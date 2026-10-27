@@ -1,0 +1,65 @@
+---
+import ListingEntry from '../../components/ListingEntry.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { absoluteUrl, siteName } from '../../lib/site';
+import { categories, categoryInfo, isCategory } from '../../lib/taxonomy';
+
+export function getStaticPaths() {
+  return categories.map((category) => ({
+    params: { category },
+  }));
+}
+
+const categoryParam = Astro.params.category ?? '';
+if (!isCategory(categoryParam)) {
+  throw new Error(`[listings] Unknown category "${categoryParam}". Use one of: ${categories.join(', ')}.`);
+}
+
+const info = categoryInfo[categoryParam];
+const listings = (await loadListings()).filter((listing) => listing.data.category === categoryParam);
+const description = `${info.blurb} A curated list of ${info.plural.toLowerCase()} in Washington Heights, NYC.`;
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/category/${categoryParam}`);
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: info.plural, url: pageUrl },
+  ]),
+  itemListJsonLd(
+    `${info.plural} in Washington Heights`,
+    listings.map((listing) => ({
+      name: listing.data.name,
+      url: absoluteUrl(site, `/places/${listing.id}`),
+    })),
+  ),
+];
+---
+
+<BaseLayout title={`${info.plural} in Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">Category</p>
+      <h1>{info.plural}</h1>
+      <p class="lede">{info.blurb}</p>
+      <p class="count">
+        {listings.length === 0 ? 'No verified listings yet' : `${listings.length} ${listings.length === 1 ? 'place' : 'places'}`}
+      </p>
+    </header>
+    {
+      listings.length > 0 ? (
+        <ul class="entries">
+          {listings.map((listing) => (
+            <ListingEntry listing={listing} />
+          ))}
+        </ul>
+      ) : (
+        <p class="empty">No verified listings in this category yet. When one is checked, it will show up here.</p>
+      )
+    }
+  </div>
+</BaseLayout>

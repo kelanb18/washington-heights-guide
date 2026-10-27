@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { absoluteUrl, correctionsEmail, siteName } from '../lib/site';
+
+const description =
+  'How The Heights chooses places in Washington Heights, and how affiliate links and sponsorships are disclosed. Verdicts are not for sale.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/about');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'About', url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout title="About this guide · The Heights" description={description} jsonLd={jsonLd}>
+  <article class="wrap prose">
+    <header class="page-head">
+      <p class="kicker">Colophon</p>
+      <h1>About this guide</h1>
+      <p class="lede">
+        The Heights is an independent list of places in Washington Heights worth your time. It is short because a complete directory already exists, and it is not very good at telling you where to go.
+      </p>
+    </header>
+
+    <h2>How a place gets listed</h2>
+    <p>
+      Someone checks the practical details and writes the page: what the place is, who it is for, what stands out, and a verdict. The date on the page is the day those details were last verified. Hours change. When the date is old, trust the door before you trust the sentence.
+    </p>
+    <p>
+      A place is listed because it earns a trip or a habit. Being open is not enough. The list will stay incomplete.
+    </p>
+
+    <h2>Verdicts</h2>
+    <p>
+      A verdict is an opinion, and it is not for sale. Payment does not create a listing, soften a sentence, add a rating, or earn the editor’s pick mark. If we would not list a place for free, we do not list it for a fee.
+    </p>
+
+    <h2 id="disclosure">Affiliate links and sponsorships</h2>
+    <p>
+      Some pages include affiliate or referral links. Each one is labeled “Affiliate link.” If you use one, this site may earn a commission. The address and the business’s own website stay on the page, so the referral link is never the only way to find it. A commission does not change the verdict.
+    </p>
+    <p>
+      A local sponsor can pay for a placement. Those listings show the word “Sponsored” on the page and anywhere the place is featured, including the home page. The word means the placement was paid. It does not mean the write-up was edited to suit the sponsor.
+    </p>
+    <p>Referral links sit apart from the verdict, with the label on them. They are not woven into the opinion.</p>
+
+    <h2 id="corrections">Corrections</h2>
+    <p>
+      If an address, an hour, or another fact is wrong, write to
+      <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>. That address is a placeholder until a real mailbox is connected. Say what you checked and when you checked it.
+    </p>
+
+    <h2>The map</h2>
+    <p>
+      The guide covers Washington Heights, roughly from West 155th Street north to the Dyckman Street edge of Inwood. A place on that seam can be included when people in the Heights use it as part of the neighborhood. Inwood proper, central Harlem, and the Bronx are outside the list. The river is the west boundary; the Harlem River is the east.
+    </p>
+
+    <h2>Placeholders</h2>
+    <p>
+      The project ships with three example listings so the pages have a shape before any real place is written up. They are named EXAMPLE, they do not describe real businesses, and production builds leave them out.
+    </p>
+  </article>
+</BaseLayout>

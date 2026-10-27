@@ -1,0 +1,53 @@
+---
+import { categories, categoryInfo } from '../lib/taxonomy';
+import { href, normalizePath } from '../lib/site';
+
+const current = normalizePath(Astro.url.pathname);
+
+function currentAttr(path: string): true | undefined {
+  return normalizePath(path) === current ? true : undefined;
+}
+
+const primary = [
+  { href: href('/places'), label: 'Places' },
+  { href: href('/about'), label: 'About' },
+];
+---
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="folio">Upper Manhattan · West 155th to Dyckman</p>
+    <div class="masthead-bar">
+      <a class="wordmark" href={href('/')}>The Heights</a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          {
+            primary.map((item) => (
+              <li>
+                <a href={item.href} aria-current={currentAttr(item.href) && 'page'}>
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+    <nav class="sections" aria-label="Categories">
+      <ul>
+        {
+          categories.map((category) => {
+            const path = href(`/category/${category}`);
+            return (
+              <li>
+                <a href={path} aria-current={currentAttr(path) && 'page'}>
+                  {categoryInfo[category].plural}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

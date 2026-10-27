@@ -1,0 +1,99 @@
+---
+import '@fontsource/fraunces/latin-600.css';
+import '@fontsource/fraunces/latin-500-italic.css';
+import '../styles/global.css';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import { loadListings } from '../lib/listings';
+import { siteName } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  ogType?: 'website' | 'article';
+  image?: string;
+  imageAlt?: string;
+  noindex?: boolean;
+  modified?: string;
+  jsonLd?: unknown[];
+}
+
+const {
+  title,
+  description,
+  ogType = 'website',
+  image = '/og.png',
+  imageAlt = 'The Heights, a guide to the best spots in Washington Heights, NYC.',
+  noindex = false,
+  modified,
+  jsonLd = [],
+} = Astro.props;
+
+if (!Astro.site) {
+  throw new Error('Set SITE, or site in astro.config.mjs, so canonical URLs and the sitemap have an origin.');
+}
+
+const pathname = Astro.url.pathname;
+const canonicalPath =
+  pathname === '/404' || pathname === '/404/' || pathname === '/404.html'
+    ? '/404.html'
+    : pathname.endsWith('/')
+      ? pathname
+      : `${pathname}/`;
+const canonical = new URL(canonicalPath, Astro.site);
+const ogImage = new URL(image, Astro.site);
+const listings = await loadListings();
+const showingExamples = listings.some((listing) => listing.data.example);
+const indexable = !noindex && !import.meta.env.DEV && !__INCLUDE_EXAMPLES__;
+const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    <meta name="robots" content={robots} />
+    <meta name="theme-color" content="#f3ecdf" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+    {modified && <meta property="article:modified_time" content={modified} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      jsonLd.map((entry) => (
+        <script is:inline type="application/ld+json" set:html={JSON.stringify(entry).replace(/</g, '\\u003c')} />
+      ))
+    }
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    {
+      showingExamples && (
+        <div class="notice notice-example" role="note">
+          <div class="wrap">
+            <strong>Example listings.</strong> The places named EXAMPLE are not real businesses. A production build leaves them out.
+          </div>
+        </div>
+      )
+    }
+    <SiteHeader />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

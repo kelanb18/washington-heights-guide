@@ -1,0 +1,237 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
+import { collectTags, loadListings } from '../../lib/listings';
+import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
+import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
+
+export async function getStaticPaths() {
+  const listings = await loadListings();
+  return listings.map((listing) => ({
+    params: { slug: listing.id },
+  }));
+}
+
+const listings = await loadListings();
+const listing = listings.find((entry) => entry.id === Astro.params.slug);
+if (!listing) {
+  throw new Error(`[listings] No public listing for slug "${Astro.params.slug}".`);
+}
+
+const data = listing.data;
+const category = categoryInfo[data.category];
+const { Content } = await render(listing);
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/places/${listing.id}`);
+const categoryUrl = absoluteUrl(site, `/category/${data.category}`);
+const tags = collectTags([listing]);
+const title = `${data.name} — ${category.singular} in Washington Heights · ${siteName}`;
+const jsonLd = [
+  listingJsonLd(listing, pageUrl, site),
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: category.plural, url: categoryUrl },
+    { name: data.name, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={title}
+  description={data.description}
+  ogType="article"
+  image={data.images[0]?.src}
+  imageAlt={data.images[0]?.alt}
+  noindex={data.example || data.draft}
+  modified={isoDate(data.lastVerified)}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href(`/category/${data.category}`)}>{category.plural}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{data.name}</span>
+    </nav>
+
+    <header class="listing-head">
+      {data.sponsored && <p class="sponsored-flag">Sponsored</p>}
+      <p class="kicker">
+        <a href={href(`/category/${data.category}`)}>{category.singular}</a>
+        <span aria-hidden="true"> · </span>
+        <span>{data.neighborhood}</span>
+        {
+          data.pick && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <span>Editor’s pick</span>
+            </>
+          )
+        }
+      </p>
+      <h1>{data.name}</h1>
+      <p class="deck">{data.verdict}</p>
+      <p class="where">
+        {data.address}
+        <span aria-hidden="true"> · </span>
+        {data.crossStreets}
+      </p>
+      {
+        data.example && (
+          <p class="example-line">Example listing. Not a real business. Omitted from the production build.</p>
+        )
+      }
+      {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
+    </header>
+
+    {
+      data.images.length > 0 && (
+        <div class="plates">
+          {data.images.map((image) => (
+            <figure class="plate">
+              <img src={image.src} alt={image.alt} width="1200" height="750" />
+            </figure>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="listing-grid">
+      <div>
+        <div class="prose dropcap">
+          <Content />
+        </div>
+        {
+          data.affiliateLinks.length > 0 && (
+            <aside class="referrals" aria-labelledby="referrals-heading">
+              <h2 id="referrals-heading">Referral links</h2>
+              <p>
+                We may earn a commission if you use one of these. The verdict above was not written for that. The address and the business’s own site are in the details.
+              </p>
+              <ul class="referral-list">
+                {data.affiliateLinks.map((link) => (
+                  <li>
+                    <a href={link.url} rel="sponsored noopener noreferrer" target="_blank">
+                      {link.label}
+                      <span class="aff-tag">Affiliate link</span>
+                      <span class="sr-only">(opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <p>
+                <a href={`${href('/about')}#disclosure`}>Disclosure policy</a>
+              </p>
+            </aside>
+          )
+        }
+      </div>
+
+      <aside class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Details</h2>
+        <dl>
+          <dt>Category</dt>
+          <dd><a href={href(`/category/${data.category}`)}>{category.singular}</a></dd>
+          {
+            data.cuisine && (
+              <>
+                <dt>Known for</dt>
+                <dd>
+                  <a href={href(`/tags/${slugify(data.cuisine)}`)}>{data.cuisine}</a>
+                </dd>
+              </>
+            )
+          }
+          <dt>Price</dt>
+          <dd>
+            {data.priceLevel}
+            <span class="sr-only"> — {priceInfo[data.priceLevel]}</span>
+            <span aria-hidden="true"> · </span>
+            {priceInfo[data.priceLevel]}
+          </dd>
+          {
+            data.rating != null && (
+              <>
+                <dt>Editorial rating</dt>
+                <dd>{data.rating} / 5. An opinion on this page, not a count of reviews.</dd>
+              </>
+            )
+          }
+          <dt>Address</dt>
+          <dd>
+            {data.address}
+            <br />
+            {data.neighborhood}, New York, NY{data.postalCode ? ` ${data.postalCode}` : ''}
+          </dd>
+          <dt>Cross streets</dt>
+          <dd>{data.crossStreets}</dd>
+          <dt>Hours</dt>
+          <dd>{data.hours ?? 'Not listed. Check before you go.'}</dd>
+          {
+            data.phone && (
+              <>
+                <dt>Phone</dt>
+                <dd>
+                  <a href={telHref(data.phone)}>{data.phone}</a>
+                </dd>
+              </>
+            )
+          }
+          {
+            data.website && (
+              <>
+                <dt>Website</dt>
+                <dd>
+                  <a href={data.website} rel="noopener noreferrer" target="_blank">
+                    {data.website.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                    <span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </dd>
+              </>
+            )
+          }
+          <dt>Map</dt>
+          <dd>
+            <a
+              href={mapsHref([data.address, data.crossStreets, data.neighborhood, data.postalCode])}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Open in Google Maps
+              <span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          </dd>
+          <dt>Details checked</dt>
+          <dd><time datetime={isoDate(data.lastVerified)}>{formatDate(data.lastVerified)}</time></dd>
+          {
+            tags.length > 0 && (
+              <>
+                <dt>Tags</dt>
+                <dd>
+                  {tags.map((tag, index) => (
+                    <>
+                      {index > 0 && <span aria-hidden="true">, </span>}
+                      <a href={href(`/tags/${tag.slug}`)}>{tag.label}</a>
+                    </>
+                  ))}
+                </dd>
+              </>
+            )
+          }
+        </dl>
+        {
+          data.sponsored && (
+            <p class="sponsor-note">
+              Sponsored placement. The verdict on this page was not for sale.
+              <a href={`${href('/about')}#disclosure`}> Read the policy.</a>
+            </p>
+          )
+        }
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,54 @@
+---
+import ListingEntry from '../../components/ListingEntry.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { collectTags, loadListings } from '../../lib/listings';
+import { absoluteUrl, siteName } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const tags = collectTags(await loadListings());
+  return tags.map((tag) => ({
+    params: { tag: tag.slug },
+  }));
+}
+
+const tags = collectTags(await loadListings());
+const tag = tags.find((entry) => entry.slug === Astro.params.tag);
+if (!tag) {
+  throw new Error(`[listings] No tag page for "${Astro.params.tag}".`);
+}
+
+const description = `Places in Washington Heights tagged ${tag.label}. A curated list from The Heights.`;
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/tags/${tag.slug}`);
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: tag.label, url: pageUrl },
+  ]),
+  itemListJsonLd(
+    `${tag.label} in Washington Heights`,
+    tag.listings.map((listing) => ({
+      name: listing.data.name,
+      url: absoluteUrl(site, `/places/${listing.id}`),
+    })),
+  ),
+];
+---
+
+<BaseLayout title={`${tag.label} in Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">Tag</p>
+      <h1>{tag.label}</h1>
+      <p class="lede">
+        {tag.listings.length} {tag.listings.length === 1 ? 'place' : 'places'} in Washington Heights filed under {tag.label}.
+      </p>
+    </header>
+    <ul class="entries">
+      {tag.listings.map((listing) => <ListingEntry listing={listing} />)}
+    </ul>
+  </div>
+</BaseLayout>

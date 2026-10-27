@@ -1,0 +1,64 @@
+---
+import type { Listing } from '../lib/listings';
+import { formatDate, href, isoDate } from '../lib/site';
+import { categoryInfo, priceInfo } from '../lib/taxonomy';
+
+interface Props {
+  listing: Listing;
+  index?: number;
+  heading?: 'h2' | 'h3';
+}
+
+const { listing, index, heading = 'h2' } = Astro.props;
+const data = listing.data;
+const category = categoryInfo[data.category];
+const Heading = heading;
+---
+
+<li class:list={['entry', { numbered: index != null }]}>
+  {index != null && <p class="entry-index">{String(index).padStart(2, '0')}</p>}
+  <div>
+    {
+      data.sponsored && (
+        <p class="sponsored-flag">
+          Sponsored <span class="sr-only">placement</span>
+        </p>
+      )
+    }
+    <p class="kicker">
+      <a href={href(`/category/${data.category}`)}>{category.singular}</a>
+      <span aria-hidden="true"> · </span>
+      <span>
+        <span class="sr-only">Price: {priceInfo[data.priceLevel]}. </span>{data.priceLevel}
+      </span>
+      {
+        data.pick && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>Editor’s pick</span>
+          </>
+        )
+      }
+      {
+        data.rating != null && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>
+              <span class="sr-only">Editorial rating </span>
+              {data.rating} / 5
+            </span>
+          </>
+        )
+      }
+    </p>
+    <Heading class="entry-title">
+      <a href={href(`/places/${listing.id}`)}>{data.name}</a>
+    </Heading>
+    <p class="verdict">{data.verdict}</p>
+    <p class="where">
+      {data.crossStreets}
+      <span aria-hidden="true"> · </span>
+      <time datetime={isoDate(data.lastVerified)}>Checked {formatDate(data.lastVerified)}</time>
+    </p>
+  </div>
+</li>
