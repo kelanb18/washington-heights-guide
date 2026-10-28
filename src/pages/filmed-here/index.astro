@@ -1,0 +1,127 @@
+---
+import FilmShoots from '../../components/FilmShoots.astro';
+import ProductionEntry from '../../components/ProductionEntry.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { compareProductionsByYear, loadProductions, productionsByKind } from '../../lib/productions';
+import { absoluteUrl, siteName } from '../../lib/site';
+
+const productions = await loadProductions();
+const groups = productionsByKind(productions);
+const byYear = [...productions].sort(compareProductionsByYear);
+const description =
+  'Films, television, and music videos shot in Washington Heights, plus film permits for where crews are cleared to work.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/filmed-here');
+const jsonLd: unknown[] = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Filmed here', url: pageUrl },
+  ]),
+];
+
+if (productions.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Filmed in Washington Heights',
+      productions.map((production) => ({
+        name: production.data.title,
+        url: absoluteUrl(site, `/filmed-here/${production.id}`),
+      })),
+    ),
+  );
+}
+---
+
+<BaseLayout title={`Filmed in the Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">On screen</p>
+      <h1>Filmed in the Heights</h1>
+      <p class="lede">
+        Movies, shows, and videos shot in the neighborhood, grouped by what they are. A separate list below is only the city’s film permits.
+      </p>
+      <p class="count">
+        {
+          productions.length === 0
+            ? 'No productions published yet'
+            : `${productions.length} ${productions.length === 1 ? 'production' : 'productions'}`
+        }
+      </p>
+    </header>
+
+    {
+      productions.length > 1 && (
+        <div class="view-toggle" role="group" aria-label="Sort productions">
+          <button type="button" data-production-view="kind" aria-pressed="true">
+            By kind
+          </button>
+          <button type="button" data-production-view="year" aria-pressed="false">
+            By year
+          </button>
+        </div>
+      )
+    }
+
+    <div data-production-panel="kind">
+      {
+        productions.length === 0 ? (
+          <p class="empty">
+            No films or videos have been published yet. Notes will be grouped as films, television, music videos, and everything else.
+          </p>
+        ) : (
+          groups.map((group) => (
+            <section class="group" aria-labelledby={group.kind}>
+              <div class="section-head">
+                <h2 id={group.kind}>{group.label}</h2>
+                <span class="count">{group.items.length}</span>
+              </div>
+              <ul class="entries">
+                {group.items.map((production) => (
+                  <ProductionEntry production={production} heading="h3" />
+                ))}
+              </ul>
+            </section>
+          ))
+        )
+      }
+    </div>
+
+    {
+      productions.length > 1 && (
+        <div data-production-panel="year" hidden>
+          <section class="group" aria-labelledby="by-year">
+            <div class="section-head">
+              <h2 id="by-year">By year</h2>
+              <span class="count">{byYear.length}</span>
+            </div>
+            <ul class="entries">
+              {byYear.map((production) => (
+                <ProductionEntry production={production} heading="h3" />
+              ))}
+            </ul>
+          </section>
+        </div>
+      )
+    }
+
+    <FilmShoots />
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-production-view]');
+  const panels = document.querySelectorAll<HTMLElement>('[data-production-panel]');
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const view = button.dataset.productionView;
+      buttons.forEach((other) => other.setAttribute('aria-pressed', other === button ? 'true' : 'false'));
+      panels.forEach((panel) => {
+        panel.hidden = panel.dataset.productionPanel !== view;
+      });
+    });
+  });
+</script>

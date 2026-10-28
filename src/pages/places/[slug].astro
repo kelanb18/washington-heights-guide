@@ -1,11 +1,14 @@
 ---
 import { render } from 'astro:content';
+import PhotoSet from '../../components/PhotoSet.astro';
+import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
+import { pinsFor } from '../../lib/pins';
 import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -24,6 +27,8 @@ if (!listing) {
 const data = listing.data;
 const category = categoryInfo[data.category];
 const area = findArea(await loadAreas(), data.area);
+const pins = pinsFor([listing]);
+const hasMap = data.latitude != null && data.longitude != null;
 const { Content } = await render(listing);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -103,6 +108,8 @@ const jsonLd = [
       }
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
+
+    <PhotoSet image={data.image} gallery={data.gallery} />
 
     {
       data.images.length > 0 && (
@@ -224,17 +231,24 @@ const jsonLd = [
               </>
             )
           }
-          <dt>Map</dt>
-          <dd>
-            <a
-              href={mapsHref([data.address, data.crossStreets, data.neighborhood, data.postalCode])}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Open in Google Maps
-              <span class="sr-only"> (opens in a new tab)</span>
-            </a>
-          </dd>
+          {
+            hasMap && (
+              <>
+                <dt>Map</dt>
+                <dd>
+                  <PlaceMap pins={pins} label={`Map of ${data.name}`} compact />
+                  <a
+                    href={mapsHref([data.address, data.crossStreets, data.neighborhood, data.postalCode])}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    Open in Google Maps
+                    <span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </dd>
+              </>
+            )
+          }
           <dt>Details checked</dt>
           <dd><time datetime={isoDate(data.lastVerified)}>{formatDate(data.lastVerified)}</time></dd>
           {

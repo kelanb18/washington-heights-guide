@@ -1,14 +1,17 @@
 ---
 import AreaTree from '../../components/AreaTree.astro';
+import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { areaTree, hasNestedAreas, loadAreas } from '../../lib/areas';
 import { listingCounts } from '../../lib/catalog';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
+import { pinsFor } from '../../lib/pins';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
 const areas = await loadAreas();
 const listings = await loadListings();
+const pins = pinsFor(listings);
 const tree = areaTree(areas);
 const counts = listingCounts(areas, listings);
 const nested = hasNestedAreas(tree);
@@ -55,6 +58,17 @@ if (areas.length > 0) {
         }
       </p>
     </header>
+
+    {
+      pins.length > 0 && (
+        <section class="group" aria-labelledby="map-heading">
+          <div class="section-head">
+            <h2 id="map-heading">Map</h2>
+          </div>
+          <PlaceMap pins={pins} label="Places in Washington Heights" />
+        </section>
+      )
+    }
 
     {
       areas.length > 0 ? (

@@ -641,6 +641,156 @@ main {
   max-width: 12ch;
 }
 
+.photo {
+  margin: 1.1rem 0 0;
+}
+
+.photo img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--ink);
+  background: var(--paper-deep);
+}
+
+.photo-hero img {
+  max-height: 32rem;
+  object-fit: cover;
+}
+
+.photo-thumb {
+  margin: 0.45rem 0 0;
+  min-width: 0;
+}
+
+.photo-thumb img {
+  width: 5.5rem;
+  height: 5.5rem;
+  object-fit: cover;
+}
+
+.photo-gallery {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.photo-credit {
+  margin: 0.35rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.entry.has-photo {
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  align-items: start;
+}
+
+.entry.numbered.has-photo {
+  grid-template-columns: 2.4rem 5.5rem minmax(0, 1fr);
+}
+
+.place-map {
+  margin-top: 0.8rem;
+}
+
+.place-map-canvas {
+  height: 22rem;
+  border: 1px solid var(--ink);
+  background: var(--paper-deep);
+}
+
+.place-map.compact .place-map-canvas {
+  height: 14rem;
+}
+
+.map-note,
+.shoot-when {
+  margin: 0.45rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.map-filters,
+.view-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.9rem;
+  margin: 0.8rem 0 0;
+}
+
+.map-filters button,
+.view-toggle button {
+  padding: 0.35rem 0;
+  border: 0;
+  background: none;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.map-filters button[aria-pressed='true'],
+.view-toggle button[aria-pressed='true'] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--brick);
+}
+
+.leaflet-container img {
+  max-width: none;
+}
+
+.map-pin {
+  background: transparent;
+  border: 0;
+}
+
+.map-pin span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--paper);
+  border-radius: 50%;
+  background: var(--brick);
+  box-shadow: 0 0 0 1px var(--ink);
+}
+
+.leaflet-popup-content {
+  margin: 0.7rem 0.85rem;
+  font-family: var(--sans);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.leaflet-popup-content p {
+  margin: 0.15rem 0 0;
+  color: var(--ink-soft);
+}
+
+.shoot-label {
+  margin: 1.2rem 0 0;
+  font-size: 1.35rem;
+}
+
+.shoot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shoot-list li {
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fact-line {
+  display: block;
+}
+
 .section-note {
   margin: 0.75rem 0 0;
   max-width: 40rem;
@@ -717,6 +867,10 @@ main {
   .principles {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.5rem;
+  }
+
+  .photo-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

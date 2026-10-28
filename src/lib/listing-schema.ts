@@ -1,6 +1,7 @@
 import { reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { assertAreaSlug } from './area-slugs';
+import { assertCreditedImages, creditedImageSchema } from './picture-schema';
 import { optionalNumber, optionalText } from './schema-helpers';
 import { categories, categoriesThatNeedCuisine, priceLevels, slugify } from './taxonomy';
 
@@ -145,6 +146,14 @@ export const listingSchema = z
       .max(4)
       .default([])
       .describe('Optional images. src is /images/... under public/, or an http(s) URL. alt is required.'),
+    image: creditedImageSchema
+      .optional()
+      .describe('Optional hero image. Local files in src/assets/ are optimized. Credit and sourceUrl are required.'),
+    gallery: z
+      .array(creditedImageSchema)
+      .max(8)
+      .default([])
+      .describe('Optional extra images, each with its own credit and source link.'),
   })
   .superRefine((data, ctx) => {
     if (data.example && !/\bEXAMPLE\b/.test(data.name)) {
@@ -223,4 +232,6 @@ export const listingSchema = z
     }
 
     assertAreaSlug(data.area, ctx, 'area');
+    if (data.image) assertCreditedImages([data.image], ctx, ['image']);
+    assertCreditedImages(data.gallery, ctx, ['gallery']);
   });

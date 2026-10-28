@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import type { CreditedImage } from '../lib/picture-schema';
+import { resolvePicture } from '../lib/pictures';
+
+interface Props {
+  picture: CreditedImage;
+  variant?: 'hero' | 'thumb' | 'gallery';
+}
+
+const { picture, variant = 'hero' } = Astro.props;
+const resolved = resolvePicture(picture.src);
+const sizes =
+  variant === 'thumb'
+    ? '5.5rem'
+    : variant === 'gallery'
+      ? '(min-width: 720px) 18rem, 100vw'
+      : '(min-width: 880px) 50rem, 100vw';
+const widths = variant === 'thumb' ? [160, 320] : variant === 'gallery' ? [480, 800] : [640, 960, 1400];
+---
+
+<figure class:list={['photo', `photo-${variant}`]}>
+  {
+    resolved.kind === 'asset' ? (
+      <Image
+        src={resolved.image}
+        alt={picture.alt}
+        widths={widths}
+        sizes={sizes}
+        loading="lazy"
+        decoding="async"
+      />
+    ) : resolved.kind === 'remote' ? (
+      <Image
+        src={resolved.src}
+        alt={picture.alt}
+        inferSize
+        widths={widths}
+        sizes={sizes}
+        loading="lazy"
+        decoding="async"
+      />
+    ) : (
+      <img src={resolved.src} alt={picture.alt} loading="lazy" decoding="async" />
+    )
+  }
+  <figcaption class="photo-credit">
+    <a href={picture.sourceUrl} rel="noopener noreferrer" target="_blank">
+      {picture.credit}
+      <span class="sr-only"> (opens in a new tab)</span>
+    </a>
+    <span aria-hidden="true"> · </span>
+    <span>{picture.license}</span>
+  </figcaption>
+</figure>

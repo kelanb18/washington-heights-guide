@@ -1,0 +1,22 @@
+---
+import AttributedPhoto from './AttributedPhoto.astro';
+import type { CreditedImage } from '../lib/picture-schema';
+
+interface Props {
+  image?: CreditedImage;
+  gallery?: CreditedImage[];
+}
+
+const { image, gallery = [] } = Astro.props;
+---
+
+{image && <AttributedPhoto picture={image} variant="hero" />}
+{
+  gallery.length > 0 && (
+    <div class="photo-gallery">
+      {gallery.map((picture) => (
+        <AttributedPhoto picture={picture} variant="gallery" />
+      ))}
+    </div>
+  )
+}

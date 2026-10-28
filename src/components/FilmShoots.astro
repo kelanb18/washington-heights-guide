@@ -1,0 +1,156 @@
+---
+import { filmPermitDatasetUrl, formatPermitSpan, heightsZips, loadFilmPermits } from '../lib/film-permits';
+
+const permits = await loadFilmPermits();
+---
+
+<section class="group" id="shoots" aria-labelledby="shoots-heading">
+  <div class="section-head">
+    <h2 id="shoots-heading">Film shoots near you</h2>
+    <a href={filmPermitDatasetUrl}>NYC Open Data</a>
+  </div>
+  <p class="section-note">
+    Permits from the Mayor’s Office of Media and Entertainment for Manhattan ZIP codes {heightsZips.join(', ')}. A record is included when one of those ZIPs is listed. The feed names the kind of work and the streets where parking is held. It does not name the production.
+  </p>
+  <div id="shoot-board" data-fallback={permits.error ?? ''}>
+    {
+      permits.error && (
+        <p class="empty" data-shoot-error>
+          {permits.error} This page will try the public feed again in your browser.
+        </p>
+      )
+    }
+    {
+      !permits.error && permits.upcoming.length === 0 && permits.recent.length === 0 && (
+        <p class="empty" data-shoot-empty>
+          No Washington Heights permits are on the calendar for the next stretch, and none ended in the last four months.
+        </p>
+      )
+    }
+    {
+      permits.upcoming.length > 0 && (
+        <div data-shoot-group="upcoming">
+          <h3 class="shoot-label">Upcoming</h3>
+          <ul class="shoot-list">
+            {permits.upcoming.map((permit) => (
+              <li>
+                <p class="kicker">
+                  {permit.category}
+                  {permit.subcategory && (
+                    <>
+                      <span aria-hidden="true"> · </span>
+                      {permit.subcategory}
+                    </>
+                  )}
+                  <span aria-hidden="true"> · </span>
+                  {permit.eventType}
+                </p>
+                <p class="shoot-when">{formatPermitSpan(permit.start, permit.end)}</p>
+                {permit.parkingHeld && <p class="where">{permit.parkingHeld}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+    {
+      permits.recent.length > 0 && (
+        <div data-shoot-group="recent">
+          <h3 class="shoot-label">Recent</h3>
+          <ul class="shoot-list">
+            {permits.recent.map((permit) => (
+              <li>
+                <p class="kicker">
+                  {permit.category}
+                  {permit.subcategory && (
+                    <>
+                      <span aria-hidden="true"> · </span>
+                      {permit.subcategory}
+                    </>
+                  )}
+                  <span aria-hidden="true"> · </span>
+                  {permit.eventType}
+                </p>
+                <p class="shoot-when">{formatPermitSpan(permit.start, permit.end)}</p>
+                {permit.parkingHeld && <p class="where">{permit.parkingHeld}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+  <p class="section-note">
+    Times are the local times published in the dataset. Upcoming permits are listed first. The page also asks the dataset again when it loads, so a shoot added after the last deploy can show up here.
+  </p>
+</section>
+
+<script>
+  import { formatPermitSpan, loadFilmPermits } from '../lib/film-permits';
+
+  const board = document.getElementById('shoot-board');
+  if (board) {
+    const paint = (items: Array<{ category: string; subcategory: string; eventType: string; start: string; end: string; parkingHeld: string }>, title: string) => {
+      if (items.length === 0) return null;
+      const group = document.createElement('div');
+      const heading = document.createElement('h3');
+      heading.className = 'shoot-label';
+      heading.textContent = title;
+      const list = document.createElement('ul');
+      list.className = 'shoot-list';
+      for (const permit of items) {
+        const item = document.createElement('li');
+        const kicker = document.createElement('p');
+        kicker.className = 'kicker';
+        const bits = [permit.category, permit.subcategory, permit.eventType].filter(Boolean);
+        kicker.textContent = bits.join(' · ');
+        const when = document.createElement('p');
+        when.className = 'shoot-when';
+        when.textContent = formatPermitSpan(permit.start, permit.end);
+        item.append(kicker, when);
+        if (permit.parkingHeld) {
+          const where = document.createElement('p');
+          where.className = 'where';
+          where.textContent = permit.parkingHeld;
+          item.append(where);
+        }
+        list.append(item);
+      }
+      group.append(heading, list);
+      return group;
+    };
+
+    void loadFilmPermits()
+      .then((result) => {
+        if (result.error && board.childElementCount > 0 && !board.querySelector('[data-shoot-error]')) {
+          const note = document.createElement('p');
+          note.className = 'section-note';
+          note.textContent = 'Could not refresh the permit list. Showing the copy from the last time this site was built.';
+          board.prepend(note);
+          return;
+        }
+        if (result.error) return;
+        board.replaceChildren();
+        const upcoming = paint(result.upcoming, 'Upcoming');
+        const recent = paint(result.recent, 'Recent');
+        if (!upcoming && !recent) {
+          const empty = document.createElement('p');
+          empty.className = 'empty';
+          empty.textContent =
+            'No Washington Heights permits are on the calendar for the next stretch, and none ended in the last four months.';
+          board.append(empty);
+          return;
+        }
+        if (upcoming) board.append(upcoming);
+        if (recent) board.append(recent);
+      })
+      .catch(() => {
+        if (!board.querySelector('[data-shoot-error]') && board.childElementCount > 0) {
+          const note = document.createElement('p');
+          note.className = 'section-note';
+          note.textContent = 'Could not refresh the permit list. Showing the copy from the last time this site was built.';
+          board.prepend(note);
+        }
+      });
+  }
+</script>

@@ -1,0 +1,147 @@
+---
+import { render } from 'astro:content';
+import PhotoSet from '../../components/PhotoSet.astro';
+import SourceList from '../../components/SourceList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../lib/areas';
+import { findArea } from '../../lib/catalog';
+import { breadcrumbJsonLd, productionJsonLd } from '../../lib/jsonld';
+import { formatYear, loadProductions } from '../../lib/productions';
+import { productionKindInfo } from '../../lib/production-schema';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const productions = await loadProductions();
+  return productions.map((production) => ({
+    params: { slug: production.id },
+  }));
+}
+
+const productions = await loadProductions();
+const production = productions.find((entry) => entry.id === Astro.params.slug);
+if (!production) {
+  throw new Error(`[productions] No public entry for slug "${Astro.params.slug}".`);
+}
+
+const data = production.data;
+const kind = productionKindInfo[data.kind];
+const area = findArea(await loadAreas(), data.area);
+const { Content } = await render(production);
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/filmed-here/${production.id}`);
+const jsonLd = [
+  productionJsonLd(production, pageUrl),
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Filmed here', url: absoluteUrl(site, '/filmed-here') },
+    { name: data.title, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${data.title} — Filmed in the Heights · ${siteName}`}
+  description={data.summary}
+  ogType="article"
+  noindex={data.example || data.draft}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/filmed-here')}>Filmed here</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{data.title}</span>
+    </nav>
+
+    <header class="listing-head">
+      <p class="kicker">
+        <a href={`${href('/filmed-here')}#${data.kind}`}>{kind.label}</a>
+        <span aria-hidden="true"> · </span>
+        <span>{formatYear(data.year)}</span>
+        {
+          data.artist && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <span>{data.artist}</span>
+            </>
+          )
+        }
+        {
+          area && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+            </>
+          )
+        }
+      </p>
+      <h1>{data.title}</h1>
+      <p class="deck">{data.summary}</p>
+      <p class="where">{data.locations.join(' · ')}</p>
+      {
+        data.example && (
+          <p class="example-line">Example entry. Not a real production. Omitted from the production build.</p>
+        )
+      }
+      {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
+    </header>
+
+    <PhotoSet image={data.image} gallery={[]} />
+
+    <div class="listing-grid">
+      <div class="prose dropcap">
+        <Content />
+      </div>
+      <aside class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Details</h2>
+        <dl>
+          <dt>Kind</dt>
+          <dd><a href={`${href('/filmed-here')}#${data.kind}`}>{kind.label}</a></dd>
+          <dt>Year</dt>
+          <dd>{formatYear(data.year)}</dd>
+          {
+            data.artist && (
+              <>
+                <dt>Artist</dt>
+                <dd>{data.artist}</dd>
+              </>
+            )
+          }
+          <dt>Locations</dt>
+          <dd>
+            {data.locations.map((location) => (
+              <span class="fact-line">{location}</span>
+            ))}
+          </dd>
+          {
+            area && (
+              <>
+                <dt>Area</dt>
+                <dd><a href={href(`/areas/${area.id}`)}>{area.data.name}</a></dd>
+              </>
+            )
+          }
+          {
+            data.watchUrl && (
+              <>
+                <dt>Watch</dt>
+                <dd>
+                  <a href={data.watchUrl} rel="noopener noreferrer" target="_blank">
+                    {data.watchUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                    <span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </dd>
+              </>
+            )
+          }
+          <dt>Sources</dt>
+          <dd><SourceList urls={data.sources} /></dd>
+        </dl>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

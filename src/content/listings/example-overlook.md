@@ -14,6 +14,18 @@ neighborhood: Washington Heights
 area: example-quarter
 lastVerified: 2026-10-01
 verdict: "A fictional landmark page. There is no gate, no collection, and no admission price to invent."
+image:
+  src: src/assets/example-photo.svg
+  alt: "Placeholder drawing labeled EXAMPLE, not a photograph of a real place."
+  credit: "EXAMPLE photographer"
+  license: "CC BY-SA 4.0"
+  sourceUrl: https://example.com/photos/example-overlook
+gallery:
+  - src: src/assets/example-photo.svg
+    alt: "A second placeholder drawing labeled EXAMPLE, still not a real photograph."
+    credit: "EXAMPLE photographer"
+    license: "CC BY-SA 4.0"
+    sourceUrl: https://example.com/photos/example-overlook
 ---
 
 > This is an example listing. It does not describe a real park, museum, or landmark. The address is a placeholder, and `priceLevel` is omitted on purpose.

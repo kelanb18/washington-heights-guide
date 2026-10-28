@@ -1,0 +1,123 @@
+---
+import type { MapPin } from '../lib/pins';
+
+interface Props {
+  pins: MapPin[];
+  label: string;
+  compact?: boolean;
+}
+
+const { pins, label, compact = false } = Astro.props;
+const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabel])).entries()];
+---
+
+{
+  pins.length > 0 && (
+    <div class:list={['place-map', { compact }]} data-pins={JSON.stringify(pins)}>
+      {
+        categories.length > 1 && (
+          <div class="map-filters" role="group" aria-label="Filter pins by category">
+            <button type="button" data-filter="all" aria-pressed="true">
+              All
+            </button>
+            {categories.map(([id, name]) => (
+              <button type="button" data-filter={id} aria-pressed="false">
+                {name}
+              </button>
+            ))}
+          </div>
+        )
+      }
+      <div class="place-map-canvas" role="region" aria-label={label}></div>
+      <p class="map-note">
+        Map data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> contributors. Pins are places on this site that have coordinates.
+      </p>
+    </div>
+  )
+}
+
+<script>
+  const roots = document.querySelectorAll<HTMLElement>('.place-map');
+
+  async function loadLeaflet() {
+    const [leaflet] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    return leaflet.default ?? leaflet;
+  }
+
+  function mount(root: HTMLElement, Leaflet: typeof import('leaflet')) {
+    const canvas = root.querySelector<HTMLElement>('.place-map-canvas');
+    if (!canvas || canvas.dataset.ready === 'true') return;
+    canvas.dataset.ready = 'true';
+    const pins = JSON.parse(root.dataset.pins ?? '[]') as Array<{
+      lat: number;
+      lng: number;
+      name: string;
+      href: string;
+      category: string;
+      categoryLabel: string;
+    }>;
+    const map = Leaflet.map(canvas, { scrollWheelZoom: false });
+    Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    const icon = Leaflet.divIcon({
+      className: 'map-pin',
+      html: '<span></span>',
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -10],
+    });
+
+    const markers = pins.map((pin) => {
+      const marker = Leaflet.marker([pin.lat, pin.lng], { icon, title: pin.name });
+      const popup = document.createElement('div');
+      const link = document.createElement('a');
+      link.href = pin.href;
+      link.textContent = pin.name;
+      const kind = document.createElement('p');
+      kind.textContent = pin.categoryLabel;
+      popup.append(link, kind);
+      marker.bindPopup(popup);
+      return { marker, category: pin.category };
+    });
+
+    const show = (filter: string) => {
+      for (const item of markers) {
+        const visible = filter === 'all' || item.category === filter;
+        if (visible) item.marker.addTo(map);
+        else item.marker.remove();
+      }
+      const visible = markers.filter((item) => filter === 'all' || item.category === filter).map((item) => item.marker);
+      if (visible.length === 1) {
+        map.setView(visible[0].getLatLng(), 16);
+      } else if (visible.length > 1) {
+        map.fitBounds(Leaflet.featureGroup(visible).getBounds().pad(0.2));
+      }
+    };
+
+    show('all');
+    root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
+      button.addEventListener('click', () => {
+        root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((other) => {
+          other.setAttribute('aria-pressed', other === button ? 'true' : 'false');
+        });
+        show(button.dataset.filter ?? 'all');
+      });
+    });
+    window.setTimeout(() => map.invalidateSize(), 0);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.disconnect();
+      void loadLeaflet().then((Leaflet) => {
+        roots.forEach((root) => mount(root, Leaflet));
+      });
+    },
+    { rootMargin: '200px' },
+  );
+  roots.forEach((root) => observer.observe(root));
+</script>

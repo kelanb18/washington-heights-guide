@@ -278,11 +278,56 @@ The index title is “Notable residents & history”. Notes are grouped by `conn
 3. Set `example: false` and `draft: false`, or omit them.
 4. Run `npm run build` and commit that one Markdown file.
 
+## Photos
+
+Listings, areas, people, and productions can carry an optional `image`, and listings, areas, and people can also carry a `gallery`. Both use the same object:
+
+| Field | What to put |
+| --- | --- |
+| `src` | `src/assets/...` (optimized at build time), a path starting with `/` for a file in `public/`, or an `http(s)` URL. |
+| `alt` | What a person sees. At least 8 characters. |
+| `credit` | Who made the picture. Printed beside it. |
+| `license` | Short name, such as `CC BY-SA 4.0` or `Public domain`. |
+| `sourceUrl` | The page the picture came from. The credit links here. Required so a Creative Commons picture stays attributed. |
+
+Pages with no image stay as they are. A hero is shown on the detail page. Cards show a thumbnail when `image` is set. The credit and license stay visible, including on the thumbnail.
+
+Do not add a picture you cannot credit. The repo ships one placeholder drawing, `src/assets/example-photo.svg`, on the EXAMPLE overlook and the EXAMPLE production. It is not a photograph.
+
+## Filmed here
+
+One production, one file:
+
+```text
+src/content/productions/<slug>.md
+```
+
+`src/content/productions/sample-picture.md` becomes `/filmed-here/sample-picture/`. Copy `templates/production.md`. Filename rules match listings. `example` and `draft` work the same way.
+
+| Field | What to put |
+| --- | --- |
+| `title` | The film, episode, or video. Placeholder titles must contain `EXAMPLE`. |
+| `kind` | `film`, `tv`, `music-video`, or `other`. This groups the index. |
+| `year` | A number, or a short span such as `2019–2021`. |
+| `locations` | At least one street or place. |
+| `summary` | One or two sentences, 40–300 characters. |
+| `sources` | At least one `http(s)` URL. |
+
+Optional: `artist` (music videos), `area` (an area slug), `watchUrl`, `image`, `example`, `draft`. The body is Markdown of at least 200 characters.
+
+The index can be grouped by kind or sorted by year. Area pages list productions whose `area` is that area or a section inside it.
+
+`/filmed-here/` also lists film permits from [NYC Open Data](https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p) (dataset `tg4x-b46p`, Mayor’s Office of Media and Entertainment). Records include a ZIP field, `zipcode_s`, often with a trailing comma or several ZIPs, plus the streets in `parkingheld`. The page keeps Manhattan permits that list 10032, 10033, or 10040 — the Washington Heights ZIPs. 10031 is mostly south of 155th Street, and 10034 is Inwood, so those are left out unless the same permit also lists one of the three. The list is fetched when the site is built and again in the browser. If the feed is down, the page says so and keeps the last built list when it has one. Permits do not name the production.
+
+## Maps
+
+A listing with both `latitude` and `longitude` gets a map and the Google Maps link. A listing with neither has no Map block. The home page and `/areas/` map every published listing that has coordinates. An area page maps the places filed under it and its smaller sections. Pins link to the place. The tiles are OpenStreetMap, loaded when the map is near the screen. No API key.
+
 ## Pages
 
 | URL | Page |
 | --- | --- |
-| `/` | Intro, principles, editor’s picks, categories, areas, and people |
+| `/` | Intro, principles, editor’s picks, categories, a map of places with coordinates, areas, people, and filmed here |
 | `/places/` | Every published listing, grouped by category, with links by area when areas exist |
 | `/places/<slug>/` | One listing, with JSON-LD (`Restaurant`, `CafeOrCoffeeShop`, `Bakery`, `BarOrPub`, `Store`, `LocalBusiness`, or `TouristAttraction` for a landmark). The area is linked when `area` is set. Price is omitted when `priceLevel` is absent. |
 | `/category/<category>/` | One category, including `landmark` |
@@ -291,6 +336,8 @@ The index title is “Notable residents & history”. Notes are grouped by `conn
 | `/areas/<slug>/` | One area: the write-up, child areas, and the places and notes filed under it or a nested section |
 | `/people/` | Notable residents & history, grouped by `connection` |
 | `/people/<slug>/` | One person or historic event, with `Person` or `Article` JSON-LD |
+| `/filmed-here/` | Productions, grouped by kind or sorted by year, plus film permits |
+| `/filmed-here/<slug>/` | One production |
 | `/about/` | Editorial policy, affiliate disclosure, sponsorships, corrections |
 | `/404.html` | Missing pages |
 

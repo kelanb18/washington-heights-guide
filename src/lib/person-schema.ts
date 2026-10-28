@@ -2,6 +2,7 @@ import { reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { assertAreaSlug } from './area-slugs';
 import { connections } from './connections';
+import { assertCreditedImages, creditedImageSchema } from './picture-schema';
 import { optionalText } from './schema-helpers';
 
 export const personSchema = z
@@ -35,6 +36,8 @@ export const personSchema = z
       .array(z.httpUrl())
       .min(1, 'List at least one source URL.')
       .describe('Pages or other http(s) URLs that support the note. At least one.'),
+    image: creditedImageSchema.optional().describe('Optional portrait or place photo, with credit and a source link.'),
+    gallery: z.array(creditedImageSchema).max(8).default([]).describe('Optional extra images.'),
     example: z
       .boolean()
       .default(false)
@@ -65,4 +68,6 @@ export const personSchema = z
     }
 
     assertAreaSlug(data.area, ctx, 'area');
+    if (data.image) assertCreditedImages([data.image], ctx, ['image']);
+    assertCreditedImages(data.gallery, ctx, ['gallery']);
   });
