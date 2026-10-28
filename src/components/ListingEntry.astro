@@ -2,6 +2,7 @@
 import AttributedPhoto from './AttributedPhoto.astro';
 import { loadAreas } from '../lib/areas';
 import { findArea } from '../lib/catalog';
+import HoursNote from './HoursNote.astro';
 import type { Listing } from '../lib/listings';
 import { formatDate, href, isoDate } from '../lib/site';
 import { categoryInfo, priceInfo } from '../lib/taxonomy';
@@ -30,8 +31,11 @@ const Heading = heading;
         </p>
       )
     }
-    <p class="kicker">
-      <a href={href(`/category/${data.category}`)}>{category.singular}</a>
+    <p class="kicker chips">
+      <a class="chip" href={href(`/category/${data.category}`)}>{category.singular}</a>
+      {area && (
+        <a class="chip" href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+      )}
       {
         data.priceLevel && (
           <>
@@ -67,6 +71,7 @@ const Heading = heading;
       <a href={href(`/places/${listing.id}`)}>{data.name}</a>
     </Heading>
     <p class="verdict">{data.verdict}</p>
+    <HoursNote hours={data.hours} />
     <p class="where">
       {data.crossStreets}
       {

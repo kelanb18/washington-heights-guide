@@ -9,6 +9,7 @@ import SourceList from '../../components/SourceList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ancestorAreas, areaTree, descendantIds, findAreaNode, loadAreas } from '../../lib/areas';
 import { listingsInArea, peopleInArea } from '../../lib/catalog';
+import { loadGuides } from '../../lib/guides';
 import { areaJsonLd, breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { loadPeople } from '../../lib/people';
@@ -38,6 +39,10 @@ const productions = (await loadProductions()).filter((production) => {
   return id != null && areaIds.has(id);
 });
 const pins = pinsFor(listings);
+const guides = (await loadGuides()).filter((guide) => {
+  if (referenceId(guide.data.area) === area.id) return true;
+  return guide.data.picks.some((pick) => listings.some((listing) => listing.id === referenceId(pick.listing)));
+});
 const children = findAreaNode(areaTree(areas), area.id)?.children ?? [];
 const ancestors = ancestorAreas(area, areas);
 const directListings = listings.filter((listing) => referenceId(listing.data.area) === area.id).length;
@@ -262,6 +267,25 @@ if (people.length > 0) {
         )
       }
     </section>
+
+    {
+      guides.length > 0 && (
+        <section class="group" aria-labelledby="guides-heading">
+          <div class="section-head">
+            <h2 id="guides-heading">Best of</h2>
+            <a href={href('/best')}>All guides</a>
+          </div>
+          <ul class="tag-line">
+            {guides.map((guide, index) => (
+              <li>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/best/${guide.id}`)}>{guide.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     <section class="group" aria-labelledby="filmed-heading">
       <div class="section-head">

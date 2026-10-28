@@ -2,16 +2,29 @@
 import { correctionsEmail, href, scopeLine, siteName } from '../lib/site';
 ---
 
-<footer class="colophon">
-  <div class="wrap">
-    <p class="wordmark">{siteName}</p>
-    <p>A curated guide to {scopeLine}</p>
-    <p>
-      <a href={`${href('/about')}#disclosure`}>Affiliate links and sponsorships</a> are labeled. Verdicts are not for sale.
-    </p>
-    <p>
-      Corrections: <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>
-      <span> — placeholder address until a real mailbox is connected.</span>
-    </p>
+<footer class="colophon" data-pagefind-ignore>
+  <div class="wrap footer-grid">
+    <div>
+      <p class="wordmark">{siteName}</p>
+      <p>A neighborhood guide to {scopeLine}</p>
+      <p>
+        <a href={href('/about')}>About</a>
+        <span aria-hidden="true"> · </span>
+        <a href={`${href('/about')}#disclosure`}>Affiliate links and sponsorships</a>
+        <span aria-hidden="true"> · </span>
+        <a href={`${href('/about')}#corrections`}>Corrections</a>
+      </p>
+      <p>
+        Corrections: <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>
+        <span> — placeholder address until a real mailbox is connected.</span>
+      </p>
+    </div>
+    <form class="newsletter" action="#" method="post">
+      <p class="kicker">Newsletter</p>
+      <p>A short letter about the neighborhood. Signup is not connected yet.</p>
+      <label class="sr-only" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" disabled />
+      <button type="button" class="button" disabled>Coming soon</button>
+    </form>
   </div>
 </footer>

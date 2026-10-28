@@ -12,6 +12,7 @@ function currentAttr(path: string): true | undefined {
 }
 
 const primary = [
+  { href: href('/best'), label: 'Best of' },
   { href: href('/places'), label: 'Places' },
   { href: href('/areas'), label: 'Areas' },
   { href: href('/people'), label: 'People' },
@@ -20,25 +21,29 @@ const primary = [
 ];
 ---
 
-<header class="masthead">
+<header class="masthead" data-pagefind-ignore>
   <div class="wrap">
-    <p class="folio">Upper Manhattan · West 155th to Dyckman</p>
     <div class="masthead-bar">
       <a class="wordmark" href={href('/')}>The Heights</a>
-      <nav aria-label="Primary">
-        <ul class="nav-list">
-          {
-            primary.map((item) => (
-              <li>
-                <a href={item.href} aria-current={currentAttr(item.href) && 'page'}>
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+      <div class="masthead-tools">
+        <a class="tool-link" href={href('/search')}>Search</a>
+        <button class="tool-link" type="button" id="theme-toggle" aria-pressed="false">Dark mode</button>
+      </div>
     </div>
+    <nav aria-label="Primary">
+      <ul class="nav-list">
+        {
+          primary.map((item) => (
+            <li>
+              <a href={item.href} aria-current={currentAttr(item.href) && 'page'}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="flag-rule" aria-hidden="true"></div>
     <nav class="sections" aria-label="Categories">
       <ul>
         {
@@ -57,3 +62,24 @@ const primary = [
     </nav>
   </div>
 </header>
+
+<script is:inline>
+  const toggle = document.getElementById('theme-toggle');
+  const sync = () => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    if (!toggle) return;
+    toggle.textContent = dark ? 'Light mode' : 'Dark mode';
+    toggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  };
+  sync();
+  toggle?.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch {
+      /* ignore */
+    }
+    sync();
+  });
+</script>

@@ -6,7 +6,9 @@ import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import { loadAreas } from '../lib/areas';
 import { loadListings } from '../lib/listings';
+import { loadGuides } from '../lib/guides';
 import { loadPeople } from '../lib/people';
+import { loadProductions } from '../lib/productions';
 import { siteName } from '../lib/site';
 
 interface Props {
@@ -47,10 +49,14 @@ const ogImage = new URL(image, Astro.site);
 const listings = await loadListings();
 const areas = await loadAreas();
 const people = await loadPeople();
+const guides = await loadGuides();
+const productions = await loadProductions();
 const showingExamples =
   listings.some((entry) => entry.data.example) ||
   areas.some((entry) => entry.data.example) ||
-  people.some((entry) => entry.data.example);
+  people.some((entry) => entry.data.example) ||
+  guides.some((entry) => entry.data.example) ||
+  productions.some((entry) => entry.data.example);
 const indexable = !noindex && !import.meta.env.DEV && !__INCLUDE_EXAMPLES__;
 const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow';
 ---
@@ -60,6 +66,15 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      try {
+        const stored = localStorage.getItem('theme');
+        const theme = stored === 'light' || stored === 'dark' ? stored : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
@@ -98,7 +113,7 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
       )
     }
     <SiteHeader />
-    <main id="main" tabindex="-1">
+    <main id="main" tabindex="-1" data-pagefind-body>
       <slot />
     </main>
     <SiteFooter />
