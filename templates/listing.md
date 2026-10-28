@@ -14,13 +14,17 @@ sponsored: false
 pick: false
 # rating: 4.5
 category: restaurant
+# restaurant, cafe, bakery, bar, shop, service, or landmark
+# cuisine is required for restaurant, cafe, bakery, and bar. Omit it for shop, service, and landmark unless it truly applies.
 cuisine: Example plates
 tags:
   - dinner
 priceLevel: "$$"
+# Omit priceLevel when the place is free or a price does not apply. Do not invent a value, and do not write Free.
 address: "000 Example Avenue"
 crossStreets: "Example Avenue & Sample Street"
 neighborhood: Washington Heights
+# area: sample-area
 # postalCode: "10033"
 # latitude: 0
 # longitude: 0

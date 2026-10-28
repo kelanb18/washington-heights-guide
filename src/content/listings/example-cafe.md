@@ -14,6 +14,7 @@ priceLevel: "$"
 address: "000 Example Avenue"
 crossStreets: "Example Avenue & Sample Street"
 neighborhood: Washington Heights
+area: example-quarter
 postalCode: "10033"
 website: https://example.com/heights-cafe
 phone: "(212) 555-0141"

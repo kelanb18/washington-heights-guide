@@ -1,0 +1,51 @@
+---
+import type { AreaNode } from '../lib/areas';
+import { href } from '../lib/site';
+import AreaTree from './AreaTree.astro';
+
+interface Props {
+  nodes: AreaNode[];
+  counts: Record<string, number>;
+  variant?: 'directory' | 'filter';
+}
+
+const { nodes, counts, variant = 'directory' } = Astro.props;
+---
+
+{
+  variant === 'directory' ? (
+    <ul class="contents area-tree">
+      {nodes.map((node) => {
+        const count = counts[node.area.id] ?? 0;
+        return (
+          <li>
+            <a href={href(`/areas/${node.area.id}`)}>
+              <span class="contents-name">{node.area.data.name}</span>
+              <span class="contents-count">
+                {count}
+                <span class="sr-only"> {count === 1 ? 'place' : 'places'}</span>
+              </span>
+              <span class="contents-blurb">{node.area.data.summary}</span>
+            </a>
+            {node.children.length > 0 && <AreaTree nodes={node.children} counts={counts} variant="directory" />}
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <ul class="area-filter">
+      {nodes.map((node) => {
+        const count = counts[node.area.id] ?? 0;
+        return (
+          <li>
+            <a href={href(`/areas/${node.area.id}`)}>
+              {node.area.data.name} <span class="tag-count">({count})</span>
+              <span class="sr-only"> {count === 1 ? 'place' : 'places'}</span>
+            </a>
+            {node.children.length > 0 && <AreaTree nodes={node.children} counts={counts} variant="filter" />}
+          </li>
+        );
+      })}
+    </ul>
+  )
+}

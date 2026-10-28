@@ -1,6 +1,8 @@
 ---
 import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../lib/areas';
+import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
@@ -21,6 +23,7 @@ if (!listing) {
 
 const data = listing.data;
 const category = categoryInfo[data.category];
+const area = findArea(await loadAreas(), data.area);
 const { Content } = await render(listing);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -30,7 +33,12 @@ const categoryUrl = absoluteUrl(site, `/category/${data.category}`);
 const tags = collectTags([listing]);
 const title = `${data.name} — ${category.singular} in Washington Heights · ${siteName}`;
 const jsonLd = [
-  listingJsonLd(listing, pageUrl, site),
+  listingJsonLd(
+    listing,
+    pageUrl,
+    site,
+    area ? { name: area.data.name, url: absoluteUrl(site, `/areas/${area.id}`) } : undefined,
+  ),
   breadcrumbJsonLd([
     { name: siteName, url: absoluteUrl(site, '/') },
     { name: category.plural, url: categoryUrl },
@@ -65,6 +73,14 @@ const jsonLd = [
         <span aria-hidden="true"> · </span>
         <span>{data.neighborhood}</span>
         {
+          area && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+            </>
+          )
+        }
+        {
           data.pick && (
             <>
               <span aria-hidden="true"> · </span>
@@ -82,7 +98,7 @@ const jsonLd = [
       </p>
       {
         data.example && (
-          <p class="example-line">Example listing. Not a real business. Omitted from the production build.</p>
+          <p class="example-line">Example listing. Not a real place. Omitted from the production build.</p>
         )
       }
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
@@ -137,6 +153,14 @@ const jsonLd = [
           <dt>Category</dt>
           <dd><a href={href(`/category/${data.category}`)}>{category.singular}</a></dd>
           {
+            area && (
+              <>
+                <dt>Area</dt>
+                <dd><a href={href(`/areas/${area.id}`)}>{area.data.name}</a></dd>
+              </>
+            )
+          }
+          {
             data.cuisine && (
               <>
                 <dt>Known for</dt>
@@ -146,13 +170,19 @@ const jsonLd = [
               </>
             )
           }
-          <dt>Price</dt>
-          <dd>
-            {data.priceLevel}
-            <span class="sr-only"> — {priceInfo[data.priceLevel]}</span>
-            <span aria-hidden="true"> · </span>
-            {priceInfo[data.priceLevel]}
-          </dd>
+          {
+            data.priceLevel && (
+              <>
+                <dt>Price</dt>
+                <dd>
+                  {data.priceLevel}
+                  <span class="sr-only"> — {priceInfo[data.priceLevel]}</span>
+                  <span aria-hidden="true"> · </span>
+                  {priceInfo[data.priceLevel]}
+                </dd>
+              </>
+            )
+          }
           {
             data.rating != null && (
               <>

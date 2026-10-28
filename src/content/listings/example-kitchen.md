@@ -14,6 +14,7 @@ priceLevel: "$$"
 address: "000 Placeholder Place"
 crossStreets: "Placeholder Place & Example Terrace"
 neighborhood: Washington Heights
+area: example-quarter
 website: https://example.com/heights-kitchen
 phone: "(212) 555-0199"
 hours: "Wed–Sun, 5pm–10pm"

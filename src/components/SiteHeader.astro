@@ -5,11 +5,16 @@ import { href, normalizePath } from '../lib/site';
 const current = normalizePath(Astro.url.pathname);
 
 function currentAttr(path: string): true | undefined {
-  return normalizePath(path) === current ? true : undefined;
+  const item = normalizePath(path);
+  if (item === '/') return current === '/' ? true : undefined;
+  if (current === item || current.startsWith(`${item}/`)) return true;
+  return undefined;
 }
 
 const primary = [
   { href: href('/places'), label: 'Places' },
+  { href: href('/areas'), label: 'Areas' },
+  { href: href('/people'), label: 'People' },
   { href: href('/about'), label: 'About' },
 ];
 ---

@@ -1,0 +1,47 @@
+---
+import { findArea } from '../lib/catalog';
+import { connectionInfo } from '../lib/connections';
+import { loadAreas } from '../lib/areas';
+import type { Person } from '../lib/people';
+import { href } from '../lib/site';
+
+interface Props {
+  person: Person;
+  heading?: 'h2' | 'h3';
+}
+
+const { person, heading = 'h2' } = Astro.props;
+const data = person.data;
+const connection = connectionInfo[data.connection];
+const area = findArea(await loadAreas(), data.area);
+const Heading = heading;
+---
+
+<li class="entry">
+  <div>
+    <p class="kicker">
+      <a href={`${href('/people')}#${data.connection}`}>{connection.label}</a>
+      {
+        data.years && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>{data.years}</span>
+          </>
+        )
+      }
+    </p>
+    <Heading class="entry-title">
+      <a href={href(`/people/${person.id}`)}>{data.name}</a>
+    </Heading>
+    <p class="verdict">{data.summary}</p>
+    {
+      (data.place || area) && (
+        <p class="where">
+          {data.place}
+          {data.place && area && <span aria-hidden="true"> · </span>}
+          {area && <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>}
+        </p>
+      )
+    }
+  </div>
+</li>

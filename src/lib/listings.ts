@@ -1,30 +1,11 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { getCollection, type CollectionEntry } from 'astro:content';
+import { assertLinkedAreas } from './area-links';
+import { assertWriteUp, isPublic } from './publish';
 import { slugify } from './taxonomy';
 
 export type Listing = CollectionEntry<'listings'>;
-
-const minimumBodyLength = 200;
-
-export function placeholdersEnabled(): boolean {
-  return import.meta.env.DEV || __INCLUDE_EXAMPLES__;
-}
-
-export function isPublic(data: Listing['data']): boolean {
-  if (data.example) return placeholdersEnabled();
-  if (data.draft) return import.meta.env.DEV;
-  return true;
-}
-
-function assertWriteUp(entry: Listing) {
-  const body = entry.body?.trim() ?? '';
-  if (body.length < minimumBodyLength) {
-    throw new Error(
-      `[listings] "${entry.id}.md" needs a write-up of at least ${minimumBodyLength} characters. Cover what it is, who it is for, standout details, and an honest verdict.`,
-    );
-  }
-}
 
 function assertImages(entry: Listing) {
   for (const [index, image] of entry.data.images.entries()) {
@@ -48,9 +29,19 @@ export function compareListings(a: Listing, b: Listing): number {
 export async function loadListings(): Promise<Listing[]> {
   const entries = await getCollection('listings');
   for (const entry of entries) {
-    assertWriteUp(entry);
+    assertWriteUp(
+      'listings',
+      entry.id,
+      entry.body,
+      'Cover what it is, who it is for, standout details, and an honest verdict.',
+    );
     assertImages(entry);
   }
+  await assertLinkedAreas(
+    'listings',
+    'area',
+    entries.map((entry) => ({ id: entry.id, data: entry.data, link: entry.data.area })),
+  );
   return entries.filter((entry) => isPublic(entry.data)).sort(compareListings);
 }
 

@@ -1,4 +1,6 @@
+import type { Area } from './areas';
 import type { Listing } from './listings';
+import type { Person } from './people';
 import { categoryInfo } from './taxonomy';
 
 export interface Crumb {
@@ -49,7 +51,12 @@ export function itemListJsonLd(name: string, items: Crumb[]) {
   };
 }
 
-export function listingJsonLd(listing: Listing, pageUrl: string, site: URL) {
+export function listingJsonLd(
+  listing: Listing,
+  pageUrl: string,
+  site: URL,
+  area?: { name: string; url: string },
+) {
   const data = listing.data;
   const address: Record<string, string> = {
     '@type': 'PostalAddress',
@@ -68,9 +75,9 @@ export function listingJsonLd(listing: Listing, pageUrl: string, site: URL) {
     url: data.website ?? pageUrl,
     mainEntityOfPage: pageUrl,
     address,
-    priceRange: data.priceLevel,
   };
 
+  if (data.priceLevel) json.priceRange = data.priceLevel;
   if (data.phone) json.telephone = data.phone;
   if (data.cuisine) json.servesCuisine = data.cuisine;
   if (data.images.length > 0) {
@@ -82,6 +89,89 @@ export function listingJsonLd(listing: Listing, pageUrl: string, site: URL) {
       latitude: data.latitude,
       longitude: data.longitude,
     };
+  }
+  if (area) {
+    json.containedInPlace = {
+      '@type': 'Place',
+      name: area.name,
+      url: area.url,
+    };
+  }
+
+  return json;
+}
+
+export function areaJsonLd(area: Area, pageUrl: string, parent?: { name: string; url: string }) {
+  const json: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Place',
+    name: area.data.name,
+    description: area.data.summary,
+    url: pageUrl,
+    disambiguatingDescription: area.data.boundaries,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'New York',
+      addressRegion: 'NY',
+      addressCountry: 'US',
+    },
+    containedInPlace: parent
+      ? { '@type': 'Place', name: parent.name, url: parent.url }
+      : {
+          '@type': 'Place',
+          name: 'Washington Heights',
+          address: {
+            '@type': 'PostalAddress',
+            addressLocality: 'New York',
+            addressRegion: 'NY',
+            addressCountry: 'US',
+          },
+        },
+  };
+
+  return json;
+}
+
+export function personJsonLd(
+  person: Person,
+  pageUrl: string,
+  located?: { name: string; url?: string },
+) {
+  const data = person.data;
+  const place = located
+    ? {
+        '@type': 'Place',
+        name: located.name,
+        ...(located.url ? { url: located.url } : {}),
+      }
+    : undefined;
+
+  if (data.connection === 'historic-event') {
+    const json: Record<string, unknown> = {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: data.name,
+      description: data.summary,
+      url: pageUrl,
+      mainEntityOfPage: pageUrl,
+      citation: data.sources.map((url) => ({ '@type': 'CreativeWork', url })),
+    };
+    if (place) json.about = place;
+    return json;
+  }
+
+  const json: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: data.name,
+    description: data.summary,
+    url: pageUrl,
+    knowsAbout: data.knownFor,
+  };
+
+  if (place && data.connection === 'worked-here') json.workLocation = place;
+  if (place && (data.connection === 'current-resident' || data.connection === 'former-resident')) {
+    json.homeLocation = place;
   }
 
   return json;

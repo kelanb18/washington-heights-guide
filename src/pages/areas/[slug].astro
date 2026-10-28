@@ -1,0 +1,242 @@
+---
+import { render } from 'astro:content';
+import ListingEntry from '../../components/ListingEntry.astro';
+import PersonEntry from '../../components/PersonEntry.astro';
+import SourceList from '../../components/SourceList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ancestorAreas, areaTree, findAreaNode, loadAreas } from '../../lib/areas';
+import { listingsInArea, peopleInArea } from '../../lib/catalog';
+import { areaJsonLd, breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { loadPeople } from '../../lib/people';
+import { referenceId } from '../../lib/refs';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const areas = await loadAreas();
+  return areas.map((area) => ({
+    params: { slug: area.id },
+  }));
+}
+
+const areas = await loadAreas();
+const area = areas.find((entry) => entry.id === Astro.params.slug);
+if (!area) {
+  throw new Error(`[areas] No public area for slug "${Astro.params.slug}".`);
+}
+
+const listings = listingsInArea(area.id, areas, await loadListings());
+const people = peopleInArea(area.id, areas, await loadPeople());
+const children = findAreaNode(areaTree(areas), area.id)?.children ?? [];
+const ancestors = ancestorAreas(area, areas);
+const directListings = listings.filter((listing) => referenceId(listing.data.area) === area.id).length;
+const nestedListings = listings.length - directListings;
+const directPeople = people.filter((person) => referenceId(person.data.area) === area.id).length;
+const nestedPeople = people.length - directPeople;
+const { Content } = await render(area);
+const data = area.data;
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/areas/${area.id}`);
+const parent = ancestors.at(-1);
+const crumbs = [
+  { name: siteName, url: absoluteUrl(site, '/') },
+  { name: 'Areas', url: absoluteUrl(site, '/areas') },
+  ...ancestors.map((entry) => ({
+    name: entry.data.name,
+    url: absoluteUrl(site, `/areas/${entry.id}`),
+  })),
+  { name: data.name, url: pageUrl },
+];
+
+const jsonLd: unknown[] = [
+  areaJsonLd(
+    area,
+    pageUrl,
+    parent ? { name: parent.data.name, url: absoluteUrl(site, `/areas/${parent.id}`) } : undefined,
+  ),
+  breadcrumbJsonLd(crumbs),
+];
+
+if (children.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      `Smaller sections of ${data.name}`,
+      children.map((node) => ({
+        name: node.area.data.name,
+        url: absoluteUrl(site, `/areas/${node.area.id}`),
+      })),
+    ),
+  );
+}
+
+if (listings.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      `Places in ${data.name}`,
+      listings.map((listing) => ({
+        name: listing.data.name,
+        url: absoluteUrl(site, `/places/${listing.id}`),
+      })),
+    ),
+  );
+}
+
+if (people.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      `People and events in ${data.name}`,
+      people.map((person) => ({
+        name: person.data.name,
+        url: absoluteUrl(site, `/people/${person.id}`),
+      })),
+    ),
+  );
+}
+---
+
+<BaseLayout
+  title={`${data.name} — Washington Heights · ${siteName}`}
+  description={data.summary}
+  ogType="article"
+  noindex={data.example || data.draft}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/areas')}>Areas</a>
+      {
+        ancestors.map((entry) => (
+          <>
+            <span aria-hidden="true">/</span>
+            <a href={href(`/areas/${entry.id}`)}>{entry.data.name}</a>
+          </>
+        ))
+      }
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{data.name}</span>
+    </nav>
+
+    <header class="listing-head">
+      <p class="kicker">
+        <a href={href('/areas')}>Area</a>
+        {
+          parent && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={href(`/areas/${parent.id}`)}>{parent.data.name}</a>
+            </>
+          )
+        }
+      </p>
+      <h1>{data.name}</h1>
+      <p class="deck">{data.summary}</p>
+      <p class="where">{data.boundaries}</p>
+      {data.example && <p class="example-line">Example area. Not a real section. Omitted from the production build.</p>}
+      {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
+    </header>
+
+    <div class="listing-grid">
+      <div>
+        <div class="prose dropcap">
+          <Content />
+        </div>
+      </div>
+
+      <aside class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Details</h2>
+        <dl>
+          {
+            parent && (
+              <>
+                <dt>Part of</dt>
+                <dd><a href={href(`/areas/${parent.id}`)}>{parent.data.name}</a></dd>
+              </>
+            )
+          }
+          <dt>Approximate streets</dt>
+          <dd>{data.boundaries}</dd>
+          <dt>Sources</dt>
+          <dd><SourceList urls={data.sources} /></dd>
+        </dl>
+      </aside>
+    </div>
+
+    <section class="group" aria-labelledby="children-heading">
+      <div class="section-head">
+        <h2 id="children-heading">Smaller sections</h2>
+        <span class="count">{children.length}</span>
+      </div>
+      {
+        children.length > 0 ? (
+          <ul class="contents">
+            {children.map((node) => (
+              <li>
+                <a href={href(`/areas/${node.area.id}`)}>
+                  <span class="contents-name">{node.area.data.name}</span>
+                  <span class="contents-blurb">{node.area.data.summary}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No smaller sections are filed here yet.</p>
+        )
+      }
+    </section>
+
+    <section class="group" aria-labelledby="places-heading">
+      <div class="section-head">
+        <h2 id="places-heading">Places</h2>
+        <a href={href('/places')}>All places</a>
+      </div>
+      {
+        nestedListings > 0 && (
+          <p class="section-note">
+            Includes {nestedListings} {nestedListings === 1 ? 'place' : 'places'} filed under a smaller section.
+          </p>
+        )
+      }
+      {
+        listings.length > 0 ? (
+          <ul class="entries">
+            {listings.map((listing) => (
+              <ListingEntry listing={listing} heading="h3" />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No published places are filed under this area yet.</p>
+        )
+      }
+    </section>
+
+    <section class="group" aria-labelledby="people-heading">
+      <div class="section-head">
+        <h2 id="people-heading">People and events</h2>
+        <a href={href('/people')}>All notes</a>
+      </div>
+      {
+        nestedPeople > 0 && (
+          <p class="section-note">
+            Includes {nestedPeople} {nestedPeople === 1 ? 'note' : 'notes'} filed under a smaller section.
+          </p>
+        )
+      }
+      {
+        people.length > 0 ? (
+          <ul class="entries">
+            {people.map((person) => (
+              <PersonEntry person={person} heading="h3" />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No published people or events are filed under this area yet.</p>
+        )
+      }
+    </section>
+  </article>
+</BaseLayout>

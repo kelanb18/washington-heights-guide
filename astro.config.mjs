@@ -6,8 +6,8 @@ import sitemap from '@astrojs/sitemap';
 const site = (process.env.SITE ?? 'https://theheights.guide').replace(/\/$/, '');
 const includeExamples = process.env.INCLUDE_EXAMPLES === 'true';
 
-function unpublishedSlugs() {
-  const dir = join(process.cwd(), 'src/content/listings');
+function unpublishedSlugs(folder) {
+  const dir = join(process.cwd(), 'src/content', folder);
   let files = [];
   try {
     files = readdirSync(dir);
@@ -28,7 +28,11 @@ function unpublishedSlugs() {
   return slugs;
 }
 
-const hiddenPlaces = new Set(unpublishedSlugs());
+const hidden = {
+  places: new Set(unpublishedSlugs('listings')),
+  areas: new Set(unpublishedSlugs('areas')),
+  people: new Set(unpublishedSlugs('people')),
+};
 
 export default defineConfig({
   site,
@@ -45,7 +49,8 @@ export default defineConfig({
         }
         const parts = url.pathname.split('/').filter(Boolean);
         if (parts[0] === '404') return false;
-        if (parts[0] === 'places' && parts[1] && hiddenPlaces.has(parts[1])) return false;
+        const hiddenSlugs = hidden[parts[0]];
+        if (hiddenSlugs && parts[1] && hiddenSlugs.has(parts[1])) return false;
         return true;
       },
     }),

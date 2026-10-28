@@ -4,7 +4,9 @@ import '@fontsource/fraunces/latin-500-italic.css';
 import '../styles/global.css';
 import SiteFooter from '../components/SiteFooter.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import { loadAreas } from '../lib/areas';
 import { loadListings } from '../lib/listings';
+import { loadPeople } from '../lib/people';
 import { siteName } from '../lib/site';
 
 interface Props {
@@ -43,7 +45,12 @@ const canonicalPath =
 const canonical = new URL(canonicalPath, Astro.site);
 const ogImage = new URL(image, Astro.site);
 const listings = await loadListings();
-const showingExamples = listings.some((listing) => listing.data.example);
+const areas = await loadAreas();
+const people = await loadPeople();
+const showingExamples =
+  listings.some((entry) => entry.data.example) ||
+  areas.some((entry) => entry.data.example) ||
+  people.some((entry) => entry.data.example);
 const indexable = !noindex && !import.meta.env.DEV && !__INCLUDE_EXAMPLES__;
 const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow';
 ---
@@ -85,7 +92,7 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
       showingExamples && (
         <div class="notice notice-example" role="note">
           <div class="wrap">
-            <strong>Example listings.</strong> The places named EXAMPLE are not real businesses. A production build leaves them out.
+            <strong>Example content.</strong> Names that include EXAMPLE are placeholders, not real places, areas, or people. A production build leaves them out.
           </div>
         </div>
       )
