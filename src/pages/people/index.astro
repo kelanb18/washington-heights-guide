@@ -1,0 +1,104 @@
+---
+import PersonEntry from '../../components/PersonEntry.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { connectionInfo, connections } from '../../lib/connections';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadPeople } from '../../lib/people';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+const people = await loadPeople();
+const groups = connections
+  .map((connection) => ({
+    connection,
+    info: connectionInfo[connection],
+    people: people.filter((person) => person.data.connection === connection),
+  }))
+  .filter((group) => group.people.length > 0);
+
+const description =
+  'Notable residents and historic events tied to Washington Heights, grouped by how they connect to the neighborhood.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/people');
+const jsonLd: unknown[] = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Notable residents & history', url: pageUrl },
+  ]),
+];
+
+if (people.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Notable residents and history in Washington Heights',
+      people.map((person) => ({
+        name: person.data.name,
+        url: absoluteUrl(site, `/people/${person.id}`),
+      })),
+    ),
+  );
+}
+---
+
+<BaseLayout title={`Notable residents & history · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">The neighborhood</p>
+      <h1>Notable residents & history</h1>
+      <p class="lede">
+        Residents and historic events tied to the neighborhood, grouped by how they connect to it. Each note cites a source.
+      </p>
+      <p class="count">
+        {
+          people.length === 0
+            ? 'No notes published yet'
+            : `${people.length} ${people.length === 1 ? 'note' : 'notes'}`
+        }
+      </p>
+    </header>
+
+    {
+      groups.length > 1 && (
+        <p class="tag-line">
+          {groups.map((group, index) => (
+            <>
+              {index > 0 && <span aria-hidden="true"> · </span>}
+              <a href={`#${group.connection}`}>{group.info.plural}</a>
+            </>
+          ))}
+        </p>
+      )
+    }
+
+    {
+      people.length === 0 ? (
+        <p class="empty">
+          No residents or historic notes have been published yet. They will be grouped as current residents, former residents, people who worked here, and historic events.
+        </p>
+      ) : (
+        groups.map((group) => (
+          <section class="group" aria-labelledby={group.connection}>
+            <div class="section-head">
+              <h2 id={group.connection}>{group.info.plural}</h2>
+              <span class="count">{group.people.length}</span>
+            </div>
+            <p class="section-note">{group.info.blurb}</p>
+            <ul class="entries">
+              {group.people.map((person) => (
+                <PersonEntry person={person} heading="h3" />
+              ))}
+            </ul>
+          </section>
+        ))
+      )
+    }
+
+    <p class="tag-line">
+      <a href={href('/areas')}>Areas</a>
+      <span aria-hidden="true"> · </span>
+      <a href={href('/places')}>All places</a>
+    </p>
+  </div>
+</BaseLayout>

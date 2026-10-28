@@ -1,21 +1,10 @@
+import { reference } from 'astro:content';
 import { z } from 'astro/zod';
+import { assertAreaSlug } from './area-slugs';
+import { optionalNumber, optionalText } from './schema-helpers';
 import { categories, categoriesThatNeedCuisine, priceLevels, slugify } from './taxonomy';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
-
-function optionalText<T extends z.ZodType>(schema: T) {
-  return z
-    .union([schema, z.literal(''), z.null()])
-    .optional()
-    .transform((value) => (value == null || value === '' ? undefined : value));
-}
-
-function optionalNumber(schema: z.ZodNumber) {
-  return z
-    .union([schema, z.null()])
-    .optional()
-    .transform((value) => (value == null ? undefined : value));
-}
 
 const imageSrc = z
   .string()
@@ -65,14 +54,25 @@ export const listingSchema = z
     ),
     category: z.enum(categories).describe(`One of: ${categories.join(', ')}.`),
     cuisine: optionalText(z.string().trim().min(2).max(40)).describe(
-      'Required for restaurant, cafe, bakery, and bar. What they are known for serving. Omit for shops and services unless it truly applies.',
+      'Required for restaurant, cafe, bakery, and bar. What they are known for serving. Omit for shops, services, and landmarks unless it truly applies.',
     ),
     tags: z
       .array(z.string().trim().min(1).max(40))
       .max(8, 'Use at most 8 tags.')
       .default([])
       .describe('Short filters such as espresso, dinner, or hardware. Lowercase is fine.'),
-    priceLevel: z.enum(priceLevels).describe('$, $$, $$$, or $$$$. Quote the value in YAML.'),
+    priceLevel: z
+      .preprocess(
+        (value) => (value == null || value === '' ? undefined : value),
+        z
+          .enum(priceLevels, {
+            error: 'priceLevel must be "$", "$$", "$$$", or "$$$$". Omit it when there is no price. Do not write Free.',
+          })
+          .optional(),
+      )
+      .describe(
+        'Optional. "$", "$$", "$$$", or "$$$$". Omit it when the place is free or a price does not apply. Quote the value in YAML. Do not invent a Free level.',
+      ),
     address: z
       .string()
       .trim()
@@ -92,6 +92,11 @@ export const listingSchema = z
       .max(60)
       .default('Washington Heights')
       .describe('Washington Heights, or a local name such as Hudson Heights.'),
+    area: reference('areas')
+      .optional()
+      .describe(
+        'Optional slug of an area in src/content/areas/. Omit it if you do not know the section. The build fails if the file does not exist.',
+      ),
     postalCode: optionalText(z.string().regex(/^\d{5}$/, 'postalCode must be a 5-digit ZIP code.')).describe(
       'Optional 5-digit ZIP code.',
     ),
@@ -216,4 +221,6 @@ export const listingSchema = z
         message: 'lastVerified cannot be in the future.',
       });
     }
+
+    assertAreaSlug(data.area, ctx, 'area');
   });

@@ -1,12 +1,16 @@
 ---
 import ListingEntry from '../components/ListingEntry.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadAreas } from '../lib/areas';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { collectTags, loadListings } from '../lib/listings';
+import { loadPeople } from '../lib/people';
 import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
 import { categories, categoryInfo } from '../lib/taxonomy';
 
 const listings = await loadListings();
+const areas = await loadAreas();
+const people = await loadPeople();
 const picks = listings.filter((listing) => listing.data.pick);
 const rest = listings.filter((listing) => !listing.data.pick);
 const tags = collectTags(listings);
@@ -30,6 +34,30 @@ const jsonLd: unknown[] = [
 if (featured.length > 0) {
   jsonLd.push(itemListJsonLd('Editor’s picks in Washington Heights', featured));
 }
+
+if (areas.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Areas in Washington Heights',
+      areas.map((area) => ({
+        name: area.data.name,
+        url: absoluteUrl(site, `/areas/${area.id}`),
+      })),
+    ),
+  );
+}
+
+if (people.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Notable residents and history in Washington Heights',
+      people.map((person) => ({
+        name: person.data.name,
+        url: absoluteUrl(site, `/people/${person.id}`),
+      })),
+    ),
+  );
+}
 ---
 
 <BaseLayout title="The Heights — Best spots in Washington Heights, NYC" description={defaultDescription} jsonLd={jsonLd}>
@@ -37,7 +65,7 @@ if (featured.length > 0) {
     <section class="hero">
       <h1>The best spots in Washington Heights.</h1>
       <p class="lede">
-        A short list of restaurants, cafes, bakeries, bars, shops, and services, from West 155th Street up to where Dyckman starts to feel like Inwood.
+        A short list of restaurants, cafes, bakeries, bars, shops, services, and landmarks, from West 155th Street up to where Dyckman starts to feel like Inwood.
       </p>
     </section>
 
@@ -94,6 +122,28 @@ if (featured.length > 0) {
             );
           })
         }
+      </ul>
+    </section>
+
+    <section aria-labelledby="neighborhood-heading">
+      <div class="section-head">
+        <h2 id="neighborhood-heading">The neighborhood</h2>
+      </div>
+      <ul class="contents">
+        <li>
+          <a href={href('/areas')}>
+            <span class="contents-name">Areas</span>
+            <span class="contents-count">{areas.length}</span>
+            <span class="contents-blurb">Smaller sections, nested when one sits inside another.</span>
+          </a>
+        </li>
+        <li>
+          <a href={href('/people')}>
+            <span class="contents-name">Notable residents & history</span>
+            <span class="contents-count">{people.length}</span>
+            <span class="contents-blurb">People and events tied to the neighborhood, with sources.</span>
+          </a>
+        </li>
       </ul>
     </section>
 

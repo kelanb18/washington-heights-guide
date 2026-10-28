@@ -1,0 +1,28 @@
+---
+interface Props {
+  urls: string[];
+}
+
+const { urls } = Astro.props;
+
+function label(url: string): string {
+  return url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+}
+---
+
+{
+  urls.length === 0 ? (
+    'No sources listed yet.'
+  ) : (
+    <ul class="source-list">
+      {urls.map((url) => (
+        <li>
+          <a href={url} rel="noopener noreferrer" target="_blank">
+            {label(url)}
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

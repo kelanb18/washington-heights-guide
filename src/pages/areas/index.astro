@@ -1,0 +1,79 @@
+---
+import AreaTree from '../../components/AreaTree.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { areaTree, hasNestedAreas, loadAreas } from '../../lib/areas';
+import { listingCounts } from '../../lib/catalog';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+const areas = await loadAreas();
+const listings = await loadListings();
+const tree = areaTree(areas);
+const counts = listingCounts(areas, listings);
+const nested = hasNestedAreas(tree);
+const description =
+  'Smaller sections of Washington Heights, listed on their own and nested when one sits inside another.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/areas');
+const jsonLd: unknown[] = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Areas', url: pageUrl },
+  ]),
+];
+
+if (areas.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Areas in Washington Heights',
+      areas.map((area) => ({
+        name: area.data.name,
+        url: absoluteUrl(site, `/areas/${area.id}`),
+      })),
+    ),
+  );
+}
+---
+
+<BaseLayout title={`Areas · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">The neighborhood</p>
+      <h1>Areas</h1>
+      <p class="lede">
+        Smaller sections of Washington Heights. When one sits inside another, it is listed underneath.
+      </p>
+      <p class="count">
+        {
+          areas.length === 0
+            ? 'No areas published yet'
+            : `${areas.length} ${areas.length === 1 ? 'area' : 'areas'}`
+        }
+      </p>
+    </header>
+
+    {
+      areas.length > 0 ? (
+        <>
+          {nested && (
+            <p class="section-note">The number on each area counts places filed there, including smaller sections.</p>
+          )}
+          <AreaTree nodes={tree} counts={counts} />
+          <p class="tag-line">
+            <a href={href('/places')}>All places</a>
+            <span aria-hidden="true"> · </span>
+            <a href={href('/people')}>Notable residents & history</a>
+          </p>
+        </>
+      ) : (
+        <p class="empty">
+          No areas have been published yet. Smaller sections of the neighborhood will be listed here. When one section sits inside another, it nests under that parent.
+        </p>
+      )
+    }
+  </div>
+</BaseLayout>

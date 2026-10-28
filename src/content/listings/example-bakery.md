@@ -15,6 +15,7 @@ priceLevel: "$$"
 address: "000 Sample Street"
 crossStreets: "Sample Street & Placeholder Avenue"
 neighborhood: Washington Heights
+area: example-quarter
 lastVerified: 2026-09-18
 verdict: "Sample bakery copy. The rating is a placeholder number, not a score for a real oven."
 ---

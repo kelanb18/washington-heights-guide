@@ -1,4 +1,6 @@
 ---
+import { loadAreas } from '../lib/areas';
+import { findArea } from '../lib/catalog';
 import type { Listing } from '../lib/listings';
 import { formatDate, href, isoDate } from '../lib/site';
 import { categoryInfo, priceInfo } from '../lib/taxonomy';
@@ -12,6 +14,7 @@ interface Props {
 const { listing, index, heading = 'h2' } = Astro.props;
 const data = listing.data;
 const category = categoryInfo[data.category];
+const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
@@ -27,10 +30,17 @@ const Heading = heading;
     }
     <p class="kicker">
       <a href={href(`/category/${data.category}`)}>{category.singular}</a>
-      <span aria-hidden="true"> · </span>
-      <span>
-        <span class="sr-only">Price: {priceInfo[data.priceLevel]}. </span>{data.priceLevel}
-      </span>
+      {
+        data.priceLevel && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>
+              <span class="sr-only">Price: {priceInfo[data.priceLevel]}. </span>
+              {data.priceLevel}
+            </span>
+          </>
+        )
+      }
       {
         data.pick && (
           <>
@@ -57,6 +67,14 @@ const Heading = heading;
     <p class="verdict">{data.verdict}</p>
     <p class="where">
       {data.crossStreets}
+      {
+        area && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+          </>
+        )
+      }
       <span aria-hidden="true"> · </span>
       <time datetime={isoDate(data.lastVerified)}>Checked {formatDate(data.lastVerified)}</time>
     </p>

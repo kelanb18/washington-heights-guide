@@ -1,0 +1,138 @@
+---
+import { render } from 'astro:content';
+import SourceList from '../../components/SourceList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../lib/areas';
+import { findArea } from '../../lib/catalog';
+import { connectionInfo } from '../../lib/connections';
+import { breadcrumbJsonLd, personJsonLd } from '../../lib/jsonld';
+import { loadPeople } from '../../lib/people';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const people = await loadPeople();
+  return people.map((person) => ({
+    params: { slug: person.id },
+  }));
+}
+
+const people = await loadPeople();
+const person = people.find((entry) => entry.id === Astro.params.slug);
+if (!person) {
+  throw new Error(`[people] No public entry for slug "${Astro.params.slug}".`);
+}
+
+const data = person.data;
+const connection = connectionInfo[data.connection];
+const area = findArea(await loadAreas(), data.area);
+const { Content } = await render(person);
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, `/people/${person.id}`);
+const indexUrl = absoluteUrl(site, '/people');
+const located = area
+  ? { name: area.data.name, url: absoluteUrl(site, `/areas/${area.id}`) }
+  : data.place
+    ? { name: data.place }
+    : undefined;
+
+const jsonLd = [
+  personJsonLd(person, pageUrl, located),
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Notable residents & history', url: indexUrl },
+    { name: data.name, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${data.name} — Notable residents & history · ${siteName}`}
+  description={data.summary}
+  ogType="article"
+  noindex={data.example || data.draft}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/people')}>Notable residents & history</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{data.name}</span>
+    </nav>
+
+    <header class="listing-head">
+      <p class="kicker">
+        <a href={`${href('/people')}#${data.connection}`}>{connection.label}</a>
+        {
+          data.years && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <span>{data.years}</span>
+            </>
+          )
+        }
+        {
+          area && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+            </>
+          )
+        }
+      </p>
+      <h1>{data.name}</h1>
+      <p class="deck">{data.summary}</p>
+      {data.place && <p class="where">{data.place}</p>}
+      {
+        data.example && (
+          <p class="example-line">Example entry. Not a real person or event. Omitted from the production build.</p>
+        )
+      }
+      {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
+    </header>
+
+    <div class="listing-grid">
+      <div>
+        <div class="prose dropcap">
+          <Content />
+        </div>
+      </div>
+
+      <aside class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Details</h2>
+        <dl>
+          <dt>Known for</dt>
+          <dd>{data.knownFor}</dd>
+          <dt>Connection</dt>
+          <dd><a href={`${href('/people')}#${data.connection}`}>{connection.label}</a></dd>
+          {data.years && (
+            <>
+              <dt>Years</dt>
+              <dd>{data.years}</dd>
+            </>
+          )}
+          {data.place && (
+            <>
+              <dt>Place</dt>
+              <dd>{data.place}</dd>
+            </>
+          )}
+          {
+            area && (
+              <>
+                <dt>Area</dt>
+                <dd><a href={href(`/areas/${area.id}`)}>{area.data.name}</a></dd>
+              </>
+            )
+          }
+          <dt>Sources</dt>
+          <dd><SourceList urls={data.sources} /></dd>
+        </dl>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>

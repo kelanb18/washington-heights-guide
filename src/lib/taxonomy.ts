@@ -1,4 +1,4 @@
-export const categories = ['restaurant', 'cafe', 'bakery', 'bar', 'shop', 'service'] as const;
+export const categories = ['restaurant', 'cafe', 'bakery', 'bar', 'shop', 'service', 'landmark'] as const;
 
 export type Category = (typeof categories)[number];
 
@@ -47,6 +47,12 @@ export const categoryInfo = {
     plural: 'Services',
     blurb: 'Practical places locals actually use.',
     schemaType: 'LocalBusiness',
+  },
+  landmark: {
+    singular: 'Landmark',
+    plural: 'Landmarks',
+    blurb: 'Parks, museums, and places worth the walk.',
+    schemaType: 'TouristAttraction',
   },
 } as const satisfies Record<Category, CategoryInfo>;
 
