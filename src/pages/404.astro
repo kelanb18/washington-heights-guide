@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../lib/site';
+
+const description = 'That page is not on The Heights, a guide to Washington Heights, NYC.';
+---
+
+<BaseLayout title="Page not found · The Heights" description={description} noindex={true}>
+  <div class="wrap missing">
+    <header class="page-head">
+      <p class="kicker">404</p>
+      <h1>Not on the list.</h1>
+      <p class="lede">The address may be wrong, or the listing may have moved. Start again from the top.</p>
+    </header>
+    <p class="tag-line">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true"> · </span>
+      <a href={href('/places')}>All places</a>
+      <span aria-hidden="true"> · </span>
+      <a href={href('/about')}>About</a>
+    </p>
+  </div>
+</BaseLayout>

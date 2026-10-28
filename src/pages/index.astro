@@ -1,0 +1,136 @@
+---
+import ListingEntry from '../components/ListingEntry.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
+import { collectTags, loadListings } from '../lib/listings';
+import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
+import { categories, categoryInfo } from '../lib/taxonomy';
+
+const listings = await loadListings();
+const picks = listings.filter((listing) => listing.data.pick);
+const rest = listings.filter((listing) => !listing.data.pick);
+const tags = collectTags(listings);
+const site = Astro.site;
+
+if (!site) {
+  throw new Error('Missing site URL.');
+}
+
+const homeUrl = absoluteUrl(site, '/');
+const featured = (picks.length > 0 ? picks : listings).map((listing) => ({
+  name: listing.data.name,
+  url: absoluteUrl(site, `/places/${listing.id}`),
+}));
+
+const jsonLd: unknown[] = [
+  websiteJsonLd(homeUrl, defaultDescription),
+  breadcrumbJsonLd([{ name: siteName, url: homeUrl }]),
+];
+
+if (featured.length > 0) {
+  jsonLd.push(itemListJsonLd('Editor’s picks in Washington Heights', featured));
+}
+---
+
+<BaseLayout title="The Heights — Best spots in Washington Heights, NYC" description={defaultDescription} jsonLd={jsonLd}>
+  <div class="wrap">
+    <section class="hero">
+      <h1>The best spots in Washington Heights.</h1>
+      <p class="lede">
+        A short list of restaurants, cafes, bakeries, bars, shops, and services, from West 155th Street up to where Dyckman starts to feel like Inwood.
+      </p>
+    </section>
+
+    <ul class="principles">
+      <li>
+        <strong>Checked</strong>
+        Every listing carries the date its address and hours were last verified.
+      </li>
+      <li>
+        <strong>Short on purpose</strong>
+        This is not a copy of every open door on Broadway, St. Nicholas, or Amsterdam.
+      </li>
+      <li>
+        <strong>Independent</strong>
+        Sponsors are labeled. A verdict cannot be bought.
+      </li>
+    </ul>
+
+    <section aria-labelledby="picks-heading">
+      <div class="section-head">
+        <h2 id="picks-heading">Editor’s picks</h2>
+        <a href={href('/places')}>All places</a>
+      </div>
+      {
+        picks.length > 0 ? (
+          <ol class="entries">
+            {picks.map((listing, index) => (
+              <ListingEntry listing={listing} index={index + 1} heading="h3" />
+            ))}
+          </ol>
+        ) : (
+          <p class="empty">No editor’s picks yet. Places land here after the details have been checked.</p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="browse-heading">
+      <div class="section-head">
+        <h2 id="browse-heading">Browse</h2>
+      </div>
+      <ul class="contents">
+        {
+          categories.map((category) => {
+            const info = categoryInfo[category];
+            const count = listings.filter((listing) => listing.data.category === category).length;
+            return (
+              <li>
+                <a href={href(`/category/${category}`)}>
+                  <span class="contents-name">{info.plural}</span>
+                  <span class="contents-count">{count}</span>
+                  <span class="contents-blurb">{info.blurb}</span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </section>
+
+    {
+      rest.length > 0 && (
+        <section aria-labelledby="rest-heading">
+          <div class="section-head">
+            <h2 id="rest-heading">Also on the list</h2>
+          </div>
+          <ul class="entries">
+            {rest.map((listing) => (
+              <ListingEntry listing={listing} heading="h3" />
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      tags.length > 0 && (
+        <section aria-labelledby="tags-heading">
+          <div class="section-head">
+            <h2 id="tags-heading">Tags</h2>
+          </div>
+          <p class="tag-line">
+            {tags.map((tag, index) => (
+              <>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/tags/${tag.slug}`)}>
+                  {tag.label}
+                  <span class="sr-only"> ({tag.listings.length})</span>
+                </a>
+              </>
+            ))}
+          </p>
+        </section>
+      )
+    }
+  </div>
+</BaseLayout>

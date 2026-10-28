@@ -1,0 +1,85 @@
+---
+import ListingEntry from '../../components/ListingEntry.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+import { categories, categoryInfo } from '../../lib/taxonomy';
+
+const listings = await loadListings();
+const description =
+  'Every place currently on The Heights, a curated guide to Washington Heights, NYC, grouped by category.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/places');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Places', url: pageUrl },
+  ]),
+  itemListJsonLd(
+    'Places in Washington Heights',
+    listings.map((listing) => ({
+      name: listing.data.name,
+      url: absoluteUrl(site, `/places/${listing.id}`),
+    })),
+  ),
+];
+---
+
+<BaseLayout title="All places · The Heights" description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">The list</p>
+      <h1>All places</h1>
+      <p class="lede">
+        {
+          listings.length === 0
+            ? 'Nothing has been published yet. Category pages are ready for the first checked listing.'
+            : `${listings.length} ${listings.length === 1 ? 'place' : 'places'}, grouped by what they are.`
+        }
+      </p>
+    </header>
+
+    {
+      listings.length === 0 && (
+        <ul class="contents">
+          {categories.map((category) => (
+            <li>
+              <a href={href(`/category/${category}`)}>
+                <span class="contents-name">{categoryInfo[category].plural}</span>
+                <span class="contents-count">0</span>
+                <span class="contents-blurb">{categoryInfo[category].blurb}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    {
+      categories.map((category) => {
+        const items = listings.filter((listing) => listing.data.category === category);
+        if (items.length === 0) return null;
+        const info = categoryInfo[category];
+        return (
+          <section class="group" aria-labelledby={`group-${category}`}>
+            <div class="section-head">
+              <h2 id={`group-${category}`}>
+                <a href={href(`/category/${category}`)}>{info.plural}</a>
+              </h2>
+              <span class="count">{items.length}</span>
+            </div>
+            <ul class="entries">
+              {items.map((listing) => (
+                <ListingEntry listing={listing} heading="h3" />
+              ))}
+            </ul>
+          </section>
+        );
+      })
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import { correctionsEmail, href, scopeLine, siteName } from '../lib/site';
+---
+
+<footer class="colophon">
+  <div class="wrap">
+    <p class="wordmark">{siteName}</p>
+    <p>A curated guide to {scopeLine}</p>
+    <p>
+      <a href={`${href('/about')}#disclosure`}>Affiliate links and sponsorships</a> are labeled. Verdicts are not for sale.
+    </p>
+    <p>
+      Corrections: <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>
+      <span> — placeholder address until a real mailbox is connected.</span>
+    </p>
+  </div>
+</footer>
