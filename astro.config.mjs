@@ -32,12 +32,16 @@ const hidden = {
   places: new Set(unpublishedSlugs('listings')),
   areas: new Set(unpublishedSlugs('areas')),
   people: new Set(unpublishedSlugs('people')),
+  'filmed-here': new Set(unpublishedSlugs('productions')),
 };
 
 export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
+  image: {
+    remotePatterns: [{ protocol: 'https' }],
+  },
   integrations: [
     sitemap({
       filter: (page) => {

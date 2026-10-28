@@ -41,6 +41,13 @@ images: []
 # images:
 #   - src: /images/your-file.jpg
 #     alt: "What a person sees in the picture, in a full sentence."
+# image:
+#   src: src/assets/your-file.jpg
+#   alt: "What a person sees in the picture, in a full sentence."
+#   credit: "Photographer Name"
+#   license: "CC BY-SA 4.0"
+#   sourceUrl: https://commons.wikimedia.org/wiki/Example
+# gallery: []
 ---
 
 > Replace this blockquote. If this file is still an example, say so in the first lines.

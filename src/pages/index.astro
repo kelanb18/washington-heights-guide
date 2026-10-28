@@ -1,16 +1,21 @@
 ---
 import ListingEntry from '../components/ListingEntry.astro';
+import PlaceMap from '../components/PlaceMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { loadAreas } from '../lib/areas';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { collectTags, loadListings } from '../lib/listings';
 import { loadPeople } from '../lib/people';
+import { pinsFor } from '../lib/pins';
+import { loadProductions } from '../lib/productions';
 import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
 import { categories, categoryInfo } from '../lib/taxonomy';
 
 const listings = await loadListings();
 const areas = await loadAreas();
 const people = await loadPeople();
+const productions = await loadProductions();
+const pins = pinsFor(listings);
 const picks = listings.filter((listing) => listing.data.pick);
 const rest = listings.filter((listing) => !listing.data.pick);
 const tags = collectTags(listings);
@@ -144,7 +149,15 @@ if (people.length > 0) {
             <span class="contents-blurb">People and events tied to the neighborhood, with sources.</span>
           </a>
         </li>
+        <li>
+          <a href={href('/filmed-here')}>
+            <span class="contents-name">Filmed here</span>
+            <span class="contents-count">{productions.length}</span>
+            <span class="contents-blurb">Movies, shows, and videos shot in the neighborhood.</span>
+          </a>
+        </li>
       </ul>
+      {pins.length > 0 && <PlaceMap pins={pins} label="Places in Washington Heights" />}
     </section>
 
     {

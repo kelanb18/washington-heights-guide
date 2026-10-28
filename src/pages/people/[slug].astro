@@ -1,5 +1,6 @@
 ---
 import { render } from 'astro:content';
+import PhotoSet from '../../components/PhotoSet.astro';
 import SourceList from '../../components/SourceList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
@@ -94,6 +95,8 @@ const jsonLd = [
       }
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
+
+    <PhotoSet image={data.image} gallery={data.gallery} />
 
     <div class="listing-grid">
       <div>

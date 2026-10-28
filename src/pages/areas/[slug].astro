@@ -2,13 +2,18 @@
 import { render } from 'astro:content';
 import ListingEntry from '../../components/ListingEntry.astro';
 import PersonEntry from '../../components/PersonEntry.astro';
+import PhotoSet from '../../components/PhotoSet.astro';
+import PlaceMap from '../../components/PlaceMap.astro';
+import ProductionEntry from '../../components/ProductionEntry.astro';
 import SourceList from '../../components/SourceList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { ancestorAreas, areaTree, findAreaNode, loadAreas } from '../../lib/areas';
+import { ancestorAreas, areaTree, descendantIds, findAreaNode, loadAreas } from '../../lib/areas';
 import { listingsInArea, peopleInArea } from '../../lib/catalog';
 import { areaJsonLd, breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { loadPeople } from '../../lib/people';
+import { pinsFor } from '../../lib/pins';
+import { loadProductions } from '../../lib/productions';
 import { referenceId } from '../../lib/refs';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
@@ -27,6 +32,12 @@ if (!area) {
 
 const listings = listingsInArea(area.id, areas, await loadListings());
 const people = peopleInArea(area.id, areas, await loadPeople());
+const areaIds = descendantIds(area.id, areas);
+const productions = (await loadProductions()).filter((production) => {
+  const id = referenceId(production.data.area);
+  return id != null && areaIds.has(id);
+});
+const pins = pinsFor(listings);
 const children = findAreaNode(areaTree(areas), area.id)?.children ?? [];
 const ancestors = ancestorAreas(area, areas);
 const directListings = listings.filter((listing) => referenceId(listing.data.area) === area.id).length;
@@ -140,6 +151,19 @@ if (people.length > 0) {
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
+    <PhotoSet image={data.image} gallery={data.gallery} />
+
+    {
+      pins.length > 0 && (
+        <section class="group" aria-labelledby="map-heading">
+          <div class="section-head">
+            <h2 id="map-heading">Map</h2>
+          </div>
+          <PlaceMap pins={pins} label={`Places in ${data.name}`} />
+        </section>
+      )
+    }
+
     <div class="listing-grid">
       <div>
         <div class="prose dropcap">
@@ -235,6 +259,24 @@ if (people.length > 0) {
           </ul>
         ) : (
           <p class="empty">No published people or events are filed under this area yet.</p>
+        )
+      }
+    </section>
+
+    <section class="group" aria-labelledby="filmed-heading">
+      <div class="section-head">
+        <h2 id="filmed-heading">Filmed here</h2>
+        <a href={href('/filmed-here')}>All productions</a>
+      </div>
+      {
+        productions.length > 0 ? (
+          <ul class="entries">
+            {productions.map((production) => (
+              <ProductionEntry production={production} heading="h3" />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No published films or videos are filed under this area yet.</p>
         )
       }
     </section>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 750" role="img">
+  <rect width="1200" height="750" fill="#e7dccb"/>
+  <rect x="48" y="48" width="1104" height="654" fill="none" stroke="#1b1612" stroke-width="3"/>
+  <text x="88" y="180" fill="#8c261c" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="6">PLACEHOLDER</text>
+  <text x="88" y="280" fill="#1b1612" font-family="Georgia, 'Times New Roman', serif" font-size="84">EXAMPLE</text>
+  <text x="88" y="350" fill="#3c352e" font-family="Georgia, 'Times New Roman', serif" font-size="32">Not a photograph of a real place.</text>
+</svg>

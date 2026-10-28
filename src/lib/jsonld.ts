@@ -1,6 +1,7 @@
 import type { Area } from './areas';
 import type { Listing } from './listings';
 import type { Person } from './people';
+import type { Production } from './productions';
 import { categoryInfo } from './taxonomy';
 
 export interface Crumb {
@@ -174,5 +175,29 @@ export function personJsonLd(
     json.homeLocation = place;
   }
 
+  return json;
+}
+
+const productionTypes = {
+  film: 'Movie',
+  tv: 'TVSeries',
+  'music-video': 'MusicVideoObject',
+  other: 'CreativeWork',
+} as const;
+
+export function productionJsonLd(production: Production, pageUrl: string) {
+  const data = production.data;
+  const json: Record<string, unknown> = {
+    '@context': 'https://schema.org',
+    '@type': productionTypes[data.kind],
+    name: data.title,
+    description: data.summary,
+    url: data.watchUrl ?? pageUrl,
+    mainEntityOfPage: pageUrl,
+    datePublished: typeof data.year === 'number' ? String(data.year) : data.year,
+    contentLocation: data.locations.map((name) => ({ '@type': 'Place', name })),
+    citation: data.sources.map((url) => ({ '@type': 'CreativeWork', url })),
+  };
+  if (data.artist) json.byArtist = { '@type': 'Person', name: data.artist };
   return json;
 }

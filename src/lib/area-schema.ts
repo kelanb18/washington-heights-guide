@@ -1,6 +1,7 @@
 import { reference } from 'astro:content';
 import { z } from 'astro/zod';
 import { assertAreaSlug } from './area-slugs';
+import { assertCreditedImages, creditedImageSchema } from './picture-schema';
 import { optionalNumber } from './schema-helpers';
 
 export const areaSchema = z
@@ -38,6 +39,8 @@ export const areaSchema = z
       .boolean()
       .default(false)
       .describe('True hides the area from production. Local dev still shows it.'),
+    image: creditedImageSchema.optional().describe('Optional hero image, with credit and a source link.'),
+    gallery: z.array(creditedImageSchema).max(8).default([]).describe('Optional extra images.'),
   })
   .superRefine((data, ctx) => {
     if (data.example && !/\bEXAMPLE\b/.test(data.name)) {
@@ -59,4 +62,6 @@ export const areaSchema = z
     }
 
     assertAreaSlug(data.parent, ctx, 'parent');
+    if (data.image) assertCreditedImages([data.image], ctx, ['image']);
+    assertCreditedImages(data.gallery, ctx, ['gallery']);
   });

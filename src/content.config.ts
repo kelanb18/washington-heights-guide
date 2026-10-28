@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { areaSchema } from './lib/area-schema';
 import { listingSchema } from './lib/listing-schema';
 import { personSchema } from './lib/person-schema';
+import { productionSchema } from './lib/production-schema';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -43,4 +44,9 @@ const people = defineCollection({
   schema: personSchema,
 });
 
-export const collections = { listings, areas, people };
+const productions = defineCollection({
+  loader: markdownFiles('productions', 'productions', 'sample-picture.md'),
+  schema: productionSchema,
+});
+
+export const collections = { listings, areas, people, productions };

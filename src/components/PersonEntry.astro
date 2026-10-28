@@ -1,4 +1,5 @@
 ---
+import AttributedPhoto from './AttributedPhoto.astro';
 import { findArea } from '../lib/catalog';
 import { connectionInfo } from '../lib/connections';
 import { loadAreas } from '../lib/areas';
@@ -17,7 +18,8 @@ const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class="entry">
+<li class:list={['entry', { 'has-photo': Boolean(data.image) }]}>
+  {data.image && <AttributedPhoto picture={data.image} variant="thumb" />}
   <div>
     <p class="kicker">
       <a href={`${href('/people')}#${data.connection}`}>{connection.label}</a>

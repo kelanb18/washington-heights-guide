@@ -1,0 +1,53 @@
+---
+import AttributedPhoto from './AttributedPhoto.astro';
+import { findArea } from '../lib/catalog';
+import { loadAreas } from '../lib/areas';
+import { formatYear, type Production } from '../lib/productions';
+import { productionKindInfo } from '../lib/production-schema';
+import { href } from '../lib/site';
+
+interface Props {
+  production: Production;
+  heading?: 'h2' | 'h3';
+}
+
+const { production, heading = 'h2' } = Astro.props;
+const data = production.data;
+const kind = productionKindInfo[data.kind];
+const area = findArea(await loadAreas(), data.area);
+const Heading = heading;
+---
+
+<li class:list={['entry', { 'has-photo': Boolean(data.image) }]}>
+  {data.image && <AttributedPhoto picture={data.image} variant="thumb" />}
+  <div>
+    <p class="kicker">
+      <a href={`${href('/filmed-here')}#${data.kind}`}>{kind.label}</a>
+      <span aria-hidden="true"> · </span>
+      <span>{formatYear(data.year)}</span>
+      {
+        data.artist && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <span>{data.artist}</span>
+          </>
+        )
+      }
+    </p>
+    <Heading class="entry-title">
+      <a href={href(`/filmed-here/${production.id}`)}>{data.title}</a>
+    </Heading>
+    <p class="verdict">{data.summary}</p>
+    <p class="where">
+      {data.locations[0]}
+      {
+        area && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+          </>
+        )
+      }
+    </p>
+  </div>
+</li>
