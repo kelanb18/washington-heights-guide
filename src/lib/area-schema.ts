@@ -21,7 +21,7 @@ export const areaSchema = z
       .string()
       .trim()
       .min(3)
-      .max(200)
+      .max(400)
       .describe('Approximate streets, such as "Sample Street to Placeholder Avenue".'),
     order: optionalNumber(z.number()).describe(
       'Optional sort position. Lower numbers are listed first. Omit it to sort by name after the numbered areas.',
