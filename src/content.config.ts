@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { areaSchema } from './lib/area-schema';
 import { listingSchema } from './lib/listing-schema';
 import { personSchema } from './lib/person-schema';
+import { guideSchema } from './lib/guide-schema';
 import { productionSchema } from './lib/production-schema';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -49,4 +50,9 @@ const productions = defineCollection({
   schema: productionSchema,
 });
 
-export const collections = { listings, areas, people, productions };
+const guides = defineCollection({
+  loader: markdownFiles('guides', 'guides', 'sample-guide.md'),
+  schema: guideSchema,
+});
+
+export const collections = { listings, areas, people, productions, guides };

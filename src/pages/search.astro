@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { href } from '../lib/site';
+
+const description = 'Search places, guides, areas, people, and productions on The Heights.';
+---
+
+<BaseLayout title="Search · The Heights" description={description}>
+  <div class="wrap" data-pagefind-ignore>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Search</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">The archive</p>
+      <h1>Search</h1>
+      <p class="lede">Places, guides, neighborhoods, people, and what was filmed here.</p>
+    </header>
+    <div id="search"></div>
+    <p id="search-fallback" class="empty" hidden>
+      Search is ready after the site is built. In local preview, run <code>npm run build</code> and open the built site.
+    </p>
+  </div>
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    const fallback = document.getElementById('search-fallback');
+    if (window.PagefindUI) {
+      new window.PagefindUI({ element: '#search', showSubResults: true, showImages: false });
+    } else if (fallback) {
+      fallback.hidden = false;
+    }
+  </script>
+</BaseLayout>

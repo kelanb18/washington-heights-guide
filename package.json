@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && pagefind --site dist",
     "build:examples": "INCLUDE_EXAMPLES=true ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check"
@@ -24,6 +24,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "@types/leaflet": "^1.9.22",
+    "pagefind": "^1.5.2",
     "typescript": "^6.0.3"
   }
 }

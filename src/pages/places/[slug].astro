@@ -1,10 +1,13 @@
 ---
 import { render } from 'astro:content';
+import ActionLinks from '../../components/ActionLinks.astro';
+import HoursNote from '../../components/HoursNote.astro';
 import PhotoSet from '../../components/PhotoSet.astro';
 import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
+import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
@@ -29,6 +32,7 @@ const category = categoryInfo[data.category];
 const area = findArea(await loadAreas(), data.area);
 const pins = pinsFor([listing]);
 const hasMap = data.latitude != null && data.longitude != null;
+const featuredIn = guidesFeaturing(await loadGuides(), listing.id);
 const { Content } = await render(listing);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -96,6 +100,7 @@ const jsonLd = [
       </p>
       <h1>{data.name}</h1>
       <p class="deck">{data.verdict}</p>
+      <ActionLinks website={data.website} links={data.links} />
       <p class="where">
         {data.address}
         <span aria-hidden="true"> · </span>
@@ -207,7 +212,9 @@ const jsonLd = [
           <dt>Cross streets</dt>
           <dd>{data.crossStreets}</dd>
           <dt>Hours</dt>
-          <dd>{data.hours ?? 'Not listed. Check before you go.'}</dd>
+          <dd>
+            {data.hours ? <HoursNote hours={data.hours} /> : 'Not listed. Check before you go.'}
+          </dd>
           {
             data.phone && (
               <>
@@ -277,5 +284,22 @@ const jsonLd = [
         }
       </aside>
     </div>
+    {
+      featuredIn.length > 0 && (
+        <section class="group" aria-labelledby="featured-in">
+          <div class="section-head">
+            <h2 id="featured-in">Featured in</h2>
+          </div>
+          <ul class="tag-line">
+            {featuredIn.map((guide, index) => (
+              <li>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/best/${guide.id}`)}>{guide.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
   </article>
 </BaseLayout>

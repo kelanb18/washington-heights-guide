@@ -1,10 +1,10 @@
 ---
-import ListingEntry from '../../components/ListingEntry.astro';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
-import { loadListings } from '../../lib/listings';
-import { absoluteUrl, siteName } from '../../lib/site';
-import { categories, categoryInfo, isCategory } from '../../lib/taxonomy';
+import ListingEntry from '../../../components/ListingEntry.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
+import { loadListings } from '../../../lib/listings';
+import { absoluteUrl, href, siteName } from '../../../lib/site';
+import { categories, categoryInfo, isCategory } from '../../../lib/taxonomy';
 
 export function getStaticPaths() {
   return categories.map((category) => ({
@@ -42,6 +42,11 @@ const jsonLd = [
 
 <BaseLayout title={`${info.plural} in Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
   <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{info.plural}</span>
+    </nav>
     <header class="page-head">
       <p class="kicker">Category</p>
       <h1>{info.plural}</h1>

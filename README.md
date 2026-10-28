@@ -278,6 +278,32 @@ The index title is “Notable residents & history”. Notes are grouped by `conn
 3. Set `example: false` and `draft: false`, or omit them.
 4. Run `npm run build` and commit that one Markdown file.
 
+## Best of guides
+
+One ranking, one file:
+
+```text
+src/content/guides/<slug>.md
+```
+
+`src/content/guides/sample-guide.md` becomes `/best/sample-guide/`. Copy `templates/guide.md`. Filename rules match listings. `example` and `draft` work the same way. A published guide cannot point at an example or draft listing.
+
+| Field | What to put |
+| --- | --- |
+| `title` | The guide title. Placeholder titles must contain `EXAMPLE`. |
+| `description` | Search and social summary, 40–160 characters. |
+| `picks` | Ordered list. Each item has `listing` (a slug in `src/content/listings/`), `blurb` (why it is here), and an optional `badge`. The first pick is number one. An unknown slug fails the build. |
+| `updated` | Date the list was last checked. `2026-10-01`. Not in the future. |
+| `sources` | `http(s)` URLs. May be empty. |
+
+Optional: `area`, `category`, `image`, `example`, `draft`. The Markdown body is the introduction. It must be at least 200 characters.
+
+`/best/` is the index. A guide page shows ranked cards, a map of picks that have coordinates, an updated date, and `ItemList` structured data. Listing pages say “Featured in” when a guide includes them. Area pages list guides about that area or its places.
+
+`/category/<category>/in/<area>/` is generated only when at least two published places of that category sit in the area or a smaller section of it. Those pages are alphabetical. They are not rankings.
+
+Listings may set `links` with `reserve`, `order`, `tickets`, and `website`. Each one that is present becomes a labeled button. `sponsored: true` still prints a Sponsored label. Neither is required, and neither is turned on for a real listing in this repo.
+
 ## Photos
 
 Listings, areas, people, and productions can carry an optional `image`, and listings, areas, and people can also carry a `gallery`. Both use the same object:
@@ -338,6 +364,10 @@ A listing with both `latitude` and `longitude` gets a map and the Google Maps li
 | `/people/<slug>/` | One person or historic event, with `Person` or `Article` JSON-LD |
 | `/filmed-here/` | Productions, grouped by kind or sorted by year, plus film permits |
 | `/filmed-here/<slug>/` | One production |
+| `/best/` | Editorial guides |
+| `/best/<slug>/` | One ranked guide, with `ItemList` structured data |
+| `/category/<category>/in/<area>/` | Alphabetical places of one category in one area, only when there are at least two |
+| `/search/` | Site search |
 | `/about/` | Editorial policy, affiliate disclosure, sponsorships, corrections |
 | `/404.html` | Missing pages |
 

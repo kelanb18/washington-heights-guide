@@ -1,0 +1,156 @@
+---
+import { render } from 'astro:content';
+import AttributedPhoto from '../../components/AttributedPhoto.astro';
+import PhotoSet from '../../components/PhotoSet.astro';
+import PlaceMap from '../../components/PlaceMap.astro';
+import SourceList from '../../components/SourceList.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../lib/areas';
+import { findArea } from '../../lib/catalog';
+import { loadGuides } from '../../lib/guides';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { pinsFor } from '../../lib/pins';
+import { referenceId } from '../../lib/refs';
+import { absoluteUrl, formatDate, href, isoDate, siteName } from '../../lib/site';
+import { categoryInfo, isCategory } from '../../lib/taxonomy';
+
+export async function getStaticPaths() {
+  const guides = await loadGuides();
+  return guides.map((guide) => ({ params: { slug: guide.id } }));
+}
+
+const guides = await loadGuides();
+const guide = guides.find((entry) => entry.id === Astro.params.slug);
+if (!guide) throw new Error(`[guides] No public guide for "${Astro.params.slug}".`);
+
+const listings = await loadListings();
+const ranked = guide.data.picks.flatMap((pick, index) => {
+  const id = referenceId(pick.listing);
+  const listing = listings.find((entry) => entry.id === id);
+  return listing ? [{ pick, listing, rank: index + 1 }] : [];
+});
+const area = findArea(await loadAreas(), guide.data.area);
+const category = guide.data.category && isCategory(guide.data.category) ? categoryInfo[guide.data.category] : undefined;
+const related = guides
+  .filter((entry) => entry.id !== guide.id)
+  .filter((entry) => {
+    if (guide.data.area && referenceId(entry.data.area) === referenceId(guide.data.area)) return true;
+    if (guide.data.category && entry.data.category === guide.data.category) return true;
+    return false;
+  })
+  .slice(0, 3);
+const { Content } = await render(guide);
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const pageUrl = absoluteUrl(site, `/best/${guide.id}`);
+const jsonLd = [
+  itemListJsonLd(
+    guide.data.title,
+    ranked.map((item) => ({
+      name: item.listing.data.name,
+      url: absoluteUrl(site, `/places/${item.listing.id}`),
+    })),
+  ),
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Best of', url: absoluteUrl(site, '/best') },
+    { name: guide.data.title, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${guide.data.title} · ${siteName}`}
+  description={guide.data.description}
+  ogType="article"
+  modified={isoDate(guide.data.updated)}
+  noindex={guide.data.example || guide.data.draft}
+  jsonLd={jsonLd}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/best')}>Best of</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{guide.data.title}</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Best of
+        {category && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href={href(`/category/${guide.data.category}`)}>{category.plural}</a>
+          </>
+        )}
+        {area && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+          </>
+        )}
+      </p>
+      <h1>{guide.data.title}</h1>
+      <p class="lede">{guide.data.description}</p>
+      <p class="where">
+        Updated <time datetime={isoDate(guide.data.updated)}>{formatDate(guide.data.updated)}</time>
+      </p>
+      {guide.data.example && <p class="example-line">Example guide. Not a real ranking. Omitted from the production build.</p>}
+    </header>
+    <PhotoSet image={guide.data.image} />
+    <div class="prose">
+      <Content />
+    </div>
+    <ol class="ranked">
+      {ranked.map((item) => (
+        <li class="ranked-card">
+          <p class="entry-index">{String(item.rank).padStart(2, '0')}</p>
+          {item.listing.data.image && <AttributedPhoto picture={item.listing.data.image} variant="thumb" />}
+          <div>
+            {item.pick.badge && <p class="badge">{item.pick.badge}</p>}
+            {item.listing.data.sponsored && <p class="sponsored-flag">Sponsored</p>}
+            <p class="kicker">
+              <a class="chip" href={href(`/category/${item.listing.data.category}`)}>
+                {categoryInfo[item.listing.data.category].singular}
+              </a>
+            </p>
+            <h2 class="entry-title">
+              <a href={href(`/places/${item.listing.id}`)}>{item.listing.data.name}</a>
+            </h2>
+            <p class="pick-blurb">{item.pick.blurb}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    {ranked.length > 0 && <PlaceMap pins={pinsFor(ranked.map((item) => item.listing))} label={`Map for ${guide.data.title}`} />}
+    {
+      guide.data.sources.length > 0 && (
+        <section class="group" aria-labelledby="guide-sources">
+          <div class="section-head">
+            <h2 id="guide-sources">Sources</h2>
+          </div>
+          <SourceList urls={guide.data.sources} />
+        </section>
+      )
+    }
+    {
+      related.length > 0 && (
+        <section class="group" aria-labelledby="related-guides">
+          <div class="section-head">
+            <h2 id="related-guides">Related guides</h2>
+          </div>
+          <ul class="tag-line">
+            {related.map((entry, index) => (
+              <li>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/best/${entry.id}`)}>{entry.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>
