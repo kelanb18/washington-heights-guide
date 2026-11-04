@@ -16,6 +16,12 @@ postalCode: "10033"
 website: "https://www.nycgovparks.org/parks/j-hood-wright-park"
 lastVerified: 2026-10-28
 verdict: "A practical neighborhood park with a good river overlook and a playground families like; less grand than Fort Tryon, more used day to day."
+image:
+  src: /images/listings/j-hood-wright-park.webp
+  alt: "Shaded paths, trees and a litter bin in J. Hood Wright Park, Manhattan."
+  credit: "Clyde Charles Brown"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:J._Hood_Wright_Park,_Manhattan,_New_York,_US.jpg"
 ---
 
 ## What it is

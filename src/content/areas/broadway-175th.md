@@ -8,6 +8,12 @@ sources:
   - https://www.nyc.gov/html/dot/html/pr2015/pr15-122.shtml
   - https://maleconnyc.com/page/locations
   - https://s-media.nyc.gov/agencies/lpc/lp/0656.pdf
+image:
+  src: /images/areas/broadway-175th.webp
+  alt: "The United Palace theater and its lit marquee at the corner of Broadway and W 175th St, seen from across the intersection."
+  credit: "Beyond My Ken"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_from_corner.jpg"
 ---
 
 This is a landmark-heavy stretch of the Broadway valley in Washington Heights. The United Palace, a 1930 theater at 4140 Broadway built as Loew's 175th Street Theatre, anchors the block, and Malecón, the Dominican restaurant at 4141 Broadway, is directly across the street. Next to the theater, W 175th St between Broadway and Wadsworth Ave was turned into Plaza de las Americas, a pedestrian plaza that the city opened in 2015.

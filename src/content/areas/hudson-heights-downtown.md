@@ -10,6 +10,12 @@ sources:
   - https://www.theuptowngarrison.com/hours
   - https://www.lecheilebarnyc.com/
   - https://www.theinfatuation.com/new-york/guides/where-to-eat-in-washington-heights
+image:
+  src: /images/areas/hudson-heights-downtown.webp
+  alt: "The public stairway from the end of Pinehurst Avenue down to W 181st St, with a street lamp, railings and apartment buildings on both sides."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Pinehurst_Avenue_stairs_to_West_181st_Street.jpg"
 ---
 
 "Downtown" and "uptown" are how locals sort Hudson Heights' two small commercial strips; neither term is official. The downtown strip is W 181st St where it meets Fort Washington Ave, a short walk from the 181st St A station and its elevators to the ridge. The Washington Heights Business Improvement District's W 181st St corridor runs from Amsterdam Ave west to Fort Washington Ave, so this is where that corridor ends.

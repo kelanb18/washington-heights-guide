@@ -17,6 +17,12 @@ website: "https://www.nycgovparks.org/park-features/highbridge-park/planyc"
 hours: "Daily 7am–10pm per NYC Parks; earlier seasonal closing has been reported"
 lastVerified: 2026-10-28
 verdict: "A free, scenic crossing with real history, best on a clear day; hours are posted by NYC Parks, so check before a late walk."
+image:
+  src: /images/listings/the-high-bridge.webp
+  alt: "The High Bridge, a pedestrian bridge with stone piers and an arched span, crossing the Harlem River, seen from Highbridge Park."
+  credit: "Jim.henderson"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:High_Bridge_jeh.JPG"
 ---
 
 ## What it is

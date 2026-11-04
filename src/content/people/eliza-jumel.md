@@ -9,6 +9,12 @@ summary: "Eliza Jumel and her husband Stephen bought the Morris-Jumel Mansion in
 sources:
   - https://morrisjumel.org/stories/history-of-the-house/
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/eliza-jumel.webp
+  alt: "An old engraved portrait print of Madame Jumel (Eliza Jumel) from the New York Public Library's digital collections."
+  credit: "Scan by NYPL"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Madame_Jumel_(NYPL_b13476046-421864).tiff"
 ---
 
 Stephen Jumel, a French wine merchant, married American Eliza Bowen in 1804. In 1810 the couple bought the house then called Mount Morris, along with its land, according to the Morris-Jumel Mansion's website. After Stephen died in 1832, Eliza married the former Vice President Aaron Burr in the home's front parlor in 1833.

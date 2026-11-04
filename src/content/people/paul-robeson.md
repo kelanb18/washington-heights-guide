@@ -9,6 +9,12 @@ summary: "Robeson and his family lived at 555 Edgecombe Avenue from 1939 to 1941
 sources:
   - http://www.nps.gov/places/new-york-paul-robeson-home.htm
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/paul-robeson.webp
+  alt: "Black-and-white portrait photograph of Paul Robeson in a suit, taken in 1942 by Gordon Parks for the Office of War Information."
+  credit: "Gordon Parks, Office of War Information (cropped by Beyond My Ken)"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Paul_Robeson_1942_crop.jpg"
 ---
 
 The National Park Service says Paul Robeson and his family lived in an apartment at 555 Edgecombe Avenue from 1939 to 1941, after he returned from living and performing in Europe. The building is a National Historic Landmark and is not open to the public.

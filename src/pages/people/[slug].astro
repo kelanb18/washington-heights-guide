@@ -8,6 +8,7 @@ import { findArea } from '../../lib/catalog';
 import { connectionInfo } from '../../lib/connections';
 import { breadcrumbJsonLd, personJsonLd } from '../../lib/jsonld';
 import { loadPeople } from '../../lib/people';
+import { shareableSrc } from '../../lib/pictures';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -53,6 +54,8 @@ const jsonLd = [
   title={`${data.name} — Notable residents & history · ${siteName}`}
   description={data.summary}
   ogType="article"
+  image={shareableSrc(data.image?.src)}
+  imageAlt={data.image?.alt}
   noindex={data.example || data.draft}
   jsonLd={jsonLd}
 >
@@ -96,7 +99,7 @@ const jsonLd = [
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
-    <PhotoSet image={data.image} gallery={data.gallery} />
+    <PhotoSet image={data.image} gallery={data.gallery} mark={data.name} tone="person" markLabel="Portrait" />
 
     <div class="listing-grid">
       <div>

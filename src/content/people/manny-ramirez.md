@@ -9,6 +9,12 @@ summary: "Born in Santo Domingo, Ramirez moved to Washington Heights in 1985 and
 sources:
   - https://en.wikipedia.org/wiki/Manny_Ramirez
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/manny-ramirez.webp
+  alt: "Manny Ramirez in a Boston Red Sox jersey and cap with a glove, running on the field in June 2007."
+  credit: "Andrew Malone"
+  license: "CC BY 2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Manny_Ramirez_with_Red_Sox_June_2007.jpg"
 ---
 
 Manny Ramirez was born in Santo Domingo, Dominican Republic, and, according to Wikipedia, moved to the Washington Heights neighborhood of New York with his parents in 1985, at about age 13. He attended George Washington High School from 1987 to 1991 and became a baseball standout there.

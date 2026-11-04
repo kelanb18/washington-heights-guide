@@ -9,6 +9,12 @@ summary: "Born in Yorkville, Gehrig grew up in Washington Heights from about age
 sources:
   - https://sabr.org/bioproj/person/lou-gehrig/
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/lou-gehrig.webp
+  alt: "Lou Gehrig of the New York Yankees in his pinstriped uniform and cap, cropped from a 1937 All-Star photograph."
+  credit: "Harris & Ewing"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Gehrig_cropped.jpg"
 ---
 
 Lou Gehrig was born in Yorkville in 1903, according to the Society for American Baseball Research biography. When he was five, SABR says, his family moved to Washington Heights, to an apartment within shouting distance of Hilltop Park, where the New York Highlanders played. The Polo Grounds were also nearby. SABR says living near those ballparks gave him an early love of baseball, and that he played pickup games in the neighborhood and attended Giants games when he could afford a bleacher seat.

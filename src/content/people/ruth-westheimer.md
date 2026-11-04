@@ -7,6 +7,12 @@ summary: "Dr. Ruth lived in Washington Heights for decades, raising her family t
 sources:
   - https://gothamist.com/news/dr-ruth-nycs-legendary-sex-therapist-dies-at-age-96
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/ruth-westheimer.webp
+  alt: "Dr. Ruth Westheimer smiling and signing at BookExpo America 2018 at the Javits Center in New York City."
+  credit: "Rhododendrites"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Ruth_Westheimer_(10877).jpg"
 ---
 
 Gothamist reported, citing a New York Times profile, that Ruth Westheimer moved to New York City in the late 1950s and stayed in the same Washington Heights apartment for nearly 70 years. She died on July 12, 2024, at age 96. Gothamist says she raised her family in Washington Heights, according to multiple profiles and the documentary Ask Dr. Ruth.

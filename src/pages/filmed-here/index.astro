@@ -1,10 +1,20 @@
 ---
+import AttributedPhoto from '../../components/AttributedPhoto.astro';
 import FilmShoots from '../../components/FilmShoots.astro';
 import ProductionEntry from '../../components/ProductionEntry.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import type { CreditedImage } from '../../lib/picture-schema';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { compareProductionsByYear, loadProductions, productionsByKind } from '../../lib/productions';
 import { absoluteUrl, siteName } from '../../lib/site';
+
+const hero: CreditedImage = {
+  src: '/images/extras/2022-movie-trucks-hudson-heights.webp',
+  alt: 'Film-production trucks parked along W 187th St between Fort Washington Avenue and Pinehurst Avenue in Hudson Heights (2022).',
+  credit: 'Beyond My Ken',
+  license: 'CC BY-SA 4.0',
+  sourceUrl: 'https://commons.wikimedia.org/wiki/File:2022_Movie_trucks_in_Hudson_Heights_1.jpg',
+};
 
 const productions = await loadProductions();
 const groups = productionsByKind(productions);
@@ -36,7 +46,13 @@ if (productions.length > 0) {
 }
 ---
 
-<BaseLayout title={`Filmed in the Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={`Filmed in the Heights · ${siteName}`}
+  description={description}
+  image={hero.src}
+  imageAlt={hero.alt}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
     <header class="page-head">
       <p class="kicker">On screen</p>
@@ -52,6 +68,8 @@ if (productions.length > 0) {
         }
       </p>
     </header>
+
+    <AttributedPhoto picture={hero} variant="hero" />
 
     {
       productions.length > 1 && (

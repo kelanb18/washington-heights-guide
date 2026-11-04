@@ -15,6 +15,12 @@ postalCode: "10033"
 website: "https://unitedpalace.com/"
 lastVerified: 2026-10-28
 verdict: "One of Washington Heights' great buildings; the best way to see inside is a ticketed event or tour, so check the calendar first."
+image:
+  src: /images/listings/united-palace.webp
+  alt: "The Broadway facade and marquee of the United Palace, a 1930 theater building at W 175th St in Washington Heights."
+  credit: "Beyond My Ken"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_Broadway_facade.jpg"
 ---
 
 ## What it is

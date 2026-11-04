@@ -7,6 +7,12 @@ sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://theshabazzcenter.org/tours/
   - https://wordupbooks.com/location-hours
+image:
+  src: /images/areas/audubon-165th.webp
+  alt: "The green terra-cotta facade of the former Audubon Ballroom at Broadway and W 165th St, with the Lasker Biomedical Research Building rising behind it."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Audubon_Ballroom_and_Lasker_Biomedical_Research_Building.jpg"
 ---
 
 This part of Washington Heights is defined by two big institutions. The first is the medical campus: NewYork-Presbyterian Hospital and Columbia University Irving Medical Center sit west of Broadway between W 165th and 168th Sts. The campus opened in 1928 as Columbia-Presbyterian, on the site of Hilltop Park, which was home to the New York Highlanders (later the Yankees) from 1903 to 1912, according to Wikipedia. The second is the Audubon Ballroom at 3940 Broadway, now the Malcolm X & Dr. Betty Shabazz Memorial and Educational Center, where Malcolm X was assassinated on February 21, 1965.

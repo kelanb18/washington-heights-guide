@@ -34,3 +34,10 @@ export function resolvePicture(src: string): ResolvedPicture {
 export function heroPicture(image: CreditedImage | undefined): CreditedImage | undefined {
   return image;
 }
+
+/** A path the Open Graph tag can use. Asset imports are optimized in the page, not as a stable public URL. */
+export function shareableSrc(src: string | undefined): string | undefined {
+  if (!src) return undefined;
+  if (src.startsWith('/') || /^https?:\/\//.test(src)) return src;
+  return undefined;
+}

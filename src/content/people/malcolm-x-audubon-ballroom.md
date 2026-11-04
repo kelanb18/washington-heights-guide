@@ -9,6 +9,12 @@ summary: "Malcolm X was assassinated at a rally of the Organization of Afro-Amer
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://theshabazzcenter.org/tours/
+image:
+  src: /images/people/malcolm-x-audubon-ballroom.webp
+  alt: "Black-and-white portrait photograph of Malcolm X in 1964 wearing glasses, a suit and tie."
+  credit: "Herman Hitler, World Telegram staff photographer"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Malcolm_X_1964_(cropped).jpg"
 ---
 
 The Audubon Ballroom was built on Broadway at W 165th St as a vaudeville and movie theater by William Fox of the Fox Film Corporation, Wikipedia's Washington Heights article says. From the 1930s it was a meeting space for unions and other groups. On February 21, 1965, Malcolm X was assassinated there during a rally of the Organization of Afro-American Unity.

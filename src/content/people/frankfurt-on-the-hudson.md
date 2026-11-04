@@ -7,6 +7,12 @@ summary: "Thousands of German Jews escaped Nazism in the 1930s and 1940s and set
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://en.wikipedia.org/wiki/Henry_Kissinger
+image:
+  src: /images/people/frankfurt-on-the-hudson.webp
+  alt: "The brick Yeshiva Rabbi Samson Raphael Hirsch building on Bennett Avenue in Washington Heights, a school of the German-Jewish community that settled in the neighborhood."
+  credit: "Jim.henderson"
+  license: "CC0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Rabbi_Samson_R_Hirsch_Yeshiva_-_85-93_Bennett_Av_jeh.jpg"
 ---
 
 Wikipedia's Washington Heights article says the neighborhood saw an influx of German Jews escaping Nazism in the 1930s and 1940s, and that the history is documented in Steven M. Lowenstein's 1989 book *Frankfurt on the Hudson: The German-Jewish Community of Washington Heights, 1933–1983*. The title refers to the many refugees who came from Frankfurt.

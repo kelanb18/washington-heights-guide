@@ -7,6 +7,12 @@ place: "Washington Heights, Manhattan"
 summary: "A-Rod was born in Washington Heights in 1975 to Dominican immigrants and moved with his family to the Dominican Republic when he was four, then to Miami."
 sources:
   - https://en.wikipedia.org/wiki/Alex_Rodriguez
+image:
+  src: /images/people/alex-rodriguez.webp
+  alt: "Alex Rodriguez in a New York Yankees uniform and batting helmet on a field before a game, August 2, 2016."
+  credit: "D. Benjamin Miller"
+  license: "CC0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Alex_Rodriguez_on_August_2,_2016.jpg"
 ---
 
 According to Wikipedia, Alex Rodriguez was born on July 27, 1975, in the Washington Heights section of Manhattan to Dominican immigrants. His parents were from San Juan de la Maguana, and his father played baseball in the Dominican Republic and introduced him to the sport.

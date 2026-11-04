@@ -6,6 +6,12 @@ order: 3
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://www.whbid181.org/about
+image:
+  src: /images/areas/181st-street-east.webp
+  alt: "Looking east along W 181st St in Washington Heights as it approaches the Washington Bridge over the Harlem River (photo from 2008)."
+  credit: "Jim.henderson"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:E181stjeh.JPG"
 ---
 
 The Washington Heights Business Improvement District, founded in 1983, describes its district as 245 commercial storefronts across 29 blocks: W 181st St from Amsterdam Ave to Fort Washington Ave, Broadway between W 179th and 182nd Sts, and St. Nicholas Ave between W 179th and 183rd Sts.

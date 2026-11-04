@@ -10,6 +10,12 @@ sources:
   - https://fountainbookshop.com/about-us
   - https://www.tampopokitchen.com/locations
   - https://www.buunnicoffee.com/pages/locations
+image:
+  src: /images/areas/hudson-heights-uptown.webp
+  alt: "A long public stairway on W 187th St climbing the ridge between Fort Washington Avenue and Bennett Avenue, between brick apartment buildings."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:West_187th_Street_stairs_from_below.jpg"
 ---
 
 The uptown strip is compact: W 187th St between Fort Washington Ave and Pinehurst Ave, close to Cabrini Blvd and the Hudson Heights apartment blocks. Addresses confirmed from the businesses' own sites include The Fountain Bookshop (803 W 187th St, between Fort Washington Ave and Pinehurst Ave), Tampopo Kitchen, a sushi and udon restaurant (805 W 187th St), and Dutch Baby Bakery (813 W 187th St). Buunni Coffee's original cafe is around the corner at 213 Pinehurst Ave, near W 187th St.
