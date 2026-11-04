@@ -1,155 +1,147 @@
 ---
-import { filmPermitDatasetUrl, formatPermitSpan, heightsZips, loadFilmPermits } from '../lib/film-permits';
+import PlaceMap from './PlaceMap.astro';
+import { loadFilmPermits } from '../lib/film-permits';
+import { sightings } from '../lib/sightings';
+import { areaChoices, mergeShoots, pinsForShoots, renderTimeline, sourceChoices } from '../lib/shoot-timeline';
 
 const permits = await loadFilmPermits();
+const groups = mergeShoots(permits, sightings);
+const timeline = renderTimeline(groups);
+const sources = sourceChoices(sightings);
+const areas = areaChoices(sightings);
+const pins = pinsForShoots([...groups.upcoming, ...groups.recent]);
 ---
 
 <section class="group" id="shoots" aria-labelledby="shoots-heading">
   <div class="section-head">
     <h2 id="shoots-heading">Film shoots near you</h2>
-    <a href={filmPermitDatasetUrl}>NYC Open Data</a>
+    <a href="https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p">NYC Open Data</a>
   </div>
   <p class="section-note">
-    Permits from the Mayor’s Office of Media and Entertainment for Manhattan ZIP codes {heightsZips.join(', ')}. A record is included when one of those ZIPs is listed. The feed names the kind of work and the streets where parking is held. It does not name the production.
+    Resident reports and press reports, merged with city film permits. A report is labeled Confirmed when a news story or a same-day permit covers the block, and Resident-reported when it is a neighbor’s post. City permits name the kind of work and the streets where parking is held. They do not name the production. Reports at the guide’s southern boundary, about West 155th to 158th Street, stay on the list and are marked South edge.
   </p>
-  <div id="shoot-board" data-fallback={permits.error ?? ''}>
+  <div class="shoot-filters">
+    <div role="group" aria-label="Filter by source">
+      {
+        sources.map((choice) => (
+          <button type="button" data-shoot-source={choice.value} aria-pressed={choice.value === 'all' ? 'true' : 'false'}>
+            {choice.label}
+          </button>
+        ))
+      }
+    </div>
+    <label>
+      Area
+      <select id="shoot-area">
+        {areas.map((choice) => <option value={choice.value}>{choice.label}</option>)}
+      </select>
+    </label>
+  </div>
+  <PlaceMap
+    pins={pins}
+    label="Resident-reported shoots with a known cross street"
+    note="Pins are resident reports whose cross streets match a corner saved on this site. The map does not look up new addresses."
+  />
+  <div id="shoot-board">
     {
       permits.error && (
-        <p class="empty" data-shoot-error>
-          {permits.error} This page will try the public feed again in your browser.
+        <p class="section-note" data-shoot-error>
+          {permits.error} This page will try the public feed again in your browser. Resident reports below do not depend on that feed.
         </p>
       )
     }
-    {
-      !permits.error && permits.upcoming.length === 0 && permits.recent.length === 0 && (
-        <p class="empty" data-shoot-empty>
-          No Washington Heights permits are on the calendar for the next stretch, and none ended in the last four months.
-        </p>
-      )
-    }
-    {
-      permits.upcoming.length > 0 && (
-        <div data-shoot-group="upcoming">
-          <h3 class="shoot-label">Upcoming</h3>
-          <ul class="shoot-list">
-            {permits.upcoming.map((permit) => (
-              <li>
-                <p class="kicker">
-                  {permit.category}
-                  {permit.subcategory && (
-                    <>
-                      <span aria-hidden="true"> · </span>
-                      {permit.subcategory}
-                    </>
-                  )}
-                  <span aria-hidden="true"> · </span>
-                  {permit.eventType}
-                </p>
-                <p class="shoot-when">{formatPermitSpan(permit.start, permit.end)}</p>
-                {permit.parkingHeld && <p class="where">{permit.parkingHeld}</p>}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
-    {
-      permits.recent.length > 0 && (
-        <div data-shoot-group="recent">
-          <h3 class="shoot-label">Recent</h3>
-          <ul class="shoot-list">
-            {permits.recent.map((permit) => (
-              <li>
-                <p class="kicker">
-                  {permit.category}
-                  {permit.subcategory && (
-                    <>
-                      <span aria-hidden="true"> · </span>
-                      {permit.subcategory}
-                    </>
-                  )}
-                  <span aria-hidden="true"> · </span>
-                  {permit.eventType}
-                </p>
-                <p class="shoot-when">{formatPermitSpan(permit.start, permit.end)}</p>
-                {permit.parkingHeld && <p class="where">{permit.parkingHeld}</p>}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    }
+    <div id="shoot-timeline" set:html={timeline} />
+  </div>
+  <div class="shoot-tip">
+    <p class="kicker">Spotted a shoot?</p>
+    <p>Tell us the cross streets, the date, and a link to what you saw. Sending a tip is not connected yet.</p>
+    <button type="button" class="shoot-soon" disabled>Coming soon</button>
   </div>
   <p class="section-note">
-    Times are the local times published in the dataset. Upcoming permits are listed first. The page also asks the dataset again when it loads, so a shoot added after the last deploy can show up here.
+    Upcoming items are listed first. Resident reports go back to 2023. City permits cover the last four months and anything still on the calendar, and the page asks the dataset again when it loads.
   </p>
 </section>
 
 <script>
-  import { formatPermitSpan, loadFilmPermits } from '../lib/film-permits';
+  import { loadFilmPermits } from '../lib/film-permits';
+  import { sightings } from '../lib/sightings';
+  import { mergeShoots, renderTimeline } from '../lib/shoot-timeline';
 
-  const board = document.getElementById('shoot-board');
-  if (board) {
-    const paint = (items: Array<{ category: string; subcategory: string; eventType: string; start: string; end: string; parkingHeld: string }>, title: string) => {
-      if (items.length === 0) return null;
-      const group = document.createElement('div');
-      const heading = document.createElement('h3');
-      heading.className = 'shoot-label';
-      heading.textContent = title;
-      const list = document.createElement('ul');
-      list.className = 'shoot-list';
-      for (const permit of items) {
-        const item = document.createElement('li');
-        const kicker = document.createElement('p');
-        kicker.className = 'kicker';
-        const bits = [permit.category, permit.subcategory, permit.eventType].filter(Boolean);
-        kicker.textContent = bits.join(' · ');
-        const when = document.createElement('p');
-        when.className = 'shoot-when';
-        when.textContent = formatPermitSpan(permit.start, permit.end);
-        item.append(kicker, when);
-        if (permit.parkingHeld) {
-          const where = document.createElement('p');
-          where.className = 'where';
-          where.textContent = permit.parkingHeld;
-          item.append(where);
+  const timeline = document.getElementById('shoot-timeline');
+  const areaSelect = document.getElementById('shoot-area');
+  const sourceButtons = document.querySelectorAll<HTMLButtonElement>('[data-shoot-source]');
+  if (timeline) {
+    let source = 'all';
+    let area = 'all';
+
+    const apply = () => {
+      const items = timeline.querySelectorAll<HTMLElement>('[data-shoot]');
+      let upcoming = 0;
+      let recent = 0;
+      items.forEach((item) => {
+        const sourceOk = source === 'all' || item.dataset.source === source;
+        const itemArea = item.dataset.area ?? '';
+        const areaOk =
+          area === 'all' ||
+          (area === 'south-edge' && item.dataset.edge === '1') ||
+          (area === 'unspecified' && itemArea === '') ||
+          itemArea === area;
+        const show = sourceOk && areaOk;
+        item.hidden = !show;
+        if (!show) return;
+        if (item.dataset.bucket === 'upcoming') upcoming += 1;
+        else recent += 1;
+      });
+      timeline.querySelectorAll<HTMLElement>('[data-shoot-group]').forEach((group) => {
+        const count = group.dataset.shootGroup === 'upcoming' ? upcoming : recent;
+        group.hidden = count === 0;
+      });
+      let empty = timeline.querySelector<HTMLElement>('[data-filter-empty]');
+      if (upcoming === 0 && recent === 0) {
+        if (!empty) {
+          empty = document.createElement('p');
+          empty.className = 'empty';
+          empty.dataset.filterEmpty = 'true';
+          empty.textContent = 'Nothing in this filter.';
+          timeline.append(empty);
         }
-        list.append(item);
+      } else {
+        empty?.remove();
       }
-      group.append(heading, list);
-      return group;
     };
+
+    sourceButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        source = button.dataset.shootSource ?? 'all';
+        sourceButtons.forEach((other) => other.setAttribute('aria-pressed', other === button ? 'true' : 'false'));
+        apply();
+      });
+    });
+    areaSelect?.addEventListener('change', () => {
+      if (areaSelect instanceof HTMLSelectElement) area = areaSelect.value;
+      apply();
+    });
 
     void loadFilmPermits()
       .then((result) => {
-        if (result.error && board.childElementCount > 0 && !board.querySelector('[data-shoot-error]')) {
-          const note = document.createElement('p');
-          note.className = 'section-note';
-          note.textContent = 'Could not refresh the permit list. Showing the copy from the last time this site was built.';
-          board.prepend(note);
+        if (result.error) {
+          if (!timeline.parentElement?.querySelector('[data-shoot-error]') && timeline.querySelector('[data-shoot]')) {
+            const note = document.createElement('p');
+            note.className = 'section-note';
+            note.textContent = 'Could not refresh the permit list. Showing the copy from the last time this site was built.';
+            timeline.before(note);
+          }
           return;
         }
-        if (result.error) return;
-        board.replaceChildren();
-        const upcoming = paint(result.upcoming, 'Upcoming');
-        const recent = paint(result.recent, 'Recent');
-        if (!upcoming && !recent) {
-          const empty = document.createElement('p');
-          empty.className = 'empty';
-          empty.textContent =
-            'No Washington Heights permits are on the calendar for the next stretch, and none ended in the last four months.';
-          board.append(empty);
-          return;
-        }
-        if (upcoming) board.append(upcoming);
-        if (recent) board.append(recent);
+        timeline.innerHTML = renderTimeline(mergeShoots(result, sightings));
+        apply();
       })
       .catch(() => {
-        if (!board.querySelector('[data-shoot-error]') && board.childElementCount > 0) {
+        if (timeline.querySelector('[data-shoot]')) {
           const note = document.createElement('p');
           note.className = 'section-note';
           note.textContent = 'Could not refresh the permit list. Showing the copy from the last time this site was built.';
-          board.prepend(note);
+          timeline.before(note);
         }
       });
   }

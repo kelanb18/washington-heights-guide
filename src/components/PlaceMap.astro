@@ -5,9 +5,10 @@ interface Props {
   pins: MapPin[];
   label: string;
   compact?: boolean;
+  note?: string;
 }
 
-const { pins, label, compact = false } = Astro.props;
+const { pins, label, compact = false, note } = Astro.props;
 const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabel])).entries()];
 ---
 
@@ -30,7 +31,9 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       }
       <div class="place-map-canvas" role="region" aria-label={label}></div>
       <p class="map-note">
-        Map data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> contributors. Pins are places on this site that have coordinates.
+        Map data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> contributors.
+        {' '}
+        {note ?? 'Pins are places on this site that have coordinates.'}
       </p>
     </div>
   )
@@ -76,6 +79,10 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       const link = document.createElement('a');
       link.href = pin.href;
       link.textContent = pin.name;
+      if (/^https?:/i.test(pin.href)) {
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
       const kind = document.createElement('p');
       kind.textContent = pin.categoryLabel;
       popup.append(link, kind);
