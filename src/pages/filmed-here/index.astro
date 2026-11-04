@@ -20,7 +20,7 @@ const productions = await loadProductions();
 const groups = productionsByKind(productions);
 const byYear = [...productions].sort(compareProductionsByYear);
 const description =
-  'Films, television, and music videos shot in Washington Heights, plus film permits for where crews are cleared to work.';
+  'Films, television, and music videos shot in Washington Heights, plus resident sightings and city film permits.';
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -58,7 +58,7 @@ if (productions.length > 0) {
       <p class="kicker">On screen</p>
       <h1>Filmed in the Heights</h1>
       <p class="lede">
-        Movies, shows, and videos shot in the neighborhood, grouped by what they are. A separate list below is only the city’s film permits.
+        Movies, shows, and videos shot in the neighborhood, grouped by what they are. Below that, resident reports and the city’s film permits share one timeline.
       </p>
       <p class="count">
         {

@@ -317,7 +317,9 @@ Optional: `artist` (music videos), `area` (an area slug), `watchUrl`, `image`, `
 
 The index can be grouped by kind or sorted by year. Area pages list productions whose `area` is that area or a section inside it.
 
-`/filmed-here/` also lists film permits from [NYC Open Data](https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p) (dataset `tg4x-b46p`, Mayor’s Office of Media and Entertainment). Records include a ZIP field, `zipcode_s`, often with a trailing comma or several ZIPs, plus the streets in `parkingheld`. The page keeps Manhattan permits that list 10032, 10033, or 10040 — the Washington Heights ZIPs. 10031 is mostly south of 155th Street, and 10034 is Inwood, so those are left out unless the same permit also lists one of the three. The list is fetched when the site is built and again in the browser. If the feed is down, the page says so and keeps the last built list when it has one. Permits do not name the production.
+`/filmed-here/` also lists film permits from [NYC Open Data](https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p) (dataset `tg4x-b46p`, Mayor’s Office of Media and Entertainment) and resident or press reports from `src/data/sightings.json`. The two lists share one timeline: upcoming first, then recent. Each row is badged City permit, Confirmed, or Resident-reported, and links to its source. The page can be filtered by source and by area. Reports whose `area` starts with `south edge` are the blocks around West 155th to 158th Street. They stay on the list and are marked South edge.
+
+Permit records include a ZIP field, `zipcode_s`, often with a trailing comma or several ZIPs, plus the streets in `parkingheld`. The page keeps Manhattan permits that list 10032, 10033, or 10040 — the Washington Heights ZIPs. 10031 is mostly south of 155th Street, and 10034 is Inwood, so those are left out unless the same permit also lists one of the three. The list is fetched when the site is built and again in the browser. If the feed is down, the page says so and keeps the last built list when it has one. Permits do not name the production. How to add a sighting is in `docs/sightings.md`.
 
 ## Maps
 
@@ -336,7 +338,7 @@ A listing with both `latitude` and `longitude` gets a map and the Google Maps li
 | `/areas/<slug>/` | One area: the write-up, child areas, and the places and notes filed under it or a nested section |
 | `/people/` | Notable residents & history, grouped by `connection` |
 | `/people/<slug>/` | One person or historic event, with `Person` or `Article` JSON-LD |
-| `/filmed-here/` | Productions, grouped by kind or sorted by year, plus film permits |
+| `/filmed-here/` | Productions, grouped by kind or sorted by year, plus resident sightings and film permits |
 | `/filmed-here/<slug>/` | One production |
 | `/about/` | Editorial policy, affiliate disclosure, sponsorships, corrections |
 | `/404.html` | Missing pages |
