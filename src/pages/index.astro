@@ -1,7 +1,9 @@
 ---
+import AttributedPhoto from '../components/AttributedPhoto.astro';
 import ListingEntry from '../components/ListingEntry.astro';
 import PlaceMap from '../components/PlaceMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { homeHero, homeStrip } from '../lib/site-images';
 import { loadAreas } from '../lib/areas';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { collectTags, loadListings } from '../lib/listings';
@@ -65,8 +67,17 @@ if (people.length > 0) {
 }
 ---
 
-<BaseLayout title="The Heights — Best spots in Washington Heights, NYC" description={defaultDescription} jsonLd={jsonLd}>
+<BaseLayout
+  title="The Heights — Best spots in Washington Heights, NYC"
+  description={defaultDescription}
+  image={homeHero.src}
+  imageAlt={homeHero.alt}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
+    <div class="hero-bleed">
+      <AttributedPhoto picture={homeHero} variant="hero" />
+    </div>
     <section class="hero">
       <h1>The best spots in Washington Heights.</h1>
       <p class="lede">
@@ -88,6 +99,15 @@ if (people.length > 0) {
         Sponsors are labeled. A verdict cannot be bought.
       </li>
     </ul>
+
+    <section aria-labelledby="around-heading">
+      <div class="section-head">
+        <h2 id="around-heading">Around the Heights</h2>
+      </div>
+      <div class="photo-strip">
+        {homeStrip.map((picture) => <AttributedPhoto picture={picture} variant="gallery" />)}
+      </div>
+    </section>
 
     <section aria-labelledby="picks-heading">
       <div class="section-head">

@@ -17,6 +17,15 @@ phone: "(646) 438-9218"
 hours: "Daily 10am–8pm (its About page also says 10am–8:30pm)"
 lastVerified: 2026-10-28
 verdict: "A friendly general-interest bookshop for Hudson Heights, strongest for kids' books, fiction, and its calendar of book clubs."
+image:
+  src: "/images/listings/fountain-bookshop/1.webp"
+  alt: "The W 187th Street shopping block between Fort Washington and Pinehurst Avenues, where the Fountain Bookshop is located (street view of the block, not the shop)"
+  credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWest_187th_Street_shopping_street_Hudson_Heights.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 922
 ---
 
 ## What it is

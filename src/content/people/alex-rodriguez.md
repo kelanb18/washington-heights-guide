@@ -13,6 +13,9 @@ image:
   credit: "D. Benjamin Miller"
   license: "CC0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Alex_Rodriguez_on_August_2,_2016.jpg"
+  licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/"
+  width: 1600
+  height: 1200
 ---
 
 According to Wikipedia, Alex Rodriguez was born on July 27, 1975, in the Washington Heights section of Manhattan to Dominican immigrants. His parents were from San Juan de la Maguana, and his father played baseball in the Dominican Republic and introduced him to the sport.

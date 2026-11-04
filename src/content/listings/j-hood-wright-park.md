@@ -22,6 +22,34 @@ image:
   credit: "Clyde Charles Brown"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:J._Hood_Wright_Park,_Manhattan,_New_York,_US.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1280
+  height: 853
+gallery:
+  - src: "/images/listings/j-hood-wright-park/1.webp"
+    alt: "The recreation center building in J. Hood Wright Park"
+    credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ._Hood_Wright_Park_Recreation_Center.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 783
+  - src: "/images/listings/j-hood-wright-park/2.webp"
+    alt: "J. Hood Wright Park in 2007"
+    credit: "Shannon McGee, CC BY-SA 2.5, via Wikimedia Commons"
+    license: "CC BY-SA 2.5"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ_Hood_Wright_Park_2007.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.5/"
+    width: 1600
+    height: 1200
+  - src: "/images/listings/j-hood-wright-park/3.webp"
+    alt: "The park sign at an entrance to J. Hood Wright Park"
+    credit: "User:M3andros, CC BY 3.0, via Wikimedia Commons"
+    license: "CC BY 3.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ._Hood_Wright_Park_200x268.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0/"
+    width: 200
+    height: 268
 ---
 
 ## What it is

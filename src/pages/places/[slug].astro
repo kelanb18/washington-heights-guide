@@ -5,6 +5,7 @@ import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
+import { nearestAreaPhoto } from '../../lib/photo-fallback';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
@@ -27,7 +28,9 @@ if (!listing) {
 
 const data = listing.data;
 const category = categoryInfo[data.category];
-const area = findArea(await loadAreas(), data.area);
+const areas = await loadAreas();
+const area = findArea(areas, data.area);
+const borrowed = data.image ? undefined : nearestAreaPhoto(area, areas);
 const pins = pinsFor([listing]);
 const hasMap = data.latitude != null && data.longitude != null;
 const { Content } = await render(listing);
@@ -110,7 +113,14 @@ const jsonLd = [
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
-    <PhotoSet image={data.image} gallery={data.gallery} mark={data.name} tone={data.category} markLabel={category.singular} />
+    <PhotoSet
+      image={data.image}
+      gallery={data.gallery}
+      mark={data.name}
+      tone={data.category}
+      markLabel={category.singular}
+      borrowed={borrowed}
+    />
 
     {
       data.images.length > 0 && (

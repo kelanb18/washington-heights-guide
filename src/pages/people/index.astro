@@ -1,6 +1,8 @@
 ---
+import AttributedPhoto from '../../components/AttributedPhoto.astro';
 import PersonEntry from '../../components/PersonEntry.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { peopleHero } from '../../lib/site-images';
 import { connectionInfo, connections } from '../../lib/connections';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadPeople } from '../../lib/people';
@@ -42,8 +44,17 @@ if (people.length > 0) {
 }
 ---
 
-<BaseLayout title={`Notable residents & history · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={`Notable residents & history · ${siteName}`}
+  description={description}
+  image={peopleHero.src}
+  imageAlt={peopleHero.alt}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
+    <div class="hero-bleed">
+      <AttributedPhoto picture={peopleHero} variant="hero" />
+    </div>
     <header class="page-head">
       <p class="kicker">The neighborhood</p>
       <h1>Notable residents & history</h1>

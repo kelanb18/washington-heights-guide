@@ -16,6 +16,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2013_The_Cloisters_tower_from_the_northeast.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1185
 ---
 
 Wikipedia's article on the film lists the Cloisters Museum at Fort Tryon Park among its metropolitan location highlights; the Cloisters-in-popular-culture article adds that characters visit the Cloisters gardens in the film. Ford also rode along with NYPD patrols in Washington Heights for research, which is not a shoot. I did not find which scenes were shot at the Cloisters.

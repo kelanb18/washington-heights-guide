@@ -1,7 +1,9 @@
 ---
 import AreaTree from '../../components/AreaTree.astro';
+import AttributedPhoto from '../../components/AttributedPhoto.astro';
 import ListingEntry from '../../components/ListingEntry.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { placesHero } from '../../lib/site-images';
 import { areaTree, hasNestedAreas, loadAreas } from '../../lib/areas';
 import { listingCounts } from '../../lib/catalog';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
@@ -36,8 +38,11 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title="All places · The Heights" description={description} jsonLd={jsonLd}>
+<BaseLayout title="All places · The Heights" description={description} image={placesHero.src} imageAlt={placesHero.alt} jsonLd={jsonLd}>
   <div class="wrap">
+    <div class="hero-bleed">
+      <AttributedPhoto picture={placesHero} variant="hero" />
+    </div>
     <header class="page-head">
       <p class="kicker">The list</p>
       <h1>All places</h1>

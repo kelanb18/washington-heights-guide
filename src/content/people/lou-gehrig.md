@@ -15,6 +15,16 @@ image:
   credit: "Harris & Ewing"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Gehrig_cropped.jpg"
+  width: 1281
+  height: 1600
+gallery:
+  - src: "/images/people/lou-gehrig/1.webp"
+    alt: "Lou Gehrig in his Columbia University uniform, 1921"
+    credit: "University Archives—Columbiana Library, Columbia University., Public domain, via Wikimedia Commons"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGehrigCU.jpg"
+    width: 536
+    height: 688
 ---
 
 Lou Gehrig was born in Yorkville in 1903, according to the Society for American Baseball Research biography. When he was five, SABR says, his family moved to Washington Heights, to an apartment within shouting distance of Hilltop Park, where the New York Highlanders played. The Polo Grounds were also nearby. SABR says living near those ballparks gave him an early love of baseball, and that he played pickup games in the neighborhood and attended Giants games when he could afford a bleacher seat.

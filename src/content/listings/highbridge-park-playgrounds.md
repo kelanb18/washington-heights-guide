@@ -15,6 +15,15 @@ area: "highbridge-park"
 website: "https://www.nycgovparks.org/parks/highbridge-park/facilities/playgrounds"
 lastVerified: 2026-10-28
 verdict: "A string of kid-friendly playgrounds along the park; see NYC Parks for each one's details."
+image:
+  src: "/images/listings/highbridge-park-playgrounds/1.webp"
+  alt: "Highbridge Play Center at the edge of Highbridge Park on Amsterdam Avenue"
+  credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_Highbridge_Park.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1012
 ---
 
 ## What it is

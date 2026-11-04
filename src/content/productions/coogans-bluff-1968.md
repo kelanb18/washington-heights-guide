@@ -19,6 +19,9 @@ image:
   credit: "Epicgenius"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_Tryon_Park_Oct_2019_92.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1280
+  height: 960
 ---
 
 Per Wikipedia's Fort Tryon Park article, two scenes were filmed in the park: a shoot-out at the Cloisters and a motorcycle chase in the Heather Garden. In the plot, a fugitive hides at the Cloisters and detective Coogan chases him through Fort Tryon Park. DNAinfo (2011) also noted that the park appeared in Coogan's Bluff. The film's title refers to the real Coogan's Bluff, the cliff above the old Polo Grounds on the Harlem River side of the neighborhood.

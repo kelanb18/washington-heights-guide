@@ -9,6 +9,24 @@ sources:
   - https://www.cuimc.columbia.edu/news/cuimc-neighborhood-restaurant-honored-co-named-coogans-way
   - https://abc7ny.com/post/beloved-nyc-bar-closes-its-doors-for-good-due-to-covid-19-shutdown/6120962/
   - https://www.armory.nyc/blog/coogans-way
+image:
+  src: "/images/people/coogans/1.webp"
+  alt: "The Broadway facade of the closed Coogan's bar at 4015 Broadway, 2025"
+  credit: "Star Mississippi, CC BY-SA 4.0, via Wikimedia Commons"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3ACoogan%27s_Broadway_facade%2C_2025.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 821
+gallery:
+  - src: "/images/people/coogans/2.webp"
+    alt: "The Fort Washington Avenue Armory, next door to Coogan's"
+    credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1043
 ---
 
 Columbia University Irving Medical Center says Coogan's opened in 1985, during a period of violence and drug crisis in Washington Heights, and became a gathering place for doctors, nurses, police officers, firefighters, students and neighbors. Its owners were Peter Walsh, Dave Hunt and Tess O'Connor-McDade. ABC7 reported that it closed on March 17, 2020 after the state ordered restaurants and bars to shut during the COVID-19 pandemic, and that Lin-Manuel Miranda had helped save the bar after a proposed rent hike. On May 25, 2022, the corner of W 169th St and Broadway was co-named Coogan's Way; the Armory Foundation, whose track is next door, hosted a reception. In October 2026 Boogie Bakery & Bistro opened in the old Coogan's space.

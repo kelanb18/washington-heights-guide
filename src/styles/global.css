@@ -740,6 +740,54 @@ main {
   color: var(--ink-soft);
 }
 
+.photo-note {
+  display: block;
+  margin-top: 0.15rem;
+}
+
+.hero-bleed {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+.hero-bleed .photo {
+  margin: 0;
+}
+
+.hero-bleed .photo img {
+  width: 100%;
+  max-height: min(70vh, 36rem);
+  object-fit: cover;
+  border-inline: 0;
+}
+
+.hero-bleed .photo-credit {
+  width: var(--wrap);
+  margin-inline: auto;
+  padding-top: 0.35rem;
+}
+
+.photo-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(16rem, 22rem);
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.4rem;
+}
+
+.photo-strip .photo {
+  margin: 0;
+  scroll-snap-align: start;
+}
+
+.photo-strip .photo img {
+  height: 12rem;
+  object-fit: cover;
+}
+
 .entry.has-photo {
   grid-template-columns: 5.5rem minmax(0, 1fr);
   align-items: start;

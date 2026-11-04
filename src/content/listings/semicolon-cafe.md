@@ -18,6 +18,15 @@ phone: "(646) 791-5518"
 hours: "Daily 8am–7pm (per its website)"
 lastVerified: 2026-10-28
 verdict: "Good egg sandwiches and bingsoo, with the polish of a small chain; a fine stop near Audubon Terrace."
+image:
+  src: "/images/listings/semicolon-cafe/1.webp"
+  alt: "Apartment buildings on Edward M. Morgan Place, the block where Semicolon Cafe is located"
+  credit: "Epicgenius, CC BY-SA 4.0, via Wikimedia Commons"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AUpper_Manhattan_Jul_2026_03.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1200
 ---
 
 ## What it is

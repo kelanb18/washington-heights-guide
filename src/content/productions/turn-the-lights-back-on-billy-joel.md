@@ -19,6 +19,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_proscenium_and_stage.jpg"
+  width: 1280
+  height: 960
 ---
 
 Wikipedia says the video, directed by Warren Fu and Freddy Wexler and released February 16, 2024, is "set in Manhattan's United Palace", with Joel performing on an empty stage and transforming into his 1970s, 1980s and 1990s selves (ABC News describes the empty-theater stage). A LinkedIn post that appeared in search results, apparently from the venue, says it recently hosted Joel for his first music video since 1993. I could not open that post to confirm who wrote it, and Billy Joel's official release note does not name the venue, so the United Palace link rests mainly on Wikipedia.

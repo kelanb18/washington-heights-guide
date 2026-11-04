@@ -15,6 +15,39 @@ postalCode: "10033"
 website: "https://www.nypl.org/locations/fort-washington"
 lastVerified: 2026-10-28
 verdict: "A handsome working library with a long local history; check NYPL for hours and programs."
+image:
+  src: "/images/listings/fort-washington-library/1.webp"
+  alt: "The Fort Washington Branch library building on W 179th Street"
+  credit: "Beyond My Ken, Public domain, via Wikimedia Commons"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3ANYPL_Fort_Washington_Branch.jpg"
+  width: 1600
+  height: 2070
+gallery:
+  - src: "/images/listings/fort-washington-library/2.webp"
+    alt: "The Fort Washington Branch library in August 2026"
+    credit: "Epicgenius, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Aug_2026_58.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
+  - src: "/images/listings/fort-washington-library/3.webp"
+    alt: "Facade detail of the Fort Washington Branch library"
+    credit: "Epicgenius, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Aug_2026_61.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
+  - src: "/images/listings/fort-washington-library/4.webp"
+    alt: "The Carnegie-funded Fort Washington Branch library in 2009"
+    credit: "Mcmillin24, CC BY-SA 3.0, via Wikimedia Commons"
+    license: "CC BY-SA 3.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ANYPL_Fort_Washington_Branch%2C_Manhattan.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+    width: 1536
+    height: 2048
 ---
 
 ## What it is

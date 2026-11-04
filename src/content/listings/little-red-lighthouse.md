@@ -20,6 +20,50 @@ image:
   credit: "Billie Grace Ward"
   license: "CC BY 2.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Little_Red_Lighthouse,_Fort_Washington_Park.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+  width: 1280
+  height: 853
+gallery:
+  - src: "/images/listings/little-red-lighthouse/1.webp"
+    alt: "The Little Red Lighthouse beneath the George Washington Bridge on the Hudson River"
+    credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Little_Red_Lighthouse_and_George_Washington_Bridge_landscape.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1183
+  - src: "/images/listings/little-red-lighthouse/2.webp"
+    alt: "The George Washington Bridge and the Little Red Lighthouse seen from the north"
+    credit: "Jay Dobkin, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGeorge_Washington_Bridge_from_Ft_Tryon_Park_07.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
+  - src: "/images/listings/little-red-lighthouse/3.webp"
+    alt: "The entrance door of the Little Red Lighthouse"
+    credit: "Uptownphototaker, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ALittle_Red_Lighthouse_Door.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 500
+    height: 750
+  - src: "/images/listings/little-red-lighthouse/4.webp"
+    alt: "Inside the Little Red Lighthouse"
+    credit: "Pavla.havirova, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ALittle_Red_Lighthouse_-_Interior_IMG_4679.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
+  - src: "/images/listings/little-red-lighthouse/5.webp"
+    alt: "A park ranger leading a tour at the Little Red Lighthouse"
+    credit: "Beyond My Ken, CC BY-SA 4.0, via Wikimedia Commons"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2015_Little_Red_Lighthouse_annual_tour_%2802%29_Park_Ranger_conducting_tour.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

@@ -15,6 +15,9 @@ image:
   credit: "Andrew Malone"
   license: "CC BY 2.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Manny_Ramirez_with_Red_Sox_June_2007.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+  width: 1600
+  height: 1067
 ---
 
 Manny Ramirez was born in Santo Domingo, Dominican Republic, and, according to Wikipedia, moved to the Washington Heights neighborhood of New York with his parents in 1985, at about age 13. He attended George Washington High School from 1987 to 1991 and became a baseball standout there.
