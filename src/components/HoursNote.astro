@@ -1,0 +1,19 @@
+---
+import { hoursStatus } from '../lib/hours';
+
+interface Props {
+  hours?: string;
+}
+
+const { hours } = Astro.props;
+const status = hoursStatus(hours);
+---
+
+{
+  hours && (
+    <p class="hours-line">
+      {status && <span class:list={['open-badge', { 'is-open': status.open }]}>{status.label}</span>}
+      <span>{hours}</span>
+    </p>
+  )
+}

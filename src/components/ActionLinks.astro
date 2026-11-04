@@ -1,0 +1,36 @@
+---
+interface LinkSet {
+  reserve?: string;
+  order?: string;
+  tickets?: string;
+  website?: string;
+}
+
+interface Props {
+  website?: string;
+  links?: LinkSet;
+}
+
+const { website, links } = Astro.props;
+const buttons = [
+  links?.reserve ? { href: links.reserve, label: 'Reserve' } : undefined,
+  links?.order ? { href: links.order, label: 'Order' } : undefined,
+  links?.tickets ? { href: links.tickets, label: 'Tickets' } : undefined,
+  (links?.website ?? website) ? { href: (links?.website ?? website) as string, label: 'Website' } : undefined,
+].filter((button): button is { href: string; label: string } => Boolean(button));
+---
+
+{
+  buttons.length > 0 && (
+    <ul class="action-row">
+      {buttons.map((button) => (
+        <li>
+          <a class="button" href={button.href} rel="noopener noreferrer" target="_blank">
+            {button.label}
+            <span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

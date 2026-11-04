@@ -1,23 +1,30 @@
 ---
 import ListingEntry from '../components/ListingEntry.astro';
+import PersonEntry from '../components/PersonEntry.astro';
 import PlaceMap from '../components/PlaceMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { loadAreas } from '../lib/areas';
+import { areaTree, loadAreas } from '../lib/areas';
+import { listingCounts } from '../lib/catalog';
+import { loadGuides } from '../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { collectTags, loadListings } from '../lib/listings';
 import { loadPeople } from '../lib/people';
 import { pinsFor } from '../lib/pins';
 import { loadProductions } from '../lib/productions';
 import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
-import { categories, categoryInfo } from '../lib/taxonomy';
 
 const listings = await loadListings();
 const areas = await loadAreas();
 const people = await loadPeople();
 const productions = await loadProductions();
+const guides = await loadGuides();
 const pins = pinsFor(listings);
+const recent = [...listings].sort((a, b) => b.data.lastVerified.getTime() - a.data.lastVerified.getTime()).slice(0, 4);
+const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+const freshThisWeek = recent.filter((listing) => listing.data.lastVerified.getTime() >= weekAgo);
+const roots = areaTree(areas);
+const counts = listingCounts(areas, listings);
 const picks = listings.filter((listing) => listing.data.pick);
-const rest = listings.filter((listing) => !listing.data.pick);
 const tags = collectTags(listings);
 const site = Astro.site;
 
@@ -67,11 +74,25 @@ if (people.length > 0) {
 
 <BaseLayout title="The Heights — Best spots in Washington Heights, NYC" description={defaultDescription} jsonLd={jsonLd}>
   <div class="wrap">
-    <section class="hero">
-      <h1>The best spots in Washington Heights.</h1>
-      <p class="lede">
-        A short list of restaurants, cafes, bakeries, bars, shops, services, and landmarks, from West 155th Street up to where Dyckman starts to feel like Inwood.
-      </p>
+    <section class="hero hero-pub">
+      <div>
+        <p class="kicker">Washington Heights · West 155th to Dyckman</p>
+        <h1>The neighborhood, edited.</h1>
+        <p class="lede">
+          A local guide to where to eat, what to walk to, and who made the hill what it is. Short lists. Checked details. Rankings that are not for sale.
+        </p>
+        <p class="hero-actions">
+          <a class="button" href={href('/best')}>Best of</a>
+          <a class="button button-ghost" href={href('/places')}>All places</a>
+        </p>
+      </div>
+      <svg class="hero-mark" viewBox="0 0 360 280" aria-hidden="true">
+        <rect width="360" height="280" fill="var(--river-soft)" />
+        <path d="M0 190 C 80 160, 140 210, 220 180 S 320 150, 360 170 V 280 H 0 Z" fill="var(--river)" opacity="0.85" />
+        <path d="M40 150 V 70 H 70 V 150 M290 150 V 80 H 320 V 150" fill="none" stroke="var(--gold)" stroke-width="8" />
+        <path d="M70 78 C 120 20, 240 20, 290 86" fill="none" stroke="var(--ink)" stroke-width="6" />
+        <path d="M110 96 V 150 M150 72 V 150 M180 64 V 150 M210 72 V 150 M250 96 V 150" stroke="var(--ink)" stroke-width="3" />
+      </svg>
     </section>
 
     <ul class="principles">
@@ -89,91 +110,123 @@ if (people.length > 0) {
       </li>
     </ul>
 
-    <section aria-labelledby="picks-heading">
+    <section aria-labelledby="best-heading">
       <div class="section-head">
-        <h2 id="picks-heading">Editor’s picks</h2>
-        <a href={href('/places')}>All places</a>
+        <h2 id="best-heading">Best of</h2>
+        <a href={href('/best')}>All guides</a>
       </div>
       {
-        picks.length > 0 ? (
-          <ol class="entries">
-            {picks.map((listing, index) => (
-              <ListingEntry listing={listing} index={index + 1} heading="h3" />
+        guides.length > 0 ? (
+          <ul class="guide-grid">
+            {guides.slice(0, 4).map((guide) => (
+              <li>
+                <a class="guide-card" href={href(`/best/${guide.id}`)}>
+                  <p class="kicker">{guide.data.picks.length} places</p>
+                  <h3>{guide.data.title}</h3>
+                  <p>{guide.data.description}</p>
+                </a>
+              </li>
             ))}
-          </ol>
+          </ul>
         ) : (
-          <p class="empty">No editor’s picks yet. Places land here after the details have been checked.</p>
+          <p class="empty">Guides show up here after a list has been checked. Nothing is ranked until then.</p>
         )
       }
     </section>
 
-    <section aria-labelledby="browse-heading">
-      <div class="section-head">
-        <h2 id="browse-heading">Browse</h2>
-      </div>
-      <ul class="contents">
-        {
-          categories.map((category) => {
-            const info = categoryInfo[category];
-            const count = listings.filter((listing) => listing.data.category === category).length;
-            return (
-              <li>
-                <a href={href(`/category/${category}`)}>
-                  <span class="contents-name">{info.plural}</span>
-                  <span class="contents-count">{count}</span>
-                  <span class="contents-blurb">{info.blurb}</span>
-                </a>
-              </li>
-            );
-          })
-        }
-      </ul>
-    </section>
-
     <section aria-labelledby="neighborhood-heading">
       <div class="section-head">
-        <h2 id="neighborhood-heading">The neighborhood</h2>
+        <h2 id="neighborhood-heading">Neighborhoods</h2>
+        <a href={href('/areas')}>All areas</a>
       </div>
-      <ul class="contents">
-        <li>
-          <a href={href('/areas')}>
-            <span class="contents-name">Areas</span>
-            <span class="contents-count">{areas.length}</span>
-            <span class="contents-blurb">Smaller sections, nested when one sits inside another.</span>
-          </a>
-        </li>
-        <li>
-          <a href={href('/people')}>
-            <span class="contents-name">Notable residents & history</span>
-            <span class="contents-count">{people.length}</span>
-            <span class="contents-blurb">People and events tied to the neighborhood, with sources.</span>
-          </a>
-        </li>
-        <li>
-          <a href={href('/filmed-here')}>
-            <span class="contents-name">Filmed here</span>
-            <span class="contents-count">{productions.length}</span>
-            <span class="contents-blurb">Movies, shows, and videos shot in the neighborhood.</span>
-          </a>
-        </li>
-      </ul>
+      {
+        roots.length > 0 ? (
+          <ul class="guide-grid">
+            {roots.map((node) => (
+              <li>
+                <a class="guide-card" href={href(`/areas/${node.area.id}`)}>
+                  <p class="kicker">{counts[node.area.id] ?? 0} places</p>
+                  <h3>{node.area.data.name}</h3>
+                  <p>{node.area.data.summary}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">Neighborhood notes will be listed here.</p>
+        )
+      }
       {pins.length > 0 && <PlaceMap pins={pins} label="Places in Washington Heights" />}
     </section>
 
-    {
-      rest.length > 0 && (
-        <section aria-labelledby="rest-heading">
-          <div class="section-head">
-            <h2 id="rest-heading">Also on the list</h2>
-          </div>
+    <section aria-labelledby="new-heading">
+      <div class="section-head">
+        <h2 id="new-heading">New this week</h2>
+        <a href={href('/places')}>All places</a>
+      </div>
+      <p class="section-note">
+        {
+          freshThisWeek.length > 0
+            ? 'Checked in the last seven days.'
+            : 'Nothing was rechecked in the last seven days. These are the latest dates on the list.'
+        }
+      </p>
+      {
+        recent.length > 0 ? (
           <ul class="entries">
-            {rest.map((listing) => (
+            {recent.map((listing) => (
               <ListingEntry listing={listing} heading="h3" />
             ))}
           </ul>
-        </section>
-      )
-    }
+        ) : (
+          <p class="empty">No places have been published yet.</p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="screen-heading">
+      <div class="section-head">
+        <h2 id="screen-heading">Filmed in the Heights</h2>
+        <a href={href('/filmed-here')}>The screen list</a>
+      </div>
+      {
+        productions.length > 0 ? (
+          <ul class="guide-grid">
+            {productions.slice(0, 3).map((production) => (
+              <li>
+                <a class="guide-card" href={href(`/filmed-here/${production.id}`)}>
+                  <p class="kicker">{production.data.year}</p>
+                  <h3>{production.data.title}</h3>
+                  <p>{production.data.summary}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">
+            The production notes are still being written. The <a href={href('/filmed-here')}>film permit list</a> is already there.
+          </p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="people-heading">
+      <div class="section-head">
+        <h2 id="people-heading">Notable residents & history</h2>
+        <a href={href('/people')}>All notes</a>
+      </div>
+      {
+        people.length > 0 ? (
+          <ul class="entries">
+            {people.slice(0, 4).map((person) => (
+              <PersonEntry person={person} heading="h3" />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">Residents and historic notes will be listed here.</p>
+        )
+      }
+    </section>
 
     {
       tags.length > 0 && (
