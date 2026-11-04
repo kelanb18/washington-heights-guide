@@ -16,6 +16,12 @@ website: "https://theshabazzcenter.org/"
 hours: "Tue–Fri 10am–6pm (advance purchase required)"
 lastVerified: 2026-10-28
 verdict: "A serious, moving history site; go with time to read, and buy tickets ahead because advance purchase is required."
+image:
+  src: /images/listings/malcolm-x-and-dr-betty-shabazz-memorial-center.webp
+  alt: "The arched glass and green terra-cotta facade of the former Audubon Ballroom on Broadway, which houses the Malcolm X & Dr. Betty Shabazz Memorial and Educational Center."
+  credit: "ajay_suresh"
+  license: "CC BY 2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Malcolm_X_&_Dr_Betty_Shabazz_Memorial_and_Educational_Center_(51241365958).jpg"
 ---
 
 ## What it is

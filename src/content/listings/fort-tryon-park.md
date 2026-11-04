@@ -15,6 +15,12 @@ postalCode: "10040"
 website: "https://www.nycgovparks.org/parks/fort-tryon-park"
 lastVerified: 2026-10-28
 verdict: "The neighborhood's best long walk, with river views and gardens; plan your visit around the gardens' seasons and the park's hills."
+image:
+  src: /images/listings/fort-tryon-park.webp
+  alt: "A paved path winding through the flowering shrubs of the Heather Garden in Fort Tryon Park."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Fort_Tryon_Park_Heather_Garden.jpg"
 ---
 
 ## What it is

@@ -15,6 +15,12 @@ area: "highbridge-park"
 website: "https://www.nycgovparks.org/parks/highbridge-park"
 lastVerified: 2026-10-28
 verdict: "Wild and mostly overlooked: good for river views and the High Bridge, though the wooded stretches are steep."
+image:
+  src: /images/listings/highbridge-park.webp
+  alt: "The High Bridge spanning the Harlem River between Manhattan and the Bronx, seen from Highbridge Park on the Manhattan side."
+  credit: "RoySmith"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Highbridge_from_Highbridge_Park.jpg"
 ---
 
 ## What it is

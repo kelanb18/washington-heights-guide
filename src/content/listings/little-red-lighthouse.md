@@ -14,6 +14,12 @@ area: "hudson-heights"
 website: "https://www.nycgovparks.org/parks/fort-washington-park"
 lastVerified: 2026-10-28
 verdict: "A charming riverside stop for the walk or bike ride below the bridge, but go for the setting, since interior access is limited."
+image:
+  src: /images/listings/little-red-lighthouse.webp
+  alt: "The red Little Red Lighthouse (Jeffrey's Hook Light) on rocks beside the Hudson River in Fort Washington Park, with a George Washington Bridge tower behind it."
+  credit: "Billie Grace Ward"
+  license: "CC BY 2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Little_Red_Lighthouse,_Fort_Washington_Park.jpg"
 ---
 
 ## What it is

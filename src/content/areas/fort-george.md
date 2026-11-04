@@ -5,6 +5,12 @@ boundaries: "Roughly east of Broadway from W 181st St north to Dyckman St, betwe
 order: 5
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/areas/fort-george.webp
+  alt: "The brick-and-limestone George Washington Educational Campus building on Audubon Avenue at W 193rd St, in the Fort George part of Washington Heights."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:George_Washington_Educational_Campus_from_south.jpg"
 ---
 
 Fort George is the lesser-known sibling of Hudson Heights on the other side of Broadway. It is named for the Revolutionary War's Fort George, according to Wikipedia, and runs east of Broadway from W 181st St to Dyckman St, where Washington Heights meets Inwood. Dyckman St is the neighborhood's northern edge, so it is not treated as a separate area here.

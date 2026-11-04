@@ -9,6 +9,12 @@ summary: "Kissinger's family reached New York in September 1938, and he spent hi
 sources:
   - https://en.wikipedia.org/wiki/Henry_Kissinger
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/henry-kissinger.webp
+  alt: "Official U.S. State Department black-and-white portrait of Henry A. Kissinger, Secretary of State 1973-1977."
+  credit: "U.S. Department of State"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Henry_A._Kissinger,_U.S._Secretary_of_State,_1973-1977.jpg"
 ---
 
 Henry Kissinger was born in Germany and emigrated to the United States in 1938 as a Jewish refugee fleeing Nazi persecution. According to Wikipedia, his family arrived in New York City on September 5, 1938, when he was 15, and he spent his high-school years in the German-Jewish community in Washington Heights.

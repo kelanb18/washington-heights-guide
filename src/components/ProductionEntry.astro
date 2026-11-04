@@ -1,5 +1,6 @@
 ---
 import AttributedPhoto from './AttributedPhoto.astro';
+import PhotoPlaceholder from './PhotoPlaceholder.astro';
 import { findArea } from '../lib/catalog';
 import { loadAreas } from '../lib/areas';
 import { formatYear, type Production } from '../lib/productions';
@@ -18,8 +19,14 @@ const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class:list={['entry', { 'has-photo': Boolean(data.image) }]}>
-  {data.image && <AttributedPhoto picture={data.image} variant="thumb" />}
+<li class:list={['entry', 'has-photo']}>
+  {
+    data.image ? (
+      <AttributedPhoto picture={data.image} variant="thumb" />
+    ) : (
+      <PhotoPlaceholder name={data.title} tone={data.kind} label={kind.label} />
+    )
+  }
   <div>
     <p class="kicker">
       <a href={`${href('/filmed-here')}#${data.kind}`}>{kind.label}</a>

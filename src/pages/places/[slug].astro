@@ -9,6 +9,7 @@ import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
+import { shareableSrc } from '../../lib/pictures';
 import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -56,8 +57,8 @@ const jsonLd = [
   title={title}
   description={data.description}
   ogType="article"
-  image={data.images[0]?.src}
-  imageAlt={data.images[0]?.alt}
+  image={shareableSrc(data.image?.src) ?? data.images[0]?.src}
+  imageAlt={data.image?.alt ?? data.images[0]?.alt}
   noindex={data.example || data.draft}
   modified={isoDate(data.lastVerified)}
   jsonLd={jsonLd}
@@ -109,7 +110,7 @@ const jsonLd = [
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
-    <PhotoSet image={data.image} gallery={data.gallery} />
+    <PhotoSet image={data.image} gallery={data.gallery} mark={data.name} tone={data.category} markLabel={category.singular} />
 
     {
       data.images.length > 0 && (

@@ -14,6 +14,12 @@ area: "highbridge-park"
 website: "https://www.nycgovparks.org/highlights/things-to-do-near-the-high-bridge"
 lastVerified: 2026-10-28
 verdict: "A distinctive hilltop landmark to see from the park or the bridge; do not count on going inside until NYC Parks confirms access."
+image:
+  src: /images/listings/highbridge-water-tower.webp
+  alt: "The Highbridge Water Tower, a tall stone tower, rising above bare trees and a grassy slope in Highbridge Park."
+  credit: "Jsobel123"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Highbridge_Water_Tower,_NYC.jpg"
 ---
 
 ## What it is

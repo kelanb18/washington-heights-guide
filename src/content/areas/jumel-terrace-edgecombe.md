@@ -8,6 +8,12 @@ sources:
   - https://morrisjumel.org/visit/
   - https://morrisjumel.org/stories/history-of-the-house/
   - http://www.nps.gov/places/new-york-paul-robeson-home.htm
+image:
+  src: /images/areas/jumel-terrace-edgecombe.webp
+  alt: "The white, Georgian-style Morris-Jumel Mansion with its columned portico at 65 Jumel Terrace, seen from the southwest."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Morris-Jumel_Mansion_from_southwest.jpg"
 ---
 
 The Morris-Jumel Mansion at 65 Jumel Terrace anchors this corner of Washington Heights. It is a short block that runs between W 160th and 162nd Sts, one block east of St. Nicholas Ave and one block west of Edgecombe Ave. Built around 1765, the mansion served as George Washington's headquarters in 1776, and Wikipedia calls it Manhattan's oldest surviving house. As of October 28, 2026, the museum's website says the mansion is temporarily closed to tours, with Roger Morris Park open daily 10 a.m. to 5 p.m. and a guided Saturday walking tour offered during the closure.

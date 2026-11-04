@@ -15,6 +15,12 @@ postalCode: "10033"
 website: "https://www.nyc.gov/html/dot/html/pr2015/pr15-122.shtml"
 lastVerified: 2026-10-28
 verdict: "A rare car-free civic space for a sit-down or a market stop beside the United Palace; programming varies, so check before a special trip."
+image:
+  src: /images/listings/plaza-de-las-americas.webp
+  alt: "Early-morning light along the paved pedestrian plaza on W 175th St looking east from Broadway, with pigeons on the ground and walkers in the distance."
+  credit: "NevinThompson"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Broadway_and_175th_Street,_October_29th,_2025.jpg"
 ---
 
 ## What it is

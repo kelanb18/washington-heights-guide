@@ -8,6 +8,12 @@ sources:
   - https://www.nycgovparks.org/parks/highbridge-park/history
   - https://www.nycgovparks.org/park-features/highbridge-park/planyc
   - https://en.wikipedia.org/wiki/Coogan%27s_Bluff
+image:
+  src: /images/areas/highbridge-park.webp
+  alt: "View north from the Highbridge Water Tower across a baseball field in Highbridge Park toward the apartment towers of upper Washington Heights."
+  credit: "Jim.henderson"
+  license: "CC BY 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Hibridge_Pk_fr_Water_Tower_2023_jeh.jpg"
 ---
 
 Highbridge Park is a narrow band of woods, cliffs, and ball fields that runs 2.25 miles along the Harlem River, according to NYC Parks. It sits below the avenues on the Fort George and Jumel Terrace sides of Washington Heights, so it overlaps with those areas on the map, but it has its own landmarks and its own way in: the High Bridge to the Bronx, the Highbridge Water Tower, the Highbridge Pool and Recreation Center, and mountain-bike trails.

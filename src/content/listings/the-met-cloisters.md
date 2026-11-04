@@ -16,6 +16,12 @@ website: "https://www.metmuseum.org/visit/plan-your-visit/met-cloisters"
 hours: "Sun–Tue and Thu–Sat 10am–5pm; closed Wed"
 lastVerified: 2026-10-28
 verdict: "A destination museum in a park setting, best for people who like medieval art and architecture, and worth planning around its Wednesday closure."
+image:
+  src: /images/listings/the-met-cloisters.webp
+  alt: "The Romanesque-style tower and stone walls of The Met Cloisters in Fort Tryon Park, framed by bare branches against a blue sky."
+  credit: "GK tramrunner RU"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Cloisters_in_New_York.jpg"
 ---
 
 ## What it is

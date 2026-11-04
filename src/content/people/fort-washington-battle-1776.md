@@ -9,6 +9,12 @@ summary: "George Washington based his operations at Fort Washington in 1776; its
 sources:
   - https://www.nycgovparks.org/parks/bennett-park/history
   - https://www.nycgovparks.org/parks/highbridge-park/history
+image:
+  src: /images/people/fort-washington-battle-1776.webp
+  alt: "A hand-colored 1776 British map of the attack on Fort Washington (then renamed Fort Knyphausen) and the American lines on New York Island, 16 November 1776."
+  credit: "Claude Joseph Sauthier"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:A_plan_of_the_attack_of_Fort_Washington,_now_Fort_Knyphausen,_and_of_the_American_lines_on_New-York_Island_by_the_King's_troops,_on_the_16th_of_November_1776._LOC_gm71000652.jpg"
 ---
 
 NYC Parks' historical sign says General George Washington located his base of operations at the high point now occupied by Bennett Park, and also fortified a position across the Hudson at Fort Lee so he could gain control over river traffic. Fort Washington was built in 1776 and was the last American stronghold as the battle for New York swept north on Manhattan.

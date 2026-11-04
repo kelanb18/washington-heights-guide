@@ -16,6 +16,12 @@ postalCode: "10033"
 website: "https://www.nycgovparks.org/parks/bennett-park"
 lastVerified: 2026-10-28
 verdict: "A small, historic park worth a few minutes for the fort outline and the schist outcrop; it is a pause, not a day out."
+image:
+  src: /images/listings/bennett-park.webp
+  alt: "Snow-covered paths and bare trees in Bennett Park in Hudson Heights, Manhattan, with apartment buildings in the background."
+  credit: "Kidfly182"
+  license: "CC BY 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Bennett_Park_2026.jpg"
 ---
 
 ## What it is

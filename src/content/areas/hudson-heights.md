@@ -7,6 +7,12 @@ sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://en.wikipedia.org/wiki/Hudson_Heights,_Manhattan
   - https://en.wikipedia.org/wiki/Bennett_Park_(New_York_City)
+image:
+  src: /images/areas/hudson-heights.webp
+  alt: "The red-brick Castle Village apartment complex on Cabrini Boulevard in Hudson Heights, seen from the north through bare trees."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Castle_Village_120-180_Cabrini_Boulevard_from_north.jpg"
 ---
 
 Hudson Heights sits on the high ridge that overlooks the Hudson River on one side and the Broadway valley on the other. Bennett Park, at W 183rd to 185th Sts between Pinehurst and Fort Washington Aves, holds the highest natural point in Manhattan, 265 feet above sea level. The neighborhood is known for its 1920s and 1930s apartment buildings, many of them Art Deco, and for being a quieter, more residential pocket than the avenues below.

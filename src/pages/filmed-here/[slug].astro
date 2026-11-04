@@ -8,6 +8,7 @@ import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, productionJsonLd } from '../../lib/jsonld';
 import { formatYear, loadProductions } from '../../lib/productions';
 import { productionKindInfo } from '../../lib/production-schema';
+import { shareableSrc } from '../../lib/pictures';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -45,6 +46,8 @@ const jsonLd = [
   title={`${data.title} — Filmed in the Heights · ${siteName}`}
   description={data.summary}
   ogType="article"
+  image={shareableSrc(data.image?.src)}
+  imageAlt={data.image?.alt}
   noindex={data.example || data.draft}
   jsonLd={jsonLd}
 >
@@ -90,7 +93,7 @@ const jsonLd = [
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
-    <PhotoSet image={data.image} gallery={[]} />
+    <PhotoSet image={data.image} gallery={[]} mark={data.title} tone={data.kind} markLabel={kind.label} />
 
     <div class="listing-grid">
       <div class="prose dropcap">

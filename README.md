@@ -290,9 +290,9 @@ Listings, areas, people, and productions can carry an optional `image`, and list
 | `license` | Short name, such as `CC BY-SA 4.0` or `Public domain`. |
 | `sourceUrl` | The page the picture came from. The credit links here. Required so a Creative Commons picture stays attributed. |
 
-Pages with no image stay as they are. A hero is shown on the detail page. Cards show a thumbnail when `image` is set. The credit and license stay visible, including on the thumbnail.
+A detail page shows the hero when `image` is set. Cards show that photograph as a thumbnail. The credit and license stay visible under the picture, including on the thumbnail. A page with no `image` shows a monogram on a solid brand color instead, so the card and the top of the page are not an empty box. Reverend Ike uses that monogram: the Commons file paired with his name shows the United Palace, not him.
 
-Do not add a picture you cannot credit. The repo ships one placeholder drawing, `src/assets/example-photo.svg`, on the EXAMPLE overlook and the EXAMPLE production. It is not a photograph.
+Do not add a picture you cannot credit. The repo ships one placeholder drawing, `src/assets/example-photo.svg`, on the EXAMPLE overlook and the EXAMPLE production. It is not a photograph. Photographs in `public/images/<collection>/<slug>.webp` are the credited files. `/filmed-here/` opens with a 2022 photograph of movie trucks on W 187th St in Hudson Heights (Beyond My Ken, CC BY-SA 4.0).
 
 ## Filmed here
 
@@ -317,7 +317,9 @@ Optional: `artist` (music videos), `area` (an area slug), `watchUrl`, `image`, `
 
 The index can be grouped by kind or sorted by year. Area pages list productions whose `area` is that area or a section inside it.
 
-`/filmed-here/` also lists film permits from [NYC Open Data](https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p) (dataset `tg4x-b46p`, Mayor’s Office of Media and Entertainment). Records include a ZIP field, `zipcode_s`, often with a trailing comma or several ZIPs, plus the streets in `parkingheld`. The page keeps Manhattan permits that list 10032, 10033, or 10040 — the Washington Heights ZIPs. 10031 is mostly south of 155th Street, and 10034 is Inwood, so those are left out unless the same permit also lists one of the three. The list is fetched when the site is built and again in the browser. If the feed is down, the page says so and keeps the last built list when it has one. Permits do not name the production.
+`/filmed-here/` also lists film permits from [NYC Open Data](https://data.cityofnewyork.us/City-Government/Film-Permits/tg4x-b46p) (dataset `tg4x-b46p`, Mayor’s Office of Media and Entertainment) and resident or press reports from `src/data/sightings.json`. The two lists share one timeline: upcoming first, then recent. Each row is badged City permit, Confirmed, or Resident-reported, and links to its source. The page can be filtered by source and by area. Reports whose `area` starts with `south edge` are the blocks around West 155th to 158th Street. They stay on the list and are marked South edge.
+
+Permit records include a ZIP field, `zipcode_s`, often with a trailing comma or several ZIPs, plus the streets in `parkingheld`. The page keeps Manhattan permits that list 10032, 10033, or 10040 — the Washington Heights ZIPs. 10031 is mostly south of 155th Street, and 10034 is Inwood, so those are left out unless the same permit also lists one of the three. The list is fetched when the site is built and again in the browser. If the feed is down, the page says so and keeps the last built list when it has one. Permits do not name the production. How to add a sighting is in `docs/sightings.md`.
 
 ## Maps
 
@@ -336,7 +338,7 @@ A listing with both `latitude` and `longitude` gets a map and the Google Maps li
 | `/areas/<slug>/` | One area: the write-up, child areas, and the places and notes filed under it or a nested section |
 | `/people/` | Notable residents & history, grouped by `connection` |
 | `/people/<slug>/` | One person or historic event, with `Person` or `Article` JSON-LD |
-| `/filmed-here/` | Productions, grouped by kind or sorted by year, plus film permits |
+| `/filmed-here/` | Productions, grouped by kind or sorted by year, plus resident sightings and film permits |
 | `/filmed-here/<slug>/` | One production |
 | `/about/` | Editorial policy, affiliate disclosure, sponsorships, corrections |
 | `/404.html` | Missing pages |

@@ -9,6 +9,12 @@ summary: "Margaret Corbin was wounded on November 16, 1776, when she took over h
 sources:
   - https://www.nycgovparks.org/parks/fort-tryon-park/monuments/332
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
+image:
+  src: /images/people/margaret-corbin.webp
+  alt: "Bronze plaque in Fort Tryon Park reading 'Margaret Cochran Corbin 1751-1800' and describing how she was wounded at Fort Washington on 16 November 1776."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2015_Fort_Tryon_Park_Margaret_Corbin_plaque.jpg"
 ---
 
 A bronze plaque at Margaret Corbin Circle, at W 190th St and Fort Washington Ave, dedicated June 13, 1982 by the Chamber of Commerce of Washington Heights and Inwood, says Margaret Cochran Corbin (1751-1800) was wounded during the British-Hessian attack on Fort Washington on November 16, 1776, when she filled the post of her husband John, and calls her the first woman to fight as a soldier in the Revolutionary War. The plaque says she is buried at West Point.
