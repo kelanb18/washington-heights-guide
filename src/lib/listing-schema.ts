@@ -108,6 +108,15 @@ export const listingSchema = z
       'Optional decimal longitude. Set latitude too, or omit both.',
     ),
     website: optionalText(z.httpUrl()).describe('The business’s own website, not an affiliate link.'),
+    links: z
+      .strictObject({
+        reserve: z.httpUrl().optional().describe('Reservation URL. Shown as a Reserve button.'),
+        order: z.httpUrl().optional().describe('Order-ahead URL. Shown as an Order button.'),
+        tickets: z.httpUrl().optional().describe('Tickets URL. Shown as a Tickets button.'),
+        website: z.httpUrl().optional().describe('A website button, separate from the address-block link.'),
+      })
+      .optional()
+      .describe('Optional action links. Each one that is set becomes a labeled button. Not affiliate links.'),
     phone: optionalText(
       z
         .string()

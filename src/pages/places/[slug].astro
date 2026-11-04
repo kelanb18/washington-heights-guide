@@ -1,11 +1,13 @@
 ---
 import { render } from 'astro:content';
+import ActionLinks from '../../components/ActionLinks.astro';
 import PhotoSet from '../../components/PhotoSet.astro';
 import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
+import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
@@ -26,6 +28,7 @@ if (!listing) {
 }
 
 const data = listing.data;
+const featuredGuides = guidesFeaturing(await loadGuides(), listing.id);
 const category = categoryInfo[data.category];
 const area = findArea(await loadAreas(), data.area);
 const pins = pinsFor([listing]);
@@ -111,6 +114,24 @@ const jsonLd = [
     </header>
 
     <PhotoSet image={data.image} gallery={data.gallery} mark={data.name} tone={data.category} markLabel={category.singular} />
+    <ActionLinks links={data.links} />
+    {
+      featuredGuides.length > 0 && (
+        <section class="group" aria-labelledby="featured-in">
+          <div class="section-head">
+            <h2 id="featured-in">Featured in</h2>
+          </div>
+          <ul class="tag-line">
+            {featuredGuides.map((guide, index) => (
+              <li>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/best/${guide.id}`)}>{guide.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     {
       data.images.length > 0 && (

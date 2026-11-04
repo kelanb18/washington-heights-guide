@@ -963,6 +963,94 @@ main {
   display: block;
 }
 
+.ranked {
+  list-style: none;
+  margin: 1.4rem 0 0;
+  padding: 0;
+}
+
+.ranked-card {
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  gap: 0.6rem 1rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ink);
+}
+
+.ranked-card:has(.photo-thumb) {
+  grid-template-columns: 2.4rem 5.5rem minmax(0, 1fr);
+}
+
+.badge,
+.chip {
+  display: inline-block;
+  margin: 0 0 0.35rem;
+  padding: 0.12rem 0.45rem;
+  background: var(--paper-deep);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.pick-blurb {
+  margin: 0.35rem 0 0;
+  max-width: 40rem;
+}
+
+.guide-grid {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+}
+
+.guide-card {
+  display: block;
+  padding: 1rem 0;
+  border-top: 1px solid var(--ink);
+  color: inherit;
+  text-decoration: none;
+}
+
+.guide-card h2 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+
+.action-row a,
+.button {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+@media (min-width: 800px) {
+  .guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .section-note {
   margin: 0.75rem 0 0;
   max-width: 40rem;
