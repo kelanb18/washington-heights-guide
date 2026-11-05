@@ -21,6 +21,32 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Fort_Tryon_Park_Heather_Garden.jpg"
+gallery:
+  - src: /images/listings/fort-tryon-park/1.webp
+    alt: "People doing sunset yoga on a lawn in Fort Tryon Park, seen from Linden Terrace"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2015_Fort_Tryon_Park_sunset_yoga.jpg"
+  - src: /images/listings/fort-tryon-park/2.webp
+    alt: "The stone Margaret Corbin Drive Arch carrying the roadway through Fort Tryon Park"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2015_Fort_Tryon_Park_Margaret_Corbin_Drive_Arch_1.jpg"
+  - src: /images/listings/fort-tryon-park/3.webp
+    alt: "A tree-lined pathway in Fort Tryon Park in October"
+    credit: "Epicgenius"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFort_Tryon_Park_Oct_2019_131.jpg"
+  - src: /images/listings/fort-tryon-park/4.webp
+    alt: "The stone Fort Tryon Park Cottage near the park entrance at Margaret Corbin Circle"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2013_Fort_Tryon_Park_Cottage.jpg"
+  - src: /images/listings/fort-tryon-park/5.webp
+    alt: "Reenactors firing muskets at a Battle of Fort Washington commemoration in Fort Tryon Park"
+    credit: "Jim.henderson"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMusket_fire_at_Battle_of_Ft_Washington_jeh.jpg"
 ---
 
 ## What it is

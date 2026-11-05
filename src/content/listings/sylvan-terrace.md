@@ -14,6 +14,33 @@ area: "jumel-terrace-edgecombe"
 postalCode: "10032"
 lastVerified: 2026-10-28
 verdict: "A short, storybook block that is free to walk; the houses are private homes, so look from the street."
+image:
+  src: /images/listings/sylvan-terrace/1.webp
+  alt: "Wooden row houses lining cobblestoned Sylvan Terrace, looking east"
+  credit: "Jim.henderson"
+  license: "CC0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASylvan_Terrace_Jumel_HD_jeh.jpg"
+gallery:
+  - src: /images/listings/sylvan-terrace/2.webp
+    alt: "The row of 1882 wooden houses along Sylvan Terrace"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJumel_Terrace_Historic_District_Sylvan_Terrace_from_west.jpg"
+  - src: /images/listings/sylvan-terrace/3.webp
+    alt: "Row house facades on Sylvan Terrace"
+    credit: "Antoni Jalandoni"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASylvan_Terrace_Houses.jpg"
+  - src: /images/listings/sylvan-terrace/4.webp
+    alt: "Sylvan Terrace row houses with the Morris-Jumel Mansion at the end of the street"
+    credit: "CaptJayRuffins"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMorris-Jumel_Manse_%26_Sylvan_Terrace_rowhouses.jpg"
+  - src: /images/listings/sylvan-terrace/5.webp
+    alt: "Sylvan Terrace in summer 2025"
+    credit: "Clyde Charles Brown"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASylvan_Terrace%2C_Manhattan%2C_New_York%2C_US.jpg"
 ---
 
 ## What it is

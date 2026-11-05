@@ -12,16 +12,11 @@ import { collectTags, loadListings } from '../lib/listings';
 import { loadPeople } from '../lib/people';
 import { pinsFor } from '../lib/pins';
 import { loadProductions } from '../lib/productions';
-import type { CreditedImage } from '../lib/picture-schema';
 import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
+import { siteHeroes } from '../lib/site-heroes';
 
-const hero: CreditedImage = {
-  src: '/images/listings/fort-tryon-park.webp',
-  alt: 'A paved path winding through the flowering shrubs of the Heather Garden in Fort Tryon Park.',
-  credit: 'Beyond My Ken',
-  license: 'CC BY-SA 4.0',
-  sourceUrl: 'https://commons.wikimedia.org/wiki/File:2014_Fort_Tryon_Park_Heather_Garden.jpg',
-};
+const hero = siteHeroes[0];
+const moreHeroes = siteHeroes.slice(1);
 
 const listings = await loadListings();
 const areas = await loadAreas();
@@ -97,6 +92,11 @@ if (people.length > 0) {
         </p>
       </div>
       <AttributedPhoto picture={hero} variant="hero" />
+      <div class="hero-set">
+        {moreHeroes.map((picture) => (
+          <AttributedPhoto picture={picture} variant="gallery" />
+        ))}
+      </div>
     </section>
 
     <ul class="principles">

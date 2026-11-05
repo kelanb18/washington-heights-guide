@@ -22,6 +22,22 @@ image:
   credit: "Clyde Charles Brown"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:J._Hood_Wright_Park,_Manhattan,_New_York,_US.jpg"
+gallery:
+  - src: /images/listings/j-hood-wright-park/1.webp
+    alt: "The recreation center building in J. Hood Wright Park"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ._Hood_Wright_Park_Recreation_Center.jpg"
+  - src: /images/listings/j-hood-wright-park/2.webp
+    alt: "J. Hood Wright Park in 2007"
+    credit: "Shannon McGee"
+    license: "CC BY-SA 2.5"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ_Hood_Wright_Park_2007.jpg"
+  - src: /images/listings/j-hood-wright-park/3.webp
+    alt: "The park sign at an entrance to J. Hood Wright Park"
+    credit: "User:M3andros"
+    license: "CC BY 3.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJ._Hood_Wright_Park_200x268.jpg"
 ---
 
 ## What it is

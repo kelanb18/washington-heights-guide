@@ -13,6 +13,7 @@ import { loadListings } from '../../lib/listings';
 import { pinsFor } from '../../lib/pins';
 import { referenceId } from '../../lib/refs';
 import { absoluteUrl, formatDate, href, isoDate, siteName } from '../../lib/site';
+import { siteHeroFor } from '../../lib/site-heroes';
 import { categoryInfo, isCategory } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -40,6 +41,7 @@ const related = guides
     return false;
   })
   .slice(0, 3);
+const hero = guide.data.image ?? siteHeroFor(guide.id);
 const { Content } = await render(guide);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -64,6 +66,8 @@ const jsonLd = [
   title={`${guide.data.title} · ${siteName}`}
   description={guide.data.description}
   ogType="article"
+  image={hero.src}
+  imageAlt={hero.alt}
   modified={isoDate(guide.data.updated)}
   noindex={guide.data.example || guide.data.draft}
   jsonLd={jsonLd}
@@ -99,7 +103,7 @@ const jsonLd = [
       </p>
       {guide.data.example && <p class="example-line">Example guide. Not a real ranking. Omitted from the production build.</p>}
     </header>
-    <PhotoSet image={guide.data.image} />
+    <PhotoSet image={hero} />
     <div class="prose">
       <Content />
     </div>

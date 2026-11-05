@@ -1008,6 +1008,18 @@ main {
   object-fit: cover;
 }
 
+.hero-set {
+  display: grid;
+  gap: 0.8rem;
+  grid-column: 1 / -1;
+}
+
+.hero-set .photo img {
+  width: 100%;
+  height: 9rem;
+  object-fit: cover;
+}
+
 .hero-pub {
   display: grid;
   gap: 1.5rem;
@@ -1246,6 +1258,10 @@ ul.tag-line {
 
   .guide-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-set {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

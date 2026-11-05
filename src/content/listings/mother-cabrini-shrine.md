@@ -18,6 +18,28 @@ phone: "(212) 923-3536"
 hours: "Tue–Fri 10am–5pm; Sat–Sun 9am–5pm; closed Mon & major holidays"
 lastVerified: 2026-10-28
 verdict: "A peaceful, free place to learn about Mother Cabrini; confirm Mass times and holiday hours with the shrine."
+image:
+  src: /images/listings/mother-cabrini-shrine/1.webp
+  alt: "The St. Frances Xavier Cabrini Shrine seen from Cabrini Boulevard"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Xavier_Cabrini_Shrine_from_Cabrini_Boulevard.jpg"
+gallery:
+  - src: /images/listings/mother-cabrini-shrine/2.webp
+    alt: "Interior of the St. Frances Cabrini Shrine church"
+    credit: "Oliveoil05"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Cabrini_Shrine_Interior.jpg"
+  - src: /images/listings/mother-cabrini-shrine/3.webp
+    alt: "The St. Frances Cabrini Shrine in 2025"
+    credit: "Clyde Charles Brown"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Cabrini_Shrine_in_Washington_Heights%2C_Manhattan%2C_New_York%2C_US.jpg"
+  - src: /images/listings/mother-cabrini-shrine/4.webp
+    alt: "The Cabrini Shrine behind its stone wall on Fort Washington Avenue"
+    credit: "Jim.henderson"
+    license: "CC0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ACabrini_Shrine_wall_jeh.jpg"
 ---
 
 ## What it is

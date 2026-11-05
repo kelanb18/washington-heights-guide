@@ -16,6 +16,42 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Pinehurst_Avenue_stairs_to_West_181st_Street.jpg"
+gallery:
+  - src: /images/areas/hudson-heights-downtown/1.webp
+    alt: "The Pinehurst Avenue stairs rising from W 181st Street"
+    credit: "Deansfa"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3APinehurst_Avenue_stairs%2C_on_West_181st_Street%2C_Little_Dominican_Republic%2C_Washington_Heights%2C_Manhattan_%282022%29.jpg"
+  - src: /images/areas/hudson-heights-downtown/2.webp
+    alt: "Stairs connecting Pinehurst Avenue down to W 181st Street"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3APinehurst_Avenue_stairs_to_West_181st_Street.jpg"
+  - src: /images/areas/hudson-heights-downtown/3.webp
+    alt: "The apartment building at 454 Fort Washington Avenue on the corner of W 181st Street"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A454_Fort_Washington_Avenue_Washington_Heights.jpg"
+  - src: /images/areas/hudson-heights-downtown/4.webp
+    alt: "Entrance of 801 W 181st Street between Fort Washington and Pinehurst Avenues"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A801_West_181st_Street_entrance.jpg"
+  - src: /images/areas/hudson-heights-downtown/5.webp
+    alt: "The turret of the 1920 apartment building at Cabrini Boulevard and W 181st Street"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A105-195_Cabrini_Boulevard_turret.jpg"
+  - src: /images/areas/hudson-heights-downtown/6.webp
+    alt: "The Overlook Terrace entrance to the 181st Street A train station"
+    credit: "Jim.henderson"
+    license: "CC0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A181_St_IND_entry_Overlook_Terr_raw_jeh.jpg"
+  - src: /images/areas/hudson-heights-downtown/7.webp
+    alt: "Storefronts on W 181st Street between Cabrini Boulevard and Pinehurst Avenue"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A831_West_181st_Street_store_facade.jpg"
 ---
 
 "Downtown" and "uptown" are how locals sort Hudson Heights' two small commercial strips; neither term is official. The downtown strip is W 181st St where it meets Fort Washington Ave, a short walk from the 181st St A station and its elevators to the ridge. The Washington Heights Business Improvement District's W 181st St corridor runs from Amsterdam Ave west to Fort Washington Ave, so this is where that corridor ends.

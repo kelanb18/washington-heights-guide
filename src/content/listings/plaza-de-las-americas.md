@@ -21,6 +21,17 @@ image:
   credit: "NevinThompson"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Broadway_and_175th_Street,_October_29th,_2025.jpg"
+gallery:
+  - src: /images/listings/plaza-de-las-americas/1.webp
+    alt: "Looking east down W 175th Street from Broadway at dawn"
+    credit: "NevinThompson"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ABroadway_and_175th_Street%2C_October_29th%2C_2025.jpg"
+  - src: /images/listings/plaza-de-las-americas/2.webp
+    alt: "The United Palace at Broadway and W 175th Street, next to Plaza de las Americas"
+    credit: "Beyond My Ken"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_United_Palace_from_corner.jpg"
 ---
 
 ## What it is

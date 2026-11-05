@@ -15,6 +15,33 @@ area: "jumel-terrace-edgecombe"
 postalCode: "10032"
 lastVerified: 2026-10-28
 verdict: "A landmark for Harlem Renaissance and jazz-era history; it is a private apartment building, so see it from the sidewalk."
+image:
+  src: /images/listings/555-edgecombe-avenue/1.webp
+  alt: "The brick 555 Edgecombe Avenue apartment building at W 160th St, seen from the north"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3A555_Edgecombe_Avenue_from_north.jpg"
+gallery:
+  - src: /images/listings/555-edgecombe-avenue/2.webp
+    alt: "555 Edgecombe Avenue seen from the south along Edgecombe Avenue"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A555_Edgecombe_Avenue_from_south.jpg"
+  - src: /images/listings/555-edgecombe-avenue/3.webp
+    alt: "555 Edgecombe Avenue in April 2026"
+    credit: "Epicgenius"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_10.jpg"
+  - src: /images/listings/555-edgecombe-avenue/4.webp
+    alt: "Historic marker outside 555 Edgecombe Avenue"
+    credit: "CmdrDan"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A555_Edgecombe_Avenue_historic_marker_%28very_long%29_asf_south_of_160th_Street.jpg"
+  - src: /images/listings/555-edgecombe-avenue/5.webp
+    alt: "Historic American Buildings Survey photograph of the front and side of 555 Edgecombe Avenue"
+    credit: "Unknown author"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGENERAL_VIEW_OF_FRONT_AND_SIDE_-_555_Edgecomb_Avenue_%28Apartment_Building%29%2C_New_York%2C_New_York_County%2C_NY_HABS_NY%2C31-NEYO%2C117-1.tif"
 ---
 
 ## What it is

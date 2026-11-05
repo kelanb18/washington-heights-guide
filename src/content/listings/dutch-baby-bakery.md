@@ -17,6 +17,12 @@ phone: "(646) 559-2441"
 hours: "Mon–Wed 7:30am–7pm; Thu–Sun 7:30am until 9 or 10pm (its site lists both)"
 lastVerified: 2026-10-28
 verdict: "A bakery-plus-restaurant on the 187th St strip; good for a morning biscuit or a later sit-down, with a few details worth confirming first."
+image:
+  src: /images/listings/dutch-baby-bakery/1.webp
+  alt: "The W 187th Street shopping block between Fort Washington and Pinehurst Avenues, where Dutch Baby Bakery is located (street view of the block, not the bakery)"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWest_187th_Street_shopping_street_Hudson_Heights.jpg"
 ---
 
 ## What it is
