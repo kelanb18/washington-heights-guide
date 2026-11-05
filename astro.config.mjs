@@ -33,6 +33,7 @@ const hidden = {
   areas: new Set(unpublishedSlugs('areas')),
   people: new Set(unpublishedSlugs('people')),
   'filmed-here': new Set(unpublishedSlugs('productions')),
+  best: new Set(unpublishedSlugs('guides')),
 };
 
 export default defineConfig({

@@ -10,6 +10,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ancestorAreas, areaTree, descendantIds, findAreaNode, loadAreas } from '../../lib/areas';
 import { listingsInArea, peopleInArea } from '../../lib/catalog';
 import { areaJsonLd, breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadGuides } from '../../lib/guides';
 import { loadListings } from '../../lib/listings';
 import { loadPeople } from '../../lib/people';
 import { pinsFor } from '../../lib/pins';
@@ -37,6 +38,15 @@ const areaIds = descendantIds(area.id, areas);
 const productions = (await loadProductions()).filter((production) => {
   const id = referenceId(production.data.area);
   return id != null && areaIds.has(id);
+});
+const listingIds = new Set(listings.map((listing) => listing.id));
+const guidesHere = (await loadGuides()).filter((guide) => {
+  const guideArea = referenceId(guide.data.area);
+  if (guideArea && areaIds.has(guideArea)) return true;
+  return guide.data.picks.some((pick) => {
+    const id = referenceId(pick.listing);
+    return id != null && listingIds.has(id);
+  });
 });
 const pins = pinsFor(listings);
 const children = findAreaNode(areaTree(areas), area.id)?.children ?? [];
@@ -265,6 +275,24 @@ if (people.length > 0) {
         )
       }
     </section>
+
+    {
+      guidesHere.length > 0 && (
+        <section class="group" aria-labelledby="guides-heading">
+          <div class="section-head">
+            <h2 id="guides-heading">Best of</h2>
+            <a href={href('/best')}>All guides</a>
+          </div>
+          <ul class="tag-line">
+            {guidesHere.map((guide) => (
+              <li>
+                <a href={href(`/best/${guide.id}`)}>{guide.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     <section class="group" aria-labelledby="filmed-heading">
       <div class="section-head">

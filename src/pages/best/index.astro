@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadGuides } from '../../lib/guides';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { absoluteUrl, formatDate, href, isoDate, siteName } from '../../lib/site';
+
+const guides = await loadGuides();
+const description = 'Checked lists of where to eat, drink, and go in Washington Heights. Rankings are editorial. They are not paid placements.';
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const pageUrl = absoluteUrl(site, '/best');
+const jsonLd: unknown[] = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Best of', url: pageUrl },
+  ]),
+];
+if (guides.length > 0) {
+  jsonLd.push(
+    itemListJsonLd(
+      'Best of Washington Heights',
+      guides.map((guide) => ({ name: guide.data.title, url: absoluteUrl(site, `/best/${guide.id}`) })),
+    ),
+  );
+}
+---
+
+<BaseLayout title={`Best of Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Best of</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">Guides</p>
+      <h1>Best of the Heights</h1>
+      <p class="lede">Short lists with a point of view. A badge means an editor’s call, not a payment.</p>
+    </header>
+    {
+      guides.length === 0 ? (
+        <p class="empty">No guides have been published yet. When a list has been checked, it will show up here.</p>
+      ) : (
+        <ul class="guide-grid">
+          {guides.map((guide) => (
+            <li>
+              <a class="guide-card" href={href(`/best/${guide.id}`)}>
+                <p class="kicker">
+                  {guide.data.picks.length} {guide.data.picks.length === 1 ? 'place' : 'places'}
+                </p>
+                <h2>{guide.data.title}</h2>
+                <p>{guide.data.description}</p>
+                <p class="where">
+                  Updated <time datetime={isoDate(guide.data.updated)}>{formatDate(guide.data.updated)}</time>
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</BaseLayout>

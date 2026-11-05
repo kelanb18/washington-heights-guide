@@ -294,6 +294,16 @@ A detail page shows the hero when `image` is set. Cards show that photograph as 
 
 Do not add a picture you cannot credit. The repo ships one placeholder drawing, `src/assets/example-photo.svg`, on the EXAMPLE overlook and the EXAMPLE production. It is not a photograph. Photographs in `public/images/<collection>/<slug>.webp` are the credited files. `/filmed-here/` opens with a 2022 photograph of movie trucks on W 187th St in Hudson Heights (Beyond My Ken, CC BY-SA 4.0).
 
+## Best of
+
+One guide, one file: `src/content/guides/<slug>.md`. Copy `templates/guide.md`. A guide has a title, a description of at most 160 characters, an `updated` date, and an ordered `picks` list. Each pick is a listing slug, a blurb, and an optional badge. The build fails if a pick does not match a file in `src/content/listings/`.
+
+`/best/` is the index. A guide page shows the picks in order, a map of the ones that have coordinates, an updated date, and `ItemList` structured data. Listing pages say “Featured in” when a guide includes them. Area pages list guides about that area or its places.
+
+`/category/<category>/in/<area>/` is generated only when at least two published places of that category sit in the area or a smaller section of it. Those pages are alphabetical. They are not rankings.
+
+Listings may set `links` with `reserve`, `order`, `tickets`, and `website`. Each one that is present becomes a labeled button.
+
 ## Filmed here
 
 One production, one file:
@@ -338,6 +348,9 @@ A listing with both `latitude` and `longitude` gets a map and the Google Maps li
 | `/areas/<slug>/` | One area: the write-up, child areas, and the places and notes filed under it or a nested section |
 | `/people/` | Notable residents & history, grouped by `connection` |
 | `/people/<slug>/` | One person or historic event, with `Person` or `Article` JSON-LD |
+| `/best/` | Editorial guides |
+| `/best/<slug>/` | One ranked guide, with `ItemList` structured data |
+| `/category/<category>/in/<area>/` | Alphabetical places of one category in one area, only when there are at least two |
 | `/filmed-here/` | Productions, grouped by kind or sorted by year, plus resident sightings and film permits |
 | `/filmed-here/<slug>/` | One production |
 | `/about/` | Editorial policy, affiliate disclosure, sponsorships, corrections |
