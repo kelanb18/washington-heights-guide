@@ -15,6 +15,12 @@ website: "https://grownyc.org/locations/fort-washington-greenmarket/"
 hours: "Tuesdays 8am–4pm; June 2–Dec 15, 2026"
 lastVerified: 2026-10-28
 verdict: "A reliable weekly farmers market with benefits accepted; it runs on Tuesdays only through Dec 15, 2026."
+image:
+  src: /images/listings/fort-washington-greenmarket/1.webp
+  alt: "Fort Washington Avenue at W 169th Street beside the Armory, the block where the greenmarket is held (shown on a non-market day)"
+  credit: "Jim.henderson"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFt_Wash_Armory_no_jeh.JPG"
 ---
 
 ## What it is

@@ -17,6 +17,33 @@ phone: "(212) 923-1803"
 hours: "Mon–Fri 9am–7pm; weekends for events only (subject to event schedule)"
 lastVerified: 2026-10-28
 verdict: "An important building and an athletics hub; visiting is mostly through events, so check the schedule."
+image:
+  src: /images/listings/fort-washington-avenue-armory/1.webp
+  alt: "The brick Fort Washington Avenue Armory between W 168th and 169th Streets"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory.jpg"
+gallery:
+  - src: /images/listings/fort-washington-avenue-armory/2.webp
+    alt: "The entrance of the Fort Washington Avenue Armory"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory_entrance.jpg"
+  - src: /images/listings/fort-washington-avenue-armory/3.webp
+    alt: "The Armory seen across Fort Washington Avenue and W 169th Street"
+    credit: "Jim.henderson"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFt_Wash_Armory_no_jeh.JPG"
+  - src: /images/listings/fort-washington-avenue-armory/4.webp
+    alt: "An indoor track meet on the banked track inside the Armory"
+    credit: "Steven Pisano"
+    license: "CC BY 2.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AIndoor_Track_and_Field_-_Jim_Mitchell_Invitational_at_the_Armory.jpg"
+  - src: /images/listings/fort-washington-avenue-armory/5.webp
+    alt: "Banners and decorative details on the Armory facade"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory_banners_and_decoration.jpg"
 ---
 
 ## What it is

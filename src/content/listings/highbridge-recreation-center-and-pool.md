@@ -18,6 +18,28 @@ website: "https://www.nycgovparks.org/facilities/recreationcenters/MX261"
 phone: "(212) 927-2400"
 lastVerified: 2026-10-28
 verdict: "A well-used city rec center in Highbridge Park; check NYC Parks for hours, pool season and temporary closures."
+image:
+  src: /images/listings/highbridge-recreation-center-and-pool/1.webp
+  alt: "The brick Highbridge Play Center on Amsterdam Avenue"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_Highbridge_Park.jpg"
+gallery:
+  - src: /images/listings/highbridge-recreation-center-and-pool/2.webp
+    alt: "The Highbridge swimming pool, empty in March, seen from the water tower"
+    credit: "Jim.henderson"
+    license: "CC BY 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_swimming_pool_from_Tower_2023_jeh.jpg"
+  - src: /images/listings/highbridge-recreation-center-and-pool/3.webp
+    alt: "Highbridge Play Center seen from the south"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_from_south.jpg"
+  - src: /images/listings/highbridge-recreation-center-and-pool/4.webp
+    alt: "Front of Highbridge Play Center in front of the pool"
+    credit: "Jim.henderson"
+    license: "CC0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_front_jeh.jpg"
 ---
 
 ## What it is

@@ -23,6 +23,32 @@ image:
   credit: "Jim.henderson"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:High_Bridge_jeh.JPG"
+gallery:
+  - src: /images/listings/the-high-bridge/1.webp
+    alt: "The High Bridge walkway crossing the Harlem River toward Manhattan"
+    credit: "Famartin"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2024-05-30_12_44_02_View_west_across_the_High_Bridge_as_it_crosses_the_Harlem_River_to_Manhattan_from_the_Bronx%2C_New_York_City%2C_New_York.jpg"
+  - src: /images/listings/the-high-bridge/2.webp
+    alt: "The stone arches of the High Bridge on the Bronx side"
+    credit: "Jim.henderson"
+    license: "CC0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHigh_Bridge_big_small_Bronx_arches_jeh.jpg"
+  - src: /images/listings/the-high-bridge/3.webp
+    alt: "South side of the High Bridge on its 2015 reopening day"
+    credit: "Jim.henderson"
+    license: "CC BY 3.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHB_south_side_zoom_opening_day_jeh.jpg"
+  - src: /images/listings/the-high-bridge/4.webp
+    alt: "Pedestrians on the High Bridge in 1905, looking toward Manhattan"
+    credit: "Unknown author"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHigh_Bridge_%281905%29.jpg"
+  - src: /images/listings/the-high-bridge/5.webp
+    alt: "The High Bridge seen from the Bronx side of the Harlem River"
+    credit: "GaoKyle"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHigh_Bridge_Bronx_Side_September_2017.jpg"
 ---
 
 ## What it is

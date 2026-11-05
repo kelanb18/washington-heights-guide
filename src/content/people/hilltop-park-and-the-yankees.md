@@ -16,6 +16,17 @@ image:
   credit: "Bain News Service"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Hilltop_Park_Entrance.jpg"
+gallery:
+  - src: /images/people/hilltop-park-and-the-yankees/1.webp
+    alt: "Hilltop Park, the Highlanders' ballpark on Broadway, in 1903"
+    credit: "Uploaded to enWiki by en:User:Randall311"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHilltoppark1903.jpg"
+  - src: /images/people/hilltop-park-and-the-yankees/2.webp
+    alt: "Columbia University Medical Center buildings now on the former Hilltop Park site"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AColumbia_University_Medical_Center_Buildings_on_Broadway_below_West_168th_Street.jpg"
 ---
 
 Before the New York Yankees played at the Polo Grounds or Yankee Stadium, they played in Washington Heights. Wikipedia says Hilltop Park opened on April 30, 1903, on Broadway between W 165th and W 168th Sts, and was home to the New York Highlanders, the team that later became the Yankees, until 1912. The park seated 16,000, with room for thousands more standing, and was built in six weeks, according to Wikipedia.

@@ -11,6 +11,42 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:George_Washington_Educational_Campus_from_south.jpg"
+gallery:
+  - src: /images/areas/fort-george/1.webp
+    alt: "Apartment buildings on Fort George Hill seen from Fort Tryon Park"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2018_Fort_Tryon_Park_-_view_of_NYCHA_Dyckman_Houses.jpg"
+  - src: /images/areas/fort-george/2.webp
+    alt: "The George Washington Educational Campus on Fort George Hill"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGeorge_Washington_Educational_Campus_from_north.jpg"
+  - src: /images/areas/fort-george/3.webp
+    alt: "The rocky bluff along Bennett Avenue at W 192nd Street"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHudson_Heights_bluff_at_Bennett_and_192nd_looking_south_1.jpg"
+  - src: /images/areas/fort-george/4.webp
+    alt: "Southbound Broadway at W 193rd Street"
+    credit: "Mr. Matté (if there is an issue with this image, contact me using this image's Commons talk page, my Commons user talk p"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ABroadway_sb_at_West_193rd_Street%2C_Manhattan%2C_NY%2C_June_2026.jpg"
+  - src: /images/areas/fort-george/5.webp
+    alt: "Yeshiva University's Zysman Hall on Amsterdam Avenue at W 186th Street"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AYeshiva_University_Zysman_Hall_from_northeast.jpg"
+  - src: /images/areas/fort-george/6.webp
+    alt: "Holy Cross Armenian Apostolic Church on W 187th Street"
+    credit: "Jeff Reuben"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHoly_Cross_Church_of_Armenia_NYC_2021.jpg"
+  - src: /images/areas/fort-george/7.webp
+    alt: "The Fort George Amusement Park on the hill above the Harlem River around 1905"
+    credit: "Unknown author"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFort_George_Amusement_Park.jpg"
 ---
 
 Fort George is the lesser-known sibling of Hudson Heights on the other side of Broadway. It is named for the Revolutionary War's Fort George, according to Wikipedia, and runs east of Broadway from W 181st St to Dyckman St, where Washington Heights meets Inwood. Dyckman St is the neighborhood's northern edge, so it is not treated as a separate area here.

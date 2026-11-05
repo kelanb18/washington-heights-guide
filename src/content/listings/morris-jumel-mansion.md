@@ -17,6 +17,38 @@ website: "https://morrisjumel.org"
 hours: "Mansion closed (roof work); Roger Morris Park daily 10am–5pm"
 lastVerified: 2026-10-28
 verdict: "Worth seeing for the history and the hilltop; the house is closed for roof replacement as of Oct 28, 2026, but the park and Saturday walks go on."
+image:
+  src: /images/listings/morris-jumel-mansion/1.webp
+  alt: "The white columned portico of the Morris-Jumel Mansion seen from the south"
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Morris-Jumel_Mansion_from_south.jpg"
+gallery:
+  - src: /images/listings/morris-jumel-mansion/2.webp
+    alt: "The Morris-Jumel Mansion and its grounds seen from the northwest"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Morris-Jumel_Mansion_from_northwest.jpg"
+  - src: /images/listings/morris-jumel-mansion/3.webp
+    alt: "The Morris-Jumel Mansion under scaffolding during restoration work, April 2026"
+    credit: "Epicgenius"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_55.jpg"
+  - src: /images/listings/morris-jumel-mansion/4.webp
+    alt: "Roger Morris Park in front of the Morris-Jumel Mansion, with construction fencing, April 2026"
+    credit: "Epicgenius"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_47.jpg"
+  - src: /images/listings/morris-jumel-mansion/5.webp
+    alt: "The Jumel Mansion photographed in 1950 by Gottscho-Schleisner"
+    credit: "Gottscho-Schleisner Collection"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJumel_Mansion%2C_Jumel_Terrace%2C_Washington_Heights%2C_New_York._LOC_gsc.5a20018.jpg"
+  - src: /images/listings/morris-jumel-mansion/6.webp
+    alt: "Historic marker for the Morris-Jumel Mansion"
+    credit: "CaptJayRuffins"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMorris-Jumel_mansion_Historic_Marker.jpg"
 ---
 
 ## What it is

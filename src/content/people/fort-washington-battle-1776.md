@@ -15,6 +15,27 @@ image:
   credit: "Claude Joseph Sauthier"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:A_plan_of_the_attack_of_Fort_Washington,_now_Fort_Knyphausen,_and_of_the_American_lines_on_New-York_Island_by_the_King's_troops,_on_the_16th_of_November_1776._LOC_gm71000652.jpg"
+gallery:
+  - src: /images/people/fort-washington-battle-1776/1.webp
+    alt: "A 1776 view of the British attack against Fort Washington"
+    credit: "Thomas Davies"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AA_View_of_the_Attack_Against_Fort_Washington_%28cropped%29.jpeg"
+  - src: /images/people/fort-washington-battle-1776/2.webp
+    alt: "Claude Joseph Sauthier's 1777 map of the Fort Washington fortifications"
+    credit: "Claude Joseph Sauthier / William Faden"
+    license: "Public domain"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3ABattle_of_Fort_Washington.jpg"
+  - src: /images/people/fort-washington-battle-1776/3.webp
+    alt: "Memorial marking the site of Fort Washington in Bennett Park"
+    credit: "Beyond My Ken"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFort_Washington_memorial_Bennett_Park.jpg"
+  - src: /images/people/fort-washington-battle-1776/4.webp
+    alt: "Reenactors firing muskets at a Battle of Fort Washington commemoration"
+    credit: "Jim.henderson"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMusket_fire_at_Battle_of_Ft_Washington_jeh.jpg"
 ---
 
 NYC Parks' historical sign says General George Washington located his base of operations at the high point now occupied by Bennett Park, and also fortified a position across the Hudson at Fort Lee so he could gain control over river traffic. Fort Washington was built in 1776 and was the last American stronghold as the battle for New York swept north on Manhattan.

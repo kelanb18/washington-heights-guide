@@ -19,6 +19,28 @@ phone: "(212) 795-7842"
 hours: "Sun–Thu 11:30am–9:30pm; closed Fri & Sat (summer hours per its site; subject to change)"
 lastVerified: 2026-10-28
 verdict: "A long-standing YU-area favorite for shawarma and poppers; closed Fridays and Saturdays, so check hours first."
+image:
+  src: /images/listings/golan-heights/1.webp
+  alt: "The Golan Heights kosher restaurant storefront on Amsterdam Avenue"
+  credit: "Bohemian Baltimore"
+  license: "CC BY-SA 4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_04.jpg"
+gallery:
+  - src: /images/listings/golan-heights/2.webp
+    alt: "Golan Heights restaurant on Amsterdam Avenue"
+    credit: "Bohemian Baltimore"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_05.jpg"
+  - src: /images/listings/golan-heights/3.webp
+    alt: "Golan Heights restaurant lit up at night on Amsterdam Avenue"
+    credit: "Bohemian Baltimore"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_01.jpg"
+  - src: /images/listings/golan-heights/4.webp
+    alt: "The Golan Heights storefront sign on Amsterdam Avenue"
+    credit: "Bohemian Baltimore"
+    license: "CC BY-SA 4.0"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_06.jpg"
 ---
 
 ## What it is
