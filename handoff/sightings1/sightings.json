@@ -1,0 +1,487 @@
+[
+  {
+    "date": "2023-01-26",
+    "location": "W 181st St & Magaw Pl (near Fort Washington Ave)",
+    "area": "181st St / Fort Washington",
+    "title": "Only Murders in the Building",
+    "kind": "TV series",
+    "summary": "Resident posted a photo of a no-parking film-shoot sign at W 181st & Magaw for Thurs 1/26 5:00 AM, project name 'The Raven' (the OMITB season 3 code name per the OLV list and a Reddit thread). A TV permit for that day lists W 181st between Fort Washington and Magaw.",
+    "signageCode": "The Raven",
+    "sourceUrl": "https://x.com/RubyQ1213/status/1617738524144590849",
+    "sourceType": "x",
+    "poster": "@RubyQ1213",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 691884 (2023-01-26, Television/Episodic series, parking held incl. W 181 St Fort Washington Ave-Magaw Pl)",
+    "additionalSources": [
+      {
+        "url": "https://www.reddit.com/r/OnlyMurdersHulu/comments/10k8n4e/omitb_season_3_filming_in_nyc_thursday_26th/",
+        "sourceType": "reddit",
+        "poster": "u/hannahlemp"
+      },
+      {
+        "url": "https://docs.google.com/document/d/15eQiGzwGX8BnCnCyJO1Ve73pK13EOdLp4M0AqL7OQZI/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credits @RubyQ1213, @smgursky)"
+      }
+    ]
+  },
+  {
+    "date": "2023-03-21",
+    "location": "Broadway & W 155th St",
+    "area": "south edge (W 155th)",
+    "title": "Boss (aka The Penguin)",
+    "kind": "TV series",
+    "summary": "Poster shared photos of 'Boss' (The Penguin) filming in upper Manhattan on 3/21; the OLV weekly list places it at Broadway & W 155th St. A TV permit for 3/21 holds parking on W 155th/Broadway.",
+    "sourceUrl": "https://x.com/shuthefrontdoor/status/1637968418786750468",
+    "sourceType": "x",
+    "poster": "@shuthefrontdoor",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 702387 (2023-03-21, Television/Episodic series, W 155 St/Broadway/Edward M Morgan Pl)",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/1s5DY2y1PusFXCzj-tjX30OU7vaHUubu-_0w11PewQn8/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credits @kucksuelwhan, @shuthefrontdoor)"
+      }
+    ]
+  },
+  {
+    "date": "2023-04-04",
+    "endDate": "2023-04-06",
+    "location": "W 176th St & Broadway, around the United Palace",
+    "area": "United Palace / 175th-176th",
+    "title": "Only Murders in the Building",
+    "kind": "TV series",
+    "summary": "Resident posted (Apr 2) that OMITB was filming at Broadway & 176th around the United Palace; fan accounts posted Selena Gomez filming in Washington Heights on Apr 4-6. TV permits on Apr 4 and Apr 6 hold parking on Broadway/W 176th.",
+    "sourceUrl": "https://x.com/Lillydrodrz/status/1642525565398679553",
+    "sourceType": "x",
+    "poster": "@Lillydrodrz",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventids 705292 (2023-04-04) and 705911 (2023-04-06), Television/Episodic series, Broadway 174-176 St & W 176 St",
+    "additionalSources": [
+      {
+        "url": "https://x.com/OfficialSGnews/status/1643618261026603009",
+        "sourceType": "x",
+        "poster": "@OfficialSGnews"
+      },
+      {
+        "url": "https://x.com/OfficialSGnews/status/1644039335480553484",
+        "sourceType": "x",
+        "poster": "@OfficialSGnews"
+      },
+      {
+        "url": "https://docs.google.com/document/d/1352-RZG62xnGpJOajYFEIJ0BFburVuvmW_S37A_iIF0/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credit @Lillydrodrz)"
+      }
+    ]
+  },
+  {
+    "date": "2023-04-16",
+    "endDate": "2023-04-21",
+    "location": "W 181st St & Fort Washington Ave; United Palace (Broadway & W 175th-176th)",
+    "area": "181st St / Fort Washington / United Palace",
+    "title": "Only Murders in the Building",
+    "kind": "TV series",
+    "summary": "Photo of no-parking signs at 181st & Ft. Washington for 4/16-4/19, project 'The Raven' (OMITB code name); another resident followed set signs from there to the United Palace, where the cast was seen. TV permits run Apr 17-21 covering W 181st/Magaw and Broadway/W 176th.",
+    "signageCode": "The Raven",
+    "sourceUrl": "https://x.com/SELENATORSS/status/1647011487217582080",
+    "sourceType": "x",
+    "poster": "@SELENATORSS (via @olv / @AndrewMagrini)",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventids 706781, 707545, 707531 (Apr 17-19), 708376/708377 (Apr 20-21); Television/Episodic series; parking held incl. W 181 St Ft Washington-Magaw",
+    "additionalSources": [
+      {
+        "url": "https://x.com/PdogGray/status/1650679663839125507",
+        "sourceType": "x",
+        "poster": "@PdogGray"
+      },
+      {
+        "url": "https://docs.google.com/document/d/1MbxpOLcTIYzSiH2OcKoOzvHEM6MVqhwYm5ps09nNS7A/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credit @AndrewMagrini)"
+      }
+    ]
+  },
+  {
+    "date": "2023-12-11",
+    "endDate": "2023-12-15",
+    "location": "W 187th St & Broadway",
+    "area": "187th St / Broadway",
+    "title": "FBI",
+    "kind": "TV series",
+    "summary": "OLV's weekly filming list for Dec 11-15 shows 'FBI' at W 187th & Broadway, credited to two community posters; exact day within the week not stated in the list.",
+    "sourceUrl": "https://docs.google.com/document/d/1gmaigyNGvlrCZkoQXdgswbY4uqCTbe5qKWrkacrkfO0/edit?usp=sharing",
+    "sourceType": "tracker",
+    "poster": "OLV weekly list (credits @RubyQ1213, @MarcFromNY)",
+    "confidence": "multiple reports",
+    "permitMatch": "none found in tg4x-b46p for 187th/Broadway that week"
+  },
+  {
+    "date": "2024-01-11",
+    "location": "W 175th-176th St between Fort Washington Ave and Haven Ave",
+    "area": "J. Hood Wright Park / 176th St",
+    "title": "Babygirl (per OLV list)",
+    "kind": "feature film",
+    "summary": "A Reddit thread (Jan 11) reported a crew for a few days on W 176th between Fort Washington and Haven; a commenter said OLV listed it as 'Babygirl'. OLV's Jan 8-12 list shows Babygirl at 175th & Fort Washington on Thursday Jan 11. Note: the permit at that block on Jan 11 is categorized Television/Episodic, so title attribution rests on the OLV list.",
+    "sourceUrl": "https://www.reddit.com/r/AskNYC/comments/1944l40/what_are_they_filming_in_washington_heights_on/",
+    "sourceType": "reddit",
+    "poster": "u/price0416",
+    "confidence": "multiple reports",
+    "permitMatch": "tg4x-b46p eventid 756131 (2024-01-11, Television/Episodic, W 176/177 St Haven-Ft Washington); eventid 756237 (2024-01-10, Film/Feature, Wadsworth/Broadway/W 176 St)",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/1RYBJz9Th3N11wAtn84Bn_f2hJZzFX6cGzCoPeUHVwDQ/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list"
+      }
+    ]
+  },
+  {
+    "date": "2024-02-02",
+    "location": "Washington Heights (exact block not stated)",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Poster shared three photos with 'Filming in Washington Heights NY today'; no title, type, or cross streets given.",
+    "sourceUrl": "https://x.com/vladar/status/1753531333488279954",
+    "sourceType": "x",
+    "poster": "@vladar",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2024-03-20",
+    "endDate": "2024-03-21",
+    "location": "W 181st St between Broadway/Fort Washington Ave and Magaw Pl; Fort Washington Ave & W 181st St",
+    "area": "181st St / Fort Washington",
+    "title": "City Girl (per OLV list)",
+    "kind": "feature film",
+    "summary": "Photo of no-parking sign for Wed 3/20-Thu 3/21, 5:00 AM, project name 'The Bench' posted from W 181st between Broadway and Fort Washington; OLV's Mar 18-22 list shows 'City Girl' at Fort Washington & W 181st on both days. Feature-film permits hold W 181st/Magaw/Bennett/Fort Washington both days.",
+    "signageCode": "The Bench",
+    "sourceUrl": "https://x.com/katiehoulis/status/1770676983254401382",
+    "sourceType": "x",
+    "poster": "@katiehoulis",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventids 769348 (2024-03-20) and 769785 (2024-03-21), Film/Feature, Ft Washington Ave 180-183 St, W 181 St, Magaw Pl, Bennett Ave",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/1D3yKrj9x9nY38Kdwb7nqL0_oavib_4WgGTjRc6hgXcU/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list"
+      }
+    ]
+  },
+  {
+    "date": "2024-04-05",
+    "location": "W 157th St & Amsterdam Ave",
+    "area": "south edge (W 157th)",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Driver reported seeing a film no-parking sign at W 157th & Amsterdam; did not know what was being filmed.",
+    "sourceUrl": "https://x.com/emilyvr26/status/1776336628581077172",
+    "sourceType": "x",
+    "poster": "@emilyvr26",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2024-04-07",
+    "endDate": "2024-04-08",
+    "location": "W 176th St & Haven Ave (J. Hood Wright Park area)",
+    "area": "J. Hood Wright Park / 176th St",
+    "title": "A Complete Unknown",
+    "kind": "feature film",
+    "summary": "Poster shared photos of a no-parking sign for Sun 4/7 6 AM, project name 'Wurtzle Brothers', and said A Complete Unknown was filming there that night; another poster the next day said they learned it filmed in Washington Heights 'last night'. A feature-film permit covers W 176th/Haven/Pinehurst/Ft Washington 4/7 5 PM to 4/8 noon.",
+    "signageCode": "Wurtzle Brothers",
+    "sourceUrl": "https://x.com/dannygonz16/status/1777171882690671059",
+    "sourceType": "x",
+    "poster": "@dannygonz16",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 772358 (2024-04-07 17:00 to 2024-04-08 12:00, Film/Feature, W 176 St Haven-S Pinehurst, Haven Ave, Ft Washington Ave 173-176 St)",
+    "additionalSources": [
+      {
+        "url": "https://x.com/ClubChalamet/status/1777573354641526996",
+        "sourceType": "x",
+        "poster": "@ClubChalamet"
+      }
+    ]
+  },
+  {
+    "date": "2024-04-10",
+    "location": "Fort Tryon Park (Anne Loftus Playground); Fort Washington Ave & W 190th St; Broadway & Dyckman St",
+    "area": "Fort Tryon Park",
+    "title": "Law & Order: SVU",
+    "kind": "TV series",
+    "summary": "ABC News and People reported Mariska Hargitay paused SVU filming on Apr 10, 2024 at the Fort Tryon Park playground to help a lost child; OLV's Apr 8-12 list shows SVU at Broadway & Dyckman and Fort Washington Ave & 190th, and a TV permit covers Fort Washington Ave/Cabrini/Dyckman that day.",
+    "sourceUrl": "https://abcnews.go.com/culture/story/mariska-hargitay-halts-svu-filming-lost-child-confused/?id=109367388",
+    "sourceType": "news",
+    "poster": "ABC News",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 773156 (2024-04-10, Television/Episodic, Ft Washington Ave Cabrini-W 190, Margaret Corbin Plaza, Broadway Dyckman-Arden)",
+    "additionalSources": [
+      {
+        "url": "https://people.com/mariska-hargitay-mistaken-for-real-life-police-officer-by-young-girl-on-svu-set-8634829",
+        "sourceType": "news",
+        "poster": "People"
+      },
+      {
+        "url": "https://docs.google.com/document/d/1c-TCSNrsLVuTuEYQmUeFkW2EzY5LZhiiKWdSHF749R0/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credits @eanubis89, @KarenDonna)"
+      },
+      {
+        "url": "https://x.com/KarenDonna/status/1776296939467710533",
+        "sourceType": "x",
+        "poster": "@KarenDonna"
+      }
+    ]
+  },
+  {
+    "date": "2024-07-20",
+    "endDate": "2024-08-31",
+    "location": "Washington Heights (locations not stated)",
+    "title": "unidentified shoot (narrative short film)",
+    "kind": "short film",
+    "summary": "Uptown Collective reposted a casting call from @theanthonyrojas for a narrative short film shooting in Washington Heights in August 2024. Announcement posted July 20, 2024; dates/locations not given.",
+    "sourceUrl": "https://x.com/Uptowncollectiv/status/1814673171213164572",
+    "sourceType": "x",
+    "poster": "@Uptowncollectiv (repost of @theanthonyrojas)",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2024-08-17",
+    "location": "St. Nicholas Ave (Juan Pablo Duarte Blvd), Washington Heights/Harlem; cross streets not stated",
+    "area": "St. Nicholas Ave",
+    "title": "Tokischa x A$AP Rocky music video (untitled)",
+    "kind": "music video",
+    "summary": "Dominican press reported Tokischa and A$AP Rocky shot a dembow collaboration video with fans around on St. Nicholas Ave (Juan Pablo Duarte Blvd) in Washington Heights; X account Los40 USA also posted it Aug 20. No permit expected to match.",
+    "sourceUrl": "https://listindiario.com/entretenimiento/urbano/20240818/tokischa-graba-dembow-asap-rocky_821946.html",
+    "sourceType": "news",
+    "poster": "Listin Diario",
+    "confidence": "confirmed",
+    "additionalSources": [
+      {
+        "url": "https://www.rdmusica.com/tokischa-y-asap-rocky-graban-juntos-un-dembow-en-washington-heights/",
+        "sourceType": "news",
+        "poster": "RD Musica"
+      },
+      {
+        "url": "https://x.com/Los40UsaOficial/status/1825706166388998572",
+        "sourceType": "x",
+        "poster": "@Los40UsaOficial"
+      }
+    ]
+  },
+  {
+    "date": "2024-11-14",
+    "location": "Washington Heights (exact block not stated)",
+    "title": "Law & Order: SVU",
+    "kind": "TV series",
+    "summary": "Cast member Ice-T posted a video: 'New SVU tonight. We're filming on location in Washington Heights NYC!' No cross streets given. Date is the post date (evening of Nov 14, ET).",
+    "sourceUrl": "https://x.com/FINALLEVEL/status/1857230405356687601",
+    "sourceType": "x",
+    "poster": "@FINALLEVEL",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2024-11-19",
+    "endDate": "2024-11-21",
+    "location": "W 162nd/163rd St near Broadway & St. Nicholas Ave (OLV list: Broadway & W 164th St)",
+    "area": "162nd-164th St / Broadway",
+    "title": "Elsbeth",
+    "kind": "TV series",
+    "summary": "Resident posted Elsbeth filming in Washington Heights around 162nd/163rd on Nov 19; photographed sign reads Elsbeth, shoot Tue 11/19-Wed 11/20; OLV list also shows Elsbeth at Broadway & W 164th on Nov 21. TV permits hold W 162nd/163rd/Broadway Nov 19-20.",
+    "signageCode": "ELSBETH",
+    "sourceUrl": "https://x.com/hits_boredom/status/1858870485368406484",
+    "sourceType": "x",
+    "poster": "@hits_boredom",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventids 819453 (2024-11-19) and 819058 (2024-11-20), Television/Cable-episodic, W 162-163 St, St Nicholas, Broadway 161-164 St",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/1Mdssaq5_YUD2cWaxXo5buIw5aNCUX9iyfXzyL7KhFMU/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credits @cinnvmoncoffee, @hits_boredom)"
+      }
+    ]
+  },
+  {
+    "date": "2024-11-21",
+    "location": "Washington Heights (exact block not stated)",
+    "title": "Law & Order: SVU",
+    "kind": "TV series",
+    "summary": "Poster said 'SVU in #Washington Heights tonight' with a photo of a no-parking sign naming 'Law & Order: SVU' (Universal Television) for Thu 11/21/24.",
+    "sourceUrl": "https://x.com/OliV1986/status/1859734944907657499",
+    "sourceType": "x",
+    "poster": "@OliV1986",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2024-12-06",
+    "location": "Riverside Dr (W 156th-158th St), Edward M. Morgan Pl, W 157th St, Broadway (W 155th-156th St)",
+    "area": "south edge (Audubon Park, W 155th-158th)",
+    "title": "Elsbeth",
+    "kind": "TV series",
+    "summary": "Photo of an Elsbeth (CBS) location letter to residents: interior/exterior filming Friday Dec 6, 2024, 7 AM-12 AM, parking held on Riverside Dr 156th-158th, Edward Morgan Pl, W 157th St and Broadway 155th-156th. Matches a TV permit that day.",
+    "sourceUrl": "https://x.com/hits_boredom/status/1863398599339413508",
+    "sourceType": "x",
+    "poster": "@hits_boredom",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 821658 (2024-12-06 08:00 to 12-07 02:00, Television/Cable-episodic, Riverside Dr 157-158, Edward M Morgan Pl, Broadway 155-156)",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/15huqU_cu0J0AYjUsfVssSDNOsK8s5UW4FtWKmQ5eOCI/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credit @hits_boredom)"
+      }
+    ]
+  },
+  {
+    "date": "2025-03-19",
+    "location": "W 155th St & Amsterdam Ave (shoot area W 153rd-157th St)",
+    "area": "south edge (W 155th)",
+    "title": "Law & Order: SVU",
+    "kind": "TV series",
+    "summary": "Photo of a red no-parking sign: tow after Tue 3/18 10 PM for a Wed 3/19/25 shoot, 'Law & Order: SVU' (Universal Television), at 155th & Amsterdam. Matches a TV permit.",
+    "sourceUrl": "https://x.com/chrisdvdbluray/status/1901614740268314854",
+    "sourceType": "x",
+    "poster": "@chrisdvdbluray",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 841390 (2025-03-19, Television/Cable-episodic, Broadway/W 155 St/Amsterdam)"
+  },
+  {
+    "date": "2025-04-11",
+    "location": "Broadway & W 155th St",
+    "area": "south edge (W 155th)",
+    "title": "FBI: Most Wanted",
+    "kind": "TV series",
+    "summary": "Photo of orange and pink no-parking signs for Fri 4/11/25, 3 AM-10 PM, project name 'Most Wanted', at Broadway & 155th (poster posted Apr 6). Matches a TV permit.",
+    "sourceUrl": "https://x.com/AlexisAgosta/status/1908993806353002970",
+    "sourceType": "x",
+    "poster": "@AlexisAgosta",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 848893 (2025-04-11, Television/Episodic, Broadway 150-155 St, W 155 St)"
+  },
+  {
+    "date": "2025-09-04",
+    "endDate": "2025-09-05",
+    "location": "near W 177th St & Wadsworth Ave",
+    "area": "175th-177th / Wadsworth",
+    "title": "FBI",
+    "kind": "TV series",
+    "summary": "Photo of a yellow no-parking sign: tow after Thu 9/4 10 PM, shoot Fri 9/5, project 'FBI', near 177th & Wadsworth. TV permit on 9/5 covers Broadway/W 176th/Wadsworth 174-177/St Nicholas.",
+    "sourceUrl": "https://x.com/RubyQ1213/status/1963793166659617086",
+    "sourceType": "x",
+    "poster": "@RubyQ1213",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 885954 (2025-09-05, Television/Episodic, Broadway 175-176, W 176, Wadsworth 174-177, St Nicholas 175-177)"
+  },
+  {
+    "date": "2025-10-04",
+    "location": "W 181st St & Fort Washington Ave",
+    "area": "181st St / Fort Washington",
+    "title": "unidentified shoot",
+    "kind": "feature film",
+    "summary": "Resident asked OLV what this was; photo shows no-parking sign for Sat 10/4/25 6 AM, project name 'Rock Hill'. A feature-film permit holds Fort Washington 179-181, W 181st/Magaw and Cabrini Blvd 177-178 that day.",
+    "signageCode": "Rock Hill",
+    "sourceUrl": "https://x.com/d_Tez56/status/1974346274674749673",
+    "sourceType": "x",
+    "poster": "@d_Tez56",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 892456 (2025-10-04, Film/Feature, Ft Washington Ave 179-181 St, W 181 St, Cabrini Blvd 177-178)"
+  },
+  {
+    "date": "2025-10-30",
+    "location": "W 182nd St between Wadsworth Ave and St. Nicholas Ave",
+    "area": "182nd St / St. Nicholas",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Resident posted (Oct 25) a no-parking sign for Thu Oct 30, 2025, 6 AM-6 PM, project name 'Celeb Sub' at W 182nd & St. Nicholas; OLV's Oct 27-31 list carries the same code name. Television permit that day on W 182nd.",
+    "signageCode": "Celeb Sub",
+    "sourceUrl": "https://x.com/d_Tez56/status/1982174342457798894",
+    "sourceType": "x",
+    "poster": "@d_Tez56",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 895481 (2025-10-30, Television/Not applicable, W 182 St Wadsworth-St Nicholas)",
+    "additionalSources": [
+      {
+        "url": "https://docs.google.com/document/d/1kPJRnrpUq_V6uItxzQWSW-1gGt5dQMMV4aFwLGx1CxQ/edit?usp=sharing",
+        "sourceType": "tracker",
+        "poster": "OLV weekly list (credit @d_Tez56)"
+      }
+    ]
+  },
+  {
+    "date": "2026-05-20",
+    "location": "Broadway & W 190th St (shoot area incl. Margaret Corbin Plaza/Cabrini Blvd/Fort Washington Ave 187-190th per permit)",
+    "area": "190th St / Fort Tryon",
+    "title": "Power: Origins",
+    "kind": "TV series",
+    "summary": "OLV's May 18-22 list shows 'Power: Origins' at Broadway & 190th St (credit @RubyQ1213); a cable-episodic permit on May 20 holds Margaret Corbin Plaza, Cabrini Blvd, Fort Washington 187th-190th and Broadway. Exact day within the week inferred from the permit.",
+    "sourceUrl": "https://docs.google.com/document/d/1725r9w3q-G6HcwgtkY5qkpzVGcAgYIdYbXkiV9BV5Ws/edit?usp=sharing",
+    "sourceType": "tracker",
+    "poster": "OLV weekly list (credit @RubyQ1213)",
+    "confidence": "confirmed",
+    "permitMatch": "tg4x-b46p eventid 945225 (2026-05-20, Television/Cable-episodic, Margaret Corbin Plaza, Cabrini Blvd, Ft Washington Ave, Broadway)"
+  },
+  {
+    "date": "2026-09-25",
+    "endDate": "2026-09-26",
+    "location": "Washington Heights (exact block not stated); sign photo only",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Resident asked OLV 'any idea?' (Sept 17) with a photo of a pink no-parking sign: tow after Fri 9/25/26 10 PM, shoot Sat 9/26, project name 'CJFY'. Location only 'Washington Heights'. May or may not relate to the Disinherited sighting on 9/25; not confirmed.",
+    "signageCode": "CJFY",
+    "sourceUrl": "https://x.com/d_Tez56/status/2100513911640387997",
+    "sourceType": "x",
+    "poster": "@d_Tez56",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2026-09-25",
+    "location": "near W 180th St & Fort Washington Ave",
+    "area": "180th St / Fort Washington",
+    "title": "Disinherited",
+    "kind": "TV series",
+    "summary": "Reddit post titled 'Disinherited filming near 180 and Fort Wash today': crew setting up in case fans show up; a commenter saw film trucks heading to the A train and another linked a Hollywood Reporter piece on the FX series.",
+    "sourceUrl": "https://www.reddit.com/r/WashingtonHeights/comments/1wpw172/disinherited_filming_near_180_and_fort_wash_today/",
+    "sourceType": "reddit",
+    "poster": "u/Rarek",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2026-10-07",
+    "location": "near W 189th St & Bennett Ave",
+    "area": "189th St / Bennett Ave",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Resident replied to the @olv filming-locations feed: 'Near 189th St and Bennett Ave.' No title or detail; presumably a shoot spotted that day (context is the OLV reply thread).",
+    "sourceUrl": "https://x.com/RubyQ1213/status/2107949299233702034",
+    "sourceType": "x",
+    "poster": "@RubyQ1213",
+    "confidence": "resident-reported"
+  },
+  {
+    "date": "2026-10-07",
+    "location": "Dyckman St area (stated as 'in dyckman soon'; no cross streets)",
+    "area": "Dyckman",
+    "title": "unidentified shoot",
+    "kind": "unknown",
+    "summary": "Reply to a quoted post: 'Yea they filming in dyckman soon lol.' Vague forward-looking mention; no title, date, or block.",
+    "sourceUrl": "https://x.com/OGLeveledUp/status/2107897148335378507",
+    "sourceType": "x",
+    "poster": "@OGLeveledUp",
+    "confidence": "resident-reported",
+    "notes": "Low specificity; context post not readable"
+  },
+  {
+    "date": "2026-10-08",
+    "location": "'the heights' (not specified; likely Washington Heights)",
+    "title": "unidentified FX show",
+    "kind": "TV series",
+    "summary": "Poster wrote 'Why are they filming a FX show in the heights'; location not specified. Close in time to the Disinherited (FX) report at 180th & Fort Washington but not tied to it by the post.",
+    "sourceUrl": "https://x.com/PaIIahAbdul/status/2108281342572323071",
+    "sourceType": "x",
+    "poster": "@PaIIahAbdul",
+    "confidence": "resident-reported",
+    "notes": "Ambiguous location; verify before publishing"
+  }
+]

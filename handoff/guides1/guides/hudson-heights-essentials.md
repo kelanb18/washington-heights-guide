@@ -1,0 +1,60 @@
+---
+title: "Hudson Heights Essentials: Where to Eat, Drink, and Wander Around 181st and 187th"
+description: "A local's shortlist for Hudson Heights: Fort Tryon Park, The Cloisters, coffee, ramen, a pub, and a bookshop along W 181st and W 187th Streets."
+area: "hudson-heights"
+updated: 2026-10-28
+picks:
+  - listing: "fort-tryon-park"
+    blurb: "A 67-acre park with Hudson River views, the Heather Garden, and eight miles of paths, according to NYC Parks. It is the neighborhood's best long walk, and it is steep."
+    badge: "Start here"
+  - listing: "the-met-cloisters"
+    blurb: "The Metropolitan Museum's medieval branch, inside Fort Tryon Park, with the Unicorn Tapestries in its collection. It is closed on Wednesdays."
+    badge: "Best museum"
+  - listing: "buunni-coffee-pinehurst"
+    blurb: "The original Buunni cafe on Pinehurst Ave, serving Ethiopian-sourced coffee, around the corner from Bennett Park. It is tiny and closes at 5pm."
+    badge: "Best morning coffee"
+  - listing: "dutch-baby-bakery"
+    blurb: "A bakery, restaurant, and bar serving seasonal Southern food, with biscuits and bread made in-house. It is on the same block as The Fountain Bookshop."
+    badge: "Best on W 187th St"
+  - listing: "tampopo-ramen"
+    blurb: "A ramen and sake bar that spent a decade on Bennett Ave before moving to 823 W 181st St in 2026. Check current reservation and delivery options, since it is a new location."
+    badge: "Best ramen"
+  - listing: "the-uptown-garrison"
+    blurb: "A cafe, restaurant, and bar about a block from the 181st St A station, with coffee and pastries by morning and cocktails with a daily happy hour later."
+    badge: "Best all-day room on W 181st St"
+  - listing: "le-cheile"
+    blurb: "A two-floor Irish pub on W 181st St, open until 2am Thursday through Sunday, with a view of the George Washington Bridge according to a 2023 Infatuation guide."
+    badge: "Best pub"
+  - listing: "fountain-bookshop"
+    blurb: "An independent bookshop at 803 W 187th St with a children's section and titles in English and Spanish, plus a calendar of book clubs and events."
+    badge: "Best bookshop"
+  - listing: "bennett-park"
+    blurb: "A small park on Manhattan's highest natural point, 265 feet above sea level, where Fort Washington stood in 1776."
+    badge: "Best history stop"
+sources:
+  - "https://www.nycgovparks.org/parks/fort-tryon-park/"
+  - "https://www.forttryonparktrust.org/"
+  - "https://www.nycgovparks.org/parks/fort-tryon-park/monuments/332"
+  - "https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan"
+  - "https://www.metmuseum.org/plan-your-visit/met-cloisters/"
+  - "https://www.buunnicoffee.com/pages/locations"
+  - "https://www.theinfatuation.com/new-york/guides/where-to-eat-in-washington-heights"
+  - "https://www.dutchbabybakery.com/"
+  - "https://www.dutchbabybakery.com/contact-us"
+  - "https://fountainbookshop.com/"
+  - "https://www.tampoporamennyc.com/"
+  - "https://www.theuptowngarrison.com/hours"
+  - "https://www.theuptowngarrison.com/"
+  - "https://www.lecheilebarnyc.com/"
+  - "https://www.lecheilebarnyc.com/menu"
+  - "https://ny.eater.com/venue/95547/le-ch-ile"
+  - "https://fountainbookshop.com/about-us"
+  - "https://www.nycgovparks.org/parks/bennett-park"
+  - "https://www.nycgovparks.org/parks/bennett-park/history"
+---
+
+Hudson Heights is the hilltop corner of Washington Heights, with commercial strips along W 181st Street and W 187th Street. This guide is for visitors heading to Fort Tryon Park and The Cloisters, and for new neighbors looking for the places that anchor the area.
+
+We chose from the Hudson Heights listings on The Heights, covering parks, a museum, cafes, restaurants, bars, and a bookshop, and ranked them by how essential each is to understanding the area. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+
+Some places here close early, and a few have details we could not fully confirm. Each listing page says what was checked.
