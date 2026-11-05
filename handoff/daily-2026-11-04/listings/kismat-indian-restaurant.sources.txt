@@ -1,0 +1,7 @@
+https://www.kismatrestaurant.com/ (official site: address, phone, family-run, dine-in/takeout/delivery, weekly tiffin menu; checked Nov 4, 2026)
+https://www.kismatrestaurant.com/about (official site: family-owned, "more than 35" years)
+https://www.kismatrestaurant.com/menu (official menu: curries, tandoori, biryani, vegetarian dishes)
+https://www.manhattantimesnews.com/uc-recap-august-19-august-24/ (Manhattan Times / Uptown Collective: over three decades in Washington Heights, Sunday buffet, happy hour; older column, undated in snippet)
+https://www.manhattantimesnews.com/uc-recap-july-6-july-11/ (Manhattan Times / Uptown Collective: sister restaurant Clove at 1592 Amsterdam Ave)
+https://data.cityofnewyork.us/resource/43nn-pn8j.json (NYC DOHMH inspection open data: KISMAT INDIAN CUISINE, 603 Fort Washington Ave, 10040, Indian, most recent inspection Jul 27, 2026; queried Nov 4, 2026)
+Not verified / left out: hours (sources conflict: 11:45am–10:30pm vs 12pm–10:45pm daily), current buffet and happy-hour schedule, founding year (1984 appears only on listing sites), price level.

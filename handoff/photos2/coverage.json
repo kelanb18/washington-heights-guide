@@ -1,0 +1,75 @@
+{
+ "stats": {
+  "listings": {
+   "total": 65,
+   "thumb": 26,
+   "gallery": 21,
+   "missing": 39
+  },
+  "people": {
+   "total": 23,
+   "thumb": 22,
+   "gallery": 17,
+   "missing": 1
+  },
+  "areas": {
+   "total": 9,
+   "thumb": 9,
+   "gallery": 9,
+   "missing": 0
+  },
+  "productions": {
+   "total": 26,
+   "thumb": 21,
+   "gallery": 0,
+   "missing": 5
+  }
+ },
+ "missing": [
+  "listings/anthony-flowers",
+  "listings/bike-by-gato",
+  "listings/boogie-bakery-and-bistro",
+  "listings/burger-heights",
+  "listings/buunni-coffee-pinehurst",
+  "listings/carrot-top-pastries",
+  "listings/club-deportivo-dominicano",
+  "listings/el-floridita",
+  "listings/el-manantial-bakery",
+  "listings/el-panadero-bakery",
+  "listings/falafel-crunch",
+  "listings/georges-pizzaria",
+  "listings/guac-time-mexican-grill",
+  "listings/hilltop-park-alehouse",
+  "listings/l-chingon-mexican-cuisine",
+  "listings/la-casa-del-mofongo",
+  "listings/la-dinastia",
+  "listings/la-reina-del-chicharron",
+  "listings/le-cheile",
+  "listings/legacy-bar-and-grill",
+  "listings/lulo-restaurant",
+  "listings/malecon",
+  "listings/mannys-bicycle",
+  "listings/manolo-tapas",
+  "listings/marilu-and-daysi",
+  "listings/native-noodles",
+  "listings/niccolo-pizzeria",
+  "listings/radio-restaurant",
+  "listings/saggio",
+  "listings/salento-colombian-coffee-and-kitchen",
+  "listings/sisters-uptown-bookstore",
+  "listings/studio-in-the-heights",
+  "listings/sushi-heights",
+  "listings/talkin-tacos",
+  "listings/tampopo-ramen",
+  "listings/tasty-deli",
+  "listings/the-uptown-garrison",
+  "listings/tinto-tapas",
+  "listings/word-up-community-bookshop",
+  "people/washington-heights-unrest-1992",
+  "productions/daisy-ad-1964",
+  "productions/hung-up-on-tokischa-madonna-tokischa",
+  "productions/let-a-na-know-wale",
+  "productions/washington-heights-2002",
+  "productions/washington-heights-mtv-2013"
+ ]
+}
