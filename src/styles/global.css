@@ -771,6 +771,11 @@ main {
   margin-top: 1rem;
 }
 
+.photo-note {
+  display: block;
+  margin-top: 0.15rem;
+}
+
 .photo-credit {
   margin: 0.35rem 0 0;
   font-family: var(--sans);

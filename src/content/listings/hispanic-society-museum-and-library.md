@@ -22,27 +22,42 @@ image:
   credit: "Edgar Alfonseca"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHispanic_Society_of_America_-_Exterior.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1021
 gallery:
   - src: /images/listings/hispanic-society-museum-and-library/2.webp
     alt: "Anna Hyatt Huntington's El Cid statue beside the Hispanic Society library on Audubon Terrace"
     credit: "NewYorkDolls (Wikipedia Takes Manhattan)"
     license: "CC BY-SA 3.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWTM_NewYorkDolls_010.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/hispanic-society-museum-and-library/3.webp
     alt: "Gallery interior of the Hispanic Society museum"
     credit: "Josef Pinlac"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHispanicSocietyofAmerica2016Interior.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/hispanic-society-museum-and-library/4.webp
     alt: "Audubon Terrace seen from W 155th Street in July 2026"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AUpper_Manhattan_Jul_2026_125.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/hispanic-society-museum-and-library/5.webp
     alt: "Audubon Terrace plaza in July 2026"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AUpper_Manhattan_Jul_2026_100.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

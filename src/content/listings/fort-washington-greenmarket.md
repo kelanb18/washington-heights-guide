@@ -21,6 +21,8 @@ image:
   credit: "Jim.henderson"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFt_Wash_Armory_no_jeh.JPG"
+  width: 1600
+  height: 1363
 ---
 
 ## What it is

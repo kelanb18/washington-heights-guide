@@ -13,12 +13,18 @@ image:
   credit: "Rhododendrites"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Ruth_Westheimer_(10877).jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1346
+  height: 1600
 gallery:
   - src: /images/people/ruth-westheimer/1.webp
     alt: "Dr. Ruth Westheimer at the Apollo Theater in 2008"
     credit: "David Shankbone"
     license: "CC BY-SA 3.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ADr._Ruth_Westheimer_by_David_Shankbone.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+    width: 770
+    height: 1207
 ---
 
 Gothamist reported, citing a New York Times profile, that Ruth Westheimer moved to New York City in the late 1950s and stayed in the same Washington Heights apartment for nearly 70 years. She died on July 12, 2024, at age 96. Gothamist says she raised her family in Washington Heights, according to multiple profiles and the documentary Ask Dr. Ruth.

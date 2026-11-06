@@ -24,6 +24,9 @@ image:
   credit: "Epicgenius"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AUpper_Manhattan_Jul_2026_03.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1200
 ---
 
 ## What it is

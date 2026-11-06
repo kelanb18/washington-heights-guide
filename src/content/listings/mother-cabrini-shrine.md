@@ -24,22 +24,34 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Xavier_Cabrini_Shrine_from_Cabrini_Boulevard.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1220
 gallery:
   - src: /images/listings/mother-cabrini-shrine/2.webp
     alt: "Interior of the St. Frances Cabrini Shrine church"
     credit: "Oliveoil05"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Cabrini_Shrine_Interior.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1536
+    height: 2048
   - src: /images/listings/mother-cabrini-shrine/3.webp
     alt: "The St. Frances Cabrini Shrine in 2025"
     credit: "Clyde Charles Brown"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Cabrini_Shrine_in_Washington_Heights%2C_Manhattan%2C_New_York%2C_US.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1067
   - src: /images/listings/mother-cabrini-shrine/4.webp
     alt: "The Cabrini Shrine behind its stone wall on Fort Washington Avenue"
     credit: "Jim.henderson"
     license: "CC0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ACabrini_Shrine_wall_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

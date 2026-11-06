@@ -21,27 +21,38 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_Broadway_facade.jpg"
+  width: 1600
+  height: 1238
 gallery:
   - src: /images/listings/united-palace/1.webp
     alt: "The ornate Broadway facade of the United Palace theater"
     credit: "Beyond My Ken"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_United_Palace_Broadway_facade.jpg"
+    width: 1600
+    height: 1238
   - src: /images/listings/united-palace/2.webp
     alt: "The United Palace marquee on W 175th Street"
     credit: "Beyond My Ken"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_United_Palace_marquee.jpg"
+    width: 1600
+    height: 1200
   - src: /images/listings/united-palace/3.webp
     alt: "The dome atop the United Palace"
     credit: "Beyond My Ken"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_United_Palace_dome.jpg"
+    width: 1600
+    height: 1200
   - src: /images/listings/united-palace/4.webp
     alt: "The United Palace on Broadway in August 2026"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Aug_2026_84.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

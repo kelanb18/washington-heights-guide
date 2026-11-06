@@ -15,6 +15,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2018_United_Palace_tour_03.ceiling.jpg"
+  width: 1600
+  height: 1033
 ---
 
 Wikipedia says a 2020 performance of Jefferson Mays's A Christmas Carol Live was filmed at the United Palace, and the venue's own site lists A Christmas Carol with Jefferson Mays among its film and TV productions.

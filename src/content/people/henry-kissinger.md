@@ -15,12 +15,16 @@ image:
   credit: "U.S. Department of State"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Henry_A._Kissinger,_U.S._Secretary_of_State,_1973-1977.jpg"
+  width: 1301
+  height: 1600
 gallery:
   - src: /images/people/henry-kissinger/1.webp
     alt: "Official portrait of Henry Kissinger as Secretary of State"
     credit: "U.S. Department of State from United States"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHenry_A._Kissinger%2C_U.S._Secretary_of_State%2C_1973-1977.jpg"
+    width: 1600
+    height: 1968
 ---
 
 Henry Kissinger was born in Germany and emigrated to the United States in 1938 as a Jewish refugee fleeing Nazi persecution. According to Wikipedia, his family arrived in New York City on September 5, 1938, when he was 15, and he spent his high-school years in the German-Jewish community in Washington Heights.

@@ -14,6 +14,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_United_Palace_Broadway_facade.jpg"
+  width: 1600
+  height: 1238
 ---
 
 Wikipedia's United Palace article lists Café Society (2016) among films shot at the theater, citing a Wall Street Journal piece on the film's 1930s design. I found no second source or details of which scenes, so treat this as lightly sourced.

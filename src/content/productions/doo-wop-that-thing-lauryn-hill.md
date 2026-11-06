@@ -22,6 +22,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_West_175th_Street_facade.jpg"
+  width: 960
+  height: 1280
 ---
 
 Directed by Monty Whitebloom and Andy Delaney of Big TV, the video shows Lauryn Hill performing at a block party in two eras on a split screen: 1967 on the left and 1998 on the right. Wikipedia, The Boombox and PAPER all say it was filmed in Washington Heights. Dazed says she shot it "outside the United Palace Theatre" in 1998; I found no second source for that exact spot, and none that names a street, so treat the United Palace location as reported by one outlet. Hill later returned to the neighborhood for a 2018 Woolrich campaign shot on Washington Heights streets (Dazed, PAPER), and played the United Palace's 90th-anniversary concert in February 2020, performing this song (The News 2).

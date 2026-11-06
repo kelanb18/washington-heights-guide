@@ -15,17 +15,24 @@ image:
   credit: "Gordon Parks, Office of War Information (cropped by Beyond My Ken)"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Paul_Robeson_1942_crop.jpg"
+  width: 1284
+  height: 1600
 gallery:
   - src: /images/people/paul-robeson/1.webp
     alt: "Paul Robeson photographed by Gordon Parks in 1942"
     credit: "Gordon Parks, Office of War Information; cropped by Beyond My Ken 07:13, 3 February 2011 (UTC)"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3APaul_Robeson_1942_crop.jpg"
+    width: 1600
+    height: 1994
   - src: /images/people/paul-robeson/2.webp
     alt: "555 Edgecombe Avenue, Paul Robeson's former residence"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A555_Edgecombe_Avenue_from_north.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2212
 ---
 
 The National Park Service says Paul Robeson and his family lived in an apartment at 555 Edgecombe Avenue from 1939 to 1941, after he returned from living and performing in Europe. The building is a National Historic Landmark and is not open to the public.

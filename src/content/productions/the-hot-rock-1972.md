@@ -16,6 +16,9 @@ image:
   credit: "RoySmith"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Detail_of_Highbridge_Tower.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1465
+  height: 1600
 ---
 
 NYC in Film identifies the park scene: the thieves enter Highbridge Park at W 175th St and Amsterdam Ave, cross a field toward the water tower, and meet Abe Greenberg at the base of the tower, overlooking the Harlem River. The same scene is recalled in a comment on the Washington Heights NYC site.

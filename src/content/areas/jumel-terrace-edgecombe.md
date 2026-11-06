@@ -14,42 +14,66 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Morris-Jumel_Mansion_from_southwest.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1222
 gallery:
   - src: /images/areas/jumel-terrace-edgecombe/1.webp
     alt: "Jumel Terrace row houses in April 2026"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_35.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/jumel-terrace-edgecombe/2.webp
     alt: "Roger Morris Park and the Morris-Jumel Mansion"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_47.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/jumel-terrace-edgecombe/3.webp
     alt: "Cobblestoned Sylvan Terrace with its wooden row houses"
     credit: "Jim.henderson"
     license: "CC0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASylvan_Terrace_Jumel_HD_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/jumel-terrace-edgecombe/4.webp
     alt: "555 Edgecombe Avenue at W 160th Street"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A555_Edgecombe_Avenue_from_north.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2212
   - src: /images/areas/jumel-terrace-edgecombe/5.webp
     alt: "Roger Morris Park with 555 Edgecombe Avenue behind"
     credit: "Epicgenius"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_Apr_2026_49.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/jumel-terrace-edgecombe/6.webp
     alt: "Row houses at 439-451 W 162nd Street in the Jumel Terrace Historic District"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJumel_Terrace_Historic_District_439-451_West_162nd_Street.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1622
   - src: /images/areas/jumel-terrace-edgecombe/7.webp
     alt: "The Alianza Dominicana \"Triangle\" Building on St. Nicholas Avenue"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AAlianza_Domicana_Building_from_west.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1405
 ---
 
 The Morris-Jumel Mansion at 65 Jumel Terrace anchors this corner of Washington Heights. It is a short block that runs between W 160th and 162nd Sts, one block east of St. Nicholas Ave and one block west of Edgecombe Ave. Built around 1765, the mansion served as George Washington's headquarters in 1776, and Wikipedia calls it Manhattan's oldest surviving house. As of October 28, 2026, the museum's website says the mansion is temporarily closed to tours, with Roger Morris Park open daily 10 a.m. to 5 p.m. and a guided Saturday walking tour offered during the closure.

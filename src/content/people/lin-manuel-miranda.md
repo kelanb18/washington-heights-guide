@@ -20,6 +20,9 @@ image:
   credit: "Steve Jurvetson"
   license: "CC BY 2.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Lin-Manuel_Miranda_in_Hamilton.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+  width: 1600
+  height: 1245
 ---
 
 Lin-Manuel Miranda is a Hudson Heights resident. According to StreetEasy, in 2017 he and his wife, Vanessa Nadal, bought a pair of co-op units at Castle Village, the 1939 complex of five towers on Cabrini Boulevard overlooking the Hudson. StreetEasy also notes that Fort Tryon Park, a few blocks north, is a long-time favorite of his.

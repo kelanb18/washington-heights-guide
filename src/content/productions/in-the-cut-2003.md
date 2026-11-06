@@ -14,6 +14,9 @@ image:
   credit: "Jmccabe371"
   license: "CC BY-SA 3.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Little_Red_Lighthouse_(Jeffrey's_Hook_Lighthouse)_01.JPG"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+  width: 1600
+  height: 1200
 ---
 
 Wikipedia's Little Red Lighthouse article says In the Cut features the lighthouse as a motif and as a filming location, citing Michael Rockland's book on the George Washington Bridge. The rest of the film was shot elsewhere in the city. I did not independently find which scenes were shot at the lighthouse.

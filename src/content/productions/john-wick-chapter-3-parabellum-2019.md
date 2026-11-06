@@ -17,6 +17,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_lobby_south_wall.jpg"
+  width: 1600
+  height: 1188
 ---
 
 Atlas of Wonders says the filmmakers used the United Palace's exterior, lobby and auditorium, and that some backstage rooms were filmed at another location. The United Palace's own site lists John Wick: Chapter 3 - Parabellum, with Keanu Reeves, among its film and TV productions. Atlas also says the theater reappears as the Ballerina theater in the 2025 spin-off, which I did not separately verify.
