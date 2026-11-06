@@ -25,22 +25,34 @@ image:
   credit: "Bohemian Baltimore"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_04.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1200
 gallery:
   - src: /images/listings/golan-heights/2.webp
     alt: "Golan Heights restaurant on Amsterdam Avenue"
     credit: "Bohemian Baltimore"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_05.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
   - src: /images/listings/golan-heights/3.webp
     alt: "Golan Heights restaurant lit up at night on Amsterdam Avenue"
     credit: "Bohemian Baltimore"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_01.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
   - src: /images/listings/golan-heights/4.webp
     alt: "The Golan Heights storefront sign on Amsterdam Avenue"
     credit: "Bohemian Baltimore"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AGolan_Heights_restaurant_06.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
 ---
 
 ## What it is

@@ -22,22 +22,34 @@ image:
   credit: "ajay_suresh"
   license: "CC BY 2.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Malcolm_X_&_Dr_Betty_Shabazz_Memorial_and_Educational_Center_(51241365958).jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+  width: 1600
+  height: 900
 gallery:
   - src: /images/listings/malcolm-x-and-dr-betty-shabazz-memorial-center/1.webp
     alt: "The restored Audubon Ballroom facade with Columbia's research building behind"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Audubon_Ballroom_and_Lasker_Biomedical_Research_Building.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 898
   - src: /images/listings/malcolm-x-and-dr-betty-shabazz-memorial-center/2.webp
     alt: "Neptune statue and entrance on the former Audubon Ballroom"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Audubon_Ballroom_Neptune_statue_and_entrance.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 2133
   - src: /images/listings/malcolm-x-and-dr-betty-shabazz-memorial-center/3.webp
     alt: "Close-up of the Neptune figure on the Audubon Ballroom facade"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Audubon_Ball_Neptune_statue_close-up.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1308
 ---
 
 ## What it is

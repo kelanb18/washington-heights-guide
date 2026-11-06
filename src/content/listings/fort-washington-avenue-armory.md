@@ -23,27 +23,41 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1043
 gallery:
   - src: /images/listings/fort-washington-avenue-armory/2.webp
     alt: "The entrance of the Fort Washington Avenue Armory"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory_entrance.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1323
   - src: /images/listings/fort-washington-avenue-armory/3.webp
     alt: "The Armory seen across Fort Washington Avenue and W 169th Street"
     credit: "Jim.henderson"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFt_Wash_Armory_no_jeh.JPG"
+    width: 1600
+    height: 1363
   - src: /images/listings/fort-washington-avenue-armory/4.webp
     alt: "An indoor track meet on the banked track inside the Armory"
     credit: "Steven Pisano"
     license: "CC BY 2.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AIndoor_Track_and_Field_-_Jim_Mitchell_Invitational_at_the_Armory.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+    width: 1600
+    height: 1068
   - src: /images/listings/fort-washington-avenue-armory/5.webp
     alt: "Banners and decorative details on the Armory facade"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Fort_Washington_Armory_banners_and_decoration.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1484
 ---
 
 ## What it is

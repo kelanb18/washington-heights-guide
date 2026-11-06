@@ -15,6 +15,9 @@ image:
   credit: "GK tramrunner RU"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AThe_Cloisters_in_New_York_%28distant_view%29.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 900
 ---
 
 Wikipedia notes that in 1948 director Maya Deren used the Cloisters' ramparts as a backdrop for her experimental short Meditation on Violence. It is a brief, arty entry but one of the earliest documented film uses of the Fort Tryon site.

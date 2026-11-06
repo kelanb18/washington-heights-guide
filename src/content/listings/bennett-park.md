@@ -22,27 +22,42 @@ image:
   credit: "Kidfly182"
   license: "CC BY 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Bennett_Park_2026.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by/4.0/"
+  width: 1080
+  height: 810
 gallery:
   - src: /images/listings/bennett-park/1.webp
     alt: "The marker for Manhattan's highest natural point in Bennett Park"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighest_point_in_Manhattan_Bennett_Park_Hudson_Heights_composite.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1329
+    height: 1017
   - src: /images/listings/bennett-park/2.webp
     alt: "Memorial marking the site of Fort Washington on the wall of Bennett Park"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AFort_Washington_memorial_Bennett_Park.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/bennett-park/3.webp
     alt: "A jazz band performing for a crowd in Bennett Park"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2022_Jazz_band_at_Bennett_Park.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1296
   - src: /images/listings/bennett-park/4.webp
     alt: "View south over Bennett Park from an apartment on its north side"
     credit: "David Fass"
     license: "CC BY-SA 3.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ABennett_Park.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

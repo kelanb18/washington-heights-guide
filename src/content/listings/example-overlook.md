@@ -20,12 +20,14 @@ image:
   credit: "EXAMPLE photographer"
   license: "CC BY-SA 4.0"
   sourceUrl: https://example.com/photos/example-overlook
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
 gallery:
   - src: src/assets/example-photo.svg
     alt: "A second placeholder drawing labeled EXAMPLE, still not a real photograph."
     credit: "EXAMPLE photographer"
     license: "CC BY-SA 4.0"
     sourceUrl: https://example.com/photos/example-overlook
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
 ---
 
 > This is an example listing. It does not describe a real park, museum, or landmark. The address is a placeholder, and `priceLevel` is omitted on purpose.

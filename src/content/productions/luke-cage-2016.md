@@ -18,6 +18,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2018_United_Palace_tour_01.view_from_the_stage.jpg"
+  width: 1600
+  height: 1382
 ---
 
 Untapped New York's location guide says the fictional Genghis Connie's is really a corner at 171st St and Broadway in Washington Heights, which appears as La Dinastia Restaurant. It says an apartment building was dressed with signs reading 150th St but is really 620 W 172nd St, and that the theater fight with Diamondback was shot at the United Palace. The show is set in Harlem, so these are Washington Heights doubling for Harlem. Wikipedia also lists the show among productions filmed at the United Palace.

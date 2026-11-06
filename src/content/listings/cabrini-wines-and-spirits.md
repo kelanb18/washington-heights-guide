@@ -23,6 +23,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:831_West_181st_Street_store_facade.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1122
 ---
 
 ## What it is

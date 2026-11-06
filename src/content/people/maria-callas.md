@@ -15,12 +15,17 @@ image:
   credit: "CBS Television"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMaria_Callas_1958.jpg"
+  width: 1600
+  height: 1595
 gallery:
   - src: /images/people/maria-callas/2.webp
     alt: "Maria Callas acknowledging applause after a concert in Amsterdam, 1959"
     credit: "Joop van Bilsen / Anefo"
     license: "CC BY-SA 2.5"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMaria_Callas_1959_Amsterdam.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.5/"
+    width: 626
+    height: 822
 ---
 
 Wikipedia says the opera singer was born in New York in 1923 to Greek parents and that, when she was four, her father opened his own pharmacy and settled the family on 192nd Street in Washington Heights, where she grew up. NYPL's Fort Washington Library page lists Callas among its notable past users.

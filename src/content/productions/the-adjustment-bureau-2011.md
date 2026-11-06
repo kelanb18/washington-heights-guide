@@ -15,6 +15,9 @@ image:
   credit: "Jose olivares"
   license: "CC BY-SA 3.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Fort_Tryon_Park_Entrance.JPG"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+  width: 1280
+  height: 853
 ---
 
 DNAinfo reported in March 2011 that the stars shot scenes in Fort Tryon Park in 2009, and that the park's New Leaf Cafe was offering a free glass of wine for movie-ticket stubs that month. The report does not say which scenes or where in the park, so the local tie is documented but unspecific.

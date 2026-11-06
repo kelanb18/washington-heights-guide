@@ -16,17 +16,25 @@ image:
   credit: "Unknown author"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AMother_Cabrini.jpg"
+  width: 1088
+  height: 1375
 gallery:
   - src: /images/people/frances-cabrini/2.webp
     alt: "The St. Frances Xavier Cabrini Shrine on Fort Washington Avenue"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Xavier_Cabrini_Shrine_from_Cabrini_Boulevard.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1220
   - src: /images/people/frances-cabrini/3.webp
     alt: "Interior of the Cabrini Shrine"
     credit: "Oliveoil05"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ASt._Frances_Cabrini_Shrine_Interior.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1536
+    height: 2048
 ---
 
 The St. Frances Cabrini Shrine's website says the shrine is built on land Mother Cabrini purchased herself in 1899, and describes it as the only U.S. shrine where her major relics can be venerated. Her feast day is November 13. The shrine has a chapel, a museum and exhibits on her work with immigrants and orphans.

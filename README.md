@@ -288,9 +288,11 @@ Listings, areas, people, and productions can carry an optional `image`, and list
 | `alt` | What a person sees. At least 8 characters. |
 | `credit` | Who made the picture. Printed beside it. |
 | `license` | Short name, such as `CC BY-SA 4.0` or `Public domain`. |
+| `licenseUrl` | Optional deed for that license. When set, the license name links here. |
 | `sourceUrl` | The page the picture came from. The credit links here. Required so a Creative Commons picture stays attributed. |
+| `width`, `height` | Optional pixel size. Pages use them so the picture does not shift the layout as it loads. |
 
-A detail page shows the hero when `image` is set. Cards show that photograph as a thumbnail. The credit and license stay visible under the picture, including on the thumbnail. A page with no `image` shows a monogram on a solid brand color instead, so the card and the top of the page are not an empty box. Reverend Ike uses that monogram: the Commons file paired with his name shows the United Palace, not him.
+A detail page shows the hero when `image` is set, then any `gallery` frames. Cards show that photograph as a thumbnail. The credit links to `sourceUrl`, and the license name links to `licenseUrl` when that field is set. A listing with no `image` uses its area’s photograph and says so, or a monogram when the area has no photograph either. Reverend Ike uses that monogram: the Commons file paired with his name shows the United Palace, not him.
 
 Do not add a picture you cannot credit. The repo ships one placeholder drawing, `src/assets/example-photo.svg`, on the EXAMPLE overlook and the EXAMPLE production. It is not a photograph. Photographs in `public/images/<collection>/<slug>.webp` are the credited files. `/filmed-here/` opens with a 2022 photograph of movie trucks on W 187th St in Hudson Heights (Beyond My Ken, CC BY-SA 4.0).
 

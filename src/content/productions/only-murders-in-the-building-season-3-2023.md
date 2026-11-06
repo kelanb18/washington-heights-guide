@@ -15,6 +15,8 @@ image:
   credit: "Beyond My Ken"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_dome.jpg"
+  width: 1280
+  height: 960
 ---
 
 Untapped New York says the theater scenes in episode 1 of season 3, including the sweeping shot of the gilded auditorium and the red-carpeted lobby, were shot at the United Palace in Washington Heights. The rest of the show uses Upper West Side and other locations. Wikipedia's United Palace article also lists the series among productions filmed or set there.

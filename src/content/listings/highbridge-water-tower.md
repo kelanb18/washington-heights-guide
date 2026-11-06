@@ -20,27 +20,42 @@ image:
   credit: "Jsobel123"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Highbridge_Water_Tower,_NYC.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1280
+  height: 960
 gallery:
   - src: /images/listings/highbridge-water-tower/1.webp
     alt: "The granite Highbridge Water Tower rising above the trees of Highbridge Park"
     credit: "Jsobel123"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Water_Tower%2C_NYC.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/highbridge-water-tower/2.webp
     alt: "Pipes and stairs inside the Highbridge Water Tower"
     credit: "RoySmith"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Tower_pipes_and_stairs.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/highbridge-water-tower/3.webp
     alt: "The iron spiral staircase inside the Highbridge Water Tower"
     credit: "Equipe C'est N'est Pas Une Pipe (Wikis Take Manhattan)"
     license: "CC BY-SA 3.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AInterior_spiral_staircase_%282%29%2C_Highbridge_Water_Tower%2C_Manhattan%2C_2008-10-04.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+    width: 1600
+    height: 1200
   - src: /images/listings/highbridge-water-tower/4.webp
     alt: "The High Bridge and Harlem River seen from the top of the Highbridge Water Tower"
     credit: "Jim.henderson"
     license: "CC BY 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHigh_Bridge_from_Tower_2023_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/"
+    width: 1600
+    height: 2400
 ---
 
 ## What it is

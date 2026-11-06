@@ -21,6 +21,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_Highbridge_Park.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1012
 ---
 
 ## What it is

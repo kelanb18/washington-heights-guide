@@ -27,7 +27,13 @@ export const creditedImageSchema = z
       .min(2)
       .max(60)
       .describe('License name, such as "CC BY-SA 4.0" or "Public domain".'),
+    licenseUrl: z
+      .httpUrl()
+      .optional()
+      .describe('Deed for the license. The license name links here when this is set.'),
     sourceUrl: z.httpUrl().describe('Page the picture came from. The credit links here.'),
+    width: z.number().int().positive().max(8000).optional().describe('Pixel width, so the layout can reserve space.'),
+    height: z.number().int().positive().max(8000).optional().describe('Pixel height, so the layout can reserve space.'),
   })
   .describe('One photograph or drawing, with credit and a link to the source.');
 

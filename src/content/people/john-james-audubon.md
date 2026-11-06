@@ -15,12 +15,16 @@ image:
   credit: "John Syme"
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:John_James_Audubon_1826.jpg"
+  width: 1260
+  height: 1600
 gallery:
   - src: /images/people/john-james-audubon/1.webp
     alt: "Portrait of John James Audubon, 1826"
     credit: "John Syme"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AJohn_James_Audubon_1826.jpg"
+    width: 1600
+    height: 2032
 ---
 
 A local history site, Audubon Park Perspectives, says John James Audubon bought the Washington Heights property in 1841 and moved into the house he named Minnie's Land in May 1842. The estate lay just north of W 155th St near the Hudson River, and the house stood where 765 Riverside Drive is today. Audubon lived there until his death on January 27, 1851.

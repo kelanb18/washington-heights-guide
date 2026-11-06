@@ -16,6 +16,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Morris-Jumel_Mansion_from_south.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1200
 ---
 
 Wikipedia's Morris-Jumel Mansion article says Broad City filmed a scene at the mansion in 2019, citing a January 2019 New York Times article on the show's final season. The location-tracking site Homes Seen on TV also lists the mansion for Broad City (2019). Treat the year as the air date of that season; I did not find the actual shoot date or the episode.

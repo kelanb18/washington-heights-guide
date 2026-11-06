@@ -23,6 +23,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWest_187th_Street_shopping_street_Hudson_Heights.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 922
 ---
 
 ## What it is

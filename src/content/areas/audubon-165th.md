@@ -13,42 +13,64 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_Audubon_Ballroom_and_Lasker_Biomedical_Research_Building.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 898
 gallery:
   - src: /images/areas/audubon-165th/1.webp
     alt: "The restored Audubon Ballroom facade on Broadway at W 165th Street"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3A2014_Audubon_Ballroom_and_Lasker_Biomedical_Research_Building.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 898
   - src: /images/areas/audubon-165th/2.webp
     alt: "Columbia University Medical Center buildings on Broadway below W 168th Street"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AColumbia_University_Medical_Center_Buildings_on_Broadway_below_West_168th_Street.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/audubon-165th/3.webp
     alt: "Medical center buildings along W 168th Street"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AColumbia_University_Medical_Center_buildings_on_West_168th_Street.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1892
   - src: /images/areas/audubon-165th/4.webp
     alt: "NewYork-Presbyterian Hospital in Washington Heights"
     credit: "ajay_suresh"
     license: "CC BY 2.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ANewYork-Presbyterian_Hospital_%2851241932239%29.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+    width: 1600
+    height: 900
   - src: /images/areas/audubon-165th/5.webp
     alt: "Columbia's Russ Berrie Medical Science Pavilion near W 165th Street"
     credit: "ajay_suresh"
     license: "CC BY 2.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3ARuss_Berrie_Medical_Science_Pavilion_%2851240455337%29.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+    width: 1600
+    height: 1200
   - src: /images/areas/audubon-165th/6.webp
     alt: "Amsterdam Avenue looking north at W 164th Street"
     credit: "Jim.henderson"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AAmsterdam_Av_164_jeh.JPG"
+    width: 1600
+    height: 1700
   - src: /images/areas/audubon-165th/7.webp
     alt: "Columbia-Presbyterian Medical Center photographed by Berenice Abbott in 1937"
     credit: "Berenice Abbott"
     license: "Public domain"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AColumbia_Presbyterian_Medical_Center%2C_168th_Street_and_Broadway%2C_from_165th_Street_and_Riverside_Drive%2C_Manhattan_%28NYPL_b13668355-482622%29.jpg"
+    width: 1600
+    height: 1262
 ---
 
 This part of Washington Heights is defined by two big institutions. The first is the medical campus: NewYork-Presbyterian Hospital and Columbia University Irving Medical Center sit west of Broadway between W 165th and 168th Sts. The campus opened in 1928 as Columbia-Presbyterian, on the site of Hilltop Park, which was home to the New York Highlanders (later the Yankees) from 1903 to 1912, according to Wikipedia. The second is the Audubon Ballroom at 3940 Broadway, now the Malcolm X & Dr. Betty Shabazz Memorial and Educational Center, where Malcolm X was assassinated on February 21, 1965.

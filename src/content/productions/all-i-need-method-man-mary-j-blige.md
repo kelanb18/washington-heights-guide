@@ -16,6 +16,9 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Audubon_Terrace_Boricua_College_formerly_American_Geographic_Society_from_main_gate.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1182
 ---
 
 DNAinfo's roundup of the best NYC music videos says this video "was shot in Washington Heights, near the intersection of 155th Street and Broadway." That is the southern edge of the neighborhood. IMDb's filming-location entry for the video lists only "New York City, New York", so the 155th St detail rests on the DNAinfo piece alone.

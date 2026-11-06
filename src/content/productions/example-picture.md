@@ -15,6 +15,7 @@ image:
   credit: "EXAMPLE photographer"
   license: "CC BY-SA 4.0"
   sourceUrl: https://example.com/photos/example-picture
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
 example: true
 draft: true
 ---

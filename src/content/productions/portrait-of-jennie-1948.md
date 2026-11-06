@@ -16,6 +16,9 @@ image:
   credit: "Paweł Drozd (cropped by Beyond My Ken)"
   license: "CC BY-SA 3.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Cloisters_Hudson_River_crop.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+  width: 1600
+  height: 830
 ---
 
 Wikipedia says producer David O. Selznick insisted on filming actual locations, among them the Cloisters in New York City, which used it as the convent school (directed by William Dieterle). A reader comment on the Washington Heights NYC site recalls interior and exterior Cloisters scenes and a night scene overlooking the Hudson and Palisades; that is an unverified recollection and is not relied on here.

@@ -17,6 +17,9 @@ image:
   credit: "Petri Krohn"
   license: "CC BY-SA 3.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Hudson_Heights_Pinehurst_stairs.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
+  width: 1280
+  height: 960
 ---
 
 DNAinfo reported on May 3, 2013, citing State Sen. Adriano Espaillat's office, that the production would shoot on W 181st St between Cabrini Boulevard and Pinehurst Avenue that Saturday and Sunday, with Sunday's filming involving a simulated car crash and fake gunshots. Parking was restricted on nearby blocks, including W 187th St between Pinehurst and Fort Washington Ave (May 4) and W 181st St between Fort Washington Ave and Riverside Dr (May 5). This is an announcement of planned filming; I did not find a post-shoot account of which scenes made the final cut. Wikipedia-based indexes (via Movie Scene Map) also list Washington Heights as a location.

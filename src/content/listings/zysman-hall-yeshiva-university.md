@@ -22,22 +22,34 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AYeshiva_University_Zysman_Hall_from_northeast.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1020
 gallery:
   - src: /images/listings/zysman-hall-yeshiva-university/2.webp
     alt: "Detail of the east facade of Zysman Hall"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AYeshiva_University_Zysman_Hall_east_facade_southern_portion.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 967
   - src: /images/listings/zysman-hall-yeshiva-university/3.webp
     alt: "The center of Zysman Hall's east facade on Amsterdam Avenue"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AYeshiva_University_Zysman_Hall_east_facade_center_portion.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1564
   - src: /images/listings/zysman-hall-yeshiva-university/4.webp
     alt: "Zysman Hall seen from the south along Amsterdam Avenue"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AYeshiva_University_Zysman_Hall_from_south.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1458
 ---
 
 ## What it is

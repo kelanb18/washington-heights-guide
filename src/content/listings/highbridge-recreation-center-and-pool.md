@@ -24,22 +24,34 @@ image:
   credit: "Beyond My Ken"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_Highbridge_Park.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1600
+  height: 1012
 gallery:
   - src: /images/listings/highbridge-recreation-center-and-pool/2.webp
     alt: "The Highbridge swimming pool, empty in March, seen from the water tower"
     credit: "Jim.henderson"
     license: "CC BY 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_swimming_pool_from_Tower_2023_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/"
+    width: 1600
+    height: 1067
   - src: /images/listings/highbridge-recreation-center-and-pool/3.webp
     alt: "Highbridge Play Center seen from the south"
     credit: "Beyond My Ken"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_from_south.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1228
   - src: /images/listings/highbridge-recreation-center-and-pool/4.webp
     alt: "Front of Highbridge Play Center in front of the pool"
     credit: "Jim.henderson"
     license: "CC0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Play_Center_front_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/"
+    width: 1600
+    height: 1200
 ---
 
 ## What it is

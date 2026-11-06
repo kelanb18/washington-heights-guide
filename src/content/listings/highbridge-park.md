@@ -21,27 +21,42 @@ image:
   credit: "RoySmith"
   license: "CC BY-SA 4.0"
   sourceUrl: "https://commons.wikimedia.org/wiki/File:Highbridge_from_Highbridge_Park.jpg"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+  width: 1144
+  height: 1280
 gallery:
   - src: /images/listings/highbridge-park/1.webp
     alt: "The High Bridge seen from Highbridge Park on the Manhattan side"
     credit: "RoySmith"
     license: "CC BY-SA 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_from_Highbridge_Park.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
+    width: 1600
+    height: 1790
   - src: /images/listings/highbridge-park/2.webp
     alt: "Highbridge Park's wooded slope seen from the water tower"
     credit: "Jim.henderson"
     license: "CC BY 4.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHibridge_Pk_fr_Water_Tower_2023_jeh.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/"
+    width: 1600
+    height: 1067
   - src: /images/listings/highbridge-park/3.webp
     alt: "Graffiti-covered walls and highway supports in Highbridge Park, 2002"
     credit: "Futurebird at English Wikipedia"
     license: "CC BY 2.5"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AHighbridge_Park_2.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by/2.5/"
+    width: 600
+    height: 450
   - src: /images/listings/highbridge-park/4.webp
     alt: "View east from W 174th Street over the Harlem River and the Bronx"
     credit: "Shannon from New York"
     license: "CC BY-SA 2.0"
     sourceUrl: "https://commons.wikimedia.org/wiki/File%3AWashington_Heights_seen_from_174th_Street.jpg"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/"
+    width: 1600
+    height: 1065
 ---
 
 ## What it is

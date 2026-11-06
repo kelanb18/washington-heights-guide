@@ -13,6 +13,8 @@ image:
   credit: "While provided by the Bureau of Engraving and Printing, it is a Federal Reserve image."
   license: "Public domain"
   sourceUrl: "https://commons.wikimedia.org/wiki/File%3AAlan_Greenspan_color_photo_portrait.jpg"
+  width: 1600
+  height: 2108
 ---
 
 Wikipedia says he was born on March 6, 1926 in the Washington Heights neighborhood, grew up with his mother in his maternal grandparents' household, and attended George Washington High School from 1940 until June 1943, where he played clarinet and saxophone. He studied clarinet at Juilliard in 1943–44.

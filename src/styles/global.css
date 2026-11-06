@@ -761,10 +761,19 @@ main {
   color: #f7f1e6;
 }
 
-.photo-gallery {
+.photo.photo-gallery {
+  display: block;
+}
+
+.photo-gallery:not(.photo) {
   display: grid;
   gap: 1rem;
   margin-top: 1rem;
+}
+
+.photo-note {
+  display: block;
+  margin-top: 0.15rem;
 }
 
 .photo-credit {
@@ -1343,7 +1352,7 @@ ul.tag-line {
     gap: 1.5rem;
   }
 
-  .photo-gallery {
+  .photo-gallery:not(.photo) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
