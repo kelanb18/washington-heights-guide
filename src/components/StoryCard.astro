@@ -1,0 +1,44 @@
+---
+import type { CreditedImage } from '../lib/picture-schema';
+
+interface Props {
+  href: string;
+  kicker: string;
+  title: string;
+  description: string;
+  cover?: CreditedImage;
+  heading?: 'h2' | 'h3';
+  meta?: string;
+}
+
+const { href, kicker, title, description, cover, heading = 'h3', meta } = Astro.props;
+const Heading = heading;
+---
+
+<article class="guide-card">
+  {
+    cover && (
+      <a class="guide-cover" href={href}>
+        <img src={cover.src} alt={cover.alt} loading="eager" decoding="async" />
+      </a>
+    )
+  }
+  <a class="guide-body" href={href}>
+    <p class="kicker">{kicker}</p>
+    <Heading>{title}</Heading>
+    <p>{description}</p>
+    {meta && <p class="where">{meta}</p>}
+  </a>
+  {
+    cover && (
+      <p class="photo-credit guide-card-credit">
+        <a href={cover.sourceUrl} rel="noopener noreferrer" target="_blank">
+          {cover.credit}
+          <span class="sr-only"> (opens in a new tab)</span>
+        </a>
+        <span aria-hidden="true"> · </span>
+        <span>{cover.license}</span>
+      </p>
+    )
+  }
+</article>

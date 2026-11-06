@@ -761,7 +761,11 @@ main {
   color: #f7f1e6;
 }
 
-.photo-gallery {
+.photo.photo-gallery {
+  display: block;
+}
+
+.photo-gallery:not(.photo) {
   display: grid;
   gap: 1rem;
   margin-top: 1rem;
@@ -1010,14 +1014,44 @@ main {
 
 .hero-set {
   display: grid;
-  gap: 0.8rem;
+  gap: 0.9rem 0.75rem;
   grid-column: 1 / -1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.hero-set .photo img {
+.place-photo {
+  margin: 0;
+}
+
+.place-photo > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.place-photo img {
   width: 100%;
-  height: 9rem;
+  height: 8.5rem;
   object-fit: cover;
+  border: 1px solid var(--ink);
+}
+
+.place-photo-feature img {
+  height: auto;
+  max-height: 24rem;
+}
+
+.place-photo-label {
+  display: block;
+  margin-top: 0.4rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
 }
 
 .hero-pub {
@@ -1085,14 +1119,12 @@ main {
   padding: 0.4rem 0;
 }
 
-.flag-rule {
-  height: 4px;
-  background: linear-gradient(90deg, var(--flag-blue) 0 34%, var(--paper) 34% 66%, var(--flag-red) 66% 100%);
+.nav-list {
+  border-bottom: 1px solid var(--rule);
 }
 
 .sections ul {
-  overflow-x: auto;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
 }
 
 .chip {
@@ -1163,12 +1195,37 @@ html[data-theme='dark'] .open-badge.is-open {
 }
 
 .guide-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  padding: 1rem 1rem 1.1rem;
+  padding: 0 0 1rem;
   border: 1px solid var(--ink);
   background: var(--paper-deep);
+  overflow: hidden;
+}
+
+.guide-cover {
+  display: block;
+  color: inherit;
+}
+
+.guide-cover img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.guide-body {
+  display: block;
+  padding: 0.9rem 1rem 0;
+  color: inherit;
   text-decoration: none;
+}
+
+.guide-card-credit {
+  margin: 0.55rem 1rem 0;
 }
 
 .guide-card h2,
@@ -1263,6 +1320,14 @@ ul.tag-line {
   .hero-set {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+
+  .place-photo img {
+    height: 11rem;
+  }
+
+  .place-photo-feature img {
+    height: auto;
+  }
 }
 
 .section-note {
@@ -1343,7 +1408,7 @@ ul.tag-line {
     gap: 1.5rem;
   }
 
-  .photo-gallery {
+  .photo-gallery:not(.photo) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1357,6 +1422,27 @@ ul.tag-line {
   .facts {
     position: sticky;
     top: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .masthead-bar {
+    align-items: flex-end;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .wordmark {
+    font-size: 2.2rem;
+  }
+
+  .nav-list,
+  .sections ul {
+    gap: 0.05rem 0.8rem;
+  }
+
+  .nav-list a,
+  .sections a {
+    padding: 0.4rem 0;
   }
 }
 
