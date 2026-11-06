@@ -1,8 +1,9 @@
 ---
-import AttributedPhoto from '../components/AttributedPhoto.astro';
 import ListingEntry from '../components/ListingEntry.astro';
 import PersonEntry from '../components/PersonEntry.astro';
 import PlaceMap from '../components/PlaceMap.astro';
+import PlacePhoto from '../components/PlacePhoto.astro';
+import StoryCard from '../components/StoryCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { areaTree, loadAreas } from '../lib/areas';
 import { listingCounts } from '../lib/catalog';
@@ -12,11 +13,11 @@ import { collectTags, loadListings } from '../lib/listings';
 import { loadPeople } from '../lib/people';
 import { pinsFor } from '../lib/pins';
 import { loadProductions } from '../lib/productions';
+import { coverForArea, coverForGuide } from '../lib/covers';
 import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
-import { siteHeroes } from '../lib/site-heroes';
+import { siteFrames } from '../lib/site-heroes';
 
-const hero = siteHeroes[0];
-const moreHeroes = siteHeroes.slice(1);
+const [feature, ...moreFrames] = siteFrames;
 
 const listings = await loadListings();
 const areas = await loadAreas();
@@ -25,8 +26,7 @@ const productions = await loadProductions();
 const guides = await loadGuides();
 const pins = pinsFor(listings);
 const recent = [...listings].sort((a, b) => b.data.lastVerified.getTime() - a.data.lastVerified.getTime()).slice(0, 4);
-const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-const freshThisWeek = recent.filter((listing) => listing.data.lastVerified.getTime() >= weekAgo);
+const openings = listings.filter((listing) => listing.data.tags.includes('new-opening'));
 const roots = areaTree(areas);
 const counts = listingCounts(areas, listings);
 const picks = listings.filter((listing) => listing.data.pick);
@@ -77,7 +77,13 @@ if (people.length > 0) {
 }
 ---
 
-<BaseLayout title="The Heights — Best spots in Washington Heights, NYC" description={defaultDescription} image={hero.src} imageAlt={hero.alt} jsonLd={jsonLd}>
+<BaseLayout
+  title="The Heights — Best spots in Washington Heights, NYC"
+  description={defaultDescription}
+  image={feature.picture.src}
+  imageAlt={feature.picture.alt}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
     <section class="hero hero-pub">
       <div>
@@ -91,12 +97,16 @@ if (people.length > 0) {
           <a class="button button-ghost" href={href('/places')}>All places</a>
         </p>
       </div>
-      <AttributedPhoto picture={hero} variant="hero" />
-      <div class="hero-set">
-        {moreHeroes.map((picture) => (
-          <AttributedPhoto picture={picture} variant="gallery" />
-        ))}
-      </div>
+      <PlacePhoto picture={feature.picture} label={feature.label} href={href(feature.href)} feature />
+      <ul class="hero-set">
+        {
+          moreFrames.map((frame) => (
+            <li>
+              <PlacePhoto picture={frame.picture} label={frame.label} href={href(frame.href)} />
+            </li>
+          ))
+        }
+      </ul>
     </section>
 
     <ul class="principles">
@@ -122,15 +132,20 @@ if (people.length > 0) {
       {
         guides.length > 0 ? (
           <ul class="guide-grid">
-            {guides.slice(0, 4).map((guide) => (
-              <li>
-                <a class="guide-card" href={href(`/best/${guide.id}`)}>
-                  <p class="kicker">{guide.data.picks.length} places</p>
-                  <h3>{guide.data.title}</h3>
-                  <p>{guide.data.description}</p>
-                </a>
-              </li>
-            ))}
+            {guides.slice(0, 4).map((guide) => {
+              const cover = coverForGuide(guide, listings, areas);
+              return (
+                <li>
+                  <StoryCard
+                    href={href(`/best/${guide.id}`)}
+                    kicker={`${guide.data.picks.length} places`}
+                    title={guide.data.title}
+                    description={guide.data.description}
+                    cover={cover?.picture}
+                  />
+                </li>
+              );
+            })}
           </ul>
         ) : (
           <p class="empty">Guides show up here after a list has been checked. Nothing is ranked until then.</p>
@@ -148,11 +163,13 @@ if (people.length > 0) {
           <ul class="guide-grid">
             {roots.map((node) => (
               <li>
-                <a class="guide-card" href={href(`/areas/${node.area.id}`)}>
-                  <p class="kicker">{counts[node.area.id] ?? 0} places</p>
-                  <h3>{node.area.data.name}</h3>
-                  <p>{node.area.data.summary}</p>
-                </a>
+                <StoryCard
+                  href={href(`/areas/${node.area.id}`)}
+                  kicker={`${counts[node.area.id] ?? 0} places`}
+                  title={node.area.data.name}
+                  description={node.area.data.summary}
+                  cover={coverForArea(node.area, areas, listings)}
+                />
               </li>
             ))}
           </ul>
@@ -163,18 +180,33 @@ if (people.length > 0) {
       {pins.length > 0 && <PlaceMap pins={pins} label="Places in Washington Heights" />}
     </section>
 
-    <section aria-labelledby="new-heading">
+    <section aria-labelledby="openings-heading">
       <div class="section-head">
-        <h2 id="new-heading">New this week</h2>
+        <h2 id="openings-heading">New in the neighborhood</h2>
         <a href={href('/places')}>All places</a>
       </div>
       <p class="section-note">
-        {
-          freshThisWeek.length > 0
-            ? 'Checked in the last seven days.'
-            : 'Nothing was rechecked in the last seven days. These are the latest dates on the list.'
-        }
+        Businesses that just opened. A page we published recently is not a new business. A sale, a closing, or plans for a place will be noted here once there is a source to cite.
       </p>
+      {
+        openings.length > 0 ? (
+          <ul class="entries">
+            {openings.map((listing) => (
+              <ListingEntry listing={listing} heading="h3" />
+            ))}
+          </ul>
+        ) : (
+          <p class="empty">No newly opened businesses are on the list yet.</p>
+        )
+      }
+    </section>
+
+    <section aria-labelledby="new-heading">
+      <div class="section-head">
+        <h2 id="new-heading">Recently checked</h2>
+        <a href={href('/places')}>All places</a>
+      </div>
+      <p class="section-note">The latest dates an address and hours were verified. These are not new businesses.</p>
       {
         recent.length > 0 ? (
           <ul class="entries">

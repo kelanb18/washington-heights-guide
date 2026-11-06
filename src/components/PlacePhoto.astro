@@ -1,0 +1,27 @@
+---
+import type { CreditedImage } from '../lib/picture-schema';
+
+interface Props {
+  picture: CreditedImage;
+  label: string;
+  href: string;
+  feature?: boolean;
+}
+
+const { picture, label, href, feature = false } = Astro.props;
+---
+
+<figure class:list={['place-photo', { 'place-photo-feature': feature }]}>
+  <a href={href}>
+    <img src={picture.src} alt={picture.alt} loading="eager" decoding="async" />
+    <span class="place-photo-label">{label}</span>
+  </a>
+  <figcaption class="photo-credit">
+    <a href={picture.sourceUrl} rel="noopener noreferrer" target="_blank">
+      {picture.credit}
+      <span class="sr-only"> (opens in a new tab)</span>
+    </a>
+    <span aria-hidden="true"> · </span>
+    <span>{picture.license}</span>
+  </figcaption>
+</figure>
