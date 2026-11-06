@@ -1,32 +1,28 @@
 ---
 import AttributedPhoto from './AttributedPhoto.astro';
-import PhotoPlaceholder from './PhotoPlaceholder.astro';
 import { findArea } from '../lib/catalog';
 import { connectionInfo } from '../lib/connections';
 import { loadAreas } from '../lib/areas';
 import type { Person } from '../lib/people';
+import type { CreditedImage } from '../lib/picture-schema';
 import { href } from '../lib/site';
 
 interface Props {
   person: Person;
+  photo?: CreditedImage | null;
   heading?: 'h2' | 'h3';
 }
 
-const { person, heading = 'h2' } = Astro.props;
+const { person, photo: photoOverride, heading = 'h2' } = Astro.props;
 const data = person.data;
+const photo = photoOverride === undefined ? data.image : photoOverride;
 const connection = connectionInfo[data.connection];
 const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class:list={['entry', 'has-photo']}>
-  {
-    data.image ? (
-      <AttributedPhoto picture={data.image} variant="thumb" />
-    ) : (
-      <PhotoPlaceholder name={data.name} tone="person" label="Portrait" />
-    )
-  }
+<li class:list={['entry', { 'has-photo': Boolean(photo) }]}>
+  {photo && <AttributedPhoto picture={photo} variant="thumb" />}
   <div>
     <p class="kicker">
       <a href={`${href('/people')}#${data.connection}`}>{connection.label}</a>

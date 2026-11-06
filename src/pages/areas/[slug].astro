@@ -15,9 +15,9 @@ import { loadListings } from '../../lib/listings';
 import { loadPeople } from '../../lib/people';
 import { pinsFor } from '../../lib/pins';
 import { loadProductions } from '../../lib/productions';
+import { coverForListing } from '../../lib/covers';
 import { referenceId } from '../../lib/refs';
-import { shareableSrc } from '../../lib/pictures';
-import { siteHeroFor } from '../../lib/site-heroes';
+import { claimFirstPicture, reservePicture, shareableSrc } from '../../lib/pictures';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
@@ -35,8 +35,8 @@ if (!area) {
 
 const listings = listingsInArea(area.id, areas, await loadListings());
 const people = peopleInArea(area.id, areas, await loadPeople());
-const siteHero = siteHeroFor(area.id);
-const areaGallery = area.data.image ? [area.data.image, ...area.data.gallery] : area.data.gallery;
+const areaHero = area.data.image ?? area.data.gallery[0];
+const areaGallery = area.data.image ? area.data.gallery : area.data.gallery.slice(1);
 const areaIds = descendantIds(area.id, areas);
 const productions = (await loadProductions()).filter((production) => {
   const id = referenceId(production.data.area);
@@ -63,6 +63,28 @@ const data = area.data;
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
+
+const usedPictures = new Set<string>();
+if (areaHero) reservePicture(areaHero, usedPictures);
+for (const picture of areaGallery) reservePicture(picture, usedPictures);
+const listingPhotos = new Map(
+  listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
+);
+const personPhotos = new Map(
+  people.map((person) => [
+    person.id,
+    claimFirstPicture(
+      [...(person.data.image ? [person.data.image] : []), ...person.data.gallery],
+      usedPictures,
+    ) ?? null,
+  ]),
+);
+const productionPhotos = new Map(
+  productions.map((production) => [
+    production.id,
+    claimFirstPicture(production.data.image ? [production.data.image] : [], usedPictures) ?? null,
+  ]),
+);
 
 const pageUrl = absoluteUrl(site, `/areas/${area.id}`);
 const parent = ancestors.at(-1);
@@ -126,8 +148,8 @@ if (people.length > 0) {
   title={`${data.name} — Washington Heights · ${siteName}`}
   description={data.summary}
   ogType="article"
-  image={shareableSrc(siteHero.src)}
-  imageAlt={siteHero.alt}
+  image={shareableSrc(areaHero?.src)}
+  imageAlt={areaHero?.alt}
   noindex={data.example || data.draft}
   jsonLd={jsonLd}
 >
@@ -167,7 +189,7 @@ if (people.length > 0) {
       {data.draft && !data.example && <p class="example-line">Draft. Visible in local development only.</p>}
     </header>
 
-    <PhotoSet image={siteHero} gallery={areaGallery} mark={data.name} tone="area" markLabel="Area" />
+    <PhotoSet image={areaHero} gallery={areaGallery} />
 
     {
       pins.length > 0 && (
@@ -245,7 +267,7 @@ if (people.length > 0) {
         listings.length > 0 ? (
           <ul class="entries">
             {listings.map((listing) => (
-              <ListingEntry listing={listing} heading="h3" />
+              <ListingEntry listing={listing} photo={listingPhotos.get(listing.id)} heading="h3" />
             ))}
           </ul>
         ) : (
@@ -270,7 +292,7 @@ if (people.length > 0) {
         people.length > 0 ? (
           <ul class="entries">
             {people.map((person) => (
-              <PersonEntry person={person} heading="h3" />
+              <PersonEntry person={person} photo={personPhotos.get(person.id)} heading="h3" />
             ))}
           </ul>
         ) : (
@@ -306,7 +328,11 @@ if (people.length > 0) {
         productions.length > 0 ? (
           <ul class="entries">
             {productions.map((production) => (
-              <ProductionEntry production={production} heading="h3" />
+              <ProductionEntry
+                production={production}
+                photo={productionPhotos.get(production.id)}
+                heading="h3"
+              />
             ))}
           </ul>
         ) : (

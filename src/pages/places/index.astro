@@ -4,10 +4,12 @@ import AttributedPhoto from '../../components/AttributedPhoto.astro';
 import ListingEntry from '../../components/ListingEntry.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { placesHero } from '../../lib/site-heroes';
+import { coverForListing } from '../../lib/covers';
 import { areaTree, hasNestedAreas, loadAreas } from '../../lib/areas';
 import { listingCounts } from '../../lib/catalog';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
+import { reservePicture } from '../../lib/pictures';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 import { categories, categoryInfo } from '../../lib/taxonomy';
 
@@ -16,6 +18,11 @@ const areas = await loadAreas();
 const tree = areaTree(areas);
 const counts = listingCounts(areas, listings);
 const nested = hasNestedAreas(tree);
+const usedPictures = new Set<string>();
+reservePicture(placesHero, usedPictures);
+const listingPhotos = new Map(
+  listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
+);
 const description =
   'Every place currently on The Heights, a curated guide to Washington Heights, NYC, grouped by category.';
 
@@ -97,7 +104,7 @@ const jsonLd = [
             </div>
             <ul class="entries">
               {items.map((listing) => (
-                <ListingEntry listing={listing} heading="h3" />
+                <ListingEntry listing={listing} photo={listingPhotos.get(listing.id)} heading="h3" />
               ))}
             </ul>
           </section>

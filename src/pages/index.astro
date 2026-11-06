@@ -9,15 +9,17 @@ import { areaTree, loadAreas } from '../lib/areas';
 import { listingCounts } from '../lib/catalog';
 import { loadGuides } from '../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
-import { collectTags, loadListings } from '../lib/listings';
+import { loadListings } from '../lib/listings';
 import { loadPeople } from '../lib/people';
 import { pinsFor } from '../lib/pins';
 import { loadProductions } from '../lib/productions';
-import { coverForArea, coverForGuide } from '../lib/covers';
-import { absoluteUrl, defaultDescription, href, siteName } from '../lib/site';
-import { siteFrames } from '../lib/site-heroes';
+import { coverForArea, coverForGuide, coverForListing } from '../lib/covers';
+import { absoluteUrl, href, siteName } from '../lib/site';
+import { claimFirstPicture, reservePicture } from '../lib/pictures';
+import { homeFrames } from '../lib/site-heroes';
+import { categories, categoryInfo } from '../lib/taxonomy';
 
-const [feature, ...moreFrames] = siteFrames;
+const [feature, ...moreFrames] = homeFrames;
 
 const listings = await loadListings();
 const areas = await loadAreas();
@@ -25,12 +27,18 @@ const people = await loadPeople();
 const productions = await loadProductions();
 const guides = await loadGuides();
 const pins = pinsFor(listings);
-const recent = [...listings].sort((a, b) => b.data.lastVerified.getTime() - a.data.lastVerified.getTime()).slice(0, 4);
 const openings = listings.filter((listing) => listing.data.tags.includes('new-opening'));
+const openingIds = new Set(openings.map((listing) => listing.id));
+const recent = [...listings]
+  .filter((listing) => !openingIds.has(listing.id))
+  .sort((a, b) => b.data.lastVerified.getTime() - a.data.lastVerified.getTime())
+  .slice(0, 4);
 const roots = areaTree(areas);
 const counts = listingCounts(areas, listings);
 const picks = listings.filter((listing) => listing.data.pick);
-const tags = collectTags(listings);
+const categoryCounts = Object.fromEntries(
+  categories.map((category) => [category, listings.filter((listing) => listing.data.category === category).length]),
+);
 const site = Astro.site;
 
 if (!site) {
@@ -42,9 +50,37 @@ const featured = (picks.length > 0 ? picks : listings).map((listing) => ({
   name: listing.data.name,
   url: absoluteUrl(site, `/places/${listing.id}`),
 }));
+const usedPictures = new Set<string>();
+for (const frame of homeFrames) reservePicture(frame.picture, usedPictures);
+const openingCards = openings.map((listing) => ({
+  listing,
+  photo: coverForListing(listing, usedPictures) ?? null,
+}));
+const recentCards = recent.map((listing) => ({
+  listing,
+  photo: coverForListing(listing, usedPictures) ?? null,
+}));
+const peopleCards = people.slice(0, 4).map((person) => ({
+  person,
+  photo:
+    claimFirstPicture(
+      [...(person.data.image ? [person.data.image] : []), ...person.data.gallery],
+      usedPictures,
+    ) ?? null,
+}));
+const guideCards = guides.slice(0, 4).map((guide) => ({
+  guide,
+  cover: coverForGuide(guide, listings, areas, usedPictures)?.picture,
+}));
+const areaCards = roots.map((node) => ({
+  node,
+  cover: coverForArea(node.area, areas, listings, usedPictures)?.picture,
+}));
+const description =
+  'An independent, locally researched guide to Washington Heights, NYC: restaurants, neighborhood walks, history, and film locations, with checked details, maps, and cited sources.';
 
 const jsonLd: unknown[] = [
-  websiteJsonLd(homeUrl, defaultDescription),
+  websiteJsonLd(homeUrl, description),
   breadcrumbJsonLd([{ name: siteName, url: homeUrl }]),
 ];
 
@@ -78,8 +114,8 @@ if (people.length > 0) {
 ---
 
 <BaseLayout
-  title="The Heights — Best spots in Washington Heights, NYC"
-  description={defaultDescription}
+  title="Washington Heights Guide: Food, Places & Neighborhoods · The Heights"
+  description={description}
   image={feature.picture.src}
   imageAlt={feature.picture.alt}
   jsonLd={jsonLd}
@@ -87,12 +123,13 @@ if (people.length > 0) {
   <div class="wrap">
     <section class="hero hero-pub">
       <div>
-        <p class="kicker">Washington Heights · West 155th to Dyckman</p>
-        <h1>The neighborhood, edited.</h1>
+        <p class="kicker">A local guide to Upper Manhattan</p>
+        <h1>Washington Heights, explored.</h1>
         <p class="lede">
-          A local guide to where to eat, what to walk to, and who made the hill what it is. Short lists. Checked details. Rankings that are not for sale.
+          Find neighborhood restaurants, places worth the walk, and the stories behind the streets. Locally researched, source-linked, and independent.
         </p>
         <p class="hero-actions">
+          <a class="button button-ghost" href={href('/search')}>Search the guide</a>
           <a class="button" href={href('/best')}>Best of</a>
           <a class="button button-ghost" href={href('/places')}>All places</a>
         </p>
@@ -126,31 +163,45 @@ if (people.length > 0) {
 
     <section aria-labelledby="best-heading">
       <div class="section-head">
-        <h2 id="best-heading">Best of</h2>
+        <h2 id="best-heading">Best of Washington Heights</h2>
         <a href={href('/best')}>All guides</a>
       </div>
       {
-        guides.length > 0 ? (
+        guideCards.length > 0 ? (
           <ul class="guide-grid">
-            {guides.slice(0, 4).map((guide) => {
-              const cover = coverForGuide(guide, listings, areas);
-              return (
-                <li>
-                  <StoryCard
-                    href={href(`/best/${guide.id}`)}
-                    kicker={`${guide.data.picks.length} places`}
-                    title={guide.data.title}
-                    description={guide.data.description}
-                    cover={cover?.picture}
-                  />
-                </li>
-              );
-            })}
+            {guideCards.map(({ guide, cover }) => (
+              <li>
+                <StoryCard
+                  href={href(`/best/${guide.id}`)}
+                  kicker={`${guide.data.picks.length} places`}
+                  title={guide.data.title}
+                  description={guide.data.description}
+                  cover={cover}
+                />
+              </li>
+            ))}
           </ul>
         ) : (
           <p class="empty">Guides show up here after a list has been checked. Nothing is ranked until then.</p>
         )
       }
+    </section>
+
+    <section aria-labelledby="category-heading">
+      <div class="section-head">
+        <h2 id="category-heading">Explore by category</h2>
+        <a href={href('/places')}>Full directory</a>
+      </div>
+      <ul class="tag-line">
+        {categories.map((category) => (
+          <li>
+            <a href={href(`/category/${category}`)}>
+              {categoryInfo[category].plural}
+              <span class="sr-only"> ({categoryCounts[category]})</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <section aria-labelledby="neighborhood-heading">
@@ -159,16 +210,16 @@ if (people.length > 0) {
         <a href={href('/areas')}>All areas</a>
       </div>
       {
-        roots.length > 0 ? (
+        areaCards.length > 0 ? (
           <ul class="guide-grid">
-            {roots.map((node) => (
+            {areaCards.map(({ node, cover }) => (
               <li>
                 <StoryCard
                   href={href(`/areas/${node.area.id}`)}
                   kicker={`${counts[node.area.id] ?? 0} places`}
                   title={node.area.data.name}
                   description={node.area.data.summary}
-                  cover={coverForArea(node.area, areas, listings)}
+                  cover={cover}
                 />
               </li>
             ))}
@@ -191,8 +242,8 @@ if (people.length > 0) {
       {
         openings.length > 0 ? (
           <ul class="entries">
-            {openings.map((listing) => (
-              <ListingEntry listing={listing} heading="h3" />
+            {openingCards.map(({ listing, photo }) => (
+              <ListingEntry listing={listing} photo={photo} heading="h3" />
             ))}
           </ul>
         ) : (
@@ -210,8 +261,8 @@ if (people.length > 0) {
       {
         recent.length > 0 ? (
           <ul class="entries">
-            {recent.map((listing) => (
-              <ListingEntry listing={listing} heading="h3" />
+            {recentCards.map(({ listing, photo }) => (
+              <ListingEntry listing={listing} photo={photo} heading="h3" />
             ))}
           </ul>
         ) : (
@@ -254,8 +305,8 @@ if (people.length > 0) {
       {
         people.length > 0 ? (
           <ul class="entries">
-            {people.slice(0, 4).map((person) => (
-              <PersonEntry person={person} heading="h3" />
+            {peopleCards.map(({ person, photo }) => (
+              <PersonEntry person={person} photo={photo} heading="h3" />
             ))}
           </ul>
         ) : (
@@ -263,26 +314,5 @@ if (people.length > 0) {
         )
       }
     </section>
-
-    {
-      tags.length > 0 && (
-        <section aria-labelledby="tags-heading">
-          <div class="section-head">
-            <h2 id="tags-heading">Tags</h2>
-          </div>
-          <p class="tag-line">
-            {tags.map((tag, index) => (
-              <>
-                {index > 0 && <span aria-hidden="true"> · </span>}
-                <a href={href(`/tags/${tag.slug}`)}>
-                  {tag.label}
-                  <span class="sr-only"> ({tag.listings.length})</span>
-                </a>
-              </>
-            ))}
-          </p>
-        </section>
-      )
-    }
   </div>
 </BaseLayout>

@@ -1,32 +1,28 @@
 ---
 import AttributedPhoto from './AttributedPhoto.astro';
-import PhotoPlaceholder from './PhotoPlaceholder.astro';
 import { findArea } from '../lib/catalog';
 import { loadAreas } from '../lib/areas';
 import { formatYear, type Production } from '../lib/productions';
+import type { CreditedImage } from '../lib/picture-schema';
 import { productionKindInfo } from '../lib/production-schema';
 import { href } from '../lib/site';
 
 interface Props {
   production: Production;
+  photo?: CreditedImage | null;
   heading?: 'h2' | 'h3';
 }
 
-const { production, heading = 'h2' } = Astro.props;
+const { production, photo: photoOverride, heading = 'h2' } = Astro.props;
 const data = production.data;
+const photo = photoOverride === undefined ? data.image : photoOverride;
 const kind = productionKindInfo[data.kind];
 const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class:list={['entry', 'has-photo']}>
-  {
-    data.image ? (
-      <AttributedPhoto picture={data.image} variant="thumb" />
-    ) : (
-      <PhotoPlaceholder name={data.title} tone={data.kind} label={kind.label} />
-    )
-  }
+<li class:list={['entry', { 'has-photo': Boolean(photo) }]}>
+  {photo && <AttributedPhoto picture={photo} variant="thumb" />}
   <div>
     <p class="kicker">
       <a href={`${href('/filmed-here')}#${data.kind}`}>{kind.label}</a>

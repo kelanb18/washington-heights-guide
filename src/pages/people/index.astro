@@ -6,9 +6,21 @@ import { peopleHero } from '../../lib/site-heroes';
 import { connectionInfo, connections } from '../../lib/connections';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadPeople } from '../../lib/people';
+import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { absoluteUrl, href, siteName } from '../../lib/site';
 
 const people = await loadPeople();
+const usedPictures = new Set<string>();
+reservePicture(peopleHero, usedPictures);
+const personPhotos = new Map(
+  people.map((person) => [
+    person.id,
+    claimFirstPicture(
+      [...(person.data.image ? [person.data.image] : []), ...person.data.gallery],
+      usedPictures,
+    ) ?? null,
+  ]),
+);
 const groups = connections
   .map((connection) => ({
     connection,
@@ -96,7 +108,7 @@ if (people.length > 0) {
             <p class="section-note">{group.info.blurb}</p>
             <ul class="entries">
               {group.people.map((person) => (
-                <PersonEntry person={person} heading="h3" />
+                <PersonEntry person={person} photo={personPhotos.get(person.id)} heading="h3" />
               ))}
             </ul>
           </section>

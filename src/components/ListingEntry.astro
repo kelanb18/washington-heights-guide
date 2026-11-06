@@ -1,40 +1,31 @@
 ---
 import AttributedPhoto from './AttributedPhoto.astro';
-import PhotoPlaceholder from './PhotoPlaceholder.astro';
 import { loadAreas } from '../lib/areas';
 import { findArea } from '../lib/catalog';
-import { nearestAreaPhoto } from '../lib/photo-fallback';
 import HoursNote from './HoursNote.astro';
 import type { Listing } from '../lib/listings';
+import type { CreditedImage } from '../lib/picture-schema';
 import { formatDate, href, isoDate } from '../lib/site';
 import { categoryInfo, priceInfo } from '../lib/taxonomy';
 
 interface Props {
   listing: Listing;
+  photo?: CreditedImage | null;
   index?: number;
   heading?: 'h2' | 'h3';
 }
 
-const { listing, index, heading = 'h2' } = Astro.props;
+const { listing, photo: photoOverride, index, heading = 'h2' } = Astro.props;
 const data = listing.data;
+const photo = photoOverride === undefined ? data.image : photoOverride;
 const category = categoryInfo[data.category];
-const areas = await loadAreas();
-const area = findArea(areas, data.area);
-const borrowed = data.image ? undefined : nearestAreaPhoto(area, areas);
+const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class:list={['entry', 'has-photo', { numbered: index != null }]}>
+<li class:list={['entry', { numbered: index != null, 'has-photo': Boolean(photo) }]}>
   {index != null && <p class="entry-index">{String(index).padStart(2, '0')}</p>}
-  {
-    data.image ? (
-      <AttributedPhoto picture={data.image} variant="thumb" />
-    ) : borrowed ? (
-      <AttributedPhoto picture={borrowed.picture} variant="thumb" note={`Photo of ${borrowed.placeName}`} />
-    ) : (
-      <PhotoPlaceholder name={data.name} tone={data.category} label={category.singular} />
-    )
-  }
+  {photo && <AttributedPhoto picture={photo} variant="thumb" />}
   <div>
     {
       data.sponsored && (

@@ -6,6 +6,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import type { CreditedImage } from '../../lib/picture-schema';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { compareProductionsByYear, loadProductions, productionsByKind } from '../../lib/productions';
+import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { absoluteUrl, siteName } from '../../lib/site';
 
 const hero: CreditedImage = {
@@ -22,6 +23,14 @@ const hero: CreditedImage = {
 const productions = await loadProductions();
 const groups = productionsByKind(productions);
 const byYear = [...productions].sort(compareProductionsByYear);
+const usedPictures = new Set<string>();
+reservePicture(hero, usedPictures);
+const productionPhotos = new Map(
+  productions.map((production) => [
+    production.id,
+    claimFirstPicture(production.data.image ? [production.data.image] : [], usedPictures) ?? null,
+  ]),
+);
 const description =
   'Films, television, and music videos shot in Washington Heights, plus resident sightings and city film permits.';
 
@@ -102,7 +111,11 @@ if (productions.length > 0) {
               </div>
               <ul class="entries">
                 {group.items.map((production) => (
-                  <ProductionEntry production={production} heading="h3" />
+                  <ProductionEntry
+                    production={production}
+                    photo={productionPhotos.get(production.id)}
+                    heading="h3"
+                  />
                 ))}
               </ul>
             </section>
@@ -121,7 +134,11 @@ if (productions.length > 0) {
             </div>
             <ul class="entries">
               {byYear.map((production) => (
-                <ProductionEntry production={production} heading="h3" />
+                <ProductionEntry
+                  production={production}
+                  photo={productionPhotos.get(production.id)}
+                  heading="h3"
+                />
               ))}
             </ul>
           </section>

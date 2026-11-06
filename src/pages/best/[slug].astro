@@ -6,14 +6,15 @@ import PlaceMap from '../../components/PlaceMap.astro';
 import SourceList from '../../components/SourceList.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
+import { coverForGuide } from '../../lib/covers';
 import { findArea } from '../../lib/catalog';
 import { loadGuides } from '../../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { pinsFor } from '../../lib/pins';
+import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { referenceId } from '../../lib/refs';
 import { absoluteUrl, formatDate, href, isoDate, siteName } from '../../lib/site';
-import { siteHeroFor } from '../../lib/site-heroes';
 import { categoryInfo, isCategory } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -31,7 +32,8 @@ const ranked = guide.data.picks.flatMap((pick, index) => {
   const listing = listings.find((entry) => entry.id === id);
   return listing ? [{ pick, listing, rank: index + 1 }] : [];
 });
-const area = findArea(await loadAreas(), guide.data.area);
+const areas = await loadAreas();
+const area = findArea(areas, guide.data.area);
 const category = guide.data.category && isCategory(guide.data.category) ? categoryInfo[guide.data.category] : undefined;
 const related = guides
   .filter((entry) => entry.id !== guide.id)
@@ -41,7 +43,18 @@ const related = guides
     return false;
   })
   .slice(0, 3);
-const hero = guide.data.image ?? siteHeroFor(guide.id);
+const hero =
+  guide.data.image ?? coverForGuide(guide, listings, areas)?.picture;
+const usedPictures = new Set<string>();
+if (hero) reservePicture(hero, usedPictures);
+const rankedCards = ranked.map((item) => ({
+  ...item,
+  photo:
+    claimFirstPicture(
+      [...(item.listing.data.image ? [item.listing.data.image] : []), ...item.listing.data.gallery],
+      usedPictures,
+    ) ?? null,
+}));
 const { Content } = await render(guide);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -66,8 +79,8 @@ const jsonLd = [
   title={`${guide.data.title} · ${siteName}`}
   description={guide.data.description}
   ogType="article"
-  image={hero.src}
-  imageAlt={hero.alt}
+  image={hero?.src}
+  imageAlt={hero?.alt}
   modified={isoDate(guide.data.updated)}
   noindex={guide.data.example || guide.data.draft}
   jsonLd={jsonLd}
@@ -108,10 +121,10 @@ const jsonLd = [
       <Content />
     </div>
     <ol class="ranked">
-      {ranked.map((item) => (
+      {rankedCards.map((item) => (
         <li class="ranked-card">
           <p class="entry-index">{String(item.rank).padStart(2, '0')}</p>
-          {item.listing.data.image && <AttributedPhoto picture={item.listing.data.image} variant="thumb" />}
+          {item.photo && <AttributedPhoto picture={item.photo} variant="thumb" />}
           <div>
             {item.pick.badge && <p class="badge">{item.pick.badge}</p>}
             {item.listing.data.sponsored && <p class="sponsored-flag">Sponsored</p>}

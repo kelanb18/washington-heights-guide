@@ -1,39 +1,24 @@
 ---
 import AttributedPhoto from './AttributedPhoto.astro';
-import PhotoPlaceholder from './PhotoPlaceholder.astro';
+import { claimPicture } from '../lib/pictures';
 import type { CreditedImage } from '../lib/picture-schema';
 
 interface Props {
   image?: CreditedImage;
   gallery?: CreditedImage[];
-  /** Shown when there is no photograph, so the page does not open on an empty box. */
-  mark?: string;
-  tone?: string;
-  markLabel?: string;
-  /** Area photograph used when this page has no photo of its own. */
-  borrowed?: { picture: CreditedImage; placeName: string };
 }
 
-const { image, gallery = [], mark, tone, markLabel, borrowed } = Astro.props;
+const { image, gallery = [] } = Astro.props;
+const usedPictures = new Set<string>();
+const hero = image && claimPicture(image, usedPictures) ? image : undefined;
+const uniqueGallery = gallery.filter((picture) => claimPicture(picture, usedPictures));
 ---
 
+{hero && <AttributedPhoto picture={hero} variant="hero" />}
 {
-  image ? (
-    <AttributedPhoto picture={image} variant="hero" />
-  ) : borrowed ? (
-    <AttributedPhoto
-      picture={borrowed.picture}
-      variant="hero"
-      note={`Photograph of ${borrowed.placeName}. This place has no photo of its own.`}
-    />
-  ) : (
-    mark && <PhotoPlaceholder name={mark} tone={tone} label={markLabel} variant="hero" />
-  )
-}
-{
-  gallery.length > 0 && (
+  uniqueGallery.length > 0 && (
     <div class="photo-gallery">
-      {gallery.map((picture) => (
+      {uniqueGallery.map((picture) => (
         <AttributedPhoto picture={picture} variant="gallery" />
       ))}
     </div>

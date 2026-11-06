@@ -1,6 +1,7 @@
 ---
 import ListingEntry from '../../components/ListingEntry.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { coverForListing } from '../../lib/covers';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, siteName } from '../../lib/site';
@@ -17,6 +18,10 @@ const tag = tags.find((entry) => entry.slug === Astro.params.tag);
 if (!tag) {
   throw new Error(`[listings] No tag page for "${Astro.params.tag}".`);
 }
+const usedPictures = new Set<string>();
+const listingPhotos = new Map(
+  tag.listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
+);
 
 const description = `Places in Washington Heights tagged ${tag.label}. A curated list from The Heights.`;
 const site = Astro.site;
@@ -48,7 +53,9 @@ const jsonLd = [
       </p>
     </header>
     <ul class="entries">
-      {tag.listings.map((listing) => <ListingEntry listing={listing} />)}
+      {tag.listings.map((listing) => (
+        <ListingEntry listing={listing} photo={listingPhotos.get(listing.id)} />
+      ))}
     </ul>
   </div>
 </BaseLayout>

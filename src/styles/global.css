@@ -258,6 +258,7 @@ main {
   letter-spacing: -0.045em;
   line-height: 0.9;
   text-wrap: balance;
+  overflow-wrap: anywhere;
 }
 
 .lede {
@@ -296,6 +297,7 @@ main {
 
 .section-head {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
   gap: 1rem;
@@ -703,64 +705,6 @@ main {
   object-fit: cover;
 }
 
-.mark {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.35rem;
-  border: 1px solid var(--ink);
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--sans);
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-.mark-thumb {
-  width: 5.5rem;
-  height: 5.5rem;
-  margin: 0.45rem 0 0;
-  font-size: 1.05rem;
-}
-
-.mark-hero {
-  min-height: 9.5rem;
-  margin: 1.1rem 0 0;
-  font-size: 2.4rem;
-}
-
-.mark-kind {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  opacity: 0.82;
-}
-
-.mark[data-tone='restaurant'],
-.mark[data-tone='film'],
-.mark[data-tone='music-video'],
-.mark[data-tone='area'] {
-  background: var(--brick);
-  color: #f7f1e6;
-}
-
-.mark[data-tone='cafe'],
-.mark[data-tone='bakery'],
-.mark[data-tone='landmark'],
-.mark[data-tone='tv'] {
-  background: var(--pine);
-  color: #f3ecdf;
-}
-
-.mark[data-tone='bar'],
-.mark[data-tone='shop'] {
-  background: var(--brick-deep);
-  color: #f7f1e6;
-}
-
 .photo.photo-gallery {
   display: block;
 }
@@ -769,11 +713,6 @@ main {
   display: grid;
   gap: 1rem;
   margin-top: 1rem;
-}
-
-.photo-note {
-  display: block;
-  margin-top: 0.15rem;
 }
 
 .photo-credit {
@@ -1061,9 +1000,18 @@ main {
 
 .hero-pub {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.5rem;
   align-items: end;
   padding-top: 1.4rem;
+}
+
+.hero-pub h1 {
+  font-size: clamp(2rem, 9vw, 5.6rem);
+}
+
+.hero-pub > * {
+  min-width: 0;
 }
 
 .hero-mark {
@@ -1193,6 +1141,7 @@ html[data-theme='dark'] .open-badge.is-open {
 
 .guide-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.8rem;
   margin: 1rem 0 0;
   padding: 0;
@@ -1315,7 +1264,7 @@ ul.tag-line {
   .hero-pub,
   .footer-grid,
   .guide-grid {
-    grid-template-columns: 1.3fr 0.9fr;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
   }
 
   .guide-grid {
@@ -1448,6 +1397,30 @@ ul.tag-line {
   .nav-list a,
   .sections a {
     padding: 0.4rem 0;
+  }
+}
+
+@media (max-width: 280px) {
+  .hero-pub h1 {
+    font-size: clamp(1.5rem, 11vw, 2rem);
+    overflow-wrap: normal;
+  }
+
+  .hero-pub .lede {
+    font-size: 1rem;
+  }
+
+  .entry.has-photo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .entry.numbered.has-photo {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .entry.numbered.has-photo .photo-thumb,
+  .entry.numbered.has-photo > div {
+    grid-column: 2;
   }
 }
 

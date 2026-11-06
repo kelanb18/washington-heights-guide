@@ -11,6 +11,11 @@ import { absoluteUrl, formatDate, href, siteName } from '../../lib/site';
 const guides = await loadGuides();
 const listings = await loadListings();
 const areas = await loadAreas();
+const usedCoverSources = new Set<string>();
+const guideCards = guides.map((guide) => ({
+  guide,
+  cover: coverForGuide(guide, listings, areas, usedCoverSources),
+}));
 const description = 'Checked lists of where to eat, drink, and go in Washington Heights. Rankings are editorial. They are not paid placements.';
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -48,9 +53,7 @@ if (guides.length > 0) {
         <p class="empty">No guides have been published yet. When a list has been checked, it will show up here.</p>
       ) : (
         <ul class="guide-grid">
-          {guides.map((guide) => {
-            const cover = coverForGuide(guide, listings, areas);
-            return (
+          {guideCards.map(({ guide, cover }) => (
               <li>
                 <StoryCard
                   href={href(`/best/${guide.id}`)}
@@ -62,8 +65,7 @@ if (guides.length > 0) {
                   meta={`Updated ${formatDate(guide.data.updated)}`}
                 />
               </li>
-            );
-          })}
+            ))}
         </ul>
       )
     }

@@ -118,12 +118,6 @@ export const siteHeroes: CreditedImage[] = [
   },
 ];
 
-export function siteHeroFor(id: string): CreditedImage {
-  let hash = 0;
-  for (const char of id) hash = (hash * 33 + char.charCodeAt(0)) >>> 0;
-  return siteHeroes[hash % siteHeroes.length];
-}
-
 function heroByFile(file: string): CreditedImage {
   const found = siteHeroes.find((hero) => hero.src.endsWith(`/${file}`));
   if (!found) throw new Error(`[site-heroes] Missing ${file}.`);
@@ -183,7 +177,14 @@ export const siteFrames: SiteFrame[] = [
   },
 ];
 
-/** One landscape from the site set for each section index. The homepage shows the full set. */
+export const homeFrames = [
+  siteFrames[0],
+  siteFrames[1],
+  siteFrames[7],
+  siteFrames[9],
+];
+
+/** One landscape from the site set for each section index. */
 export const placesHero = heroByFile('9.webp');
 export const areasHero = heroByFile('10.webp');
 export const peopleHero = heroByFile('6.webp');

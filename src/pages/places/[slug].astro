@@ -6,13 +6,12 @@ import PlaceMap from '../../components/PlaceMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
-import { nearestAreaPhoto } from '../../lib/photo-fallback';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { collectTags, loadListings } from '../../lib/listings';
 import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
-import { shareableSrc } from '../../lib/pictures';
+import { claimPicture, reservePicture, shareableSrc } from '../../lib/pictures';
 import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -29,11 +28,15 @@ if (!listing) {
 }
 
 const data = listing.data;
+const usedPictures = new Set<string>();
+for (const picture of [...(data.image ? [data.image] : []), ...data.gallery]) {
+  reservePicture(picture, usedPictures);
+}
+const plates = data.images.filter((picture) => claimPicture(picture, usedPictures));
 const featuredGuides = guidesFeaturing(await loadGuides(), listing.id);
 const category = categoryInfo[data.category];
 const areas = await loadAreas();
 const area = findArea(areas, data.area);
-const borrowed = data.image ? undefined : nearestAreaPhoto(area, areas);
 const pins = pinsFor([listing]);
 const hasMap = data.latitude != null && data.longitude != null;
 const { Content } = await render(listing);
@@ -119,10 +122,6 @@ const jsonLd = [
     <PhotoSet
       image={data.image}
       gallery={data.gallery}
-      mark={data.name}
-      tone={data.category}
-      markLabel={category.singular}
-      borrowed={borrowed}
     />
     <ActionLinks links={data.links} />
     {
@@ -144,9 +143,9 @@ const jsonLd = [
     }
 
     {
-      data.images.length > 0 && (
+      plates.length > 0 && (
         <div class="plates">
-          {data.images.map((image) => (
+          {plates.map((image) => (
             <figure class="plate">
               <img src={image.src} alt={image.alt} width="1200" height="750" />
             </figure>

@@ -3,6 +3,7 @@ import ListingEntry from '../../../../components/ListingEntry.astro';
 import BaseLayout from '../../../../layouts/BaseLayout.astro';
 import { descendantIds, loadAreas } from '../../../../lib/areas';
 import { listingsInArea } from '../../../../lib/catalog';
+import { coverForListing } from '../../../../lib/covers';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../../../lib/jsonld';
 import { loadListings } from '../../../../lib/listings';
 import { absoluteUrl, href, siteName } from '../../../../lib/site';
@@ -35,6 +36,10 @@ const info = categoryInfo[categoryParam];
 const listings = listingsInArea(area.id, areas, await loadListings())
   .filter((listing) => listing.data.category === categoryParam)
   .sort((a, b) => a.data.name.localeCompare(b.data.name, 'en'));
+const usedPictures = new Set<string>();
+const listingPhotos = new Map(
+  listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
+);
 
 if (listings.length < 2 || !descendantIds(area.id, areas).has(area.id)) {
   throw new Error(`[listings] ${info.plural} in ${area.data.name} does not have enough places to publish.`);
@@ -78,7 +83,7 @@ const jsonLd = [
     </header>
     <ul class="entries">
       {listings.map((listing) => (
-        <ListingEntry listing={listing} />
+        <ListingEntry listing={listing} photo={listingPhotos.get(listing.id)} />
       ))}
     </ul>
   </div>
