@@ -7,7 +7,7 @@ export const GET: APIRoute = ({ site }) => {
     throw new Error('Set SITE, or site in astro.config.mjs, so robots.txt can point at the sitemap.');
   }
 
-  const sitemap = new URL('sitemap-index.xml', site);
+  const sitemap = new URL('sitemap.xml', site);
   const body = `User-agent: *\nAllow: /\n\nSitemap: ${sitemap.href}\n`;
 
   return new Response(body, {
