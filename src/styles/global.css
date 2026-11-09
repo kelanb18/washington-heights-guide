@@ -1876,3 +1876,241 @@ ul.tag-line {
     gap: 0.7rem;
   }
 }
+
+/* Map explorer */
+.explorer-bar {
+  padding-top: 1.2rem;
+}
+
+.explorer-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+}
+
+.explorer-heading h1 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+}
+
+.explorer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.9rem;
+  align-items: center;
+  margin: 0.8rem 0 0.6rem;
+  font-family: var(--sans);
+}
+
+.explorer-controls input[type='search'] {
+  flex: 1 1 14rem;
+  min-height: 44px;
+  padding: 0 0.8rem;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.explorer-locate {
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.explorer-locate:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.explorer-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 24rem;
+  height: max(34rem, calc(100vh - 16rem));
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.explorer-map {
+  height: 100%;
+  min-height: 20rem;
+  background: var(--paper-deep);
+}
+
+.explorer-panel {
+  overflow-y: auto;
+  border-left: 1px solid var(--ink);
+  background: var(--paper);
+  padding: 0 1.1rem 1.2rem;
+}
+
+.explorer-status {
+  margin: 0;
+  padding: 0.8rem 0 0.6rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+}
+
+.explorer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+
+.explorer-list li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.explorer-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.explorer-item:hover .explorer-item-name,
+.explorer-item:focus-visible .explorer-item-name {
+  color: var(--brick);
+}
+
+.explorer-item-name {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.15rem;
+  line-height: 1.2;
+}
+
+.explorer-item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-top: 0.3rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.explorer-empty {
+  margin: 1rem 0 0;
+  font-family: var(--display);
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.explorer-detail {
+  padding-top: 0.8rem;
+  outline: none;
+}
+
+.explorer-back {
+  min-height: 40px;
+  margin-bottom: 0.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.explorer-back:hover {
+  color: var(--brick);
+}
+
+.explorer-photo {
+  margin: 0 0 0.8rem;
+}
+
+.explorer-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.explorer-name {
+  margin: 0.25rem 0 0.4rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.7rem;
+  line-height: 1.1;
+}
+
+.explorer-verdict {
+  margin: 0 0 0.6rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.explorer-where {
+  margin: 0.5rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.explorer-detail .action-row .button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.explorer-checked {
+  color: var(--ink-soft);
+}
+
+.map-pin.is-selected span {
+  width: 22px;
+  height: 22px;
+  background: var(--ink);
+  box-shadow: 0 0 0 2px var(--brick);
+}
+
+@media (max-width: 52rem) {
+  .explorer-body {
+    grid-template-columns: minmax(0, 1fr);
+    height: auto;
+  }
+
+  .explorer-map {
+    height: 58vh;
+  }
+
+  .explorer-panel {
+    border-left: 0;
+    border-top: 1px solid var(--ink);
+    overflow: visible;
+    padding: 0 1rem 1.2rem;
+  }
+}
+
+/* On phones the two-row header would cover a third of the screen if it stayed pinned. Let it scroll away. */
+@media (max-width: 52rem) {
+  .masthead {
+    position: static;
+  }
+}

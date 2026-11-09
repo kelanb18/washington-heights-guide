@@ -1,0 +1,400 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { loadAreas } from '../lib/areas';
+import { findArea } from '../lib/catalog';
+import { coverForListing } from '../lib/covers';
+import { directionsHref } from '../lib/directions';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { loadListings } from '../lib/listings';
+import { shareableSrc } from '../lib/pictures';
+import { absoluteUrl, formatDate, href, pageTitle, siteName, telHref } from '../lib/site';
+import { categories, categoryInfo } from '../lib/taxonomy';
+
+const listings = await loadListings();
+const areas = await loadAreas();
+
+const places = listings
+  .filter((listing) => listing.data.latitude != null && listing.data.longitude != null)
+  .map((listing) => {
+    const data = listing.data;
+    const photo = coverForListing(listing, new Set());
+    const photoSrc = shareableSrc(photo?.src);
+    const area = findArea(areas, data.area);
+    return {
+      id: listing.id,
+      name: data.name,
+      category: data.category,
+      categoryLabel: categoryInfo[data.category].singular,
+      area: area?.data.name,
+      lat: data.latitude,
+      lng: data.longitude,
+      verdict: data.verdict,
+      cuisine: data.cuisine,
+      price: data.priceLevel,
+      address: data.address,
+      crossStreets: data.crossStreets,
+      hours: data.hours,
+      phone: data.phone,
+      tel: data.phone ? telHref(data.phone) : undefined,
+      website: data.website,
+      pick: data.pick,
+      sponsored: data.sponsored,
+      checked: formatDate(data.lastVerified),
+      url: href(`/places/${listing.id}`),
+      directions: directionsHref(listing),
+      photo: photoSrc ? { src: photoSrc, alt: photo!.alt, credit: `${photo!.credit} · ${photo!.license}` } : undefined,
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+
+const presentCategories = categories.filter((category) => places.some((place) => place.category === category));
+const unmapped = listings.length - places.length;
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Map', url: absoluteUrl(site, '/map') },
+  ]),
+];
+const description = `A map of all ${places.length} places on Washington Heights Guide. Tap any pin for the verdict, hours, address and directions.`;
+---
+
+<BaseLayout title={pageTitle('Map of every place')} description={description} jsonLd={jsonLd}>
+  <div class="explorer" data-places={JSON.stringify(places)}>
+    <div class="wrap explorer-bar">
+      <div class="explorer-heading">
+        <h1>The map</h1>
+        <p class="front-kicker" id="explorer-count">{places.length} places</p>
+      </div>
+      <div class="explorer-controls">
+        <label class="sr-only" for="explorer-search">Search places</label>
+        <input id="explorer-search" type="search" placeholder="Search by name or food" autocomplete="off" />
+        <button type="button" class="explorer-locate" id="explorer-locate">Near me</button>
+        <label class="toggle">
+          <input type="checkbox" id="explorer-open" />
+          <span>Open now</span>
+        </label>
+      </div>
+      <p class="chip-row" role="group" aria-label="Filter by category">
+        <button type="button" class="chip is-active" data-category="all" aria-pressed="true">All</button>
+        {
+          presentCategories.map((category) => (
+            <button type="button" class="chip" data-category={category} aria-pressed="false">
+              {categoryInfo[category].plural}
+            </button>
+          ))
+        }
+      </p>
+    </div>
+
+    <div class="explorer-body">
+      <div class="explorer-map" id="explorer-map" role="region" aria-label="Map of every place"></div>
+      <aside class="explorer-panel" id="explorer-panel" aria-label="Places">
+        <div id="explorer-list-view">
+          <p class="explorer-status" id="explorer-status" role="status" aria-live="polite">Tap a pin or a name for details.</p>
+          <ul class="explorer-list" id="explorer-list"></ul>
+          <p class="explorer-empty" id="explorer-empty" hidden>Nothing matches. Try another category or turn off “Open now”.</p>
+        </div>
+        <article class="explorer-detail" id="explorer-detail" hidden tabindex="-1">
+          <button type="button" class="explorer-back" id="explorer-back">← All places</button>
+          <div id="explorer-detail-body"></div>
+        </article>
+      </aside>
+    </div>
+    <p class="wrap map-note">
+      Map data <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap</a> contributors.
+      {unmapped > 0 && ` ${unmapped} ${unmapped === 1 ? 'place covers' : 'places cover'} a wide area and ${unmapped === 1 ? 'is' : 'are'} listed on the Places page instead.`}
+    </p>
+  </div>
+</BaseLayout>
+
+<script>
+  import { hoursStatus } from '../lib/hours';
+
+  interface Place {
+    id: string;
+    name: string;
+    category: string;
+    categoryLabel: string;
+    area?: string;
+    lat: number;
+    lng: number;
+    verdict: string;
+    cuisine?: string;
+    price?: string;
+    address?: string;
+    crossStreets?: string;
+    hours?: string;
+    phone?: string;
+    tel?: string;
+    website?: string;
+    pick?: boolean;
+    sponsored?: boolean;
+    checked: string;
+    url: string;
+    directions: string;
+    photo?: { src: string; alt: string; credit: string };
+  }
+
+  const root = document.querySelector<HTMLElement>('.explorer');
+  const places: Place[] = JSON.parse(root?.dataset.places ?? '[]');
+  const byId = new Map(places.map((place) => [place.id, place]));
+
+  const listEl = document.getElementById('explorer-list') as HTMLUListElement;
+  const listView = document.getElementById('explorer-list-view') as HTMLElement;
+  const detail = document.getElementById('explorer-detail') as HTMLElement;
+  const detailBody = document.getElementById('explorer-detail-body') as HTMLElement;
+  const status = document.getElementById('explorer-status') as HTMLElement;
+  const empty = document.getElementById('explorer-empty') as HTMLElement;
+  const count = document.getElementById('explorer-count') as HTMLElement;
+  const search = document.getElementById('explorer-search') as HTMLInputElement;
+  const openOnly = document.getElementById('explorer-open') as HTMLInputElement;
+  const locate = document.getElementById('explorer-locate') as HTMLButtonElement;
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-category]')];
+
+  let category = 'all';
+  let here: { lat: number; lng: number } | undefined;
+  let selected: string | undefined;
+
+  function el<K extends keyof HTMLElementTagNameMap>(tag: K, className?: string, text?: string) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  function metres(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+    const rad = Math.PI / 180;
+    const h =
+      Math.sin(((b.lat - a.lat) * rad) / 2) ** 2 +
+      Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(((b.lng - a.lng) * rad) / 2) ** 2;
+    return 2 * 6371000 * Math.asin(Math.sqrt(h));
+  }
+
+  function distanceText(place: Place) {
+    if (!here) return '';
+    const m = metres(here, place);
+    const miles = m / 1609.34;
+    return `${miles < 0.1 ? '<0.1' : miles.toFixed(1)} mi · ${Math.max(1, Math.round(m / 80))} min walk`;
+  }
+
+  function matches(place: Place) {
+    if (category !== 'all' && place.category !== category) return false;
+    if (openOnly.checked && !hoursStatus(place.hours)?.open) return false;
+    const q = search.value.trim().toLowerCase();
+    if (!q) return true;
+    return [place.name, place.cuisine, place.categoryLabel, place.area, place.crossStreets]
+      .filter(Boolean)
+      .some((value) => value!.toLowerCase().includes(q));
+  }
+
+  function openBadge(place: Place) {
+    const state = hoursStatus(place.hours);
+    if (!state) return null;
+    const badge = el('span', `open-badge${state.open ? ' is-open' : ''}`, state.label);
+    return badge;
+  }
+
+  async function start() {
+    const [leafletModule] = await Promise.all([import('leaflet'), import('leaflet/dist/leaflet.css')]);
+    const L = (leafletModule as unknown as { default?: typeof import('leaflet') }).default ?? leafletModule;
+    const map = L.map('explorer-map', { zoomControl: true });
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    const icon = (active: boolean) =>
+      L.divIcon({
+        className: `map-pin${active ? ' is-selected' : ''}`,
+        html: '<span></span>',
+        iconSize: active ? [22, 22] : [16, 16],
+        iconAnchor: active ? [11, 11] : [8, 8],
+      });
+
+    const markers = new Map<string, ReturnType<typeof L.marker>>();
+    for (const place of places) {
+      const marker = L.marker([place.lat, place.lng], { icon: icon(false), title: place.name, keyboard: true });
+      marker.on('click', () => select(place.id, false));
+      markers.set(place.id, marker);
+    }
+    let hereMarker: ReturnType<typeof L.circleMarker> | undefined;
+
+    function render(fit: boolean) {
+      const visible = places.filter(matches);
+      if (here) visible.sort((a, b) => metres(here!, a) - metres(here!, b));
+      for (const place of places) {
+        const marker = markers.get(place.id)!;
+        if (visible.includes(place)) marker.addTo(map);
+        else marker.remove();
+      }
+      listEl.replaceChildren(
+        ...visible.map((place) => {
+          const li = el('li');
+          const button = el('button', 'explorer-item');
+          button.type = 'button';
+          button.addEventListener('click', () => select(place.id, true));
+          const kicker = el('span', 'front-kicker', [place.categoryLabel, place.area].filter(Boolean).join(' · '));
+          const name = el('span', 'explorer-item-name', place.name);
+          const meta = el('span', 'explorer-item-meta');
+          const badge = openBadge(place);
+          if (badge) meta.append(badge);
+          const dist = distanceText(place);
+          if (dist) meta.append(el('span', '', dist));
+          button.append(kicker, name);
+          if (meta.childNodes.length) button.append(meta);
+          li.append(button);
+          return li;
+        }),
+      );
+      count.textContent = `${visible.length} ${visible.length === 1 ? 'place' : 'places'}`;
+      empty.hidden = visible.length > 0;
+      if (fit && visible.length > 0) {
+        const bounds = L.latLngBounds(visible.map((place) => [place.lat, place.lng] as [number, number]));
+        if (here) bounds.extend([here.lat, here.lng]);
+        map.fitBounds(bounds.pad(0.12), { maxZoom: 16 });
+      }
+    }
+
+    function select(id: string, pan: boolean) {
+      const place = byId.get(id);
+      if (!place) return;
+      if (selected) markers.get(selected)?.setIcon(icon(false));
+      selected = id;
+      markers.get(id)?.setIcon(icon(true)).setZIndexOffset(1000);
+      if (pan) map.setView([place.lat, place.lng], Math.max(map.getZoom(), 16), { animate: true });
+      else map.panTo([place.lat, place.lng], { animate: true });
+      history.replaceState(null, '', `#${id}`);
+
+      const parts: Node[] = [];
+      if (place.photo) {
+        const figure = el('figure', 'explorer-photo');
+        const img = el('img');
+        img.src = place.photo.src;
+        img.alt = place.photo.alt;
+        img.loading = 'lazy';
+        figure.append(img, el('figcaption', 'photo-credit', place.photo.credit));
+        parts.push(figure);
+      }
+      if (place.sponsored) parts.push(el('p', 'sponsored-flag', 'Sponsored'));
+      parts.push(
+        el(
+          'p',
+          'front-kicker',
+          [place.categoryLabel, place.area, place.price, place.pick ? 'Editor’s pick' : undefined].filter(Boolean).join(' · '),
+        ),
+      );
+      parts.push(el('h2', 'explorer-name', place.name));
+      parts.push(el('p', 'explorer-verdict', place.verdict));
+      if (place.hours) {
+        const line = el('p', 'hours-line');
+        const badge = openBadge(place);
+        if (badge) line.append(badge);
+        line.append(el('span', '', place.hours));
+        parts.push(line);
+      }
+      const where = el('p', 'explorer-where');
+      where.append(el('span', '', [place.address, place.crossStreets].filter(Boolean).join(' · ')));
+      const dist = distanceText(place);
+      if (dist) where.append(el('span', 'distance', ` · ${dist}`));
+      parts.push(where);
+
+      const actions = el('p', 'action-row');
+      const link = (label: string, url: string, ghost: boolean, external: boolean) => {
+        const a = el('a', `button${ghost ? ' button-ghost' : ''}`, label);
+        a.href = url;
+        if (external) {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        }
+        return a;
+      };
+      actions.append(link('Directions', place.directions, false, true));
+      if (place.tel) actions.append(link('Call', place.tel, true, false));
+      if (place.website) actions.append(link('Website', place.website, true, true));
+      parts.push(actions);
+
+      const more = el('p', 'front-more');
+      const full = el('a', '', 'Read the full page →');
+      full.href = place.url;
+      more.append(full, el('span', 'explorer-checked', ` Checked ${place.checked}`));
+      parts.push(more);
+
+      detailBody.replaceChildren(...parts);
+      listView.hidden = true;
+      detail.hidden = false;
+      detail.focus({ preventScroll: true });
+      if (window.matchMedia('(max-width: 52rem)').matches) {
+        detail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        (document.getElementById('explorer-panel') as HTMLElement).scrollTop = 0;
+      }
+    }
+
+    function backToList() {
+      if (selected) markers.get(selected)?.setIcon(icon(false)).setZIndexOffset(0);
+      selected = undefined;
+      history.replaceState(null, '', location.pathname);
+      detail.hidden = true;
+      listView.hidden = false;
+    }
+
+    document.getElementById('explorer-back')?.addEventListener('click', backToList);
+    search.addEventListener('input', () => render(false));
+    openOnly.addEventListener('change', () => render(true));
+    for (const chip of chips) {
+      chip.addEventListener('click', () => {
+        category = chip.dataset.category ?? 'all';
+        for (const other of chips) {
+          other.classList.toggle('is-active', other === chip);
+          other.setAttribute('aria-pressed', String(other === chip));
+        }
+        backToList();
+        render(true);
+      });
+    }
+
+    locate.addEventListener('click', () => {
+      if (!('geolocation' in navigator)) {
+        status.textContent = 'This browser cannot share a location.';
+        return;
+      }
+      status.textContent = 'Finding you…';
+      locate.disabled = true;
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          here = { lat: position.coords.latitude, lng: position.coords.longitude };
+          hereMarker?.remove();
+          hereMarker = L.circleMarker([here.lat, here.lng], {
+            radius: 8,
+            color: '#ffffff',
+            weight: 3,
+            fillColor: '#1d4e6e',
+            fillOpacity: 1,
+          })
+            .addTo(map)
+            .bindTooltip('You are here');
+          status.textContent = 'Sorted by distance from you. Your location stays on this device.';
+          locate.textContent = 'Update location';
+          locate.disabled = false;
+          render(true);
+          if (selected) select(selected, false);
+        },
+        () => {
+          status.textContent = 'Location is off or was declined.';
+          locate.disabled = false;
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
+      );
+    });
+
+    render(true);
+    const initial = decodeURIComponent(location.hash.slice(1));
+    if (initial && byId.has(initial)) select(initial, true);
+    window.setTimeout(() => map.invalidateSize(), 0);
+  }
+
+  void start();
+</script>
