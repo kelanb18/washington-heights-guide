@@ -9,7 +9,7 @@ import { breadcrumbJsonLd, productionJsonLd } from '../../lib/jsonld';
 import { formatYear, loadProductions } from '../../lib/productions';
 import { productionKindInfo } from '../../lib/production-schema';
 import { shareableSrc } from '../../lib/pictures';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
   const productions = await loadProductions();
@@ -43,7 +43,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={`${data.title} — Filmed in the Heights · ${siteName}`}
+  title={pageTitle(`${data.title} (${data.year}): Filmed in the Heights`)}
   description={data.summary}
   ogType="article"
   image={shareableSrc(data.image?.src)}

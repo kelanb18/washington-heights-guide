@@ -9,7 +9,7 @@ import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { collectTags, loadListings } from '../../lib/listings';
-import { absoluteUrl, formatDate, href, isoDate, mapsHref, siteName, telHref } from '../../lib/site';
+import { absoluteUrl, formatDate, href, isoDate, mapsHref, pageTitle, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
 import { claimPicture, reservePicture, shareableSrc } from '../../lib/pictures';
 import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
@@ -46,7 +46,7 @@ if (!site) throw new Error('Missing site URL.');
 const pageUrl = absoluteUrl(site, `/places/${listing.id}`);
 const categoryUrl = absoluteUrl(site, `/category/${data.category}`);
 const tags = collectTags([listing]);
-const title = `${data.name} — ${category.singular} in Washington Heights · ${siteName}`;
+const title = pageTitle(`${data.name}: ${category.singular} in ${area?.data.name ?? 'Washington Heights'}`);
 const jsonLd = [
   listingJsonLd(
     listing,

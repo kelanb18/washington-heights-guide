@@ -14,7 +14,7 @@ import { loadListings } from '../../lib/listings';
 import { pinsFor } from '../../lib/pins';
 import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { referenceId } from '../../lib/refs';
-import { absoluteUrl, formatDate, href, isoDate, siteName } from '../../lib/site';
+import { absoluteUrl, formatDate, href, isoDate, pageTitleFit, siteName } from '../../lib/site';
 import { categoryInfo, isCategory } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -76,7 +76,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={`${guide.data.title} · ${siteName}`}
+  title={pageTitleFit(guide.data.title)}
   description={guide.data.description}
   ogType="article"
   image={hero?.src}

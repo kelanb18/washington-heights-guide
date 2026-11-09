@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { coverForListing } from '../../lib/covers';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { collectTags, loadListings } from '../../lib/listings';
-import { absoluteUrl, siteName } from '../../lib/site';
+import { absoluteUrl, pageTitle, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
   const tags = collectTags(await loadListings());
@@ -43,7 +43,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${tag.label} in Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle(`${tag.label} in Washington Heights`)} description={description} noindex={true} jsonLd={jsonLd}>
   <div class="wrap">
     <header class="page-head">
       <p class="kicker">Tag</p>

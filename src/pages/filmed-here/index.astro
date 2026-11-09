@@ -7,7 +7,7 @@ import type { CreditedImage } from '../../lib/picture-schema';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { compareProductionsByYear, loadProductions, productionsByKind } from '../../lib/productions';
 import { claimFirstPicture, reservePicture } from '../../lib/pictures';
-import { absoluteUrl, siteName } from '../../lib/site';
+import { absoluteUrl, pageTitle, siteName } from '../../lib/site';
 
 const hero: CreditedImage = {
   src: '/images/extras/2022-movie-trucks-hudson-heights.webp',
@@ -59,7 +59,7 @@ if (productions.length > 0) {
 ---
 
 <BaseLayout
-  title={`Filmed in the Heights · ${siteName}`}
+  title={pageTitle('Filmed in the Heights')}
   description={description}
   image={hero.src}
   imageAlt={hero.alt}

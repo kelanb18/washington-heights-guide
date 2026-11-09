@@ -6,7 +6,7 @@ import { coverForGuide } from '../../lib/covers';
 import { loadGuides } from '../../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
-import { absoluteUrl, formatDate, href, siteName } from '../../lib/site';
+import { absoluteUrl, formatDate, href, pageTitle, siteName } from '../../lib/site';
 
 const guides = await loadGuides();
 const listings = await loadListings();
@@ -36,7 +36,7 @@ if (guides.length > 0) {
 }
 ---
 
-<BaseLayout title={`Best of Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Best of Washington Heights')} description={description} jsonLd={jsonLd}>
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>

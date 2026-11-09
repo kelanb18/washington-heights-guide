@@ -18,7 +18,7 @@ import { loadProductions } from '../../lib/productions';
 import { coverForListing } from '../../lib/covers';
 import { referenceId } from '../../lib/refs';
 import { claimFirstPicture, reservePicture, shareableSrc } from '../../lib/pictures';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, latestDate, pageTitle, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
   const areas = await loadAreas();
@@ -145,7 +145,8 @@ if (people.length > 0) {
 ---
 
 <BaseLayout
-  title={`${data.name} — Washington Heights · ${siteName}`}
+  title={pageTitle(`${data.name}: Where to Eat & What to See`)}
+  modified={latestDate(listings.map((listing) => listing.data.lastVerified))}
   description={data.summary}
   ogType="article"
   image={shareableSrc(areaHero?.src)}

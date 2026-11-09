@@ -87,12 +87,15 @@ function parseChunk(chunk: string): Span | undefined {
   return { days, start, end };
 }
 
-/** Returns a status only when the hours string is unambiguous. */
-export function hoursStatus(hours: string | undefined, now = new Date()): HoursStatus | undefined {
+/**
+ * Parses an hours string only when it is unambiguous: 'always' for 24-hour places,
+ * a list of spans for plain day/time ranges, or undefined for anything hedged or irregular.
+ */
+function parseHours(hours: string | undefined): Span[] | 'always' | undefined {
   if (!hours) return undefined;
   const text = hours.trim();
   if (/vary|check|per |about|until|listing|site|approx/i.test(text)) return undefined;
-  if (/24\s*hours/i.test(text)) return { open: true, label: 'Open now' };
+  if (/24\s*hours/i.test(text)) return 'always';
 
   const parts = text
     .split(/\s*;\s*|\s*,\s*(?=(?:mon|tue|wed|thu|fri|sat|sun|daily|weekdays|weekends)\b)/i)
@@ -105,6 +108,34 @@ export function hoursStatus(hours: string | undefined, now = new Date()): HoursS
     if (!span) return undefined;
     spans.push(span);
   }
+  return spans;
+}
+
+const schemaDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+function clockTime(total: number): string {
+  const wrapped = total % (24 * 60);
+  const hour = Math.floor(wrapped / 60);
+  const minute = wrapped % 60;
+  return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+}
+
+/** schema.org openingHours values, e.g. ["Mo,Tu,We 11:00-22:00"]. Undefined when the hours are not unambiguous. */
+export function schemaOpeningHours(hours: string | undefined): string[] | undefined {
+  const parsed = parseHours(hours);
+  if (!parsed) return undefined;
+  if (parsed === 'always') return ['Mo-Su 00:00-23:59'];
+  return parsed.map((span) => {
+    const days = [...span.days].sort((a, b) => ((a + 6) % 7) - ((b + 6) % 7));
+    return `${days.map((day) => schemaDays[day]).join(',')} ${clockTime(span.start)}-${clockTime(span.end)}`;
+  });
+}
+
+/** Returns a status only when the hours string is unambiguous. */
+export function hoursStatus(hours: string | undefined, now = new Date()): HoursStatus | undefined {
+  const spans = parseHours(hours);
+  if (!spans) return undefined;
+  if (spans === 'always') return { open: true, label: 'Open now' };
 
   const clock = new Intl.DateTimeFormat('en-US', {
     timeZone: 'America/New_York',

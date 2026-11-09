@@ -10,7 +10,7 @@ import { listingCounts } from '../../lib/catalog';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { reservePicture } from '../../lib/pictures';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
 import { categories, categoryInfo } from '../../lib/taxonomy';
 
 const listings = await loadListings();
@@ -45,7 +45,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`All places · ${siteName}`} description={description} image={placesHero.src} imageAlt={placesHero.alt} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('All places')} description={description} image={placesHero.src} imageAlt={placesHero.alt} jsonLd={jsonLd}>
   <div class="wrap">
     <AttributedPhoto picture={placesHero} variant="hero" />
     <header class="page-head">

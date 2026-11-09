@@ -6,7 +6,7 @@ import { listingsInArea } from '../../../../lib/catalog';
 import { coverForListing } from '../../../../lib/covers';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../../../lib/jsonld';
 import { loadListings } from '../../../../lib/listings';
-import { absoluteUrl, href, siteName } from '../../../../lib/site';
+import { absoluteUrl, href, latestDate, minIndexableListings, pageTitle, siteName } from '../../../../lib/site';
 import { categories, categoryInfo, isCategory } from '../../../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -66,7 +66,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${info.plural} in ${area.data.name} · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={pageTitle(`${info.plural} in ${area.data.name}`)}
+  description={description}
+  noindex={listings.length < minIndexableListings}
+  modified={latestDate(listings.map((listing) => listing.data.lastVerified))}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>

@@ -9,7 +9,7 @@ import { connectionInfo } from '../../lib/connections';
 import { breadcrumbJsonLd, personJsonLd } from '../../lib/jsonld';
 import { loadPeople } from '../../lib/people';
 import { shareableSrc } from '../../lib/pictures';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
   const people = await loadPeople();
@@ -51,7 +51,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={`${data.name} — Notable residents & history · ${siteName}`}
+  title={pageTitle(`${data.name}: Washington Heights History`)}
   description={data.summary}
   ogType="article"
   image={shareableSrc(data.image?.src)}

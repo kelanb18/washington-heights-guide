@@ -7,7 +7,7 @@ import { connectionInfo, connections } from '../../lib/connections';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadPeople } from '../../lib/people';
 import { claimFirstPicture, reservePicture } from '../../lib/pictures';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
 
 const people = await loadPeople();
 const usedPictures = new Set<string>();
@@ -57,7 +57,7 @@ if (people.length > 0) {
 ---
 
 <BaseLayout
-  title={`Notable residents & history · ${siteName}`}
+  title={pageTitle('Notable residents & history')}
   description={description}
   image={peopleHero.src}
   imageAlt={peopleHero.alt}

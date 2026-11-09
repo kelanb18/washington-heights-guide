@@ -2,6 +2,7 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import sitemapRules from './integrations/sitemap-rules.mjs';
 
 const site = (process.env.SITE ?? 'https://washingtonheightsguide.com').replace(/\/$/, '');
 const includeExamples = process.env.INCLUDE_EXAMPLES === 'true';
@@ -59,6 +60,8 @@ export default defineConfig({
         return true;
       },
     }),
+    // Must come after sitemap(): drops noindexed pages and adds lastmod.
+    sitemapRules(),
   ],
   vite: {
     define: {

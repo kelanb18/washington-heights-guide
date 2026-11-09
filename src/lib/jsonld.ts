@@ -2,6 +2,8 @@ import type { Area } from './areas';
 import type { Listing } from './listings';
 import type { Person } from './people';
 import type { Production } from './productions';
+import { schemaOpeningHours } from './hours';
+import { shareableSrc } from './pictures';
 import { categoryInfo } from './taxonomy';
 
 export interface Crumb {
@@ -81,9 +83,17 @@ export function listingJsonLd(
   if (data.priceLevel) json.priceRange = data.priceLevel;
   if (data.phone) json.telephone = data.phone;
   if (data.cuisine) json.servesCuisine = data.cuisine;
-  if (data.images.length > 0) {
-    json.image = data.images.map((image) => absoluteImage(site, image.src));
-  }
+  const imageUrls = [
+    ...new Set(
+      [data.image?.src, ...data.gallery.map((image) => image.src), ...data.images.map((image) => image.src)]
+        .map((src) => shareableSrc(src))
+        .filter((src): src is string => Boolean(src))
+        .map((src) => absoluteImage(site, src)),
+    ),
+  ];
+  if (imageUrls.length > 0) json.image = imageUrls;
+  const openingHours = schemaOpeningHours(data.hours);
+  if (openingHours) json.openingHours = openingHours;
   if (data.latitude != null && data.longitude != null) {
     json.geo = {
       '@type': 'GeoCoordinates',

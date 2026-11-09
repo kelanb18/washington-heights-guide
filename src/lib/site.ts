@@ -5,6 +5,29 @@ export const defaultDescription =
 
 export const correctionsEmail = 'washingtonheightsguide@gmail.com';
 
+/** Search engines can take a title of about this many characters before cutting it. */
+export const titleLimit = 60;
+
+/** Category pages with fewer listings than this are noindexed and left out of the sitemap. */
+export const minIndexableListings = 3;
+
+/** "[head] | Washington Heights Guide". */
+export function pageTitle(head: string): string {
+  return `${head} | ${siteName}`;
+}
+
+/** Adds the site name only while the whole title stays within the limit. */
+export function pageTitleFit(head: string): string {
+  const full = pageTitle(head);
+  return full.length <= titleLimit ? full : head;
+}
+
+/** The newest of a set of dates, as YYYY-MM-DD, for article:modified_time and sitemap lastmod. */
+export function latestDate(dates: Date[]): string | undefined {
+  if (dates.length === 0) return undefined;
+  return isoDate(new Date(Math.max(...dates.map((date) => date.getTime()))));
+}
+
 export const scopeLine =
   'Washington Heights, from West 155th Street to the Dyckman edge of Inwood.';
 

@@ -4,7 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { coverForListing } from '../../../lib/covers';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
 import { loadListings } from '../../../lib/listings';
-import { absoluteUrl, siteName } from '../../../lib/site';
+import { absoluteUrl, latestDate, minIndexableListings, pageTitle, siteName } from '../../../lib/site';
 import { categories, categoryInfo, isCategory } from '../../../lib/taxonomy';
 
 export function getStaticPaths() {
@@ -45,11 +45,17 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`${info.plural} in Washington Heights · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={pageTitle(`${info.plural} in Washington Heights`)}
+  description={description}
+  noindex={listings.length < minIndexableListings}
+  modified={latestDate(listings.map((listing) => listing.data.lastVerified))}
+  jsonLd={jsonLd}
+>
   <div class="wrap">
     <header class="page-head">
       <p class="kicker">Category</p>
-      <h1>{info.plural}</h1>
+      <h1>{info.plural} in Washington Heights</h1>
       <p class="lede">{info.blurb}</p>
       <p class="count">
         {listings.length === 0 ? 'No verified listings yet' : `${listings.length} ${listings.length === 1 ? 'place' : 'places'}`}

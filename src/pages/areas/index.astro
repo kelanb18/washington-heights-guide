@@ -9,7 +9,7 @@ import { listingCounts } from '../../lib/catalog';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { pinsFor } from '../../lib/pins';
-import { absoluteUrl, href, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
 
 const areas = await loadAreas();
 const listings = await loadListings();
@@ -44,7 +44,7 @@ if (areas.length > 0) {
 }
 ---
 
-<BaseLayout title={`Areas · ${siteName}`} description={description} image={areasHero.src} imageAlt={areasHero.alt} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Areas')} description={description} image={areasHero.src} imageAlt={areasHero.alt} jsonLd={jsonLd}>
   <div class="wrap">
     <AttributedPhoto picture={areasHero} variant="hero" />
     <header class="page-head">

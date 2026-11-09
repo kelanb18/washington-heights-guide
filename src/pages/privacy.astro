@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../lib/jsonld';
-import { absoluteUrl, correctionsEmail, siteName } from '../lib/site';
+import { absoluteUrl, correctionsEmail, formatDate, href, isoDate, pageTitle, siteName } from '../lib/site';
 
-const description = `How ${siteName} handles newsletter subscriptions, analytics, and contact messages.`;
+const effectiveDate = new Date('2026-11-09T00:00:00Z');
+
+const description = `How ${siteName} handles newsletter subscriptions, Google Analytics, cookies, and contact messages.`;
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
 
@@ -15,12 +17,15 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={`Privacy · ${siteName}`} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Privacy')} description={description} jsonLd={jsonLd}>
   <article class="wrap prose">
     <header class="page-head">
       <p class="kicker">Your information</p>
       <h1>Privacy</h1>
       <p class="lede">A short explanation of the information used to run this guide.</p>
+      <p>
+        Effective date: <time datetime={isoDate(effectiveDate)}>{formatDate(effectiveDate)}</time>
+      </p>
     </header>
 
     <h2>Newsletter</h2>
@@ -31,11 +36,32 @@ const jsonLd = [
       <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>.
     </p>
 
-    <h2>Analytics</h2>
+    <h2 id="analytics">Analytics and cookies</h2>
     <p>
-      This site uses Google Tag Manager to load analytics tags configured by the site owner. Those tags
-      may collect information about visits and interactions, subject to the services’ settings and
-      policies.
+      This site uses Google Analytics, loaded through Google Tag Manager, to count visits and see which
+      pages people read. Google Analytics sets cookies in your browser and collects information such as
+      the pages you view, how you arrived, how far you scroll, links you follow off the site, and general
+      details about your device, browser, and approximate location. It does not give this site your name
+      or email address.
+    </p>
+    <p>
+      Google processes this information under its own policies. You can read
+      <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">how Google uses information from sites that use its services</a>.
+      To stop Google Analytics from collecting your visits on every site, install the
+      <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer" target="_blank">Google Analytics opt-out browser add-on</a>.
+      You can also block or delete cookies in your browser settings. The guide works without them.
+    </p>
+    <p>
+      The site also stores your light or dark mode choice in your browser so the setting sticks. That
+      choice stays on your device and is not sent anywhere.
+    </p>
+
+    <h2 id="partners">Affiliate and advertising partners</h2>
+    <p>
+      Some pages include labeled affiliate links (see <a href={`${href('/about')}#disclosure`}>affiliate links and sponsorships</a>).
+      If you follow one, the partner’s site may set its own cookies to record the referral. If this site
+      adds advertising partners, they may also set cookies. Any such partners will be named on this page
+      when they are added, with a link to their own privacy policy.
     </p>
 
     <h2>Contact</h2>
