@@ -11,6 +11,7 @@ import { findArea } from '../../lib/catalog';
 import { loadGuides } from '../../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
+import { directionsHref, northToSouth, walkingRoute } from '../../lib/directions';
 import { pinsFor } from '../../lib/pins';
 import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { referenceId } from '../../lib/refs';
@@ -55,6 +56,14 @@ const rankedCards = ranked.map((item) => ({
       usedPictures,
     ) ?? null,
 }));
+const routeStops =
+  guide.data.route === 'as-listed'
+    ? ranked.map((item) => item.listing)
+    : northToSouth(
+        ranked.map((item) => item.listing),
+        listings,
+      );
+const routeLegs = walkingRoute(routeStops);
 const { Content } = await render(guide);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -120,6 +129,34 @@ const jsonLd = [
     <div class="prose">
       <Content />
     </div>
+    {
+      routeStops.length > 1 && (
+        <section class="route-box" aria-labelledby="route-heading">
+          <h2 id="route-heading">Walk this list</h2>
+          <p class="route-note">
+            Opens Google Maps with walking directions from where you are
+            {guide.data.route === 'as-listed' ? ', in the order above' : ', ordered north to south so you do not double back'}.
+            {routeLegs.length > 1 &&
+              ` Google Maps on a phone takes four stops per link, so the walk comes in ${routeLegs.length} parts. Each part starts where the last one ended.`}
+          </p>
+          <ol class="route-stops">
+            {routeStops.map((listing) => (
+              <li>{listing.data.name}</li>
+            ))}
+          </ol>
+          <p class="action-row">
+            {routeLegs.map((leg, index) => (
+              <a class:list={['button', { 'button-ghost': index > 0 }]} href={leg.href} rel="noopener noreferrer" target="_blank">
+                {routeLegs.length === 1
+                  ? 'Open the route in Google Maps'
+                  : `Part ${index + 1}: stops ${leg.from}–${leg.to}`}
+                <span class="sr-only"> (opens Google Maps in a new tab)</span>
+              </a>
+            ))}
+          </p>
+        </section>
+      )
+    }
     <ol class="ranked">
       {rankedCards.map((item) => (
         <li class="ranked-card">
@@ -137,6 +174,13 @@ const jsonLd = [
               <a href={href(`/places/${item.listing.id}`)}>{item.listing.data.name}</a>
             </h2>
             <p class="pick-blurb">{item.pick.blurb}</p>
+            <p class="where">
+              {item.listing.data.crossStreets}
+              <span aria-hidden="true"> · </span>
+              <a href={directionsHref(item.listing)} rel="noopener noreferrer" target="_blank">
+                Directions<span class="sr-only"> to {item.listing.data.name} (opens Google Maps)</span>
+              </a>
+            </p>
           </div>
         </li>
       ))}

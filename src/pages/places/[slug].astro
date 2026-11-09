@@ -9,7 +9,8 @@ import { findArea } from '../../lib/catalog';
 import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { collectTags, loadListings } from '../../lib/listings';
-import { absoluteUrl, formatDate, href, isoDate, mapsHref, pageTitle, siteName, telHref } from '../../lib/site';
+import { directionsHref, mapSearchHref } from '../../lib/directions';
+import { absoluteUrl, formatDate, href, isoDate, pageTitle, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
 import { claimPicture, reservePicture, shareableSrc } from '../../lib/pictures';
 import { categoryInfo, priceInfo, slugify } from '../../lib/taxonomy';
@@ -110,6 +111,21 @@ const jsonLd = [
         {data.address}
         <span aria-hidden="true"> · </span>
         {data.crossStreets}
+      </p>
+      <p class="action-row">
+        <a class="button" href={directionsHref(listing)} rel="noopener noreferrer" target="_blank">
+          Directions<span class="sr-only"> to {data.name} (opens Google Maps)</span>
+        </a>
+        {
+          data.phone && (
+            <a class="button button-ghost" href={telHref(data.phone)}>
+              Call<span class="sr-only"> {data.name}, {data.phone}</span>
+            </a>
+          )
+        }
+        <a class="button button-ghost" href={mapSearchHref(listing)} rel="noopener noreferrer" target="_blank">
+          View in Google Maps<span class="sr-only"> (opens in a new tab)</span>
+        </a>
       </p>
       {
         data.example && (
@@ -231,9 +247,12 @@ const jsonLd = [
           }
           <dt>Address</dt>
           <dd>
-            {data.address}
-            <br />
-            {data.neighborhood}, New York, NY{data.postalCode ? ` ${data.postalCode}` : ''}
+            <a href={mapSearchHref(listing)} rel="noopener noreferrer" target="_blank">
+              {data.address}
+              <br />
+              {data.neighborhood}, New York, NY{data.postalCode ? ` ${data.postalCode}` : ''}
+              <span class="sr-only"> (opens Google Maps)</span>
+            </a>
           </dd>
           <dt>Cross streets</dt>
           <dd>{data.crossStreets}</dd>
@@ -268,11 +287,7 @@ const jsonLd = [
                 <dt>Map</dt>
                 <dd>
                   <PlaceMap pins={pins} label={`Map of ${data.name}`} compact />
-                  <a
-                    href={mapsHref([data.address, data.crossStreets, data.neighborhood, data.postalCode])}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
+                  <a href={mapSearchHref(listing)} rel="noopener noreferrer" target="_blank">
                     Open in Google Maps
                     <span class="sr-only"> (opens in a new tab)</span>
                   </a>

@@ -1433,3 +1433,41 @@ ul.tag-line {
     scroll-behavior: auto;
   }
 }
+
+/* Walking route on best-of guides */
+.route-box {
+  margin: 1.6rem 0 1.4rem;
+  padding: 1rem 1.05rem 1.15rem;
+  background: var(--pine-soft);
+  color: var(--pine);
+  font-family: var(--sans);
+}
+
+.route-box h2 {
+  margin: 0 0 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.route-note {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.route-stops {
+  margin: 0.7rem 0 0;
+  padding-left: 1.4rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.route-box .action-row .button,
+.listing-head .action-row .button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}

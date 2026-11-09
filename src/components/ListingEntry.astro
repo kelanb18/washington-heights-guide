@@ -3,6 +3,7 @@ import AttributedPhoto from './AttributedPhoto.astro';
 import { loadAreas } from '../lib/areas';
 import { findArea } from '../lib/catalog';
 import HoursNote from './HoursNote.astro';
+import { directionsHref } from '../lib/directions';
 import type { Listing } from '../lib/listings';
 import type { CreditedImage } from '../lib/picture-schema';
 import { formatDate, href, isoDate } from '../lib/site';
@@ -87,6 +88,10 @@ const Heading = heading;
       }
       <span aria-hidden="true"> · </span>
       <time datetime={isoDate(data.lastVerified)}>Checked {formatDate(data.lastVerified)}</time>
+      <span aria-hidden="true"> · </span>
+      <a href={directionsHref(listing)} rel="noopener noreferrer" target="_blank">
+        Directions<span class="sr-only"> to {data.name} (opens Google Maps)</span>
+      </a>
     </p>
   </div>
 </li>

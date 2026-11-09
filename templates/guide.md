@@ -4,6 +4,8 @@
 # Example: src/content/guides/sample-guide.md → /best/sample-guide/
 # picks.listing is a slug in src/content/listings/, without .md.
 # The order of picks is the ranking. Do not invent a rank you have not checked.
+# route: "as-listed" makes the Google Maps walking route follow the picks order (use it for
+# itineraries). Leave it out and the route is sorted north to south by cross street.
 
 title: "EXAMPLE Guide Title"
 description: "One or two sentences, 40 to 160 characters, for search and social cards. This line is still placeholder copy for a guide that is not a real ranking."

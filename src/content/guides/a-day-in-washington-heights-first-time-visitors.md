@@ -1,6 +1,7 @@
 ---
 title: "A Day in Washington Heights: A First-Timer's Itinerary"
 description: "One day in Washington Heights: coffee, Fort Tryon Park and The Cloisters, ramen, the High Bridge, and a Dominican dinner across from the United Palace."
+route: "as-listed"
 updated: 2026-10-28
 picks:
   - listing: "buunni-coffee-pinehurst"

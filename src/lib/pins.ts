@@ -1,3 +1,4 @@
+import { directionsHref } from './directions';
 import type { Listing } from './listings';
 import { href } from './site';
 import { categoryInfo } from './taxonomy';
@@ -10,6 +11,7 @@ export interface MapPin {
   category: string;
   categoryLabel: string;
   sponsored?: boolean;
+  directions?: string;
 }
 
 export function pinsFor(listings: Listing[]): MapPin[] {
@@ -25,6 +27,7 @@ export function pinsFor(listings: Listing[]): MapPin[] {
       category,
       categoryLabel: categoryInfo[category].singular,
       sponsored,
+      directions: directionsHref(listing),
     });
   }
   return pins;

@@ -24,6 +24,12 @@ export const guideSchema = z
       )
       .min(1, 'A guide needs at least one pick.')
       .max(12),
+    route: z
+      .enum(['north-to-south', 'as-listed'])
+      .default('north-to-south')
+      .describe(
+        'Stop order for the Google Maps walking route. "north-to-south" sorts by cross street so a ranked list walks without doubling back; "as-listed" keeps the picks order, for itineraries.',
+      ),
     area: reference('areas').optional().describe('Optional area slug this guide is about.'),
     category: z.enum(categories).optional().describe('Optional listing category this guide is about.'),
     updated: z.coerce.date().describe('Date the ranking was last updated. YAML date: 2026-10-01.'),

@@ -59,6 +59,7 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       category: string;
       categoryLabel: string;
       sponsored?: boolean;
+      directions?: string;
     }>;
     const map = Leaflet.map(canvas, { scrollWheelZoom: false });
     Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -93,6 +94,14 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
         popup.append(flag);
       }
       popup.append(link, kind);
+      if (pin.directions) {
+        const go = document.createElement('a');
+        go.href = pin.directions;
+        go.target = '_blank';
+        go.rel = 'noopener noreferrer';
+        go.textContent = 'Directions';
+        popup.append(go);
+      }
       marker.bindPopup(popup);
       return { marker, category: pin.category };
     });
