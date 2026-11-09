@@ -1245,10 +1245,14 @@ html[data-theme='dark'] .open-badge.is-open {
   font: inherit;
 }
 
-.newsletter .button[disabled],
-.newsletter input[disabled] {
-  opacity: 0.72;
-  cursor: not-allowed;
+.newsletter h2 {
+  margin: 0.45rem 0;
+  font-size: 1.15rem;
+}
+
+.newsletter-note {
+  max-width: 32rem;
+  font-size: 0.8rem;
 }
 
 ul.tag-line {

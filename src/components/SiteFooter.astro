@@ -1,5 +1,7 @@
 ---
 import { correctionsEmail, href, scopeLine, siteName } from '../lib/site';
+
+const buttondownUsername = 'washingtonheightsguide';
 ---
 
 <footer class="colophon" data-pagefind-ignore>
@@ -13,17 +15,42 @@ import { correctionsEmail, href, scopeLine, siteName } from '../lib/site';
         <a href={`${href('/about')}#disclosure`}>Affiliate links and sponsorships</a>
         <span aria-hidden="true"> · </span>
         <a href={`${href('/about')}#corrections`}>Corrections</a>
+        <span aria-hidden="true"> · </span>
+        <a href={href('/privacy')}>Privacy</a>
       </p>
       <p>
         Corrections: <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>
       </p>
     </div>
-    <form class="newsletter" action="#" method="post">
+    <section class="newsletter" aria-labelledby="newsletter-title">
       <p class="kicker">Newsletter</p>
-      <p>A short letter about the neighborhood. Signup is not connected yet.</p>
-      <label class="sr-only" for="newsletter-email">Email address</label>
-      <input id="newsletter-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" disabled />
-      <button type="button" class="button" disabled>Coming soon</button>
-    </form>
+      <h2 id="newsletter-title">A short letter about the neighborhood.</h2>
+      {
+        buttondownUsername ? (
+          <form
+            action={`https://buttondown.com/api/emails/embed-subscribe/${encodeURIComponent(buttondownUsername)}`}
+            method="post"
+          >
+            <label class="sr-only" for="newsletter-email">Email address</label>
+            <input
+              id="newsletter-email"
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            />
+            <input type="hidden" name="embed" value="1" />
+            <button type="submit" class="button">Subscribe</button>
+            <p class="newsletter-note">
+              By subscribing, you agree to receive the newsletter. Unsubscribe anytime. See our{' '}
+              <a href={href('/privacy')}>privacy policy</a>.
+            </p>
+          </form>
+        ) : (
+          <p>Signup is being connected and is not active yet.</p>
+        )
+      }
+    </section>
   </div>
 </footer>

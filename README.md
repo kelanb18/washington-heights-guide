@@ -55,6 +55,8 @@ No `vercel.json` and no adapter. Astro’s static output is the whole site. Cano
 
 The default origin, when `SITE` is unset, is `https://washingtonheightsguide.com`.
 
+The footer newsletter signup uses Buttondown's standard HTML subscription form and points to `buttondown.com/washingtonheightsguide`. The public username is configured in `src/components/SiteFooter.astro`; never put account passwords or API keys in the site.
+
 ## Listing format
 
 One place, one file:

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { absoluteUrl, correctionsEmail, siteName } from '../lib/site';
+
+const description = `How ${siteName} handles newsletter subscriptions, analytics, and contact messages.`;
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Privacy', url: absoluteUrl(site, '/privacy') },
+  ]),
+];
+---
+
+<BaseLayout title={`Privacy · ${siteName}`} description={description} jsonLd={jsonLd}>
+  <article class="wrap prose">
+    <header class="page-head">
+      <p class="kicker">Your information</p>
+      <h1>Privacy</h1>
+      <p class="lede">A short explanation of the information used to run this guide.</p>
+    </header>
+
+    <h2>Newsletter</h2>
+    <p>
+      If you subscribe, your email address is sent to Buttondown, which stores and processes it to manage
+      your subscription and deliver the newsletter. You can unsubscribe using the link in any newsletter
+      email. For help with your subscription or a request to remove your information, contact{' '}
+      <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>.
+    </p>
+
+    <h2>Analytics</h2>
+    <p>
+      This site uses Google Tag Manager to load analytics tags configured by the site owner. Those tags
+      may collect information about visits and interactions, subject to the services’ settings and
+      policies.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      For privacy questions, email <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>.
+    </p>
+  </article>
+</BaseLayout>
