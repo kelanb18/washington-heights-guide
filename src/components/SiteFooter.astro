@@ -1,5 +1,6 @@
 ---
 import { correctionsEmail, href, scopeLine, siteName } from '../lib/site';
+import { categories, categoryInfo } from '../lib/taxonomy';
 
 const buttondownUsername = 'washingtonheightsguide';
 ---
@@ -9,6 +10,14 @@ const buttondownUsername = 'washingtonheightsguide';
     <div>
       <p class="wordmark">{siteName}</p>
       <p>A neighborhood guide to {scopeLine}</p>
+      <p class="footer-categories">
+        {categories.map((category, index) => (
+          <>
+            {index > 0 && <span aria-hidden="true"> · </span>}
+            <a href={href(`/category/${category}`)}>{categoryInfo[category].plural}</a>
+          </>
+        ))}
+      </p>
       <p>
         <a href={href('/about')}>About</a>
         <span aria-hidden="true"> · </span>
@@ -28,7 +37,7 @@ const buttondownUsername = 'washingtonheightsguide';
     </div>
     <section class="newsletter" aria-labelledby="newsletter-title">
       <p class="kicker">Newsletter</p>
-      <h2 id="newsletter-title">A short letter about the neighborhood.</h2>
+      <h2 id="newsletter-title">get the neighborhood in your inbox.</h2>
       {
         buttondownUsername ? (
           <form

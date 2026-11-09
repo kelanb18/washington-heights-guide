@@ -1,58 +1,65 @@
 ---
-import AttributedPhoto from '../components/AttributedPhoto.astro';
-import EventRow from '../components/EventRow.astro';
 import HidePastEvents from '../components/HidePastEvents.astro';
-import { dayHeading, loadEvents } from '../lib/events';
 import PlaceMap from '../components/PlaceMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { areaTree, loadAreas } from '../lib/areas';
 import { coverForGuide } from '../lib/covers';
+import { loadEvents, timeRange, withOffset } from '../lib/events';
 import { loadGuides } from '../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { loadListings } from '../lib/listings';
 import { pinsFor } from '../lib/pins';
-import { reservePicture } from '../lib/pictures';
-import { absoluteUrl, formatDate, href, isoDate, siteName } from '../lib/site';
-import { homeFrames } from '../lib/site-heroes';
+import { absoluteUrl, href, siteName } from '../lib/site';
 
-const feature = homeFrames[0];
 const listings = await loadListings();
 const areas = await loadAreas();
 const guides = await loadGuides();
+const guideIds = new Set(guides.map((guide) => guide.id));
 const pins = pinsFor(listings);
 const roots = areaTree(areas);
 const flatten = (nodes: typeof roots): (typeof roots)[number]['area'][] =>
   nodes.flatMap((node) => [node.area, ...flatten(node.children)]);
 const neighborhoods = flatten(roots);
 
-const usedPictures = new Set<string>();
-reservePicture(feature.picture, usedPictures);
+/** Vibe shortcuts. Each points at a published guide; a vibe whose guide is missing is left out. */
+const vibes = [
+  { label: 'late night', guide: 'best-late-night-food-washington-heights', tone: 'tomato' },
+  { label: 'brunch', guide: 'best-brunch-washington-heights', tone: 'plain' },
+  { label: 'coffee run', guide: 'best-coffee-shops-washington-heights', tone: 'grape' },
+  { label: 'dominican food', guide: 'best-dominican-restaurants-washington-heights', tone: 'plain' },
+  { label: 'touch grass', guide: 'best-parks-and-views-washington-heights', tone: 'street' },
+  { label: 'w/ the kids', guide: 'best-spots-for-families-washington-heights', tone: 'plain' },
+  { label: 'history nerd', guide: 'history-lovers-guide-washington-heights', tone: 'bridge' },
+  { label: 'something sweet', guide: 'best-bakeries-and-desserts-washington-heights', tone: 'plain' },
+  { label: 'drinks', guide: 'best-bars-and-nightlife-washington-heights', tone: 'tomato' },
+].filter((vibe) => guideIds.has(vibe.guide));
 
-/** The four "here for a reason" guides, in this order, when they are published. */
-const situations: Array<{ id: string; kicker: string }> = [
-  { id: 'food-near-newyork-presbyterian-columbia-medical-center', kicker: 'Visiting the hospital' },
-  { id: 'where-to-eat-before-a-show-at-united-palace', kicker: 'Going to a show' },
-  { id: 'after-the-cloisters-walk-to-hudson-heights', kicker: 'After the museum' },
-  { id: 'a-day-in-washington-heights-first-time-visitors', kicker: 'First time here' },
+const usedPictures = new Set<string>();
+const situations = [
+  { id: 'food-near-newyork-presbyterian-columbia-medical-center', caption: 'food near the hospital', note: 'incl. a 24-hour spot' },
+  { id: 'where-to-eat-before-a-show-at-united-palace', caption: 'dinner before the show', note: 'United Palace, steps away' },
+  { id: 'after-the-cloisters-walk-to-hudson-heights', caption: 'the Cloisters walk', note: 'downhill to coffee + books' },
+  { id: 'a-day-in-washington-heights-first-time-visitors', caption: 'first time here?', note: 'a whole day, mapped' },
 ];
-const situationCards = situations.flatMap(({ id, kicker }) => {
-  const guide = guides.find((entry) => entry.id === id);
+const situationCards = situations.flatMap((item) => {
+  const guide = guides.find((entry) => entry.id === item.id);
   if (!guide) return [];
-  return [{ guide, kicker, cover: coverForGuide(guide, listings, areas, usedPictures)?.picture }];
+  return [{ ...item, guide, cover: coverForGuide(guide, listings, areas, usedPictures)?.picture }];
 });
 
 const { oneOff } = await loadEvents();
 const weekAhead = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
-const thisWeek = oneOff.filter((event) => event.start.slice(0, 10) <= weekAhead).slice(0, 5);
+const thisWeek = oneOff.filter((event) => event.start.slice(0, 10) <= weekAhead).slice(0, 4);
+const stubTones = ['tomato', 'grape', 'street', 'bridge'];
+const weekday = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', weekday: 'short' });
+const stubDay = (local: string) => {
+  const [y, m, d] = local.slice(0, 10).split('-').map(Number);
+  return { day: weekday.format(new Date(Date.UTC(y, m - 1, d))).toUpperCase(), date: String(d) };
+};
 
 const openings = listings.filter((listing) => listing.data.tags.includes('new-opening')).slice(0, 3);
 
-const startHere = [
-  { numeral: 'i.', label: 'Eat', note: 'Dominican plates, coffee, bakeries, late nights', path: '/category/restaurant' },
-  { numeral: 'ii.', label: 'See', note: 'The Cloisters, hilltop parks, the High Bridge', path: '/category/landmark' },
-  { numeral: 'iii.', label: 'Walk', note: 'Guides with routes that open in Google Maps', path: '/best' },
-  { numeral: 'iv.', label: 'Near me', note: 'Closest first, and what’s open right now', path: '/near-me' },
-];
+const ticker = ['mangú', 'open late', 'the Cloisters', 'coffee run', 'touch grass', 'the High Bridge', 'chicharrón', 'Fort Tryon'];
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -74,79 +81,126 @@ if (guides.length > 0) {
 <BaseLayout
   title="Washington Heights Guide: Food, Places & Neighborhoods"
   description={description}
-  image={feature.picture.src}
-  imageAlt={feature.picture.alt}
+  image="/images/site/home/collage-og.jpg"
+  imageAlt="Washington Heights, the neighborhood guide: a collage of Fort Tryon Park, the George Washington Bridge, a W 181 St sign, the Dominican flag, and plates of mangú."
   jsonLd={jsonLd}
 >
-  <div class="wrap front">
-    <section class="front-intro">
-      <p class="front-byline">By Kelan, who lives in Hudson Heights</p>
-      <h1>Where to eat, what to see, and how to walk Washington Heights.</h1>
-      <p class="front-dek">A short list of places I’d send a friend, each one checked and dated.</p>
+  <div class="wrap home">
+    <div class="home-collage">
+      <img
+        src="/images/site/home/collage-1774.webp"
+        srcset="/images/site/home/collage-760.webp 760w, /images/site/home/collage-1100.webp 1100w, /images/site/home/collage-1774.webp 1774w"
+        sizes="(min-width: 72rem) 72rem, 100vw"
+        width="1774"
+        height="887"
+        fetchpriority="high"
+        decoding="async"
+        alt="Washington Heights, the neighborhood guide: a torn-paper collage of the Fort Tryon Park banner and tower, George Washington in a straw hat, the Dominican flag, a W 181 St street sign, the George Washington Bridge, hibiscus flowers, plates of mangú, and apartment buildings above the trees."
+      />
+      <span class="sticker sticker-yellow home-collage-sticker" aria-hidden="true">est. by a neighbor</span>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      {[0, 1].map(() => ticker.map((word) => <span>✶ {word}</span>))}
+    </div>
+  </div>
+
+  <div class="wrap home">
+    <section class="home-intro">
+      <p class="scribble">hi, I’m Kelan. I live here.</p>
+      <h1>ok so where are we going?</h1>
+      <svg class="squiggle" aria-hidden="true" width="230" height="14" viewBox="0 0 210 14">
+        <path d="M2 9 C 30 2, 50 13, 80 7 S 140 3, 170 8 S 200 6, 208 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
+      </svg>
+      <p class="home-dek">
+        The places in Washington Heights I’d actually send a friend. Checked, dated, zero sponsored nonsense.
+      </p>
     </section>
 
-    <div class="front-hero">
-      <AttributedPhoto picture={feature.picture} variant="hero" />
-    </div>
-
-    <nav class="front-index" aria-labelledby="start-here">
-      <p class="front-label" id="start-here">Start here</p>
-      <ol>
+    <section class="home-block" aria-labelledby="vibe-heading">
+      <p class="label" id="vibe-heading">Pick a vibe</p>
+      <ul class="vibes">
         {
-          startHere.map((item) => (
+          vibes.map((vibe) => (
             <li>
-              <a href={href(item.path)}>
-                <span class="front-numeral" aria-hidden="true">{item.numeral}</span>
-                <span class="front-index-text">
-                  <span class="front-index-word">{item.label}</span>
-                  <span class="front-index-note">{item.note}</span>
-                </span>
-                <span class="front-arrow" aria-hidden="true">→</span>
+              <a class:list={['pill', `pill-${vibe.tone}`]} href={href(`/best/${vibe.guide}`)}>
+                {vibe.label}
               </a>
             </li>
           ))
         }
-      </ol>
-    </nav>
+      </ul>
+    </section>
+
+    <a class="open-rn" href={href('/near-me')}>
+      <span>
+        <span class="open-rn-title">what’s open rn?</span>
+        <span class="open-rn-note">closest first, sorted from where you are</span>
+      </span>
+      <span class="open-rn-arrow" aria-hidden="true">→</span>
+    </a>
 
     {
       situationCards.length > 0 && (
-        <section class="front-section" aria-labelledby="reasons-heading">
-          <h2 id="reasons-heading" class="front-heading">Here for a reason?</h2>
-          <p class="front-subhead">Short guides for the trips people actually make.</p>
-          <ul class="front-rows">
-            {situationCards.map(({ guide, kicker, cover }) => (
+        <section class="home-block" aria-labelledby="reasons-heading">
+          <div class="home-head">
+            <h2 id="reasons-heading" class="poster-heading">here for a reason?</h2>
+            <a href={href('/best')}>all {guides.length} guides</a>
+          </div>
+          <ul class="polaroids">
+            {situationCards.map((card) => (
               <li>
-                <a href={href(`/best/${guide.id}`)}>
-                  {cover && <img src={cover.src} alt={cover.alt} loading="lazy" decoding="async" width="92" height="92" />}
-                  <span>
-                    <span class="front-kicker">{kicker}</span>
-                    <span class="front-row-title">{guide.data.title}</span>
-                  </span>
+                <a class="polaroid" href={href(`/best/${card.guide.id}`)}>
+                  {card.cover && <img src={card.cover.src} alt={card.cover.alt} loading="lazy" decoding="async" />}
+                  <span class="polaroid-caption">{card.caption}</span>
+                  <span class="polaroid-note">{card.note}</span>
+                  <span class="sr-only">: {card.guide.data.title}</span>
                 </a>
               </li>
             ))}
           </ul>
-          <p class="front-more">
-            <a href={href('/best')}>All {guides.length} guides</a>
-          </p>
+          <p class="scribble scribble-note" aria-hidden="true">↑ trust me on the walk</p>
         </section>
       )
     }
 
     {
       thisWeek.length > 0 && (
-        <section class="front-section" aria-labelledby="events-heading" data-events-scope>
-          <h2 id="events-heading" class="front-heading">This week</h2>
-          <p class="front-subhead">Free programs in the parks, and what’s on at local venues.</p>
-          <ul class="event-list event-list-ruled">
-            {thisWeek.map((event) => (
-              <EventRow event={event} showDay dayLabel={dayHeading(event.start).split(',')[0]} compact />
-            ))}
+        <section class="home-block" aria-labelledby="events-heading" data-events-scope>
+          <div class="home-head">
+            <h2 id="events-heading" class="poster-heading">this week, irl</h2>
+            <a href={href('/events')}>all events</a>
+          </div>
+          <ul class="stubs">
+            {thisWeek.map((event, index) => {
+              const when = stubDay(event.start);
+              return (
+                <li class="stub" data-event-end={withOffset(event.end ?? event.start)}>
+                  <p class:list={['stub-date', `tone-${stubTones[index % stubTones.length]}`]}>
+                    <span>{when.day}</span>
+                    <span class="stub-num">{when.date}</span>
+                    <span>{timeRange(event.start, event.end)}</span>
+                  </p>
+                  <div class="stub-body">
+                    <span class="mini-sticker">{event.label}</span>
+                    <h3>
+                      <a href={event.sourceUrl} rel="noopener noreferrer" target="_blank">
+                        {event.title}
+                        <span class="sr-only"> (opens {event.sourceName} in a new tab)</span>
+                      </a>
+                    </h3>
+                    <p>
+                      {event.listingId ? <a href={href(`/places/${event.listingId}`)}>{event.place}</a> : event.place}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
-          <p class="front-more">
-            <a href={href('/events')}>All events</a>
-          </p>
+          <p class="front-subhead" data-events-empty hidden>Nothing else this week. The events page has what’s next.</p>
+          <a class="pill pill-ink" href={href('/events')}>see everything happening →</a>
           <HidePastEvents />
         </section>
       )
@@ -154,16 +208,15 @@ if (guides.length > 0) {
 
     {
       openings.length > 0 && (
-        <section class="front-section" aria-labelledby="new-heading">
-          <h2 id="new-heading" class="front-rule-heading">New in the neighborhood</h2>
-          <ul class="front-list">
+        <section class="home-block" aria-labelledby="new-heading">
+          <h2 id="new-heading" class="poster-heading">just opened</h2>
+          <ul class="home-list">
             {openings.map((listing) => (
               <li>
                 <a href={href(`/places/${listing.id}`)}>
-                  <span class="front-kicker">
-                    Checked <time datetime={isoDate(listing.data.lastVerified)}>{formatDate(listing.data.lastVerified)}</time>
-                  </span>
-                  <span class="front-row-title">{listing.data.name}</span>
+                  <span class="mini-sticker mini-sticker-yellow">new</span>
+                  <span class="home-list-title">{listing.data.name}</span>
+                  <span class="home-list-note">{listing.data.verdict}</span>
                 </a>
               </li>
             ))}
@@ -174,60 +227,60 @@ if (guides.length > 0) {
 
     {
       pins.length > 0 && (
-        <section class="front-section" aria-labelledby="map-heading">
-          <h2 id="map-heading" class="front-rule-heading">Every place on one map</h2>
+        <section class="home-block" aria-labelledby="map-heading">
+          <div class="home-head">
+            <h2 id="map-heading" class="poster-heading">the whole map</h2>
+            <a href={href('/map')}>open the big map</a>
+          </div>
           <PlaceMap pins={pins} label="Places in Washington Heights" />
-          <p class="front-more"><a href={href('/map')}>Open the full map, with details for every place</a></p>
         </section>
       )
     }
 
     {
       neighborhoods.length > 0 && (
-        <section class="front-section" aria-labelledby="areas-heading">
-          <h2 id="areas-heading" class="front-rule-heading">The neighborhoods</h2>
-          <p class="front-inline-links">
-            {neighborhoods.map((area, index) => (
-              <>
-                {index > 0 && <span aria-hidden="true"> · </span>}
-                <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
-              </>
+        <section class="home-block" aria-labelledby="areas-heading">
+          <h2 id="areas-heading" class="poster-heading">pick a corner</h2>
+          <ul class="corners">
+            {neighborhoods.map((area) => (
+              <li>
+                <a class="pill pill-plain pill-square" href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+              </li>
             ))}
-          </p>
+          </ul>
         </section>
       )
     }
 
-    <section class="front-section" aria-labelledby="archive-heading">
-      <h2 id="archive-heading" class="front-rule-heading">From the archive</h2>
-      <ul class="front-list">
+    <section class="home-block" aria-labelledby="archive-heading">
+      <h2 id="archive-heading" class="poster-heading">the backstory</h2>
+      <ul class="home-list">
         <li>
           <a href={href('/people/fort-washington-battle-1776')}>
-            <span class="front-kicker">History</span>
-            <span class="front-row-title">Where Fort Washington fell in 1776</span>
+            <span class="mini-sticker">history</span>
+            <span class="home-list-title">Where Fort Washington fell in 1776</span>
           </a>
         </li>
         <li>
           <a href={href('/filmed-here')}>
-            <span class="front-kicker">Filmed here</span>
-            <span class="front-row-title">In the Heights, Malcolm X, Coogan’s Bluff and more</span>
+            <span class="mini-sticker">filmed here</span>
+            <span class="home-list-title">In the Heights, Malcolm X, Coogan’s Bluff and more</span>
           </a>
         </li>
         <li>
           <a href={href('/people')}>
-            <span class="front-kicker">People</span>
-            <span class="front-row-title">Residents, from Lou Gehrig to Lin-Manuel Miranda</span>
+            <span class="mini-sticker">people</span>
+            <span class="home-list-title">Residents, from Lou Gehrig to Lin-Manuel Miranda</span>
           </a>
         </li>
       </ul>
     </section>
 
-    <section class="front-signoff">
-      <p>
-        I check every listing myself, and each page shows the date I last did. Sponsors are labeled, and verdicts are not
-        for sale. <em>— Kelan</em>
-      </p>
-      <p class="front-more"><a href={href('/about')}>How this guide works</a></p>
+    <section class="promise">
+      <p class="promise-title">no paid opinions. ever.</p>
+      <p>I check every spot myself and date every page. Sponsors get a label, never a better review.</p>
+      <p class="scribble">— Kelan</p>
+      <p class="promise-link"><a href={href('/about')}>how this guide works</a></p>
     </section>
   </div>
 </BaseLayout>

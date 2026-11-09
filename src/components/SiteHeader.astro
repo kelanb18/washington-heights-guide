@@ -1,5 +1,4 @@
 ---
-import { categories, categoryInfo } from '../lib/taxonomy';
 import { href, normalizePath } from '../lib/site';
 
 const current = normalizePath(Astro.url.pathname);
@@ -33,7 +32,7 @@ const primary = [
         <button class="tool-link" type="button" id="theme-toggle" aria-pressed="false">Dark mode</button>
       </div>
     </div>
-    <nav aria-label="Primary">
+    <nav aria-label="Primary" class="nav-scroll">
       <ul class="nav-list">
         {
           primary.map((item) => (
@@ -43,22 +42,6 @@ const primary = [
               </a>
             </li>
           ))
-        }
-      </ul>
-    </nav>
-    <nav class="sections" aria-label="Categories">
-      <ul>
-        {
-          categories.map((category) => {
-            const path = href(`/category/${category}`);
-            return (
-              <li>
-                <a href={path} aria-current={currentAttr(path) && 'page'}>
-                  {categoryInfo[category].plural}
-                </a>
-              </li>
-            );
-          })
         }
       </ul>
     </nav>

@@ -116,7 +116,7 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       if (visible.length === 1) {
         map.setView(visible[0].getLatLng(), 16);
       } else if (visible.length > 1) {
-        map.fitBounds(Leaflet.featureGroup(visible).getBounds().pad(0.2));
+        map.fitBounds(Leaflet.featureGroup(visible).getBounds().pad(0.06));
       }
     };
 
