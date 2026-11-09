@@ -1768,3 +1768,111 @@ ul.tag-line {
   font-size: 1.1rem;
   line-height: 1.5;
 }
+
+/* Events */
+.event-day-group + .event-day-group {
+  margin-top: 1.4rem;
+}
+
+.event-day-heading {
+  margin: 1.1rem 0 0.2rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.35rem;
+}
+
+.event-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+
+.event-list-ruled {
+  margin-top: 0.6rem;
+  border-bottom: 1px solid var(--ink);
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 5.2rem minmax(0, 1fr);
+  gap: 0.9rem;
+  padding: 0.9rem 0;
+}
+
+.event-row + .event-row {
+  border-top: 1px solid var(--rule);
+}
+
+.event-time {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--brick);
+}
+
+.event-day {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.event-title {
+  margin: 0.2rem 0 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.event-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.event-title a:hover {
+  color: var(--brick);
+}
+
+.event-place,
+.event-summary,
+.event-note,
+.event-source {
+  margin: 0.25rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.event-recurring .event-place {
+  display: block;
+}
+
+.event-summary {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--ink);
+}
+
+.event-note {
+  font-style: italic;
+}
+
+.event-source {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.event-row-compact .event-title {
+  font-size: 1.08rem;
+}
+
+@media (max-width: 30rem) {
+  .event-row {
+    grid-template-columns: 4.4rem minmax(0, 1fr);
+    gap: 0.7rem;
+  }
+}

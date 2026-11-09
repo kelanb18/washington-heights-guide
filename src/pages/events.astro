@@ -1,0 +1,136 @@
+---
+import EventRow from '../components/EventRow.astro';
+import HidePastEvents from '../components/HidePastEvents.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { dayHeading, loadEvents, scheduleLine, withOffset } from '../lib/events';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { loadListings } from '../lib/listings';
+import { absoluteUrl, correctionsEmail, href, pageTitle, siteName } from '../lib/site';
+
+const { oneOff, recurring } = await loadEvents();
+const listings = await loadListings();
+const byId = new Map(listings.map((listing) => [listing.id, listing]));
+
+const days = new Map<string, typeof oneOff>();
+for (const event of oneOff) {
+  const day = event.start.slice(0, 10);
+  days.set(day, [...(days.get(day) ?? []), event]);
+}
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const pageUrl = absoluteUrl(site, '/events');
+
+const eventJsonLd = oneOff.slice(0, 40).map((event) => {
+  const listing = event.listingId ? byId.get(event.listingId) : undefined;
+  const address = listing?.data.address ?? event.detail;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.title,
+    startDate: withOffset(event.start),
+    ...(event.end ? { endDate: withOffset(event.end) } : {}),
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    description: event.summary,
+    url: event.sourceUrl,
+    location: {
+      '@type': 'Place',
+      name: event.place,
+      address: {
+        '@type': 'PostalAddress',
+        ...(address ? { streetAddress: address } : {}),
+        addressLocality: 'New York',
+        addressRegion: 'NY',
+        ...(listing?.data.postalCode ? { postalCode: listing.data.postalCode } : {}),
+        addressCountry: 'US',
+      },
+      ...(listing?.data.latitude != null && listing.data.longitude != null
+        ? { geo: { '@type': 'GeoCoordinates', latitude: listing.data.latitude, longitude: listing.data.longitude } }
+        : {}),
+    },
+    organizer: { '@type': 'Organization', name: event.sourceName.replace(/ tickets$/, ''), url: event.sourceUrl },
+  };
+});
+
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Events', url: pageUrl },
+  ]),
+  ...eventJsonLd,
+];
+const description =
+  'Upcoming events in Washington Heights: free NYC Parks programs in Fort Tryon, Highbridge, and J. Hood Wright parks, plus shows, talks, and more from neighborhood venues.';
+---
+
+<BaseLayout title={pageTitle('Events in Washington Heights')} description={description} jsonLd={jsonLd}>
+  <div class="wrap front" data-events-scope>
+    <section class="front-intro">
+      <p class="front-byline">What’s on</p>
+      <h1>Events in Washington Heights</h1>
+      <p class="front-dek">
+        Free programs in the neighborhood’s parks and shows, talks and more at local venues. Each one links to its official
+        page.
+      </p>
+    </section>
+
+    <section class="front-section" aria-labelledby="coming-up">
+      <h2 id="coming-up" class="front-rule-heading">Coming up</h2>
+      {
+        days.size === 0 ? (
+          <p class="front-subhead">Nothing is listed right now. Check back soon.</p>
+        ) : (
+          [...days.entries()].map(([day, events]) => (
+            <section class="event-day-group" data-event-group aria-label={dayHeading(day)}>
+              <h3 class="event-day-heading">{dayHeading(day)}</h3>
+              <ul class="event-list">
+                {events.map((event) => (
+                  <EventRow event={event} />
+                ))}
+              </ul>
+            </section>
+          ))
+        )
+      }
+      <p class="front-subhead" data-events-empty hidden>Nothing else is listed for the coming days. Check back soon.</p>
+    </section>
+
+    {
+      recurring.length > 0 && (
+        <section class="front-section" aria-labelledby="every-week">
+          <h2 id="every-week" class="front-rule-heading">Every week</h2>
+          <p class="front-subhead">Regular classes and programs in the parks over the next two weeks.</p>
+          <ul class="front-list event-recurring">
+            {recurring.map((item) => (
+              <li>
+                <a href={item.sourceUrl} rel="noopener noreferrer" target="_blank">
+                  <span class="front-kicker">
+                    {item.label}
+                    {item.kids && ' · Good for kids'}
+                  </span>
+                  <span class="front-row-title">
+                    {item.title}
+                    <span class="sr-only"> (opens {item.sourceName} in a new tab)</span>
+                  </span>
+                  <span class="event-place">
+                    {item.place} · {scheduleLine(item.occurrences)}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section class="front-signoff">
+      <p>
+        Parks events come from NYC Parks’ public listings. Venue events are added by hand from each venue’s own calendar. Know
+        an event in the neighborhood? Email <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent('Event for the guide')}`}>{correctionsEmail}</a> with the link.
+      </p>
+      <p class="front-more"><a href={href('/near-me')}>What’s open near me</a></p>
+    </section>
+  </div>
+  <HidePastEvents />
+</BaseLayout>

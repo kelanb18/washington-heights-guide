@@ -1,0 +1,21 @@
+<script>
+  // The site is built ahead of time, so an event can end between builds. Hide anything already over,
+  // and any day group or section left empty.
+  function hidePast() {
+    const now = Date.now();
+    for (const row of document.querySelectorAll<HTMLElement>('[data-event-end]')) {
+      const end = Date.parse(row.dataset.eventEnd ?? '');
+      if (!Number.isNaN(end) && end < now) row.hidden = true;
+    }
+    for (const group of document.querySelectorAll<HTMLElement>('[data-event-group]')) {
+      const visible = group.querySelectorAll('[data-event-end]:not([hidden])').length;
+      group.hidden = visible === 0;
+    }
+    for (const empty of document.querySelectorAll<HTMLElement>('[data-events-empty]')) {
+      const scope = empty.closest('[data-events-scope]') ?? document;
+      empty.hidden = scope.querySelectorAll('[data-event-end]:not([hidden])').length > 0;
+    }
+  }
+  hidePast();
+  setInterval(hidePast, 5 * 60_000);
+</script>

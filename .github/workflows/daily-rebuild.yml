@@ -1,0 +1,24 @@
+name: Daily rebuild
+
+# Rebuilds the site every morning so the events page picks up the latest NYC Parks listings.
+# Setup (once): in Vercel, Project Settings > Git > Deploy Hooks, create a hook for the main
+# branch, then add its URL as a GitHub Actions secret named VERCEL_DEPLOY_HOOK.
+
+on:
+  schedule:
+    - cron: '0 10 * * *' # 10:00 UTC = 5 or 6am in New York
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a Vercel production build
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "VERCEL_DEPLOY_HOOK is not set; skipping. See the setup note at the top of this file."
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK"

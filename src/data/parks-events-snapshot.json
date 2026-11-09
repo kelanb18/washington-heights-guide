@@ -1,0 +1,507 @@
+[
+ {
+  "title": "Forest Fitness",
+  "guid": "2219113",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/07/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221328419179?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-07T08:30:00.000",
+  "endtime": "2026-11-07T09:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness",
+  "coordinates": "40.85941194491500000, -73.93413484096500000"
+ },
+ {
+  "title": "Rise&Restore Circuit Training",
+  "instructor": "Ashley Cabrera",
+  "guid": "2188224",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/07/riserestore-circuit-training"
+  },
+  "description": "This circuit training class combines bodyweight resistance training and conditioning to provide you with a dynamic full body workout. Whether you are a beginner or looking for a challenge; this class for all fitness levels and modifications are always provided. Come engage in exercises that target all muscle groups, get your heart pumping, and connect with people in your community!",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=c0a398c8-e8d0-4c97-955d-59a702b576bf&occurrenceDate=20261107"
+  },
+  "registration_description": "Registration has begun and ends on 11/7/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-07T10:00:00.000",
+  "endtime": "2026-11-07T10:45:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Guided Nature Walk",
+  "guid": "2313371",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/07/guided-nature-walk"
+  },
+  "description": "Join naturalist Ken Chaya for a guided nature walk through Fort Tryon Park and discover the remarkable diversity of plants, trees, and wildlife that make this urban oasis so special. Known for his deep knowledge of New York City’s trees and natural landscapes, Ken will share insights into the park’s horticulture, ecology, and seasonal changes as we explore its winding paths and beautiful landscapes.Whether you’re a longtime park visitor or discovering Fort Tryon Park for the first time, this walk offers a chance to slow down, connect with nature, and see the park from a new perspective. Come curious and enjoy a morning of exploration in one of Manhattan’s most beautiful green spaces!Event DetailsSaturday, November 710 AMBeginning at Margaret Corbin CircleReserve Your Free Spots Here!",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/guided-nature-walk-tickets-2003793881440?aff=oddtdtcreator&keep_tld=true"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-07T10:00:00.000",
+  "endtime": "2026-11-07T11:00:00.000",
+  "contact_phone": "(212) 795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Nature | Tours | Wildlife",
+  "coordinates": "40.85941194491500000, -73.93413484096500000"
+ },
+ {
+  "title": "Basketball Clinic at Highbridge Recreation Center (Ages: 5 to 7)",
+  "instructor": "Leudys Cabrera",
+  "guid": "2249001",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/07/basketball-clinic-at-highbridge-recreation-center-ages-5-to-7"
+  },
+  "description": "This Instructional basketball clinic will provide an opportunity for youth, regardless of skill to have a positive basketball experience followed by league play. Participants will have the opportunity to learn and practice the fundamentals of Basketball and advance their basketball skills through a series of drills. This specific clinic for youth ages 5 and 7.",
+  "registration_description": "Registration not required.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-07T12:30:00.000",
+  "endtime": "2026-11-07T13:30:00.000",
+  "contact_phone": "(212) 927-2400",
+  "location": "Gymnasium (in Highbridge Park)",
+  "categories": "Best for Kids | Sports | Recreation Center Programming | Basketball/Netball",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Kid Birding",
+  "guid": "2313372",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/08/kid-birding"
+  },
+  "description": "Discover the wonderful world of birds with Alexandra Wang on a family-friendly birding adventure through Fort Tryon Park!Young nature lovers will learn how to spot and identify local birds, observe their behaviors, and explore the habitats that support our feathered neighbors. Kids can also join in on birding bingo, turning the walk into a fun challenge as they search for different birds along the way. Whether your child is an experienced birdwatcher or just beginning to notice the birds around them, this engaging outdoor experience is a great opportunity to build curiosity about nature and connect with the wildlife right here in our neighborhood.Event DetailsSunday, November 810 AMMeeting Location: Dongan LawnReserve Your Free Spots Here!",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/kid-birding-tickets-2003794185349?aff=oddtdtcreator&keep_tld=true"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-08T10:00:00.000",
+  "endtime": "2026-11-08T11:00:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Broadway and Dongan Place Entrance (in Fort Tryon Park)",
+  "categories": "Birding | Wildlife",
+  "coordinates": "40.86333596124400000, -73.93007373479500000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2218038",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/10/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221322391149?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-10T07:30:00.000",
+  "endtime": "2026-11-10T08:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness | Exercise Classes",
+  "coordinates": "40.85941194491500000, -73.93413484096500000",
+  "image": {
+   "url": "http://www.nycgovparks.org/common_images/events/6a6bbbb6c990d.png"
+  }
+ },
+ {
+  "title": "Yoga en Espa&#241;ol (Yoga in Spanish)",
+  "instructor": "Lucia Pinzon",
+  "guid": "2238890",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/10/yoga-en-espaol-yoga-in-spanish"
+  },
+  "description": "Conéctate, equilibra y desafíate con Yoga en español. Esta clase de Vinyasa Yoga incluye flujos de intensidad media que te llevarán desde el saludo al sol hasta una postura máxima final. Ven y concéntrate en las inversiones y la respiración para ayudarte a mejorar tu práctica personal mientras brindas conciencia y una nueva experiencia.  Se recomiendan tapetes, pero no son obligatorios, y todos los niveles son bienvenido. Connect, balance, and challenge yourself with Yoga in Spanish. This Vinyasa Yoga class includes mid-intensity flows that will move you seamlessly from sun salutation to a final peak pose. Come focus on inversions and breath work to help improve your personal practice while bringing awareness and a new experience. Mats are recommended but not required and all levels are welcome.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=36f1f892-dfb2-4e96-9421-cff924de08f8&occurrenceDate=20261110"
+  },
+  "registration_description": "Registration has begun and ends on 11/10/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-10T10:00:00.000",
+  "endtime": "2026-11-10T11:00:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes | Yoga & Pilates Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Bodyweight Circuit Training",
+  "instructor": "Xiomara Ogando",
+  "guid": "2237521",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/10/bodyweight-circuit-training"
+  },
+  "description": "Using your own body weight, come experience this circuit training class that focuses on functional, everyday movement that will increase overall strength. This is not just a great workout, but a way to learn \"movement tools\" you can use in everyday life. Open to all fitness levels, and you can expect several rounds of timed exercises followed by rest. Sets and rounds will vary class to class, and all exercises will be demonstrated and cued for participants.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=bab9be83-6b3b-411d-a810-559785c12040&occurrenceDate=20261110"
+  },
+  "registration_description": "Registration has begun and ends on 11/10/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-10T18:15:00.000",
+  "endtime": "2026-11-10T19:15:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Zumba",
+  "instructor": "Yhajaira Muniz",
+  "guid": "2296793",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/11/zumba1"
+  },
+  "description": "Zumba is a fusion of Latin, International and popular music dance themes creating a dynamic, exciting, effective fitness system! The routines feature aerobic, fitness interval training with a combination of fast and slow rhythms that tone and sculpt the body with easy to follow dance steps.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=3eac4af3-1aa6-4505-8127-23c6d730315f&occurrenceDate=20261111"
+  },
+  "registration_description": "Registration has begun and ends on 11/11/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-11T18:00:00.000",
+  "endtime": "2026-11-11T19:00:00.000",
+  "location": "Gymnasium (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Fishing | Recreation Center Programming | Dance Classes | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2218039",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/12/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221322391149?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-12T07:30:00.000",
+  "endtime": "2026-11-12T08:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness | Exercise Classes",
+  "coordinates": "40.85941194491500000, -73.93413484096500000",
+  "image": {
+   "url": "http://www.nycgovparks.org/common_images/events/6a6bbbb6c990d.png"
+  }
+ },
+ {
+  "title": "Cardio Circuit Blast",
+  "instructor": "Chris Patt",
+  "guid": "2294548",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/13/cardio-circuit-blast"
+  },
+  "description": "This high-energy total body workout will keep you moving with challenging yet fun bodyweight circuits. Cardio Circuit Blast is a heart-pumping, high-intensity class that is open to all levels and the perfect way to increase your overall endurance!  Participants must sign in at the front desk and bring locks to lock up their bags. The center does not allow anyone to bring their bags to the dance room except: towel, water and phone.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=6c979f30-3439-4a9b-9b6b-62cf4c7595e4&occurrenceDate=20261113"
+  },
+  "registration_description": "Registration has begun and ends on 11/13/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-13T18:00:00.000",
+  "endtime": "2026-11-13T19:00:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2219114",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/14/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221328419179?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-14T08:30:00.000",
+  "endtime": "2026-11-14T09:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness",
+  "coordinates": "40.85941194491500000, -73.93413484096500000"
+ },
+ {
+  "title": "Broadway Beautification",
+  "guid": "2233434",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/14/broadway-beautification"
+  },
+  "description": "Join the Fort Tryon Park Conservancy and NYC Parks for some cleaning in Fort Tryon Park! Help beautify the park along the Broadway Promenade. Meet at the Broadway Greeting Garden at the Arden Street/Broadway entrance.&nbsp;Wear long pants, sturdy shoes, and get ready to improve the park’s ecology by removing debris and helping site preparations.&nbsp; Tools and gloves will be provided but please bring a filled water bottle.Groups of 5+ must RSVP by emailing&nbsp;info@FortTryonParkTrust.org&nbsp;2 weeks in advance.Volunteers under age 18 must be accompanied by an adult.Beautification Days along the eastern expanse of the park take place on the 2nd &amp; 4th Saturdays of each month from March to November. The Fort Tryon Park Conservancy supports these volunteer opportunities by underwriting tools, horticultural supplies, and NYC Parks staffing to oversee projects.",
+  "registration_description": "No need to register for groups of 5 or less.",
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-14T10:00:00.000",
+  "endtime": "2026-11-14T12:00:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Broadway/Arden Entrance (in Fort Tryon Park)",
+  "categories": "Volunteer",
+  "coordinates": "40.86463018272500000, -73.92912423280400000"
+ },
+ {
+  "title": "Rise&Restore Circuit Training",
+  "instructor": "Ashley Cabrera",
+  "guid": "2292962",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/14/riserestore-circuit-training"
+  },
+  "description": "This circuit training class combines bodyweight resistance training and conditioning to provide you with a dynamic full body workout. Whether you are a beginner or looking for a challenge; this class for all fitness levels and modifications are always provided. Come engage in exercises that target all muscle groups, get your heart pumping, and connect with people in your community!",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=c0a398c8-e8d0-4c97-955d-59a702b576bf&occurrenceDate=20261114"
+  },
+  "registration_description": "Registration has begun and ends on 11/14/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-14T10:00:00.000",
+  "endtime": "2026-11-14T10:45:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Basketball Clinic at Highbridge Recreation Center (Ages: 5 to 7)",
+  "instructor": "Leudys Cabrera",
+  "guid": "2248887",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/14/basketball-clinic-at-highbridge-recreation-center-ages-5-to-7"
+  },
+  "description": "This Instructional basketball clinic will provide an opportunity for youth, regardless of skill to have a positive basketball experience followed by league play. Participants will have the opportunity to learn and practice the fundamentals of Basketball and advance their basketball skills through a series of drills. This specific clinic for youth ages 5 and 7.",
+  "registration_description": "Registration not required.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-14T12:30:00.000",
+  "endtime": "2026-11-14T13:30:00.000",
+  "contact_phone": "(212) 927-2400",
+  "location": "Gymnasium (in Highbridge Park)",
+  "categories": "Best for Kids | Sports | Recreation Center Programming | Basketball/Netball",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Sunday Stewardship",
+  "guid": "2233438",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/15/sunday-stewardship"
+  },
+  "description": "The Fort Tryon Park Conservancy hosts volunteer opportunities for you, your friends, and family to dig in the dirt! Join us to help protect Fort Tryon Park’s ecology and beauty!&nbsp;Meet the NYC Parks’ horticulture staff at the Heather Garden’s Margaret Corbin Circle entrance to sign in at 10:00AM.&nbsp;Activities will include removing debris and weeds and preparing the site for plantings. Tools and gloves will be provided, but wear long pants, sturdy shoes, a face mask as needed, and bring a filled water bottle,Groups of 5+ RSVP by emailing john.kelly@parks.nyc.gov two weeks in advance so we can provide sufficient equipment and tools on hand.Volunteers under 18 must be accompanied by an adult.Stewardship Days along the southwest area of Fort Tryon Park take place on the 3rd Sunday of each month from April to November.",
+  "registration_description": "No need to register if less than 5 people.",
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-15T10:00:00.000",
+  "endtime": "2026-11-15T12:00:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Volunteer",
+  "coordinates": "40.85941194491500000, -73.93413484096500000"
+ },
+ {
+  "title": "Battle of Fort Washington",
+  "guid": "2279633",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/15/battle-of-fort-washington"
+  },
+  "description": "Step back in time and commemorate the 250th anniversary of the Battle of Fort Washington, fought on the grounds of what is now Fort Tryon Park in 1776! Join us for an afternoon of living history featuring exciting reenactments, live music, blacksmith demonstrations, historic food demonstrations, and much more. Discover the people, stories, and events that shaped this pivotal moment in our neighborhood’s history.",
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-15T13:00:00.000",
+  "endtime": "2026-11-15T16:00:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Cafe Lawn (in Fort Tryon Park)",
+  "categories": "History",
+  "coordinates": "40.86019897460937500, -73.93309783935547000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2218040",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/17/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221322391149?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-17T07:30:00.000",
+  "endtime": "2026-11-17T08:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness | Exercise Classes",
+  "coordinates": "40.85941194491500000, -73.93413484096500000",
+  "image": {
+   "url": "http://www.nycgovparks.org/common_images/events/6a6bbbb6c990d.png"
+  }
+ },
+ {
+  "title": "Yoga en Espa&#241;ol (Yoga in Spanish)",
+  "instructor": "Lucia Pinzon",
+  "guid": "2238933",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/17/yoga-en-espaol-yoga-in-spanish"
+  },
+  "description": "Conéctate, equilibra y desafíate con Yoga en español. Esta clase de Vinyasa Yoga incluye flujos de intensidad media que te llevarán desde el saludo al sol hasta una postura máxima final. Ven y concéntrate en las inversiones y la respiración para ayudarte a mejorar tu práctica personal mientras brindas conciencia y una nueva experiencia.  Se recomiendan tapetes, pero no son obligatorios, y todos los niveles son bienvenido. Connect, balance, and challenge yourself with Yoga in Spanish. This Vinyasa Yoga class includes mid-intensity flows that will move you seamlessly from sun salutation to a final peak pose. Come focus on inversions and breath work to help improve your personal practice while bringing awareness and a new experience. Mats are recommended but not required and all levels are welcome.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=36f1f892-dfb2-4e96-9421-cff924de08f8&occurrenceDate=20261117"
+  },
+  "registration_description": "Registration has begun and ends on 11/17/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-17T10:00:00.000",
+  "endtime": "2026-11-17T11:00:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes | Yoga & Pilates Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Zumba",
+  "instructor": "Yhajaira Muniz",
+  "guid": "2303098",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/18/zumba1"
+  },
+  "description": "Zumba is a fusion of Latin, International and popular music dance themes creating a dynamic, exciting, effective fitness system! The routines feature aerobic, fitness interval training with a combination of fast and slow rhythms that tone and sculpt the body with easy to follow dance steps.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=3eac4af3-1aa6-4505-8127-23c6d730315f&occurrenceDate=20261118"
+  },
+  "registration_description": "Registration has begun and ends on 11/18/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-18T18:00:00.000",
+  "endtime": "2026-11-18T19:00:00.000",
+  "location": "Gymnasium (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Fishing | Recreation Center Programming | Dance Classes | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2218041",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/19/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221322391149?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-19T07:30:00.000",
+  "endtime": "2026-11-19T08:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness | Exercise Classes",
+  "coordinates": "40.85941194491500000, -73.93413484096500000",
+  "image": {
+   "url": "http://www.nycgovparks.org/common_images/events/6a6bbbb6c990d.png"
+  }
+ },
+ {
+  "title": "Cardio Circuit Blast",
+  "instructor": "Chris Patt",
+  "guid": "2298319",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/20/cardio-circuit-blast"
+  },
+  "description": "This high-energy total body workout will keep you moving with challenging yet fun bodyweight circuits. Cardio Circuit Blast is a heart-pumping, high-intensity class that is open to all levels and the perfect way to increase your overall endurance!  Participants must sign in at the front desk and bring locks to lock up their bags. The center does not allow anyone to bring their bags to the dance room except: towel, water and phone.",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=6c979f30-3439-4a9b-9b6b-62cf4c7595e4&occurrenceDate=20261120"
+  },
+  "registration_description": "Registration has begun and ends on 11/20/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-20T18:00:00.000",
+  "endtime": "2026-11-20T19:00:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Forest Fitness",
+  "guid": "2219115",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/21/forest-fitness"
+  },
+  "description": "Join us for a free, year-round “Fitness at the Fort” exercise program on Tuesdays, Thursdays, and Saturdays!This fitness class incorporates climbing multiple staircases, stretches and strengthening exercises, notable tree identification, and forest bathing. Led by instructor, Nancy Bruning, BA, MPH, PAPHS.Classes are structured so that all levels of fitness will be accommodated; however, all classes involve relatively brisk walking and some stairs because of the layout of the park itself. Classes vary according to the season, path conditions, and the weather, but always meet at the Heather Garden entrance.Tuesday and Thursday classes end at various points near the starting point, including the volleyball courts. Saturday class ends at the Anne Loftus Playground, using the various pieces of equipment, and offers optional after-class group walk to the Greenmarket on Isham Street. All classes end with closing with stretches.(Note: Fitness Walking does not meet if it is raining or if the actual temperature or wind chill is below 20 degrees F.)",
+  "registration_url": {
+   "url": "https://www.eventbrite.com/e/1221328419179?aff=oddtdtcreator"
+  },
+  "parkids": "M029",
+  "parknames": "Fort Tryon Park",
+  "starttime": "2026-11-21T08:30:00.000",
+  "endtime": "2026-11-21T09:30:00.000",
+  "contact_phone": "212-795-1388",
+  "location": "Margaret Corbin Circle (in Fort Tryon Park)",
+  "categories": "Fitness | Outdoor Fitness",
+  "coordinates": "40.85941194491500000, -73.93413484096500000"
+ },
+ {
+  "title": "Rise&Restore Circuit Training",
+  "instructor": "Ashley Cabrera",
+  "guid": "2292995",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/21/riserestore-circuit-training"
+  },
+  "description": "This circuit training class combines bodyweight resistance training and conditioning to provide you with a dynamic full body workout. Whether you are a beginner or looking for a challenge; this class for all fitness levels and modifications are always provided. Come engage in exercises that target all muscle groups, get your heart pumping, and connect with people in your community!",
+  "registration_url": {
+   "url": "https://nycparks.perfectmind.com/24936/Clients/BookMe4LandingPages/Class?widgetId=15f6af07-39c5-473e-b053-96653f77a406&embed=False&redirectedFromEmbededMode=False&classId=c0a398c8-e8d0-4c97-955d-59a702b576bf&occurrenceDate=20261121"
+  },
+  "registration_description": "Registration has begun and ends on 11/21/2026.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-21T10:00:00.000",
+  "endtime": "2026-11-21T10:45:00.000",
+  "location": "Dance Room (in Highbridge Park)",
+  "categories": "Fitness | Shape Up NYC | Recreation Center Programming | Exercise Classes",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ },
+ {
+  "title": "Artful Gatherings",
+  "instructor": "Annmarie Alston",
+  "guid": "2312857",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/21/artful-gatherings"
+  },
+  "description": "Join us at J. Hood Wright Recreation center to celebrate Thanksgiving with a fun and festive paint event! Guests will choose from a selection of preprinted Thanksgiving-themed canvases and bring them to life with their own colors and creativity. No painting experience is needed—just come ready to relax, have fun, and enjoy a creative holiday activity with family and friends!",
+  "registration_description": "Registration not required.",
+  "parkids": "M099",
+  "parknames": "J. Hood Wright Park",
+  "starttime": "2026-11-21T12:00:00.000",
+  "endtime": "2026-11-21T14:00:00.000",
+  "contact_phone": "(212) 927-1514",
+  "location": "J. Hood Wright Recreation Center (in J. Hood Wright Park)",
+  "categories": "Arts & Crafts | Art | Thanksgiving | Recreation Center Programming",
+  "coordinates": "40.84657630176400000, -73.94082593917800000"
+ },
+ {
+  "title": "Basketball Clinic at Highbridge Recreation Center (Ages: 5 to 7)",
+  "instructor": "Leudys Cabrera",
+  "guid": "2248583",
+  "link": {
+   "url": "http://www.nycgovparks.org/events/2026/11/21/basketball-clinic-at-highbridge-recreation-center-ages-5-to-7"
+  },
+  "description": "This Instructional basketball clinic will provide an opportunity for youth, regardless of skill to have a positive basketball experience followed by league play. Participants will have the opportunity to learn and practice the fundamentals of Basketball and advance their basketball skills through a series of drills. This specific clinic for youth ages 5 and 7.",
+  "registration_description": "Registration not required.",
+  "parkids": "M037",
+  "parknames": "Highbridge Park",
+  "starttime": "2026-11-21T12:30:00.000",
+  "endtime": "2026-11-21T13:30:00.000",
+  "contact_phone": "(212) 927-2400",
+  "location": "Gymnasium (in Highbridge Park)",
+  "categories": "Best for Kids | Sports | Recreation Center Programming | Basketball/Netball",
+  "coordinates": "40.84260178000000000, -73.93430328000000000"
+ }
+]

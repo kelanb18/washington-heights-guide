@@ -10,6 +10,9 @@ import { breadcrumbJsonLd, listingJsonLd } from '../../lib/jsonld';
 import { guidesFeaturing, loadGuides } from '../../lib/guides';
 import { collectTags, loadListings } from '../../lib/listings';
 import { directionsHref, mapSearchHref } from '../../lib/directions';
+import EventRow from '../../components/EventRow.astro';
+import HidePastEvents from '../../components/HidePastEvents.astro';
+import { dayHeading, loadEvents } from '../../lib/events';
 import { absoluteUrl, formatDate, href, isoDate, pageTitle, siteName, telHref } from '../../lib/site';
 import { pinsFor } from '../../lib/pins';
 import { claimPicture, reservePicture, shareableSrc } from '../../lib/pictures';
@@ -41,6 +44,11 @@ const area = findArea(areas, data.area);
 const pins = pinsFor([listing]);
 const hasMap = data.latitude != null && data.longitude != null;
 const { Content } = await render(listing);
+const allEvents = await loadEvents();
+const upcomingHere = [...allEvents.oneOff, ...allEvents.recurring.map((item) => item.occurrences[0])]
+  .filter((event) => event.listingId === listing.id)
+  .sort((a, b) => a.start.localeCompare(b.start))
+  .slice(0, 4);
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
 
@@ -140,6 +148,22 @@ const jsonLd = [
       gallery={data.gallery}
     />
     <ActionLinks links={data.links} />
+    {
+      upcomingHere.length > 0 && (
+        <section class="group" aria-labelledby="upcoming-here" data-events-scope>
+          <div class="section-head">
+            <h2 id="upcoming-here">Upcoming here</h2>
+            <a href={href('/events')}>All events</a>
+          </div>
+          <ul class="event-list event-list-ruled">
+            {upcomingHere.map((event) => (
+              <EventRow event={event} showDay dayLabel={dayHeading(event.start)} compact />
+            ))}
+          </ul>
+          <HidePastEvents />
+        </section>
+      )
+    }
     {
       featuredGuides.length > 0 && (
         <section class="group" aria-labelledby="featured-in">

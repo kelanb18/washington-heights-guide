@@ -1,0 +1,40 @@
+---
+import type { NeighborhoodEvent } from '../lib/events';
+import { timeRange, withOffset } from '../lib/events';
+import { href } from '../lib/site';
+
+interface Props {
+  event: NeighborhoodEvent;
+  /** Show the day in the row (for lists that are not grouped by day). */
+  showDay?: boolean;
+  dayLabel?: string;
+  compact?: boolean;
+}
+
+const { event, showDay = false, dayLabel, compact = false } = Astro.props;
+const endsAt = withOffset(event.end ?? event.start);
+---
+
+<li class:list={['event-row', { 'event-row-compact': compact }]} data-event-end={endsAt}>
+  <p class="event-time">
+    {showDay && dayLabel && <span class="event-day">{dayLabel}</span>}
+    <time datetime={withOffset(event.start)}>{timeRange(event.start, event.end)}</time>
+  </p>
+  <div class="event-body">
+    <p class="front-kicker">
+      {event.label}{event.kids && ' · Good for kids'}{event.cost && ` · ${event.cost}`}
+    </p>
+    <h3 class="event-title">
+      <a href={event.sourceUrl} rel="noopener noreferrer" target="_blank">
+        {event.title}<span class="sr-only"> (opens {event.sourceName} in a new tab)</span>
+      </a>
+    </h3>
+    <p class="event-place">
+      {event.listingId ? <a href={href(`/places/${event.listingId}`)}>{event.place}</a> : event.place}
+      {event.detail && <span>, {event.detail}</span>}
+    </p>
+    {!compact && event.summary && <p class="event-summary">{event.summary}</p>}
+    {!compact && event.note && <p class="event-note">{event.note}</p>}
+    {!compact && <p class="event-source">Details from {event.sourceName}</p>}
+  </div>
+</li>

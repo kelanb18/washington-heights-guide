@@ -1,5 +1,8 @@
 ---
 import AttributedPhoto from '../components/AttributedPhoto.astro';
+import EventRow from '../components/EventRow.astro';
+import HidePastEvents from '../components/HidePastEvents.astro';
+import { dayHeading, loadEvents } from '../lib/events';
 import PlaceMap from '../components/PlaceMap.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { areaTree, loadAreas } from '../lib/areas';
@@ -37,6 +40,10 @@ const situationCards = situations.flatMap(({ id, kicker }) => {
   if (!guide) return [];
   return [{ guide, kicker, cover: coverForGuide(guide, listings, areas, usedPictures)?.picture }];
 });
+
+const { oneOff } = await loadEvents();
+const weekAhead = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+const thisWeek = oneOff.filter((event) => event.start.slice(0, 10) <= weekAhead).slice(0, 5);
 
 const openings = listings.filter((listing) => listing.data.tags.includes('new-opening')).slice(0, 3);
 
@@ -123,6 +130,24 @@ if (guides.length > 0) {
           <p class="front-more">
             <a href={href('/best')}>All {guides.length} guides</a>
           </p>
+        </section>
+      )
+    }
+
+    {
+      thisWeek.length > 0 && (
+        <section class="front-section" aria-labelledby="events-heading" data-events-scope>
+          <h2 id="events-heading" class="front-heading">This week</h2>
+          <p class="front-subhead">Free programs in the parks, and what’s on at local venues.</p>
+          <ul class="event-list event-list-ruled">
+            {thisWeek.map((event) => (
+              <EventRow event={event} showDay dayLabel={dayHeading(event.start).split(',')[0]} compact />
+            ))}
+          </ul>
+          <p class="front-more">
+            <a href={href('/events')}>All events</a>
+          </p>
+          <HidePastEvents />
         </section>
       )
     }
