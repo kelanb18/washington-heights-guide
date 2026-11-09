@@ -41,6 +41,6 @@ sources:
 
 Washington Heights has plenty of green space, and most of it comes with a playground. This guide is for parents and caregivers planning an outing with kids, whether that means a morning at a playground, a walk to a landmark, or a stop for a book.
 
-We chose from the listings on The Heights that mention playgrounds, children's offerings, or families, and ranked them by how well each fits a day with kids. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from the listings on Washington Heights Guide that mention playgrounds, children's offerings, or families, and ranked them by how well each fits a day with kids. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Most of these are parks, so hours and conditions come from NYC Parks. Check the listing page and NYC Parks before you plan around a recreation center or a specific playground.

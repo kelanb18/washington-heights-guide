@@ -23,7 +23,7 @@ const listingPhotos = new Map(
   tag.listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
 );
 
-const description = `Places in Washington Heights tagged ${tag.label}. A curated list from The Heights.`;
+const description = `Places in Washington Heights tagged ${tag.label}. A curated list from Washington Heights Guide.`;
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
 

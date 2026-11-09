@@ -32,6 +32,6 @@ sources:
 
 Brunch is not the first thing Washington Heights is known for, and the neighborhood has fewer dedicated brunch spots than some others. This guide is for anyone planning a weekend meal here and wanting the places that state a brunch service in their own materials.
 
-We included only listings whose sources mention brunch, and ranked them by how clearly brunch is part of what the place offers. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We included only listings whose sources mention brunch, and ranked them by how clearly brunch is part of what the place offers. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Weekend schedules shift. Where a place's own pages disagree on brunch hours, the blurb says so; confirm before you go, and reserve where the place takes reservations.

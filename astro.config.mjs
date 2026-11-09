@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-const site = (process.env.SITE ?? 'https://theheights.guide').replace(/\/$/, '');
+const site = (process.env.SITE ?? 'https://washingtonheightsguide.com').replace(/\/$/, '');
 const includeExamples = process.env.INCLUDE_EXAMPLES === 'true';
 
 function unpublishedSlugs(folder) {

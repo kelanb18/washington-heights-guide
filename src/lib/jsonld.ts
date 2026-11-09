@@ -18,7 +18,7 @@ export function websiteJsonLd(url: string, description: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'The Heights',
+    name: 'Washington Heights Guide',
     description,
     url,
     inLanguage: 'en-US',

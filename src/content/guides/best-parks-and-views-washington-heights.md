@@ -42,6 +42,6 @@ sources:
 
 Manhattan's highest natural point is in Washington Heights, so the best parks here come with hills, river views, and a bit of history. This guide is for walkers, runners, picnickers, and anyone hunting for a good view of the Hudson or the Harlem River.
 
-We chose from the parks and outdoor landmarks listed on The Heights and ranked them by how well they work for a park visit and how good the views are according to their sources. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from the parks and outdoor landmarks listed on Washington Heights Guide and ranked them by how well they work for a park visit and how good the views are according to their sources. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 These are hilly places, and some paths and gates have their own hours or seasonal closures. We note where a listing says conditions were not checked.

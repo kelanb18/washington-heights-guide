@@ -1,10 +1,9 @@
-export const siteName = 'The Heights';
+export const siteName = 'Washington Heights Guide';
 
 export const defaultDescription =
   'A curated guide to restaurants, cafes, bakeries, bars, shops, services, and landmarks in Washington Heights, from West 155th Street to the Dyckman edge of Inwood.';
 
-/** Replace this before launch. It is not a working mailbox. */
-export const correctionsEmail = 'corrections@example.com';
+export const correctionsEmail = 'washingtonheightsguide@gmail.com';
 
 export const scopeLine =
   'Washington Heights, from West 155th Street to the Dyckman edge of Inwood.';

@@ -40,6 +40,6 @@ sources:
 
 Washington Heights has more to see than many visitors expect, from a medieval museum inside a hilltop park to a pedestrian bridge over the Harlem River. This guide is for visitors, new residents, and locals looking for a good afternoon.
 
-We picked from the landmark listings on The Heights, which cover parks, museums, historic buildings, and public spaces, and ranked them by how well each works as a destination in itself. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We picked from the landmark listings on Washington Heights Guide, which cover parks, museums, historic buildings, and public spaces, and ranked them by how well each works as a destination in itself. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Several of these have limited hours or are closed on certain days, so each blurb notes what to check first.

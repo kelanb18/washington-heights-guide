@@ -50,6 +50,6 @@ sources:
 
 If you only have one day in Washington Heights, this is a route that starts in Hudson Heights and works south and east. It is for first-time visitors who want a mix of green space, history, and a proper meal.
 
-The picks are ordered as a day rather than ranked as a list, from morning coffee to dinner. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict. We chose places from the listings on The Heights that fit the shape of a day.
+The picks are ordered as a day rather than ranked as a list, from morning coffee to dinner. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict. We chose places from the listings on Washington Heights Guide that fit the shape of a day.
 
 A few cautions: The Met Cloisters is closed on Wednesdays, so adjust the day if you want to go inside. Check hours for each stop before you set out, because the listings flag items that vary.

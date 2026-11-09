@@ -4,7 +4,7 @@ import { breadcrumbJsonLd } from '../lib/jsonld';
 import { absoluteUrl, correctionsEmail, siteName } from '../lib/site';
 
 const description =
-  'How The Heights chooses places in Washington Heights, and how affiliate links and sponsorships are disclosed. Verdicts are not for sale.';
+  'How Washington Heights Guide chooses places in Washington Heights, and how affiliate links and sponsorships are disclosed. Verdicts are not for sale.';
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -18,13 +18,13 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title="About this guide · The Heights" description={description} jsonLd={jsonLd}>
+<BaseLayout title={`About this guide · ${siteName}`} description={description} jsonLd={jsonLd}>
   <article class="wrap prose">
     <header class="page-head">
       <p class="kicker">Colophon</p>
       <h1>About this guide</h1>
       <p class="lede">
-        The Heights is an independent list of places in Washington Heights worth your time. It is short because a complete directory already exists, and it is not very good at telling you where to go.
+        Washington Heights Guide is an independent list of places in Washington Heights worth your time. It is short because a complete directory already exists, and it is not very good at telling you where to go.
       </p>
     </header>
 
@@ -58,7 +58,7 @@ const jsonLd = [
     <h2 id="corrections">Corrections</h2>
     <p>
       If an address, an hour, or another fact is wrong, write to
-      <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>. That address is a placeholder until a real mailbox is connected. Say what you checked and when you checked it.
+      <a href={`mailto:${correctionsEmail}`}>{correctionsEmail}</a>. Say what you checked and when you checked it.
     </p>
 
     <h2>The map</h2>

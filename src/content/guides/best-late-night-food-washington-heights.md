@@ -33,6 +33,6 @@ sources:
 
 Washington Heights does late nights well, with a Cuban-Dominican diner that lists itself as open 24 hours and a few spots serving until 2am. This guide is for night owls, shift workers, and anyone coming out of a show at the United Palace who is hungry.
 
-We chose from listings that state late hours or an overnight schedule, and ranked them by how late they stay open and how well they work as a place to eat. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from listings that state late hours or an overnight schedule, and ranked them by how late they stay open and how well they work as a place to eat. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Late hours are the detail most likely to be out of date, and several listings say their sources disagree. Call before you set out in the small hours.

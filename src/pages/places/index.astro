@@ -24,7 +24,7 @@ const listingPhotos = new Map(
   listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]),
 );
 const description =
-  'Every place currently on The Heights, a curated guide to Washington Heights, NYC, grouped by category.';
+  'Every place currently on Washington Heights Guide, a curated guide to Washington Heights, NYC, grouped by category.';
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -45,7 +45,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title="All places · The Heights" description={description} image={placesHero.src} imageAlt={placesHero.alt} jsonLd={jsonLd}>
+<BaseLayout title={`All places · ${siteName}`} description={description} image={placesHero.src} imageAlt={placesHero.alt} jsonLd={jsonLd}>
   <div class="wrap">
     <AttributedPhoto picture={placesHero} variant="hero" />
     <header class="page-head">

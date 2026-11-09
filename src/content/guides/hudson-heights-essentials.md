@@ -55,6 +55,6 @@ sources:
 
 Hudson Heights is the hilltop corner of Washington Heights, with commercial strips along W 181st Street and W 187th Street. This guide is for visitors heading to Fort Tryon Park and The Cloisters, and for new neighbors looking for the places that anchor the area.
 
-We chose from the Hudson Heights listings on The Heights, covering parks, a museum, cafes, restaurants, bars, and a bookshop, and ranked them by how essential each is to understanding the area. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from the Hudson Heights listings on Washington Heights Guide, covering parks, a museum, cafes, restaurants, bars, and a bookshop, and ranked them by how essential each is to understanding the area. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Some places here close early, and a few have details we could not fully confirm. Each listing page says what was checked.

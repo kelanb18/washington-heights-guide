@@ -1,4 +1,4 @@
-# The Heights
+# Washington Heights Guide
 
 A fast, static guide to Washington Heights, NYC — roughly West 155th Street to the Dyckman edge of Inwood. Restaurants, cafes, bakeries, bars, shops, services, and landmarks, plus notes on smaller areas and on people and events tied to the neighborhood. Listings, areas, and people are Markdown files. Adding one is a new file and a commit.
 
@@ -41,19 +41,19 @@ npm run build:examples
 
 ## Deploy on Vercel
 
-The project is ready for a static deploy. Nothing here is connected to Vercel.
+The project is deployed as a static site on Vercel.
 
 1. Import this repository in Vercel.
 2. Framework preset: **Astro**.
 3. Build command: `npm run build`.
 4. Output directory: `dist`.
 5. Node.js 22.23.4 or newer.
-6. Set the `SITE` environment variable to the public origin, with no trailing slash, for Production (and Preview, if you want those URLs to match). Example: `https://theheights.guide`.
+6. Set the `SITE` environment variable to the public origin, with no trailing slash, for Production (and Preview, if you want those URLs to match). Example: `https://washingtonheightsguide.com`.
 7. Leave `INCLUDE_EXAMPLES` unset.
 
 No `vercel.json` and no adapter. Astro’s static output is the whole site. Canonical URLs, Open Graph tags, `robots.txt`, and the sitemap are baked in at build time, so change `SITE` and rebuild when the domain changes.
 
-The default origin, when `SITE` is unset, is `https://theheights.guide`. That domain is a placeholder until someone owns it and sets `SITE`.
+The default origin, when `SITE` is unset, is `https://washingtonheightsguide.com`.
 
 ## Listing format
 
@@ -375,8 +375,6 @@ Leave them in the repo or delete them once real files exist. Production builds o
 
 ## Still needs a person
 
-- Buy or connect a domain, then set `SITE` in Vercel to that origin and redeploy.
-- Import the repo in Vercel (or another static host). This repository does not deploy itself.
-- Replace `corrections@example.com` in `src/lib/site.ts`. The footer and About page currently say that mailbox is not real.
+- Connect `washingtonheightsguide.com` to the Vercel project and set `SITE` to `https://washingtonheightsguide.com`.
+- Confirm `washingtonheightsguide@gmail.com` is the preferred corrections mailbox.
 - Write real listings, area notes, and people notes. The public production build is the guide’s shell until those files exist.
-- Confirm `https://theheights.guide` is the name you want, if you use the default instead of `SITE`.

@@ -38,6 +38,6 @@ sources:
 
 Nightlife in Washington Heights ranges from dark-wood pubs and tapas bars to cocktail rooms and a hotel restaurant with a full bar. This guide is for people who want an evening out uptown without defaulting to a trip downtown.
 
-We built it from the bars, cafe-bars, and restaurants with bars listed on The Heights, and ranked them by how well they work as a night out. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We built it from the bars, cafe-bars, and restaurants with bars listed on Washington Heights Guide, and ranked them by how well they work as a night out. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Bar hours are the least stable detail in any listing, and several places here have sources that disagree. Check the listing page, and call before a late night.

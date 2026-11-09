@@ -31,6 +31,6 @@ sources:
 
 A plate of rice, beans, and something stewed, fried, or mashed from a plantain is a natural way to start eating in Washington Heights. This guide is for first-timers who want a reliable starting point and for locals deciding where to take out-of-town friends.
 
-We started with the Dominican and Dominican-adjacent restaurants already listed on The Heights and ranked them by fit: how well each one delivers classic Dominican cooking, and what kind of meal it suits. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We started with the Dominican and Dominican-adjacent restaurants already listed on Washington Heights Guide and ranked them by fit: how well each one delivers classic Dominican cooking, and what kind of meal it suits. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Hours and menus change, and some of these listings note that sources disagree, so check before a special trip.

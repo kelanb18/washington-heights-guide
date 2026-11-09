@@ -28,6 +28,6 @@ sources:
 
 This guide is for people who want a good cup before a walk through Fort Tryon Park, a place to sit down on the 181st Street strip, or a coffee and a snack on the way up Amsterdam Ave. Washington Heights coffee is not one thing, and the places here come from different traditions.
 
-We chose from the cafes listed on The Heights and ranked them by how well they work as a coffee stop. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from the cafes listed on Washington Heights Guide and ranked them by how well they work as a coffee stop. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Most of these close by early evening, and a few are small, so seats are not guaranteed. Each listing page has hours and a note on what we could and could not confirm.

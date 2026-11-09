@@ -50,6 +50,6 @@ sources:
 
 The neighborhood's name traces back to Fort Washington, the Revolutionary War fort that fell in 1776. This guide is for history readers who want to see where the fort stood, visit the Malcolm X memorial, and cross the city's oldest standing bridge, and for anyone who likes a neighborhood with layers.
 
-We chose from the landmark and history-linked listings on The Heights and ranked them by how much history each one carries and how much of it a visitor can actually see. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on The Heights with its own page, sources, and verdict.
+We chose from the landmark and history-linked listings on Washington Heights Guide and ranked them by how much history each one carries and how much of it a visitor can actually see. Picks are editorial: the order is our judgment, not star ratings, review counts, or any scoring system, and every place is a listing on Washington Heights Guide with its own page, sources, and verdict.
 
 Several of these are exteriors or buildings you see best with a ticket. Each blurb says what you can and cannot do.

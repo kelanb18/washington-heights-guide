@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { href } from '../lib/site';
+import { href, siteName } from '../lib/site';
 
-const description = 'Search places, guides, areas, people, and productions on The Heights.';
+const description = 'Search places, guides, areas, people, and productions on Washington Heights Guide.';
 ---
 
-<BaseLayout title="Search · The Heights" description={description}>
+<BaseLayout title={`Search · ${siteName}`} description={description}>
   <div class="wrap" data-pagefind-ignore>
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>
