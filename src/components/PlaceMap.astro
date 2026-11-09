@@ -58,6 +58,7 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       href: string;
       category: string;
       categoryLabel: string;
+      sponsored?: boolean;
     }>;
     const map = Leaflet.map(canvas, { scrollWheelZoom: false });
     Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -85,6 +86,12 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       }
       const kind = document.createElement('p');
       kind.textContent = pin.categoryLabel;
+      if (pin.sponsored) {
+        const flag = document.createElement('p');
+        flag.className = 'sponsored-flag';
+        flag.textContent = 'Sponsored';
+        popup.append(flag);
+      }
       popup.append(link, kind);
       marker.bindPopup(popup);
       return { marker, category: pin.category };

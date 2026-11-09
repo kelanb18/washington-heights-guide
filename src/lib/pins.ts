@@ -9,12 +9,13 @@ export interface MapPin {
   href: string;
   category: string;
   categoryLabel: string;
+  sponsored?: boolean;
 }
 
 export function pinsFor(listings: Listing[]): MapPin[] {
   const pins: MapPin[] = [];
   for (const listing of listings) {
-    const { latitude, longitude, name, category } = listing.data;
+    const { latitude, longitude, name, category, sponsored } = listing.data;
     if (latitude == null || longitude == null) continue;
     pins.push({
       lat: latitude,
@@ -23,6 +24,7 @@ export function pinsFor(listings: Listing[]): MapPin[] {
       href: href(`/places/${listing.id}`),
       category,
       categoryLabel: categoryInfo[category].singular,
+      sponsored,
     });
   }
   return pins;

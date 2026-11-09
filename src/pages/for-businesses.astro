@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../lib/jsonld';
+import { absoluteUrl, correctionsEmail, href, pageTitle, siteName } from '../lib/site';
+
+const description = `For Washington Heights business owners: fix your listing, suggest a place, and learn how sponsored placements and advertising work on ${siteName}.`;
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+
+const pageUrl = absoluteUrl(site, '/for-businesses');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'For businesses', url: pageUrl },
+  ]),
+];
+
+const mail = (subject: string) => `mailto:${correctionsEmail}?subject=${encodeURIComponent(subject)}`;
+---
+
+<BaseLayout title={pageTitle('For businesses')} description={description} jsonLd={jsonLd}>
+  <article class="wrap prose">
+    <header class="page-head">
+      <p class="kicker">Owners and managers</p>
+      <h1>For businesses</h1>
+      <p class="lede">
+        If you run a place in Washington Heights, this page covers how to fix your listing, suggest a
+        place, and sponsor or advertise on the guide.
+      </p>
+    </header>
+
+    <h2 id="fix-your-listing">Fix your listing</h2>
+    <p>
+      Hours, addresses, phone numbers, and websites change. If something on your page is wrong, email
+      <a href={mail('Listing correction')}>{correctionsEmail}</a> with:
+    </p>
+    <ul>
+      <li>the name of the business and the link to its page on this site,</li>
+      <li>what is wrong and what it should say,</li>
+      <li>where the new details can be confirmed, such as your website, your Google listing, or a photo of the hours on the door.</li>
+    </ul>
+    <p>
+      Corrections to facts are free and always will be. Once the details are confirmed, the page is
+      updated and its “Checked” date moves forward. A correction does not change the verdict.
+    </p>
+
+    <h2 id="suggest-a-place">Suggest a place</h2>
+    <p>
+      Know a place that belongs on the list, including your own? Email
+      <a href={mail('Place suggestion')}>{correctionsEmail}</a> with its name, address, and what makes it
+      worth the trip. Every suggestion is read. A place is added when it earns a trip or a habit, so not
+      every suggestion becomes a listing, and payment does not create one.
+    </p>
+
+    <h2 id="sponsored-placements">Sponsored placements</h2>
+    <p>
+      A business that is already listed, or that would be listed for free, can pay for a sponsored
+      placement. Sponsored listings show the word “Sponsored” on the place’s own page and anywhere it is
+      featured, including category pages, best-of guides, and the home page.
+    </p>
+    <p>A sponsorship does not buy a better verdict, a rating, or the editor’s pick mark. The full rules are in the
+      <a href={`${href('/about')}#disclosure`}>sponsorship and affiliate policy</a>.
+    </p>
+
+    <h2 id="advertising">Get in touch about advertising</h2>
+    <p>
+      To ask about a sponsored placement or other advertising, email
+      <a href={mail('Advertising inquiry')}>{correctionsEmail}</a>. Include the business name, what you
+      have in mind, and the best way to reach you. Kelan, who writes the guide, will reply with what is
+      available and what it costs.
+    </p>
+  </article>
+</BaseLayout>
