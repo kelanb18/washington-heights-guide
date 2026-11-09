@@ -1,0 +1,71 @@
+---
+import StoryCard from '../../components/StoryCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../lib/areas';
+import { coverForGuide } from '../../lib/covers';
+import { loadSpanishGuides } from '../../lib/guides';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+const pairs = await loadSpanishGuides();
+const listings = await loadListings();
+const areas = await loadAreas();
+const usedPictures = new Set<string>();
+const cards = pairs.map(({ guide, es }) => ({
+  guide,
+  es,
+  cover: coverForGuide(guide, listings, areas, usedPictures)?.picture,
+}));
+const description =
+  'Guías de Washington Heights en español: dónde comer, qué hacer y rutas a pie para abrir en Google Maps desde tu teléfono.';
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const jsonLd = [
+  breadcrumbJsonLd([{ name: siteName, url: absoluteUrl(site, '/es') }]),
+  itemListJsonLd(
+    'Guías de Washington Heights en español',
+    pairs.map(({ es }) => ({ name: es.data.title, url: absoluteUrl(site, `/es/guias/${es.id}`) })),
+  ),
+];
+---
+
+<BaseLayout
+  title="Washington Heights Guide en español: dónde comer y qué hacer"
+  description={description}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: '/best' }]}
+>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="kicker">
+        En español
+        <span aria-hidden="true"> · </span>
+        <a href={href('/best')} hreflang="en" lang="en">Read in English</a>
+      </p>
+      <h1>Washington Heights, en español</h1>
+      <p class="lede">
+        Guías independientes del barrio: dónde comer, qué hacer y cómo recorrerlo a pie. Cada guía tiene una ruta que se abre en Google Maps desde donde estés.
+      </p>
+    </header>
+    <ul class="guide-grid">
+      {
+        cards.map(({ es, cover }) => (
+          <li>
+            <StoryCard
+              href={href(`/es/guias/${es.id}`)}
+              kicker={`${es.data.picks.length} lugares`}
+              title={es.data.title}
+              description={es.data.description}
+              cover={cover}
+            />
+          </li>
+        ))
+      }
+    </ul>
+    <p class="section-note">
+      Las fichas de cada lugar están en inglés por ahora. Las guías las escribe y revisa Kelan, que vive en Hudson Heights. Ningún pago cambia una recomendación.
+    </p>
+  </div>
+</BaseLayout>

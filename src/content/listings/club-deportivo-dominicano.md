@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave at W 163rd St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.837044
+longitude: -73.939064
 phone: "(212) 923-3817"
 hours: "Friday salsa night, listed midnight–4am; call for other nights"
 lastVerified: 2026-10-28

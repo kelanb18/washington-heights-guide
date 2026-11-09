@@ -12,6 +12,8 @@ crossStreets: "Bennett Ave at W 181st St"
 neighborhood: "Washington Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.850769
+longitude: -73.936675
 phone: "(212) 927-8501"
 hours: "Mon–Sat 10am–7pm; Sun 12–5pm (per Google-sourced listing)"
 lastVerified: 2026-10-28

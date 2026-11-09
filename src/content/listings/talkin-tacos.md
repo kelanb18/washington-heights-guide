@@ -14,6 +14,8 @@ crossStreets: "Broadway at W 177th St"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
+latitude: 40.847515
+longitude: -73.938127
 website: "https://talkintacos.net/"
 phone: "(646) 593-7531"
 hours: "Daily 11am–2am"

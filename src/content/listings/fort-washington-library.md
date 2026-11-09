@@ -12,6 +12,8 @@ address: "535 W 179th St"
 crossStreets: "W 179th St near Audubon Ave"
 neighborhood: "Washington Heights"
 postalCode: "10033"
+latitude: 40.847788
+longitude: -73.933913
 website: "https://www.nypl.org/locations/fort-washington"
 lastVerified: 2026-10-28
 verdict: "A handsome working library with a long local history; check NYPL for hours and programs."

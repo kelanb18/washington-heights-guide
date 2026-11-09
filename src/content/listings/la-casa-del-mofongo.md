@@ -14,6 +14,8 @@ crossStreets: "St Nicholas Ave near W 182nd St"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.850444
+longitude: -73.933180
 phone: "(212) 740-1200"
 lastVerified: 2026-10-28
 verdict: "Go for a casual group dinner built around mofongo; skip it if you want a quiet room, and confirm hours since listings disagree."

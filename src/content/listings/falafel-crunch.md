@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave near Yeshiva University's Wilf Campus"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.851371
+longitude: -73.928297
 website: "https://www.falafelcrunch.com/"
 phone: "(212) 641-0155"
 hours: "Sun–Thu 11am–11:30pm; Fri 11am–4pm; closed Sat"

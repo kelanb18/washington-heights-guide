@@ -13,6 +13,8 @@ crossStreets: "W 181st St near Fort Washington Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.851213
+longitude: -73.939139
 website: "https://www.theuptowngarrison.com/"
 phone: "(917) 261-4680"
 hours: "Coffee Mon–Fri 7:30am–4pm, Sat–Sun 9am–4pm; dinner Sun–Wed 4–10pm, Thu–Sat 4–11pm; bar hours vary"

@@ -14,6 +14,8 @@ crossStreets: "Wadsworth Ave at W 182nd St"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.850189
+longitude: -73.934522
 website: "https://burgerheights.com"
 phone: "(212) 951-1984"
 hours: "Daily 11:30am–10pm"

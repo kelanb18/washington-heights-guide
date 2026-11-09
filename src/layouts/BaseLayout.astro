@@ -9,7 +9,7 @@ import { loadListings } from '../lib/listings';
 import { loadGuides } from '../lib/guides';
 import { loadPeople } from '../lib/people';
 import { loadProductions } from '../lib/productions';
-import { siteName } from '../lib/site';
+import { href, siteName } from '../lib/site';
 
 interface Props {
   title: string;
@@ -20,6 +20,10 @@ interface Props {
   noindex?: boolean;
   modified?: string;
   jsonLd?: unknown[];
+  /** Page language. Spanish pages pass 'es'. */
+  lang?: 'en' | 'es';
+  /** Translations of this page, for hreflang links. Paths, e.g. { lang: 'es', path: '/es/guias/x' }. */
+  alternates?: Array<{ lang: 'en' | 'es'; path: string }>;
 }
 
 const {
@@ -31,6 +35,8 @@ const {
   noindex = false,
   modified,
   jsonLd = [],
+  lang = 'en',
+  alternates = [],
 } = Astro.props;
 
 if (!Astro.site) {
@@ -62,7 +68,7 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KNCGSJ2J"></script>
     <script is:inline>
@@ -91,7 +97,22 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:site_name" content={siteName} />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_US' : 'en_US'} />
+    {
+      alternates.length > 0 && (
+        <>
+          <link rel="alternate" hreflang={lang} href={canonical.href} />
+          {alternates.map((alt) => (
+            <link rel="alternate" hreflang={alt.lang} href={new URL(href(alt.path), Astro.site).href} />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={lang === 'en' ? canonical.href : new URL(href(alternates.find((alt) => alt.lang === 'en')?.path ?? '/'), Astro.site).href}
+          />
+        </>
+      )
+    }
     <meta property="og:image" content={ogImage.href} />
     <meta property="og:image:alt" content={imageAlt} />
     <meta name="twitter:card" content="summary_large_image" />

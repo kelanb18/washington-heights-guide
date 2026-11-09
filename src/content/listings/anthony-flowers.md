@@ -10,6 +10,8 @@ address: "4034 Broadway"
 crossStreets: "Broadway between W 169th & W 170th Sts"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.841942
+longitude: -73.938852
 website: "https://anthonyflowershop.com"
 phone: "(212) 923-5900"
 hours: "Mon–Sat 9am–7pm; Sun 10am–6pm (per its website)"

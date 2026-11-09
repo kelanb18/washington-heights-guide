@@ -13,6 +13,8 @@ crossStreets: "W 181st St near Fort Washington Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.851454
+longitude: -73.940005
 website: "https://www.lecheilebarnyc.com/"
 phone: "(212) 740-3111"
 hours: "Mon–Wed 11am–midnight; Thu–Sun 11am–2am"

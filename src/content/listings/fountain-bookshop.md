@@ -12,6 +12,8 @@ crossStreets: "W 187th St between Fort Washington Ave & Pinehurst Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-uptown"
 postalCode: "10033"
+latitude: 40.855231
+longitude: -73.937011
 website: "https://fountainbookshop.com/"
 phone: "(646) 438-9218"
 hours: "Daily 10am–8pm (its About page also says 10am–8:30pm)"

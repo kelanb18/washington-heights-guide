@@ -13,6 +13,8 @@ address: "4020 Broadway"
 crossStreets: "Broadway near W 169th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.841789
+longitude: -73.939009
 website: "http://www.tastydeliny.com/"
 phone: "(212) 923-0700"
 lastVerified: 2026-10-28

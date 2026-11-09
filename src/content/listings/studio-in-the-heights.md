@@ -13,6 +13,8 @@ crossStreets: "W 181st St between Audubon & Wadsworth Aves"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.849553
+longitude: -73.934128
 website: "https://studiointheheights.com"
 hours: "Mon & Wed 6:30am–8:30pm; Tue & Thu to 7:30pm / 7pm; Fri to 6:30pm; Sat 8am–1:30pm; Sun limited"
 lastVerified: 2026-10-28

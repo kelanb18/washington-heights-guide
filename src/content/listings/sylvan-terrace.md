@@ -12,6 +12,8 @@ crossStreets: "Between St. Nicholas Ave & Jumel Terrace"
 neighborhood: "Washington Heights"
 area: "jumel-terrace-edgecombe"
 postalCode: "10032"
+latitude: 40.834839
+longitude: -73.939702
 lastVerified: 2026-10-28
 verdict: "A short, storybook block that is free to walk; the houses are private homes, so look from the street."
 image:

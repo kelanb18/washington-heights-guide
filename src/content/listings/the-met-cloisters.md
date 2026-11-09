@@ -12,6 +12,8 @@ crossStreets: "Fort Tryon Park, near Margaret Corbin Circle"
 neighborhood: "Hudson Heights"
 area: "hudson-heights"
 postalCode: "10040"
+latitude: 40.864868
+longitude: -73.931923
 website: "https://www.metmuseum.org/visit/plan-your-visit/met-cloisters"
 hours: "Sun–Tue and Thu–Sat 10am–5pm; closed Wed"
 lastVerified: 2026-10-28

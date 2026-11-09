@@ -91,19 +91,36 @@ function median(values: number[]): number | undefined {
  * from every listing in `all`; failing that, it keeps the position of the stop before it.
  */
 export function northToSouth(stops: Listing[], all: Listing[] = stops): Listing[] {
+  // Prefer real latitude. Without it, convert a street number to an approximate latitude
+  // using the listings that have both (Manhattan's grid runs close to north–south here).
+  const pairs = all
+    .map((listing) => ({ number: streetNumber(listing), lat: listing.data.latitude }))
+    .filter((pair): pair is { number: number; lat: number } => pair.number != null && pair.lat != null);
+  const latFromStreet = (number: number): number | undefined => {
+    if (pairs.length < 2) return undefined;
+    const meanN = pairs.reduce((sum, pair) => sum + pair.number, 0) / pairs.length;
+    const meanL = pairs.reduce((sum, pair) => sum + pair.lat, 0) / pairs.length;
+    const slope =
+      pairs.reduce((sum, pair) => sum + (pair.number - meanN) * (pair.lat - meanL), 0) /
+      pairs.reduce((sum, pair) => sum + (pair.number - meanN) ** 2, 0);
+    return Number.isFinite(slope) ? meanL + slope * (number - meanN) : undefined;
+  };
   const byArea = new Map<string, number[]>();
   for (const listing of all) {
     const area = referenceId(listing.data.area);
-    const number = streetNumber(listing);
-    if (!area || number == null) continue;
-    byArea.set(area, [...(byArea.get(area) ?? []), number]);
+    if (!area || listing.data.latitude == null) continue;
+    byArea.set(area, [...(byArea.get(area) ?? []), listing.data.latitude]);
   }
   let last = Number.POSITIVE_INFINITY;
   const keyed = stops.map((listing, index) => {
     const area = referenceId(listing.data.area);
-    const number = streetNumber(listing) ?? (area ? median(byArea.get(area) ?? []) : undefined);
-    if (number != null) last = number;
-    return { listing, index, key: number ?? last };
+    const number = streetNumber(listing);
+    const key =
+      listing.data.latitude ??
+      (number != null ? latFromStreet(number) : undefined) ??
+      (area ? median(byArea.get(area) ?? []) : undefined);
+    if (key != null) last = key;
+    return { listing, index, key: key ?? last };
   });
   return keyed
     .sort((a, b) => b.key - a.key || a.index - b.index)

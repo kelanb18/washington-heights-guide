@@ -13,6 +13,8 @@ crossStreets: "Edgecombe Ave at W 160th St"
 neighborhood: "Washington Heights"
 area: "jumel-terrace-edgecombe"
 postalCode: "10032"
+latitude: 40.833822
+longitude: -73.939146
 lastVerified: 2026-10-28
 verdict: "A landmark for Harlem Renaissance and jazz-era history; it is a private apartment building, so see it from the sidewalk."
 image:

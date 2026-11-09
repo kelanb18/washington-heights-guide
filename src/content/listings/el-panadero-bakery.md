@@ -14,6 +14,8 @@ crossStreets: "St Nicholas Ave at W 179th St"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.848020
+longitude: -73.934429
 phone: "(212) 923-6610"
 lastVerified: 2026-10-28
 verdict: "A solid uptown bakery stop for pastries and coffee; there is no menu site, so call for hours."

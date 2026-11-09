@@ -13,6 +13,8 @@ address: "1249 St Nicholas Ave"
 crossStreets: "St Nicholas Ave near W 172nd St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.843793
+longitude: -73.937855
 phone: "(212) 795-3667"
 lastVerified: 2026-10-28
 verdict: "A no-frills chicharrón counter; quick and filling, with a small local chain behind it."

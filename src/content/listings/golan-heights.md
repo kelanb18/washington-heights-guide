@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave near Yeshiva University's Wilf Campus"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.851501
+longitude: -73.928199
 website: "https://www.golannyc.com/"
 phone: "(212) 795-7842"
 hours: "Sun–Thu 11:30am–9:30pm; closed Fri & Sat (summer hours per its site; subject to change)"

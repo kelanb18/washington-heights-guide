@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave near W 187th St"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.851537
+longitude: -73.928170
 phone: "(212) 740-7467"
 lastVerified: 2026-10-28
 verdict: "A useful kosher sushi and poke option near YU; confirm hours first, since reviewers report the listed times do not always match."

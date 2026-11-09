@@ -14,6 +14,8 @@ crossStreets: "Broadway between W 176th & W 177th Sts"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
+latitude: 40.847098
+longitude: -73.938255
 website: "http://manolotapas.net/"
 phone: "(212) 923-9100"
 hours: "Daily 4pm–10pm; happy hour Mon–Fri 4–6pm"

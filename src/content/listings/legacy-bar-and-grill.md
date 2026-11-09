@@ -14,6 +14,8 @@ crossStreets: "Broadway at W 189th St"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10040"
+latitude: 40.855713
+longitude: -73.933390
 website: "https://www.legacynycbargrill.com/"
 phone: "(917) 261-7785"
 hours: "Mon–Thu 4pm–12am; Fri–Sat 4pm–2am; Sun 1pm–12am"

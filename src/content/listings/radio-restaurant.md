@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave between W 181st & W 182nd Sts"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.847925
+longitude: -73.931382
 website: "https://www.radiorestaurant.com/"
 phone: "929-822-6079"
 hours: "Bar daily from noon (closes 9–11pm); dinner from 4pm Tue–Sun; breakfast Wed–Sun 7–10:45am; brunch Sat–Sun"

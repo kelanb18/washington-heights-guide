@@ -12,6 +12,8 @@ crossStreets: "Broadway & W 175th St"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
+latitude: 40.846449
+longitude: -73.937899
 website: "https://unitedpalace.com/"
 lastVerified: 2026-10-28
 verdict: "One of Washington Heights' great buildings; the best way to see inside is a ticketed event or tour, so check the calendar first."

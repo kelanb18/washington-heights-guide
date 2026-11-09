@@ -9,6 +9,8 @@ tags:
   - custom-cakes
   - pastries
 address: "813 W 187th St"
+latitude: 40.855362
+longitude: -73.937358
 crossStreets: "W 187th St near Fort Washington Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-uptown"

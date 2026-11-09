@@ -8,7 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { coverForGuide } from '../../lib/covers';
 import { findArea } from '../../lib/catalog';
-import { loadGuides } from '../../lib/guides';
+import { loadGuides, loadSpanishGuides } from '../../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { directionsHref, northToSouth, walkingRoute } from '../../lib/directions';
@@ -56,6 +56,7 @@ const rankedCards = ranked.map((item) => ({
       usedPictures,
     ) ?? null,
 }));
+const spanish = (await loadSpanishGuides()).find((pair) => pair.guide.id === guide.id);
 const routeStops =
   guide.data.route === 'as-listed'
     ? ranked.map((item) => item.listing)
@@ -93,6 +94,7 @@ const jsonLd = [
   modified={isoDate(guide.data.updated)}
   noindex={guide.data.example || guide.data.draft}
   jsonLd={jsonLd}
+  alternates={spanish ? [{ lang: 'es', path: `/es/guias/${guide.id}` }] : []}
 >
   <article class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb">
@@ -115,6 +117,12 @@ const jsonLd = [
           <>
             <span aria-hidden="true"> · </span>
             <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+          </>
+        )}
+        {spanish && (
+          <>
+            <span aria-hidden="true"> · </span>
+            <a href={href(`/es/guias/${guide.id}`)} hreflang="es" lang="es">Leer en español</a>
           </>
         )}
       </p>

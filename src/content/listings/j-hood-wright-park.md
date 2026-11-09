@@ -13,6 +13,8 @@ crossStreets: "W 173rd to W 176th St, Haven Ave to Fort Washington Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights"
 postalCode: "10033"
+latitude: 40.846485
+longitude: -73.941350
 website: "https://www.nycgovparks.org/parks/j-hood-wright-park"
 lastVerified: 2026-10-28
 verdict: "A practical neighborhood park with a good river overlook and a playground families like; less grand than Fort Tryon, more used day to day."

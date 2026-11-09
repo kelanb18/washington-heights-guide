@@ -77,10 +77,17 @@ function expandDays(label: string): number[] | undefined {
 function parseChunk(chunk: string): Span | undefined {
   const match = chunk
     .trim()
-    .match(/^([a-z][a-z ,&–—-]*?)\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm)|noon|midnight)\s*[–—-]\s*(\d{1,2}(?::\d{2})?\s*(?:am|pm)|noon|midnight)$/i);
+    .match(/^([a-z][a-z ,&–—-]*?),?\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm)?|noon|midnight)\s*[–—-]\s*(\d{1,2}(?::\d{2})?\s*(?:am|pm)|noon|midnight)$/i);
   if (!match) return undefined;
   const days = expandDays(match[1]);
-  const start = minutes(match[2]);
+  let startToken = match[2];
+  // "12–10pm" or "5–10pm": a start with no am/pm takes the end's.
+  if (/^\d{1,2}(?::\d{2})?$/.test(startToken.trim())) {
+    const meridiem = match[3].match(/(am|pm)$/i)?.[1];
+    if (!meridiem) return undefined;
+    startToken = `${startToken.trim()}${meridiem}`;
+  }
+  const start = minutes(startToken);
   let end = minutes(match[3]);
   if (!days || start == null || end == null) return undefined;
   if (end <= start) end += 24 * 60;
@@ -90,17 +97,24 @@ function parseChunk(chunk: string): Span | undefined {
 /**
  * Parses an hours string only when it is unambiguous: 'always' for 24-hour places,
  * a list of spans for plain day/time ranges, or undefined for anything hedged or irregular.
+ * A source note in brackets, "(per its website)", is dropped; "Closed Mon" and
+ * "happy hour ..." chunks are skipped (days with no span count as closed).
  */
 function parseHours(hours: string | undefined): Span[] | 'always' | undefined {
   if (!hours) return undefined;
-  const text = hours.trim();
-  if (/vary|check|per |about|until|listing|site|approx/i.test(text)) return undefined;
+  const text = hours
+    .replace(/\s*\((?:per|via|from)\b[^)]*\)/gi, '')
+    .trim();
+  if (/vary|check|per |about|until|listing|site|approx|\(|seasonal|limited|appointment|events? only/i.test(text)) {
+    return undefined;
+  }
   if (/24\s*hours/i.test(text)) return 'always';
 
   const parts = text
     .split(/\s*;\s*|\s*,\s*(?=(?:mon|tue|wed|thu|fri|sat|sun|daily|weekdays|weekends)\b)/i)
     .map((part) => part.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .filter((part) => !/^(?:closed\b|happy hour\b)/i.test(part));
   if (parts.length === 0) return undefined;
   const spans: Span[] = [];
   for (const part of parts) {

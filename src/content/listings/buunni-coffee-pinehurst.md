@@ -13,6 +13,8 @@ crossStreets: "Pinehurst Ave near W 187th St"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-uptown"
 postalCode: "10033"
+latitude: 40.855175
+longitude: -73.937734
 website: "https://www.buunnicoffee.com/"
 phone: "(212) 568-8700"
 hours: "Mon–Fri 7am–5pm; Sat–Sun 8am–5pm"

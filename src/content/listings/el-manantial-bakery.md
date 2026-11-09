@@ -13,6 +13,8 @@ address: "1220 St Nicholas Ave"
 crossStreets: "St Nicholas Ave near W 171st St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.842924
+longitude: -73.938317
 phone: "(212) 795-0045"
 lastVerified: 2026-10-28
 verdict: "A cheap, quick stop for guava pastries and coffee; call for hours, since no official page turned up."

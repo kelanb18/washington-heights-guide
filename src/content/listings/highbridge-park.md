@@ -9,6 +9,8 @@ tags:
   - hiking
   - harlem-river
 address: "W 155th St to Dyckman St"
+latitude: 40.842304
+longitude: -73.935124
 crossStreets: "Edgecombe Ave & Amsterdam Ave"
 neighborhood: "Washington Heights"
 area: "highbridge-park"

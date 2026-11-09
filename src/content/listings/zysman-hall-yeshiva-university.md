@@ -13,6 +13,8 @@ crossStreets: "Amsterdam Ave at W 186th St"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.851624
+longitude: -73.928417
 website: "https://www.yu.edu/"
 lastVerified: 2026-10-28
 verdict: "A one-of-a-kind building to see from the street; it's an active school, so interior access depends on events."

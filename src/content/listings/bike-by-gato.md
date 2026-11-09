@@ -12,6 +12,8 @@ crossStreets: "Amsterdam Ave near W 182nd St"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.848554
+longitude: -73.930826
 website: "https://bikebygatonyc.com"
 phone: "(917) 495-8133"
 hours: "Mon–Fri 11am–7pm; Sat 10am–6pm; Sun 10am–4pm (per aggregator listings)"

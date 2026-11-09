@@ -11,6 +11,8 @@ address: "Fort Washington Ave between W 168th & W 169th Sts"
 crossStreets: "Fort Washington Ave, W 168th–169th Sts"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.842488
+longitude: -73.942151
 website: "https://grownyc.org/locations/fort-washington-greenmarket/"
 hours: "Tuesdays 8am–4pm; June 2–Dec 15, 2026"
 lastVerified: 2026-10-28

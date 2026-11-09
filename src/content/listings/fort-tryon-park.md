@@ -12,6 +12,8 @@ crossStreets: "Fort Washington Ave & W 190th St"
 neighborhood: "Hudson Heights"
 area: "hudson-heights"
 postalCode: "10040"
+latitude: 40.857109
+longitude: -73.935602
 website: "https://www.nycgovparks.org/parks/fort-tryon-park"
 lastVerified: 2026-10-28
 verdict: "The neighborhood's best long walk, with river views and gardens; plan your visit around the gardens' seasons and the park's hills."

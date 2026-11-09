@@ -11,6 +11,8 @@ crossStreets: "Amsterdam Ave & W 165th St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.837655
+longitude: -73.938299
 website: "https://wordupbooks.com/"
 phone: "(347) 688-4456"
 hours: "Tue–Wed 12–8pm; Thu–Sat 12–6pm; closed Sun and Mon"

@@ -10,6 +10,8 @@ tags:
   - biking
   - croton-aqueduct
 address: "Highbridge Park, W 172nd St & Amsterdam Ave"
+latitude: 40.842428
+longitude: -73.931496
 crossStreets: "Entrance at W 172nd St & Amsterdam Ave"
 neighborhood: "Washington Heights"
 area: "highbridge-park"

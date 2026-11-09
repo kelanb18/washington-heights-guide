@@ -13,6 +13,8 @@ crossStreets: "Fort Washington Ave, W 183rd St & Pinehurst Ave"
 neighborhood: "Hudson Heights"
 area: "hudson-heights"
 postalCode: "10033"
+latitude: 40.853017
+longitude: -73.938054
 website: "https://www.nycgovparks.org/parks/bennett-park"
 lastVerified: 2026-10-28
 verdict: "A small, historic park worth a few minutes for the fort outline and the schist outcrop; it is a pause, not a day out."

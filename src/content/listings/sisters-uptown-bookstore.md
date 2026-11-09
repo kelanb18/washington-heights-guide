@@ -12,6 +12,8 @@ address: "1942 Amsterdam Ave"
 crossStreets: "Amsterdam Ave near W 156th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.832394
+longitude: -73.942472
 website: "https://sistersuptownbookstore.com"
 phone: "(212) 862-3680"
 hours: "Tue–Sat 12–6pm; closed Sun & Mon"

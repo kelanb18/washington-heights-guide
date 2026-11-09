@@ -14,6 +14,8 @@ crossStreets: "St Nicholas Ave between W 191st & W 192nd Sts"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10040"
+latitude: 40.855755
+longitude: -73.928939
 phone: "(212) 543-9661"
 lastVerified: 2026-10-28
 verdict: "A busy local counter for Dominican goat and sides; Gothamist praised it, but check hours by phone."

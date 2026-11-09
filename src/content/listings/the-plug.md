@@ -14,6 +14,8 @@ crossStreets: "W 167th St near Amsterdam Ave"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.839282
+longitude: -73.937462
 website: "https://theplugcoffee.com/"
 phone: "(646) 413-8770"
 hours: "Mon–Fri 7am–5pm; Sat–Sun 8am–5pm"

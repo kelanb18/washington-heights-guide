@@ -13,6 +13,8 @@ address: "4059 Broadway"
 crossStreets: "Broadway near W 170th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.843178
+longitude: -73.939393
 phone: "(212) 928-6605"
 lastVerified: 2026-10-28
 verdict: "A neighborhood classic for Latin and Chinese-American dishes; the special fried rice is the one to try."

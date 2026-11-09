@@ -13,6 +13,8 @@ address: "9 Edward M Morgan Pl"
 crossStreets: "Edward M Morgan Pl near Broadway & W 157th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.834593
+longitude: -73.945225
 website: "https://semicoloncafe.com/nyc-uptown"
 phone: "(646) 791-5518"
 hours: "Daily 8am–7pm (per its website)"

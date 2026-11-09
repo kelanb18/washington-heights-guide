@@ -14,6 +14,8 @@ address: "3821 Broadway"
 crossStreets: "Broadway at W 159th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.835559
+longitude: -73.944148
 website: "https://hilltoppark.bar/"
 phone: "(646) 438-9293"
 hours: "Weekdays from noon, weekends from 11am; closes 11pm–midnight (per listings)"

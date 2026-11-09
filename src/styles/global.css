@@ -1471,3 +1471,70 @@ ul.tag-line {
   display: inline-flex;
   align-items: center;
 }
+
+/* Near me */
+.near-tools {
+  margin: 0 0 1.2rem;
+  font-family: var(--sans);
+}
+
+.near-tools .button {
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.near-tools .button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.toggle {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 44px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.toggle input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--river);
+}
+
+.toggle-note {
+  color: var(--ink-soft);
+  font-size: 0.8rem;
+}
+
+.near-status {
+  margin: 0.4rem 0 0.8rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip-row .chip {
+  margin: 0;
+  padding: 0.45rem 0.75rem;
+  min-height: 36px;
+  border: 1px solid transparent;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.chip-row .chip.is-active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.distance {
+  font-weight: 700;
+  color: var(--ink);
+}

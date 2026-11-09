@@ -12,6 +12,8 @@ address: "216 Fort Washington Ave"
 crossStreets: "Fort Washington Ave between W 168th & W 169th Sts"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.842738
+longitude: -73.941963
 website: "https://armory.nyc"
 phone: "(212) 923-1803"
 hours: "Mon–Fri 9am–7pm; weekends for events only (subject to event schedule)"

@@ -14,6 +14,8 @@ crossStreets: "Pinehurst Ave near W 187th St"
 neighborhood: "Washington Heights"
 area: "hudson-heights-uptown"
 postalCode: "10033"
+latitude: 40.854257
+longitude: -73.938069
 website: "https://tintonyc.com"
 phone: "(212) 933-1803"
 hours: "Tue–Thu 4–10pm; Fri 4–11pm; Sat 12–11pm; Sun 12–10pm; closed Mon"

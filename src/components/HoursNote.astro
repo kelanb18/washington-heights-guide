@@ -1,19 +1,42 @@
 ---
-import { hoursStatus } from '../lib/hours';
-
 interface Props {
   hours?: string;
 }
 
 const { hours } = Astro.props;
-const status = hoursStatus(hours);
 ---
 
 {
   hours && (
-    <p class="hours-line">
-      {status && <span class:list={['open-badge', { 'is-open': status.open }]}>{status.label}</span>}
+    <p class="hours-line" data-hours={hours}>
+      <span class="open-badge" hidden />
       <span>{hours}</span>
     </p>
   )
 }
+
+<script>
+  import { hoursStatus } from '../lib/hours';
+
+  // Worked out in the visitor's browser (New York time), so the badge is never as old as the build.
+  function refresh() {
+    for (const line of document.querySelectorAll<HTMLElement>('.hours-line[data-hours]')) {
+      const badge = line.querySelector<HTMLElement>('.open-badge');
+      const status = hoursStatus(line.dataset.hours);
+      const card = line.closest<HTMLElement>('[data-place]');
+      if (card) card.dataset.open = status ? String(status.open) : 'unknown';
+      if (!badge) continue;
+      if (!status) {
+        badge.hidden = true;
+        continue;
+      }
+      badge.hidden = false;
+      badge.textContent = status.label;
+      badge.classList.toggle('is-open', status.open);
+    }
+    document.dispatchEvent(new CustomEvent('hours:refreshed'));
+  }
+
+  refresh();
+  setInterval(refresh, 60_000);
+</script>

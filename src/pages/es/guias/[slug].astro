@@ -1,0 +1,177 @@
+---
+import { render } from 'astro:content';
+import AttributedPhoto from '../../../components/AttributedPhoto.astro';
+import PhotoSet from '../../../components/PhotoSet.astro';
+import PlaceMap from '../../../components/PlaceMap.astro';
+import SourceList from '../../../components/SourceList.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { loadAreas } from '../../../lib/areas';
+import { coverForGuide } from '../../../lib/covers';
+import { directionsHref, northToSouth, walkingRoute } from '../../../lib/directions';
+import { loadSpanishGuides } from '../../../lib/guides';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
+import { loadListings } from '../../../lib/listings';
+import { pinsFor } from '../../../lib/pins';
+import { claimFirstPicture, reservePicture } from '../../../lib/pictures';
+import { referenceId } from '../../../lib/refs';
+import { absoluteUrl, href, isoDate, pageTitleFit, siteName } from '../../../lib/site';
+import { categoryInfoEs, formatDateEs } from '../../../lib/spanish';
+
+export async function getStaticPaths() {
+  const pairs = await loadSpanishGuides();
+  return pairs.map(({ es }) => ({ params: { slug: es.id } }));
+}
+
+const pairs = await loadSpanishGuides();
+const pair = pairs.find(({ es }) => es.id === Astro.params.slug);
+if (!pair) throw new Error(`[guias] No Spanish guide for "${Astro.params.slug}".`);
+const { guide, es } = pair;
+
+const listings = await loadListings();
+const ranked = guide.data.picks.flatMap((pick, index) => {
+  const id = referenceId(pick.listing);
+  const listing = listings.find((entry) => entry.id === id);
+  const translated = es.data.picks[index];
+  return listing && translated ? [{ listing, blurb: translated.blurb, badge: translated.badge, rank: index + 1 }] : [];
+});
+const areas = await loadAreas();
+const hero = guide.data.image ?? coverForGuide(guide, listings, areas)?.picture;
+const usedPictures = new Set<string>();
+if (hero) reservePicture(hero, usedPictures);
+const cards = ranked.map((item) => ({
+  ...item,
+  photo:
+    claimFirstPicture(
+      [...(item.listing.data.image ? [item.listing.data.image] : []), ...item.listing.data.gallery],
+      usedPictures,
+    ) ?? null,
+}));
+const routeStops =
+  guide.data.route === 'as-listed'
+    ? ranked.map((item) => item.listing)
+    : northToSouth(
+        ranked.map((item) => item.listing),
+        listings,
+      );
+const routeLegs = walkingRoute(routeStops);
+const { Content } = await render(es);
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const pageUrl = absoluteUrl(site, `/es/guias/${es.id}`);
+const jsonLd = [
+  itemListJsonLd(
+    es.data.title,
+    ranked.map((item) => ({ name: item.listing.data.name, url: absoluteUrl(site, `/places/${item.listing.id}`) })),
+  ),
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Guías', url: absoluteUrl(site, '/es') },
+    { name: es.data.title, url: pageUrl },
+  ]),
+];
+---
+
+<BaseLayout
+  title={pageTitleFit(es.data.title)}
+  description={es.data.description}
+  ogType="article"
+  image={hero?.src}
+  imageAlt={hero?.alt}
+  modified={isoDate(es.data.translated)}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: `/best/${guide.id}` }]}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio en español</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{es.data.title}</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Lo mejor de Washington Heights
+        <span aria-hidden="true"> · </span>
+        <a href={href(`/best/${guide.id}`)} hreflang="en" lang="en">Read in English</a>
+      </p>
+      <h1>{es.data.title}</h1>
+      <p class="lede">{es.data.description}</p>
+      <p class="where">
+        Actualizada el <time datetime={isoDate(es.data.translated)}>{formatDateEs(es.data.translated)}</time>
+      </p>
+    </header>
+    <PhotoSet image={hero} />
+    <div class="prose">
+      <Content />
+    </div>
+    {
+      routeStops.length > 1 && (
+        <section class="route-box" aria-labelledby="route-heading">
+          <h2 id="route-heading">Recorre esta lista a pie</h2>
+          <p class="route-note">
+            Abre Google Maps con indicaciones a pie desde donde estás
+            {guide.data.route === 'as-listed' ? ', en el orden de la guía' : ', de norte a sur para no volver sobre tus pasos'}.
+            {routeLegs.length > 1 &&
+              ` En el teléfono, Google Maps acepta cuatro paradas por enlace, así que el recorrido va en ${routeLegs.length} partes. Cada parte empieza donde terminó la anterior.`}
+          </p>
+          <ol class="route-stops">
+            {routeStops.map((listing) => (
+              <li>{listing.data.name}</li>
+            ))}
+          </ol>
+          <p class="action-row">
+            {routeLegs.map((leg, index) => (
+              <a class:list={['button', { 'button-ghost': index > 0 }]} href={leg.href} rel="noopener noreferrer" target="_blank">
+                {routeLegs.length === 1 ? 'Abrir la ruta en Google Maps' : `Parte ${index + 1}: paradas ${leg.from}–${leg.to}`}
+                <span class="sr-only"> (abre Google Maps en otra pestaña)</span>
+              </a>
+            ))}
+          </p>
+        </section>
+      )
+    }
+    <ol class="ranked">
+      {
+        cards.map((item) => (
+          <li class="ranked-card">
+            <p class="entry-index">{String(item.rank).padStart(2, '0')}</p>
+            {item.photo && <AttributedPhoto picture={item.photo} variant="thumb" />}
+            <div>
+              {item.badge && <p class="badge">{item.badge}</p>}
+              {item.listing.data.sponsored && <p class="sponsored-flag">Patrocinado</p>}
+              <p class="kicker">
+                <span class="chip">{categoryInfoEs[item.listing.data.category]}</span>
+              </p>
+              <h2 class="entry-title">
+                <a href={href(`/places/${item.listing.id}`)}>{item.listing.data.name}</a>
+              </h2>
+              <p class="pick-blurb">{item.blurb}</p>
+              <p class="where">
+                {item.listing.data.crossStreets}
+                <span aria-hidden="true"> · </span>
+                <a href={directionsHref(item.listing)} rel="noopener noreferrer" target="_blank">
+                  Cómo llegar<span class="sr-only"> a {item.listing.data.name} (abre Google Maps)</span>
+                </a>
+              </p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+    {ranked.length > 0 && <PlaceMap pins={pinsFor(ranked.map((item) => item.listing))} label={`Mapa de ${es.data.title}`} />}
+    <p class="section-note">
+      Las fichas de cada lugar, con horarios y fuentes, están en inglés por ahora.
+    </p>
+    {
+      guide.data.sources.length > 0 && (
+        <section class="group" aria-labelledby="guide-sources">
+          <div class="section-head">
+            <h2 id="guide-sources">Fuentes</h2>
+          </div>
+          <SourceList urls={guide.data.sources} />
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>

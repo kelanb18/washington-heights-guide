@@ -13,6 +13,8 @@ crossStreets: "Pinehurst Ave & W 181st St"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.850777
+longitude: -73.939258
 website: "https://www.cabriniwines.com/"
 phone: "(212) 568-3290"
 lastVerified: 2026-11-04

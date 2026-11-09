@@ -4,6 +4,7 @@ import { areaSchema } from './lib/area-schema';
 import { listingSchema } from './lib/listing-schema';
 import { personSchema } from './lib/person-schema';
 import { guideSchema } from './lib/guide-schema';
+import { guideTranslationSchema } from './lib/guide-translation-schema';
 import { productionSchema } from './lib/production-schema';
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -55,4 +56,9 @@ const guides = defineCollection({
   schema: guideSchema,
 });
 
-export const collections = { listings, areas, people, productions, guides };
+const guias = defineCollection({
+  loader: markdownFiles('guias', 'guias', 'best-brunch-washington-heights.md'),
+  schema: guideTranslationSchema,
+});
+
+export const collections = { listings, areas, people, productions, guides, guias };

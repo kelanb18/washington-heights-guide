@@ -13,6 +13,8 @@ crossStreets: "Audubon Ave near W 185th St"
 neighborhood: "Washington Heights"
 area: "fort-george"
 postalCode: "10033"
+latitude: 40.851369
+longitude: -73.930636
 phone: "(646) 678-4131"
 hours: "Closed Mon; Tue–Thu 12–10pm; Fri–Sat 12–11pm; Sun 2–10pm (per listings)"
 lastVerified: 2026-10-28

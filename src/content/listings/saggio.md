@@ -14,6 +14,8 @@ crossStreets: "W 181st St between Fort Washington Ave & Cabrini Blvd"
 neighborhood: "Washington Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.851374
+longitude: -73.939491
 phone: "(212) 795-3080"
 lastVerified: 2026-10-28
 verdict: "A cozy, affordable pasta-and-wine room with a back garden; the Infatuation found the food unmemorable."

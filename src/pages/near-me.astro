@@ -1,0 +1,158 @@
+---
+import ListingEntry from '../components/ListingEntry.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { coverForListing } from '../lib/covers';
+import { loadListings } from '../lib/listings';
+import { href, pageTitle } from '../lib/site';
+import { categories, categoryInfo } from '../lib/taxonomy';
+
+const listings = [...(await loadListings())].sort((a, b) => a.data.name.localeCompare(b.data.name, 'en'));
+const usedPictures = new Set<string>();
+const photos = new Map(listings.map((listing) => [listing.id, coverForListing(listing, usedPictures) ?? null]));
+const presentCategories = categories.filter((category) => listings.some((listing) => listing.data.category === category));
+const description = 'Places in Washington Heights sorted by distance from where you are, with a filter for what is open right now.';
+---
+
+<BaseLayout title={pageTitle('Near me')} description={description} noindex={true}>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Near me</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">From where you are</p>
+      <h1>Near me</h1>
+      <p class="lede">Sort every place on the guide by walking distance, and see what is open right now.</p>
+    </header>
+
+    <div class="near-tools" data-pagefind-ignore>
+      <p class="action-row">
+        <button type="button" class="button" id="locate">Use my location</button>
+        <label class="toggle">
+          <input type="checkbox" id="open-only" />
+          <span>Open now <span class="toggle-note">(places with clear posted hours)</span></span>
+        </label>
+      </p>
+      <p class="near-status" id="near-status" role="status" aria-live="polite">
+        Your location stays on your phone. It is used to sort this list and is not sent anywhere.
+      </p>
+      <p class="tag-line chip-row" role="group" aria-label="Filter by category">
+        <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+        {
+          presentCategories.map((category) => (
+            <button type="button" class="chip" data-filter={category} aria-pressed="false">
+              {categoryInfo[category].plural}
+            </button>
+          ))
+        }
+      </p>
+    </div>
+
+    <ul class="entries" id="near-list">
+      {listings.map((listing) => <ListingEntry listing={listing} photo={photos.get(listing.id)} heading="h2" />)}
+    </ul>
+    <p class="empty" id="near-empty" hidden>Nothing matches right now. Turn off “Open now” or pick another category.</p>
+  </div>
+</BaseLayout>
+
+<script>
+  const list = document.getElementById('near-list') as HTMLUListElement | null;
+  const status = document.getElementById('near-status');
+  const locate = document.getElementById('locate') as HTMLButtonElement | null;
+  const openOnly = document.getElementById('open-only') as HTMLInputElement | null;
+  const empty = document.getElementById('near-empty');
+  const chips = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const cards = list ? [...list.querySelectorAll<HTMLElement>('[data-place]')] : [];
+  let category = 'all';
+
+  // Centre of Washington Heights, roughly W 175th St and Broadway.
+  const centre = { lat: 40.8467, lng: -73.9383 };
+  const metresPerMile = 1609.34;
+  const walkMetresPerMinute = 80;
+
+  function metres(a: { lat: number; lng: number }, b: { lat: number; lng: number }) {
+    const rad = Math.PI / 180;
+    const dLat = (b.lat - a.lat) * rad;
+    const dLng = (b.lng - a.lng) * rad;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLng / 2) ** 2;
+    return 2 * 6371000 * Math.asin(Math.sqrt(h));
+  }
+
+  function applyFilters() {
+    let shown = 0;
+    for (const card of cards) {
+      const matchesCategory = category === 'all' || card.dataset.category === category;
+      const matchesOpen = !openOnly?.checked || card.dataset.open === 'true';
+      const visible = matchesCategory && matchesOpen;
+      card.hidden = !visible;
+      if (visible) shown += 1;
+    }
+    if (empty) empty.hidden = shown > 0;
+  }
+
+  function sortFrom(here: { lat: number; lng: number }) {
+    if (!list) return;
+    const keyed = cards.map((card) => {
+      const lat = Number(card.dataset.lat);
+      const lng = Number(card.dataset.lng);
+      const known = card.dataset.lat != null && card.dataset.lng != null && !Number.isNaN(lat) && !Number.isNaN(lng);
+      const distance = known ? metres(here, { lat, lng }) : Number.POSITIVE_INFINITY;
+      const label = card.querySelector<HTMLElement>('.distance');
+      if (label) {
+        label.hidden = !known;
+        if (known) {
+          const miles = distance / metresPerMile;
+          const minutes = Math.max(1, Math.round(distance / walkMetresPerMinute));
+          label.textContent = `${miles < 0.1 ? '<0.1' : miles.toFixed(1)} mi · ${minutes} min walk · `;
+        }
+      }
+      return { card, distance };
+    });
+    keyed.sort((a, b) => a.distance - b.distance);
+    for (const { card } of keyed) list.append(card);
+  }
+
+  locate?.addEventListener('click', () => {
+    if (!('geolocation' in navigator)) {
+      if (status) status.textContent = 'This browser cannot share a location. The list stays in A–Z order.';
+      return;
+    }
+    if (status) status.textContent = 'Finding you…';
+    locate.disabled = true;
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const here = { lat: position.coords.latitude, lng: position.coords.longitude };
+        sortFrom(here);
+        const far = metres(here, centre) > 5000;
+        if (status) {
+          status.textContent = far
+            ? 'Sorted by distance from you. You look to be outside Washington Heights, so the walks will be long.'
+            : 'Sorted by distance from you, nearest first. Walking times are estimates.';
+        }
+        locate.textContent = 'Update my location';
+        locate.disabled = false;
+      },
+      () => {
+        if (status) status.textContent = 'Location is off or was declined. The list stays in A–Z order.';
+        locate.disabled = false;
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 60000 },
+    );
+  });
+
+  openOnly?.addEventListener('change', applyFilters);
+  document.addEventListener('hours:refreshed', applyFilters);
+  for (const chip of chips) {
+    chip.addEventListener('click', () => {
+      category = chip.dataset.filter ?? 'all';
+      for (const other of chips) {
+        const active = other === chip;
+        other.classList.toggle('is-active', active);
+        other.setAttribute('aria-pressed', String(active));
+      }
+      applyFilters();
+    });
+  }
+  applyFilters();
+</script>

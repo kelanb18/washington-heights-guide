@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave at W 165th St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.837859
+longitude: -73.938603
 website: "https://www.salento-ny.com/"
 phone: "+1 646 767 0680"
 hours: "Daily 8am–8pm"

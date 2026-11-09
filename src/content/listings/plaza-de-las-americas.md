@@ -12,6 +12,8 @@ crossStreets: "Broadway & Wadsworth Ave"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
+latitude: 40.846182
+longitude: -73.938209
 website: "https://www.nyc.gov/html/dot/html/pr2015/pr15-122.shtml"
 lastVerified: 2026-10-28
 verdict: "A rare car-free civic space for a sit-down or a market stop beside the United Palace; programming varies, so check before a special trip."

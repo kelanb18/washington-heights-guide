@@ -8,6 +8,8 @@ tags:
   - greenway
   - history
 address: "Fort Washington Park, Jeffrey's Hook"
+latitude: 40.850257
+longitude: -73.946963
 crossStreets: "Hudson River Greenway at the George Washington Bridge"
 neighborhood: "Washington Heights"
 area: "hudson-heights"

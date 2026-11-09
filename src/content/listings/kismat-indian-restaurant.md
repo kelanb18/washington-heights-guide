@@ -14,6 +14,8 @@ crossStreets: "Fort Washington Ave between W 187th & W 190th Sts"
 neighborhood: "Hudson Heights"
 area: "hudson-heights"
 postalCode: "10040"
+latitude: 40.855244
+longitude: -73.937023
 website: "https://www.kismatrestaurant.com/"
 phone: "(212) 795-8633"
 lastVerified: 2026-11-04

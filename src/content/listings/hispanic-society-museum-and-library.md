@@ -12,6 +12,8 @@ address: "613 W 155th St"
 crossStreets: "W 155th St at Broadway (Audubon Terrace)"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.832971
+longitude: -73.946137
 website: "https://hispanicsociety.org"
 hours: "Museum Thu–Sun 12–5pm; library Thu–Sat 12–3:30pm (researchers by appointment)"
 lastVerified: 2026-10-28

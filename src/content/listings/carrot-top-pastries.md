@@ -14,6 +14,8 @@ crossStreets: "Broadway between W 164th & W 165th Sts"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.838733
+longitude: -73.941552
 hours: "6am–8pm (per Columbia medical center local-food list)"
 lastVerified: 2026-10-28
 verdict: "A long-running neighborhood bakery where the carrot cake is the draw; its official site is gone, so confirm hours before a trip."

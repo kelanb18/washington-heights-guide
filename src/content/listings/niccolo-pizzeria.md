@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave near W 166th St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.838252
+longitude: -73.938007
 website: "https://niccolopizzeria.com/"
 phone: "(646) 964-5061"
 lastVerified: 2026-10-28

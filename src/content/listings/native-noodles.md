@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave near W 166th St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.838262
+longitude: -73.937872
 website: "https://www.nativenoodles.com/"
 phone: "(646) 370-6290"
 hours: "Daily 11:30am–9pm"

@@ -24,7 +24,13 @@ const area = findArea(await loadAreas(), data.area);
 const Heading = heading;
 ---
 
-<li class:list={['entry', { numbered: index != null, 'has-photo': Boolean(photo) }]}>
+<li
+  class:list={['entry', { numbered: index != null, 'has-photo': Boolean(photo) }]}
+  data-place={listing.id}
+  data-category={data.category}
+  data-lat={data.latitude}
+  data-lng={data.longitude}
+>
   {index != null && <p class="entry-index">{String(index).padStart(2, '0')}</p>}
   {photo && <AttributedPhoto picture={photo} variant="thumb" />}
   <div>
@@ -77,6 +83,7 @@ const Heading = heading;
     <p class="verdict">{data.verdict}</p>
     <HoursNote hours={data.hours} />
     <p class="where">
+      <span class="distance" hidden></span>
       {data.crossStreets}
       {
         area && (

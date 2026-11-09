@@ -12,6 +12,8 @@ crossStreets: "Broadway & W 165th St"
 neighborhood: "Washington Heights"
 area: "audubon-165th"
 postalCode: "10032"
+latitude: 40.839358
+longitude: -73.940675
 website: "https://theshabazzcenter.org/"
 hours: "Tue–Fri 10am–6pm (advance purchase required)"
 lastVerified: 2026-10-28

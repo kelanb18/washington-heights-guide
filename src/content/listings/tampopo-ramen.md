@@ -14,6 +14,8 @@ crossStreets: "W 181st St between Fort Washington Ave & Cabrini Blvd"
 neighborhood: "Hudson Heights"
 area: "hudson-heights-downtown"
 postalCode: "10033"
+latitude: 40.851366
+longitude: -73.939455
 website: "https://www.tampoporamennyc.com/"
 hours: "Sun–Thu 12–10pm; Fri–Sat 12–11pm; happy hour 5–6pm"
 lastVerified: 2026-10-28

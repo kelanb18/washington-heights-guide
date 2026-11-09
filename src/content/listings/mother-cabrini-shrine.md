@@ -13,6 +13,8 @@ crossStreets: "Fort Washington Ave at W 190th St"
 neighborhood: "Washington Heights"
 area: "hudson-heights"
 postalCode: "10040"
+latitude: 40.857363
+longitude: -73.935505
 website: "https://cabrinishrinenyc.org"
 phone: "(212) 923-3536"
 hours: "Tue–Fri 10am–5pm; Sat–Sun 9am–5pm; closed Mon & major holidays"

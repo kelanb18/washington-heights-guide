@@ -14,6 +14,8 @@ crossStreets: "W 181st St between Wadsworth & Fort Washington Aves"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.850493
+longitude: -73.937039
 website: "https://www.georgespizzaria.com/"
 phone: "(212) 568-6891"
 lastVerified: 2026-10-28

@@ -13,8 +13,8 @@ crossStreets: "Broadway & W 175th St"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
-latitude: 40.84651
-longitude: -73.938824
+latitude: 40.846366
+longitude: -73.938601
 website: "https://maleconnyc.com/"
 phone: "(212) 927-3812"
 hours: "Sun–Thu 9am–11pm; Fri–Sat 9am–midnight"

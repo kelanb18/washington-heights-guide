@@ -14,6 +14,8 @@ address: "206 Audubon Ave"
 crossStreets: "Audubon Ave between W 175th & W 176th Sts"
 neighborhood: "Washington Heights"
 postalCode: "10033"
+latitude: 40.845139
+longitude: -73.935052
 website: "https://www.mariluanddaysiny.com/"
 phone: "(212) 795-6909"
 hours: "Daily, about 8am–6pm"

@@ -14,6 +14,8 @@ crossStreets: "Amsterdam Ave at W 173rd St"
 neighborhood: "Washington Heights"
 area: "highbridge-park"
 postalCode: "10033"
+latitude: 40.842979
+longitude: -73.934568
 website: "https://www.nycgovparks.org/facilities/recreationcenters/MX261"
 phone: "(212) 927-2400"
 lastVerified: 2026-10-28

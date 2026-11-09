@@ -14,6 +14,8 @@ crossStreets: "Broadway between W 176th & W 177th Sts"
 neighborhood: "Washington Heights"
 area: "broadway-175th"
 postalCode: "10033"
+latitude: 40.847020
+longitude: -73.938123
 website: "https://www.floriditanyc.com/"
 phone: "(212) 928-0653"
 hours: "Open 24 hours"

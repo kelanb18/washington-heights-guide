@@ -13,6 +13,8 @@ crossStreets: "Jumel Terrace between W 160th & W 162nd Sts"
 neighborhood: "Washington Heights"
 area: "jumel-terrace-edgecombe"
 postalCode: "10032"
+latitude: 40.834429
+longitude: -73.938580
 website: "https://morrisjumel.org"
 hours: "Mansion closed (roof work); Roger Morris Park daily 10am–5pm"
 lastVerified: 2026-10-28

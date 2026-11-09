@@ -13,6 +13,8 @@ address: "4015 Broadway"
 crossStreets: "Broadway at W 169th St"
 neighborhood: "Washington Heights"
 postalCode: "10032"
+latitude: 40.841658
+longitude: -73.939437
 website: "https://www.boogielabnyc.com/"
 hours: "Bakery daily 6:45am–7pm; bistro Mon–Sat 5–10pm"
 lastVerified: 2026-10-28

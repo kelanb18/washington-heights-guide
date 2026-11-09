@@ -13,6 +13,8 @@ crossStreets: "St Nicholas Ave near W 179th St"
 neighborhood: "Washington Heights"
 area: "181st-street-east"
 postalCode: "10033"
+latitude: 40.848314
+longitude: -73.934378
 website: "https://guactimeusa.com/"
 phone: "(212) 300-4187"
 lastVerified: 2026-10-28
