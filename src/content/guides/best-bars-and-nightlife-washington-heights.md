@@ -3,6 +3,15 @@ title: "The Best Bars and Nightlife in Washington Heights"
 description: "Where to drink in Washington Heights: neighborhood pubs, tapas and wine bars, a hotel bar, and cocktail rooms, with notes on happy hours and late hours."
 category: "bar"
 updated: 2026-10-28
+image:
+  src: /images/guides/best-bars-and-nightlife-washington-heights.webp
+  alt: "A bar counter with beer taps and rows of glasses hanging above it."
+  credit: "Wilfredor"
+  license: "CC BY-SA 4.0"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Bar_counter_with_beer_taps,_Vieux-Qu%C3%A9bec.jpg"
+  width: 1600
+  height: 1067
 picks:
   - listing: "le-cheile"
     blurb: "A two-floor Irish pub that its website says has served the neighborhood for over a decade. A 2023 Infatuation guide mentions a view of the George Washington Bridge and singled out the wings; it is open until 2am Thursday through Sunday."

@@ -1178,7 +1178,7 @@ html[data-theme='dark'] .open-badge.is-open {
   text-decoration: none;
 }
 
-.guide-card-credit {
+.guide-card .guide-card-credit {
   margin: 0.55rem 1rem 0;
 }
 
@@ -1537,4 +1537,234 @@ ul.tag-line {
 .distance {
   font-weight: 700;
   color: var(--ink);
+}
+
+/* Homepage: front page in the guide's print style. Ink on paper, one brick accent. */
+.front > :not(.front-hero) {
+  max-width: 46rem;
+}
+
+.front-intro h1 {
+  max-width: 20ch;
+}
+
+.front-intro {
+  padding-top: 1.6rem;
+}
+
+.front-byline,
+.front-label,
+.front-kicker {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.front-intro h1 {
+  margin: 0.6rem 0 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(2.1rem, 6vw, 3.4rem);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+
+.front-dek,
+.front-subhead {
+  margin: 0.75rem 0 0;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--ink-soft);
+}
+
+.front-hero .photo {
+  margin-top: 1.4rem;
+}
+
+.front-hero .photo img {
+  border: 0;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.front-index {
+  margin-top: 1.8rem;
+}
+
+.front-index ol,
+.front-rows,
+.front-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.front-index ol {
+  margin-top: 0.3rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.front-index li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.front-index a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.9rem;
+  padding: 1rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.front-numeral {
+  flex: 0 0 1.4rem;
+  font-family: var(--display);
+  font-size: 0.85rem;
+  color: var(--brick);
+}
+
+.front-index-text {
+  flex: 1;
+}
+
+.front-index-word {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+.front-index-note {
+  display: block;
+  margin-top: 0.3rem;
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+}
+
+.front-arrow {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+}
+
+.front-index a:hover .front-index-word,
+.front-rows a:hover .front-row-title,
+.front-list a:hover .front-row-title {
+  color: var(--brick);
+}
+
+.front-index a:hover .front-arrow {
+  transform: translateX(4px);
+  color: var(--brick);
+}
+
+.front-section {
+  margin-top: 2.4rem;
+}
+
+.front-heading {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.65rem;
+}
+
+.front-subhead {
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.front-rows {
+  margin-top: 0.6rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.front-rows li + li {
+  border-top: 1px solid var(--rule);
+}
+
+.front-rows a {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.85rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.front-rows img {
+  flex: 0 0 auto;
+  width: 5.75rem;
+  height: 5.75rem;
+  object-fit: cover;
+  background: var(--paper-deep);
+}
+
+.front-row-title {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 1.2rem;
+  line-height: 1.18;
+}
+
+.front-rule-heading {
+  margin: 0 0 0.4rem;
+  padding-top: 0.65rem;
+  border-top: 3px double var(--ink);
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.front-list li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.front-list a {
+  display: block;
+  padding: 0.75rem 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.front-inline-links {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.12rem;
+  line-height: 1.75;
+}
+
+.front-more {
+  margin: 0.8rem 0 0;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+}
+
+.front-signoff {
+  margin-top: 2.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--ink);
+}
+
+.front-signoff p:first-child {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 1.1rem;
+  line-height: 1.5;
 }

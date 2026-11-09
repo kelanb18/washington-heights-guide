@@ -3,6 +3,15 @@ title: "The Best Coffee Shops in Washington Heights"
 description: "The best coffee shops in Washington Heights, from Ethiopian-sourced espresso on Pinehurst Ave to Colombian coffee and an all-day cafe on W 181st St."
 category: "cafe"
 updated: 2026-10-28
+image:
+  src: /images/guides/best-coffee-shops-washington-heights.webp
+  alt: "A latte with leaf-shaped latte art beside a cup of black coffee on a wooden table."
+  credit: "Bex Walton"
+  license: "CC BY 2.0"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Latte_and_dark_coffee.jpg"
+  width: 1600
+  height: 1000
 picks:
   - listing: "buunni-coffee-pinehurst"
     blurb: "The original Buunni location. A 2023 Infatuation guide said all of its coffee comes from small growers in Ethiopia, and noted espresso drinks, cold brew, and beans sold by the pound. The same write-up called the shop tiny, and it closes at 5pm daily."

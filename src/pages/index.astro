@@ -1,113 +1,64 @@
 ---
-import ListingEntry from '../components/ListingEntry.astro';
-import PersonEntry from '../components/PersonEntry.astro';
+import AttributedPhoto from '../components/AttributedPhoto.astro';
 import PlaceMap from '../components/PlaceMap.astro';
-import PlacePhoto from '../components/PlacePhoto.astro';
-import StoryCard from '../components/StoryCard.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { areaTree, loadAreas } from '../lib/areas';
-import { listingCounts } from '../lib/catalog';
+import { coverForGuide } from '../lib/covers';
 import { loadGuides } from '../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { loadListings } from '../lib/listings';
-import { loadPeople } from '../lib/people';
 import { pinsFor } from '../lib/pins';
-import { loadProductions } from '../lib/productions';
-import { coverForArea, coverForGuide, coverForListing } from '../lib/covers';
-import { absoluteUrl, href, siteName } from '../lib/site';
-import { claimFirstPicture, reservePicture } from '../lib/pictures';
+import { reservePicture } from '../lib/pictures';
+import { absoluteUrl, formatDate, href, isoDate, siteName } from '../lib/site';
 import { homeFrames } from '../lib/site-heroes';
-import { categories, categoryInfo } from '../lib/taxonomy';
 
-const [feature, ...moreFrames] = homeFrames;
-
+const feature = homeFrames[0];
 const listings = await loadListings();
 const areas = await loadAreas();
-const people = await loadPeople();
-const productions = await loadProductions();
 const guides = await loadGuides();
 const pins = pinsFor(listings);
-const openings = listings.filter((listing) => listing.data.tags.includes('new-opening'));
-const openingIds = new Set(openings.map((listing) => listing.id));
-const recent = [...listings]
-  .filter((listing) => !openingIds.has(listing.id))
-  .sort((a, b) => b.data.lastVerified.getTime() - a.data.lastVerified.getTime())
-  .slice(0, 4);
 const roots = areaTree(areas);
-const counts = listingCounts(areas, listings);
-const picks = listings.filter((listing) => listing.data.pick);
-const categoryCounts = Object.fromEntries(
-  categories.map((category) => [category, listings.filter((listing) => listing.data.category === category).length]),
-);
-const site = Astro.site;
+const flatten = (nodes: typeof roots): (typeof roots)[number]['area'][] =>
+  nodes.flatMap((node) => [node.area, ...flatten(node.children)]);
+const neighborhoods = flatten(roots);
 
-if (!site) {
-  throw new Error('Missing site URL.');
-}
-
-const homeUrl = absoluteUrl(site, '/');
-const featured = (picks.length > 0 ? picks : listings).map((listing) => ({
-  name: listing.data.name,
-  url: absoluteUrl(site, `/places/${listing.id}`),
-}));
 const usedPictures = new Set<string>();
-for (const frame of homeFrames) reservePicture(frame.picture, usedPictures);
-const openingCards = openings.map((listing) => ({
-  listing,
-  photo: coverForListing(listing, usedPictures) ?? null,
-}));
-const recentCards = recent.map((listing) => ({
-  listing,
-  photo: coverForListing(listing, usedPictures) ?? null,
-}));
-const peopleCards = people.slice(0, 4).map((person) => ({
-  person,
-  photo:
-    claimFirstPicture(
-      [...(person.data.image ? [person.data.image] : []), ...person.data.gallery],
-      usedPictures,
-    ) ?? null,
-}));
-const guideCards = guides.slice(0, 4).map((guide) => ({
-  guide,
-  cover: coverForGuide(guide, listings, areas, usedPictures)?.picture,
-}));
-const areaCards = roots.map((node) => ({
-  node,
-  cover: coverForArea(node.area, areas, listings, usedPictures)?.picture,
-}));
-const description =
-  'An independent, locally researched guide to Washington Heights, NYC: restaurants, neighborhood walks, history, and film locations, with checked details, maps, and cited sources.';
+reservePicture(feature.picture, usedPictures);
 
-const jsonLd: unknown[] = [
-  websiteJsonLd(homeUrl, description),
-  breadcrumbJsonLd([{ name: siteName, url: homeUrl }]),
+/** The four "here for a reason" guides, in this order, when they are published. */
+const situations: Array<{ id: string; kicker: string }> = [
+  { id: 'food-near-newyork-presbyterian-columbia-medical-center', kicker: 'Visiting the hospital' },
+  { id: 'where-to-eat-before-a-show-at-united-palace', kicker: 'Going to a show' },
+  { id: 'after-the-cloisters-walk-to-hudson-heights', kicker: 'After the museum' },
+  { id: 'a-day-in-washington-heights-first-time-visitors', kicker: 'First time here' },
+];
+const situationCards = situations.flatMap(({ id, kicker }) => {
+  const guide = guides.find((entry) => entry.id === id);
+  if (!guide) return [];
+  return [{ guide, kicker, cover: coverForGuide(guide, listings, areas, usedPictures)?.picture }];
+});
+
+const openings = listings.filter((listing) => listing.data.tags.includes('new-opening')).slice(0, 3);
+
+const startHere = [
+  { numeral: 'i.', label: 'Eat', note: 'Dominican plates, coffee, bakeries, late nights', path: '/category/restaurant' },
+  { numeral: 'ii.', label: 'See', note: 'The Cloisters, hilltop parks, the High Bridge', path: '/category/landmark' },
+  { numeral: 'iii.', label: 'Walk', note: 'Guides with routes that open in Google Maps', path: '/best' },
+  { numeral: 'iv.', label: 'Near me', note: 'Closest first, and what’s open right now', path: '/near-me' },
 ];
 
-if (featured.length > 0) {
-  jsonLd.push(itemListJsonLd('Editor’s picks in Washington Heights', featured));
-}
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
 
-if (areas.length > 0) {
+const homeUrl = absoluteUrl(site, '/');
+const description =
+  'An independent, locally researched guide to Washington Heights, NYC: where to eat, what to see, and walking routes, with checked details, maps, and cited sources.';
+const jsonLd: unknown[] = [websiteJsonLd(homeUrl, description), breadcrumbJsonLd([{ name: siteName, url: homeUrl }])];
+if (guides.length > 0) {
   jsonLd.push(
     itemListJsonLd(
-      'Areas in Washington Heights',
-      areas.map((area) => ({
-        name: area.data.name,
-        url: absoluteUrl(site, `/areas/${area.id}`),
-      })),
-    ),
-  );
-}
-
-if (people.length > 0) {
-  jsonLd.push(
-    itemListJsonLd(
-      'Notable residents and history in Washington Heights',
-      people.map((person) => ({
-        name: person.data.name,
-        url: absoluteUrl(site, `/people/${person.id}`),
-      })),
+      'Guides to Washington Heights',
+      guides.map((guide) => ({ name: guide.data.title, url: absoluteUrl(site, `/best/${guide.id}`) })),
     ),
   );
 }
@@ -120,200 +71,137 @@ if (people.length > 0) {
   imageAlt={feature.picture.alt}
   jsonLd={jsonLd}
 >
-  <div class="wrap">
-    <section class="hero hero-pub">
-      <div>
-        <p class="kicker">A local guide to Upper Manhattan</p>
-        <h1>Washington Heights, explored.</h1>
-        <p class="lede">
-          Find neighborhood restaurants, places worth the walk, and the stories behind the streets. Locally researched, source-linked, and independent.
-        </p>
-        <p class="hero-actions">
-          <a class="button button-ghost" href={href('/near-me')}>What’s near me</a>
-          <a class="button button-ghost" href={href('/search')}>Search the guide</a>
-          <a class="button" href={href('/best')}>Best of</a>
-          <a class="button button-ghost" href={href('/places')}>All places</a>
-        </p>
-      </div>
-      <PlacePhoto picture={feature.picture} label={feature.label} href={href(feature.href)} feature />
-      <ul class="hero-set">
+  <div class="wrap front">
+    <section class="front-intro">
+      <p class="front-byline">By Kelan, who lives in Hudson Heights</p>
+      <h1>Where to eat, what to see, and how to walk Washington Heights.</h1>
+      <p class="front-dek">A short list of places I’d send a friend, each one checked and dated.</p>
+    </section>
+
+    <div class="front-hero">
+      <AttributedPhoto picture={feature.picture} variant="hero" />
+    </div>
+
+    <nav class="front-index" aria-labelledby="start-here">
+      <p class="front-label" id="start-here">Start here</p>
+      <ol>
         {
-          moreFrames.map((frame) => (
+          startHere.map((item) => (
             <li>
-              <PlacePhoto picture={frame.picture} label={frame.label} href={href(frame.href)} />
+              <a href={href(item.path)}>
+                <span class="front-numeral" aria-hidden="true">{item.numeral}</span>
+                <span class="front-index-text">
+                  <span class="front-index-word">{item.label}</span>
+                  <span class="front-index-note">{item.note}</span>
+                </span>
+                <span class="front-arrow" aria-hidden="true">→</span>
+              </a>
             </li>
           ))
         }
-      </ul>
-    </section>
+      </ol>
+    </nav>
 
-    <ul class="principles">
-      <li>
-        <strong>Checked</strong>
-        Every listing carries the date its address and hours were last verified.
-      </li>
-      <li>
-        <strong>Short on purpose</strong>
-        This is not a copy of every open door on Broadway, St. Nicholas, or Amsterdam.
-      </li>
-      <li>
-        <strong>Independent</strong>
-        Sponsors are labeled. A verdict cannot be bought.
-      </li>
-    </ul>
-
-    <section aria-labelledby="best-heading">
-      <div class="section-head">
-        <h2 id="best-heading">Best of Washington Heights</h2>
-        <a href={href('/best')}>All guides</a>
-      </div>
-      {
-        guideCards.length > 0 ? (
-          <ul class="guide-grid">
-            {guideCards.map(({ guide, cover }) => (
+    {
+      situationCards.length > 0 && (
+        <section class="front-section" aria-labelledby="reasons-heading">
+          <h2 id="reasons-heading" class="front-heading">Here for a reason?</h2>
+          <p class="front-subhead">Short guides for the trips people actually make.</p>
+          <ul class="front-rows">
+            {situationCards.map(({ guide, kicker, cover }) => (
               <li>
-                <StoryCard
-                  href={href(`/best/${guide.id}`)}
-                  kicker={`${guide.data.picks.length} places`}
-                  title={guide.data.title}
-                  description={guide.data.description}
-                  cover={cover}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">Guides show up here after a list has been checked. Nothing is ranked until then.</p>
-        )
-      }
-    </section>
-
-    <section aria-labelledby="category-heading">
-      <div class="section-head">
-        <h2 id="category-heading">Explore by category</h2>
-        <a href={href('/places')}>Full directory</a>
-      </div>
-      <ul class="tag-line">
-        {categories.map((category) => (
-          <li>
-            <a href={href(`/category/${category}`)}>
-              {categoryInfo[category].plural}
-              <span class="sr-only"> ({categoryCounts[category]})</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section aria-labelledby="neighborhood-heading">
-      <div class="section-head">
-        <h2 id="neighborhood-heading">Neighborhoods</h2>
-        <a href={href('/areas')}>All areas</a>
-      </div>
-      {
-        areaCards.length > 0 ? (
-          <ul class="guide-grid">
-            {areaCards.map(({ node, cover }) => (
-              <li>
-                <StoryCard
-                  href={href(`/areas/${node.area.id}`)}
-                  kicker={`${counts[node.area.id] ?? 0} places`}
-                  title={node.area.data.name}
-                  description={node.area.data.summary}
-                  cover={cover}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">Neighborhood notes will be listed here.</p>
-        )
-      }
-      {pins.length > 0 && <PlaceMap pins={pins} label="Places in Washington Heights" />}
-    </section>
-
-    <section aria-labelledby="openings-heading">
-      <div class="section-head">
-        <h2 id="openings-heading">New in the neighborhood</h2>
-        <a href={href('/places')}>All places</a>
-      </div>
-      <p class="section-note">
-        Businesses that just opened. A page we published recently is not a new business. A sale, a closing, or plans for a place will be noted here once there is a source to cite.
-      </p>
-      {
-        openings.length > 0 ? (
-          <ul class="entries">
-            {openingCards.map(({ listing, photo }) => (
-              <ListingEntry listing={listing} photo={photo} heading="h3" />
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">No newly opened businesses are on the list yet.</p>
-        )
-      }
-    </section>
-
-    <section aria-labelledby="new-heading">
-      <div class="section-head">
-        <h2 id="new-heading">Recently checked</h2>
-        <a href={href('/places')}>All places</a>
-      </div>
-      <p class="section-note">The latest dates an address and hours were verified. These are not new businesses.</p>
-      {
-        recent.length > 0 ? (
-          <ul class="entries">
-            {recentCards.map(({ listing, photo }) => (
-              <ListingEntry listing={listing} photo={photo} heading="h3" />
-            ))}
-          </ul>
-        ) : (
-          <p class="empty">No places have been published yet.</p>
-        )
-      }
-    </section>
-
-    <section aria-labelledby="screen-heading">
-      <div class="section-head">
-        <h2 id="screen-heading">Filmed in the Heights</h2>
-        <a href={href('/filmed-here')}>The screen list</a>
-      </div>
-      {
-        productions.length > 0 ? (
-          <ul class="guide-grid">
-            {productions.slice(0, 3).map((production) => (
-              <li>
-                <a class="guide-card" href={href(`/filmed-here/${production.id}`)}>
-                  <p class="kicker">{production.data.year}</p>
-                  <h3>{production.data.title}</h3>
-                  <p>{production.data.summary}</p>
+                <a href={href(`/best/${guide.id}`)}>
+                  {cover && <img src={cover.src} alt={cover.alt} loading="lazy" decoding="async" width="92" height="92" />}
+                  <span>
+                    <span class="front-kicker">{kicker}</span>
+                    <span class="front-row-title">{guide.data.title}</span>
+                  </span>
                 </a>
               </li>
             ))}
           </ul>
-        ) : (
-          <p class="empty">
-            The production notes are still being written. The <a href={href('/filmed-here')}>film permit list</a> is already there.
+          <p class="front-more">
+            <a href={href('/best')}>All {guides.length} guides</a>
           </p>
-        )
-      }
-    </section>
+        </section>
+      )
+    }
 
-    <section aria-labelledby="people-heading">
-      <div class="section-head">
-        <h2 id="people-heading">Notable residents & history</h2>
-        <a href={href('/people')}>All notes</a>
-      </div>
-      {
-        people.length > 0 ? (
-          <ul class="entries">
-            {peopleCards.map(({ person, photo }) => (
-              <PersonEntry person={person} photo={photo} heading="h3" />
+    {
+      openings.length > 0 && (
+        <section class="front-section" aria-labelledby="new-heading">
+          <h2 id="new-heading" class="front-rule-heading">New in the neighborhood</h2>
+          <ul class="front-list">
+            {openings.map((listing) => (
+              <li>
+                <a href={href(`/places/${listing.id}`)}>
+                  <span class="front-kicker">
+                    Checked <time datetime={isoDate(listing.data.lastVerified)}>{formatDate(listing.data.lastVerified)}</time>
+                  </span>
+                  <span class="front-row-title">{listing.data.name}</span>
+                </a>
+              </li>
             ))}
           </ul>
-        ) : (
-          <p class="empty">Residents and historic notes will be listed here.</p>
-        )
-      }
+        </section>
+      )
+    }
+
+    {
+      pins.length > 0 && (
+        <section class="front-section" aria-labelledby="map-heading">
+          <h2 id="map-heading" class="front-rule-heading">Every place on one map</h2>
+          <PlaceMap pins={pins} label="Places in Washington Heights" />
+        </section>
+      )
+    }
+
+    {
+      neighborhoods.length > 0 && (
+        <section class="front-section" aria-labelledby="areas-heading">
+          <h2 id="areas-heading" class="front-rule-heading">The neighborhoods</h2>
+          <p class="front-inline-links">
+            {neighborhoods.map((area, index) => (
+              <>
+                {index > 0 && <span aria-hidden="true"> · </span>}
+                <a href={href(`/areas/${area.id}`)}>{area.data.name}</a>
+              </>
+            ))}
+          </p>
+        </section>
+      )
+    }
+
+    <section class="front-section" aria-labelledby="archive-heading">
+      <h2 id="archive-heading" class="front-rule-heading">From the archive</h2>
+      <ul class="front-list">
+        <li>
+          <a href={href('/people/fort-washington-battle-1776')}>
+            <span class="front-kicker">History</span>
+            <span class="front-row-title">Where Fort Washington fell in 1776</span>
+          </a>
+        </li>
+        <li>
+          <a href={href('/filmed-here')}>
+            <span class="front-kicker">Filmed here</span>
+            <span class="front-row-title">In the Heights, Malcolm X, Coogan’s Bluff and more</span>
+          </a>
+        </li>
+        <li>
+          <a href={href('/people')}>
+            <span class="front-kicker">People</span>
+            <span class="front-row-title">Residents, from Lou Gehrig to Lin-Manuel Miranda</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="front-signoff">
+      <p>
+        I check every listing myself, and each page shows the date I last did. Sponsors are labeled, and verdicts are not
+        for sale. <em>— Kelan</em>
+      </p>
+      <p class="front-more"><a href={href('/about')}>How this guide works</a></p>
     </section>
   </div>
 </BaseLayout>

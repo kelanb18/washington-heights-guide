@@ -3,6 +3,15 @@ title: "The Best Dominican Restaurants in Washington Heights"
 description: "Where to eat Dominican food in Washington Heights: rotisserie chicken, mofongo, breakfast mangú, and a Cuban-Dominican diner open around the clock."
 category: "restaurant"
 updated: 2026-10-28
+image:
+  src: /images/guides/best-dominican-restaurants-washington-heights.webp
+  alt: "A plate of mangú, mashed green plantains, a Dominican breakfast staple."
+  credit: "Ll1324"
+  license: "CC0"
+  licenseUrl: "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Dominican_Mangu.jpg"
+  width: 1600
+  height: 1375
 picks:
   - listing: "malecon"
     blurb: "Its own site describes rotisserie chicken, stews, fried plantains, rice and beans, empanadas, and mofongo, and says it has served New Yorkers since 1987. A 2023 Infatuation guide listed it as good for casual dinners and serious takeout."

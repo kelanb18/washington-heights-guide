@@ -3,6 +3,15 @@ title: "The Best Bakeries and Desserts in Washington Heights"
 description: "A sweet-tooth guide to Washington Heights: carrot cake on Broadway, Southern biscuits and custom cakes on W 187th St, and Colombian pastries."
 category: "bakery"
 updated: 2026-10-28
+image:
+  src: /images/guides/best-bakeries-and-desserts-washington-heights.webp
+  alt: "A slice of carrot cake with cream cheese frosting and a walnut on top."
+  credit: "Andy Li"
+  license: "CC0"
+  licenseUrl: "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Carrot_cake_-_Milfey_Patisserie_2026-09-07.jpg"
+  width: 1600
+  height: 1205
 picks:
   - listing: "carrot-top-pastries"
     blurb: "Open since 1979 according to The Infatuation's 2023 guide, which says it makes some of the best carrot cake that critic had had, with slices taller than a coffee mug. Its official site is gone, so confirm hours before you go."

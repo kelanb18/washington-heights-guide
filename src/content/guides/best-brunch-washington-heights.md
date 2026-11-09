@@ -2,6 +2,15 @@
 title: "The Best Brunch in Washington Heights"
 description: "Where to brunch in Washington Heights: pancakes and Sunday jazz at a pub, table-service brunch on W 181st St, Southern biscuits, and a hotel restaurant."
 updated: 2026-10-28
+image:
+  src: /images/guides/best-brunch-washington-heights.webp
+  alt: "A bowl of tall, flaky buttermilk biscuits."
+  credit: "jeffreyw"
+  license: "CC BY 2.0"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Buttermilk_biscuits_(6340812760).jpg"
+  width: 1600
+  height: 1151
 picks:
   - listing: "hilltop-park-alehouse"
     blurb: "The Infatuation says there is brunch and live jazz on Sundays and recommends the buttermilk pancakes. It tagged the pub for birthdays, brunch, and date nights, and its hours begin at 11am on weekends."

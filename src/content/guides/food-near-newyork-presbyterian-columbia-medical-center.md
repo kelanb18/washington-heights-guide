@@ -2,6 +2,15 @@
 title: "Food Near NewYork-Presbyterian and Columbia's Medical Campus"
 description: "Where to eat near NewYork-Presbyterian and Columbia's medical campus at W 168th St: quick sandwiches, early breakfast, coffee, and a 24-hour diner."
 updated: 2026-11-09
+image:
+  src: /images/guides/food-near-newyork-presbyterian-columbia-medical-center.webp
+  alt: "The entrance of the Milstein Hospital Building at 177 Fort Washington Ave, part of NewYork-Presbyterian and Columbia's medical campus."
+  credit: "Beyond My Ken"
+  license: "CC BY-SA 4.0"
+  licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Columbia_University_Medical_Center_Milstein_Hospital_Building_entrance.jpg"
+  width: 1600
+  height: 1098
 picks:
   - listing: "boogie-bakery-and-bistro"
     blurb: "About four minutes from Fort Washington Ave and W 168th St, on Broadway at W 169th St. The bakery opens at 6:45am every day for sourdough, focaccia and sandwiches, and the bistro serves dinner Monday to Saturday. It is brand new, so check hours before you go."

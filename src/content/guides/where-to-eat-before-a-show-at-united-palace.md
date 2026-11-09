@@ -3,6 +3,14 @@ title: "Where to Eat Before a Show at United Palace"
 description: "Where to eat before or after a concert or film at United Palace on Broadway and W 175th St, from Dominican plates across the street to late tacos."
 area: "broadway-175th"
 updated: 2026-11-09
+image:
+  src: /images/guides/where-to-eat-before-a-show-at-united-palace.webp
+  alt: "The United Palace marquee over the theater entrance on Broadway at W 175th St."
+  credit: "Beyond My Ken"
+  license: "Public domain"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:2014_United_Palace_marquee.jpg"
+  width: 1600
+  height: 1200
 picks:
   - listing: "malecon"
     blurb: "Directly across Broadway at 4141 Broadway. Rotisserie chicken, mofongo and stews in a casual room, open until 11pm Sunday to Thursday and midnight on Fridays and Saturdays. The easiest sit-down dinner before a show."

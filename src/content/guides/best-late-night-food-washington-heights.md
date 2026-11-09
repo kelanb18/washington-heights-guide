@@ -2,6 +2,15 @@
 title: "The Best Late-Night Food in Washington Heights"
 description: "Where to eat late in Washington Heights: an all-night Cuban-Dominican diner, tacos until 2am, a late pub, and big mofongo plates."
 updated: 2026-10-28
+image:
+  src: /images/guides/best-late-night-food-washington-heights.webp
+  alt: "A pressed Cubano sandwich cut in half, showing ham, cheese and pickles."
+  credit: "jeffreyw"
+  license: "CC BY 2.0"
+  licenseUrl: "https://creativecommons.org/licenses/by/2.0"
+  sourceUrl: "https://commons.wikimedia.org/wiki/File:Cubano_sandwich_(1).jpg"
+  width: 1600
+  height: 1100
 picks:
   - listing: "el-floridita"
     blurb: "Its own website lists the Broadway location as open 24 hours. The Infatuation says the reason to go is the Cubano, and describes mofongo, asopao, and rotisserie chicken on a long menu."
