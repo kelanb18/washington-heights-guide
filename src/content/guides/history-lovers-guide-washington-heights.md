@@ -6,6 +6,9 @@ picks:
   - listing: "bennett-park"
     blurb: "A small park on Manhattan's highest natural point, where Fort Washington fell to British and Hessian troops on November 16, 1776. Bluestone and granite paving outlines part of the fort."
     badge: "Best for the Revolutionary War"
+  - listing: "george-washington-high-school"
+    blurb: "Henry Kissinger, Alan Greenspan and Harry Belafonte were students at this public school on Audubon Ave, which moved into the building in 1925. Kissinger's family had arrived as refugees in 1938. It is a working school, so see it from the street."
+    badge: "Best for famous former residents"
   - listing: "malcolm-x-and-dr-betty-shabazz-memorial-center"
     blurb: "A memorial and museum in the restored Audubon Ballroom, where Malcolm X was assassinated on February 21, 1965. Tickets must be bought in advance, and its listed hours are Tuesday to Friday."
     badge: "Best for civil-rights history"
@@ -34,6 +37,8 @@ picks:
     blurb: "A free museum and research library at 613 W 155th St on Audubon Terrace, founded in 1904, with works by Velázquez, Goya, and El Greco, and Sorolla's Vision of Spain. The listing says it is open Thursday through Sunday."
     badge: "Best art collection"
 sources:
+  - "https://en.wikipedia.org/wiki/George_Washington_Educational_Campus"
+  - "https://en.wikipedia.org/wiki/Henry_Kissinger"
   - "https://www.nycgovparks.org/parks/bennett-park"
   - "https://www.nycgovparks.org/parks/bennett-park/history"
   - "https://theshabazzcenter.org/tours/"
