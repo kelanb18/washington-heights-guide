@@ -2,6 +2,7 @@
 title: "A Day in Washington Heights: A First-Timer's Itinerary"
 description: "One day in Washington Heights: coffee, Fort Tryon Park and The Cloisters, ramen, the High Bridge, and a Dominican dinner across from the United Palace."
 route: "as-listed"
+affiliateDisclosure: true
 updated: 2026-10-28
 picks:
   - listing: "buunni-coffee-pinehurst"
@@ -13,6 +14,9 @@ picks:
   - listing: "the-met-cloisters"
     blurb: "The Met's medieval branch is inside the park. It is open 10am to 5pm except Wednesday, and admission rules are on the Met's site."
     badge: "Late morning"
+    affiliate:
+      href: "https://www.viator.com/en-HK/New-York-City-attractions/Metropolitan-Museum-of-Art-The-Met/d687-a1298?pid=P00331024&mcid=42383&medium=link&campaign=met-tours"
+      label: "See Met tours and tickets"
   - listing: "bennett-park"
     blurb: "A short walk from Fort Tryon Park, according to the listing, this small park sits on Manhattan's highest natural point where Fort Washington stood in 1776."
     badge: "Midday"

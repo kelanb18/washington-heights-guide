@@ -20,6 +20,13 @@ export const guideSchema = z
           listing: reference('listings').describe('Slug of a file in src/content/listings/.'),
           blurb: z.string().trim().min(12).max(280).describe('Why this place is on the list, in one or two sentences.'),
           badge: z.string().trim().min(2).max(80).optional().describe('Optional label, such as "Best overall".'),
+          affiliate: z
+            .strictObject({
+              href: z.httpUrl().describe('Exact affiliate URL, with every tracking parameter kept.'),
+              label: z.string().trim().min(4).max(80).describe('Anchor text for the link.'),
+            })
+            .optional()
+            .describe('Optional affiliate link shown after the blurb. Set affiliateDisclosure: true on the guide when used.'),
         }),
       )
       .min(1, 'A guide needs at least one pick.')
@@ -35,6 +42,10 @@ export const guideSchema = z
     updated: z.coerce.date().describe('Date the ranking was last updated. YAML date: 2026-10-01.'),
     image: creditedImageSchema.optional(),
     sources: z.array(z.httpUrl()).default([]).describe('Source URLs. May be empty.'),
+    affiliateDisclosure: z
+      .boolean()
+      .default(false)
+      .describe('Show the affiliate commission disclosure near the top of the page.'),
     example: z.boolean().default(false),
     draft: z.boolean().default(false),
   })
@@ -58,6 +69,14 @@ export const guideSchema = z
     data.picks.forEach((pick, index) => {
       assertListingSlug(pick.listing, ctx, ['picks', index, 'listing']);
     });
+    if (data.picks.some((pick) => pick.affiliate) && !data.affiliateDisclosure) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['affiliateDisclosure'],
+        input: data.affiliateDisclosure,
+        message: 'A guide with an affiliate link needs affiliateDisclosure: true.',
+      });
+    }
     assertAreaSlug(data.area, ctx, 'area');
     if (data.image) assertCreditedImages([data.image], ctx, ['image']);
     const verified = Date.UTC(data.updated.getUTCFullYear(), data.updated.getUTCMonth(), data.updated.getUTCDate());

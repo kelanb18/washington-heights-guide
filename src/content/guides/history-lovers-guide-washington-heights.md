@@ -1,6 +1,7 @@
 ---
 title: "A History Lover's Guide to Washington Heights"
 description: "Revolutionary War history, the High Bridge, a landmarked theater, the Malcolm X memorial, and a baseball-themed pub: history in Washington Heights."
+affiliateDisclosure: true
 updated: 2026-10-28
 picks:
   - listing: "bennett-park"
@@ -27,6 +28,9 @@ picks:
   - listing: "morris-jumel-mansion"
     blurb: "The museum's site calls the house at 65 Jumel Terrace, built about 1765, the oldest surviving residence in Manhattan. George Washington used it as headquarters in 1776. As of Oct 28, 2026 the house is closed for roof work; Roger Morris Park stays open."
     badge: "Best historic house"
+    affiliate:
+      href: "https://www.viator.com/en-PH/tours/New-York-City/Sugar-Hill-North-Walking-Tour/d687-42456P3?pid=P00331024&mcid=42383&medium=link&campaign=washington-heights-walk"
+      label: "Take a Sugar Hill / Washington Heights walking tour"
   - listing: "sylvan-terrace"
     blurb: "A cobbled block of twenty wooden houses built in 1882 and 1883 on the old Morris estate carriage drive, restored in 1979 to 1981. The houses are private homes, so the visit is a walk from the street."
     badge: "Best frame-house block"

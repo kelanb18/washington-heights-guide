@@ -131,7 +131,10 @@ const jsonLd = [
       <p class="where">
         Updated <time datetime={isoDate(guide.data.updated)}>{formatDate(guide.data.updated)}</time>
       </p>
-      {guide.data.example && <p class="example-line">Example guide. Not a real ranking. Omitted from the production build.</p>}
+      {guide.data.affiliateDisclosure && (
+        <p class="where">Some links on this page may earn us a commission if you book, at no extra cost to you.</p>
+      )}
+      {guide.data.example &&<p class="example-line">Example guide. Not a real ranking. Omitted from the production build.</p>}
     </header>
     <PhotoSet image={hero} />
     <div class="prose">
@@ -182,6 +185,13 @@ const jsonLd = [
               <a href={href(`/places/${item.listing.id}`)}>{item.listing.data.name}</a>
             </h2>
             <p class="pick-blurb">{item.pick.blurb}</p>
+            {item.pick.affiliate && (
+              <p class="pick-blurb">
+                <a href={item.pick.affiliate.href} rel="sponsored noopener noreferrer" target="_blank">
+                  {item.pick.affiliate.label}<span class="sr-only"> (opens in a new tab)</span>
+                </a>
+              </p>
+            )}
             <p class="where">
               {item.listing.data.crossStreets}
               <span aria-hidden="true"> · </span>

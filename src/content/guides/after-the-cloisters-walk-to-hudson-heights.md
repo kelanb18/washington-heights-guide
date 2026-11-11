@@ -2,11 +2,15 @@
 title: "After the Cloisters: A Walk Down to Hudson Heights"
 description: "What to do after The Met Cloisters: walk south through Fort Tryon Park to the Cabrini Shrine, then coffee, a bakery, books, and dinner on W 187th St."
 route: "as-listed"
+affiliateDisclosure: true
 updated: 2026-11-09
 picks:
   - listing: "the-met-cloisters"
     blurb: "Start here. The Met's medieval branch is open Thursday to Tuesday, 10am to 5pm, and closed on Wednesdays, so plan around that. From the museum, follow the park paths south toward Margaret Corbin Circle."
     badge: "Start"
+    affiliate:
+      href: "https://www.viator.com/en-ZA/tours/New-York-City/Skip-the-line-Met-Cloisters-and-Fifth-Avenue-Tour-by-Car/d687-368349P426?pid=P00331024&mcid=42383&medium=link&campaign=cloisters-guide"
+      label: "Book a skip-the-line Cloisters tour"
   - listing: "fort-tryon-park"
     blurb: "The walk itself. Sixty-seven acres of hilltop paths with Hudson River views and the Heather Garden on the way down. The park is hilly, so give yourself time. You come out at Fort Washington Ave and W 190th St."
     badge: "The walk"
