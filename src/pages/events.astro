@@ -1,4 +1,5 @@
 ---
+import EventCalendar from '../components/EventCalendar.astro';
 import EventRow from '../components/EventRow.astro';
 import HidePastEvents from '../components/HidePastEvents.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -8,6 +9,7 @@ import { loadListings } from '../lib/listings';
 import { absoluteUrl, correctionsEmail, href, pageTitle, siteName } from '../lib/site';
 
 const { oneOff, recurring } = await loadEvents();
+const calendarEvents = [...oneOff, ...recurring.flatMap((item) => item.occurrences)];
 const listings = await loadListings();
 const byId = new Map(listings.map((listing) => [listing.id, listing]));
 
@@ -75,6 +77,17 @@ const description =
       </p>
     </section>
 
+    <div class="view-switch" role="group" aria-label="Show events as" data-view-switch hidden>
+      <button type="button" data-view="list" aria-pressed="true">List</button>
+      <button type="button" data-view="calendar" aria-pressed="false">Calendar</button>
+    </div>
+
+    <section class="front-section" aria-labelledby="calendar-heading" data-view-panel="calendar" hidden>
+      <h2 id="calendar-heading" class="front-rule-heading">Calendar</h2>
+      <EventCalendar events={calendarEvents} />
+    </section>
+
+    <div data-view-panel="list">
     <section class="front-section" aria-labelledby="coming-up">
       <h2 id="coming-up" class="front-rule-heading">Coming up</h2>
       {
@@ -123,6 +136,7 @@ const description =
         </section>
       )
     }
+    </div>
 
     <section class="front-signoff">
       <p>
@@ -133,4 +147,32 @@ const description =
     </section>
   </div>
   <HidePastEvents />
+  <script>
+    // List or calendar. #calendar in the address opens the calendar; the choice is kept for next time.
+    const switcher = document.querySelector<HTMLElement>('[data-view-switch]');
+    const panels = document.querySelectorAll<HTMLElement>('[data-view-panel]');
+    const buttons = switcher ? Array.from(switcher.querySelectorAll<HTMLButtonElement>('[data-view]')) : [];
+    const setView = (view: string, remember: boolean) => {
+      panels.forEach((panel) => (panel.hidden = panel.dataset.viewPanel !== view));
+      buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.view === view)));
+      if (!remember) return;
+      history.replaceState(null, '', view === 'calendar' ? '#calendar' : location.pathname + location.search);
+      try {
+        localStorage.setItem('events-view', view);
+      } catch {
+        /* ignore */
+      }
+    };
+    if (switcher) {
+      switcher.hidden = false;
+      let saved: string | null = null;
+      try {
+        saved = localStorage.getItem('events-view');
+      } catch {
+        /* ignore */
+      }
+      setView(location.hash === '#calendar' ? 'calendar' : saved === 'calendar' ? 'calendar' : 'list', false);
+      buttons.forEach((button) => button.addEventListener('click', () => setView(button.dataset.view ?? 'list', true)));
+    }
+  </script>
 </BaseLayout>

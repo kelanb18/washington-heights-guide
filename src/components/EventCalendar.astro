@@ -1,0 +1,215 @@
+---
+import EventRow from './EventRow.astro';
+import type { NeighborhoodEvent } from '../lib/events';
+import { clock, dayHeading, withOffset } from '../lib/events';
+
+interface Props {
+  events: NeighborhoodEvent[];
+  /** How many months to show, starting with the current one. */
+  months?: number;
+}
+
+const { events, months = 3 } = Astro.props;
+
+/** Chip color by event type, using the collage palette. */
+const toneFor = (label: string): string => {
+  if (/music|film|theater/i.test(label)) return 'show';
+  if (/arts|talk/i.test(label)) return 'arts';
+  if (/nature|outdoors|parks|volunteer|market/i.test(label)) return 'outdoors';
+  if (/history|tour/i.test(label)) return 'history';
+  if (/family|kids/i.test(label)) return 'family';
+  return 'other';
+};
+
+const legend = [
+  { tone: 'show', label: 'Music, film and theater' },
+  { tone: 'arts', label: 'Arts and talks' },
+  { tone: 'outdoors', label: 'Parks and outdoors' },
+  { tone: 'history', label: 'History and tours' },
+  { tone: 'family', label: 'Family' },
+  { tone: 'other', label: 'Fitness and other' },
+];
+
+const byDay = new Map<string, NeighborhoodEvent[]>();
+for (const event of [...events].sort((a, b) => a.start.localeCompare(b.start))) {
+  const day = event.start.slice(0, 10);
+  byDay.set(day, [...(byDay.get(day) ?? []), event]);
+}
+
+// Months run from the first event's month; the calendar is built ahead of time, so the script moves to today.
+const firstDay = [...byDay.keys()][0];
+const [startYear, startMonth] = firstDay ? firstDay.split('-').map(Number) : [new Date().getUTCFullYear(), new Date().getUTCMonth() + 1];
+
+const monthName = new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', month: 'long', year: 'numeric' });
+const pad = (value: number) => String(value).padStart(2, '0');
+const weekdays = [
+  ['Sun', 'Sunday'],
+  ['Mon', 'Monday'],
+  ['Tue', 'Tuesday'],
+  ['Wed', 'Wednesday'],
+  ['Thu', 'Thursday'],
+  ['Fri', 'Friday'],
+  ['Sat', 'Saturday'],
+];
+const visibleChips = 3;
+
+const calendar = Array.from({ length: months }, (_, offset) => {
+  const first = new Date(Date.UTC(startYear, startMonth - 1 + offset, 1));
+  const year = first.getUTCFullYear();
+  const month = first.getUTCMonth();
+  const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();
+  const cells: Array<{ day?: string; date?: number }> = [];
+  for (let blank = 0; blank < first.getUTCDay(); blank += 1) cells.push({});
+  for (let date = 1; date <= daysInMonth; date += 1) cells.push({ day: `${year}-${pad(month + 1)}-${pad(date)}`, date });
+  while (cells.length % 7 !== 0) cells.push({});
+  const weeks = Array.from({ length: cells.length / 7 }, (_, week) => cells.slice(week * 7, week * 7 + 7));
+  return { key: `${year}-${pad(month + 1)}`, title: monthName.format(first), weeks };
+});
+---
+
+<div class="cal" data-cal>
+  <ul class="cal-legend" aria-label="Event colors">
+    {legend.map((item) => <li><span class:list={['cal-swatch', `cal-tone-${item.tone}`]} aria-hidden="true"></span>{item.label}</li>)}
+  </ul>
+  {
+    calendar.map((month, index) => (
+      <section class="cal-month" data-cal-month={month.key} aria-labelledby={`cal-title-${month.key}`}>
+        <header class="cal-head">
+          <button class="cal-nav" type="button" data-cal-step="-1" disabled={index === 0} aria-label="Previous month">
+            ←
+          </button>
+          <h3 class="cal-title" id={`cal-title-${month.key}`}>{month.title}</h3>
+          <button class="cal-nav" type="button" data-cal-step="1" disabled={index === calendar.length - 1} aria-label="Next month">
+            →
+          </button>
+        </header>
+        <table class="cal-table">
+          <thead>
+            <tr>
+              {weekdays.map(([short, long]) => (
+                <th scope="col" abbr={long}>
+                  {short}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {month.weeks.map((week) => (
+              <tr>
+                {week.map((cell) => {
+                  if (!cell.day) return <td class="cal-cell cal-cell-empty" />;
+                  const items = byDay.get(cell.day) ?? [];
+                  const detailId = `cal-detail-${cell.day}`;
+                  return (
+                    <td class:list={['cal-cell', { 'has-events': items.length > 0 }]} data-cal-day={cell.day}>
+                      {items.length > 0 ? (
+                        <button
+                          class="cal-date"
+                          type="button"
+                          aria-expanded="false"
+                          aria-controls={detailId}
+                          aria-label={`${dayHeading(cell.day)}: ${items.length} ${items.length === 1 ? 'event' : 'events'}`}
+                        >
+                          {cell.date}
+                        </button>
+                      ) : (
+                        <span class="cal-date">{cell.date}</span>
+                      )}
+                      {items.length > 0 && (
+                        <ul class="cal-chips">
+                          {items.slice(0, visibleChips).map((event) => (
+                            <li data-event-end={withOffset(event.end ?? event.start)}>
+                              <a
+                                class:list={['cal-chip', `cal-tone-${toneFor(event.label)}`]}
+                                href={event.sourceUrl}
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                <span class="cal-chip-time">{clock(event.start)}</span>
+                                <span class="cal-chip-title">{event.title}</span>
+                                <span class="sr-only"> (opens {event.sourceName} in a new tab)</span>
+                              </a>
+                            </li>
+                          ))}
+                          {items.length > visibleChips && (
+                            <li>
+                              <button class="cal-more" type="button" aria-controls={detailId} data-cal-more>
+                                +{items.length - visibleChips} more
+                              </button>
+                            </li>
+                          )}
+                        </ul>
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {month.weeks.flat().map((cell) => {
+          const items = cell.day ? byDay.get(cell.day) : undefined;
+          if (!cell.day || !items) return null;
+          return (
+            <div class="cal-detail" id={`cal-detail-${cell.day}`} data-cal-detail hidden>
+              <h4 class="event-day-heading">{dayHeading(cell.day)}</h4>
+              <ul class="event-list">
+                {items.map((event) => (
+                  <EventRow event={event} compact />
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </section>
+    ))
+  }
+</div>
+
+<script>
+  for (const cal of document.querySelectorAll<HTMLElement>('[data-cal]')) {
+    const months = Array.from(cal.querySelectorAll<HTMLElement>('[data-cal-month]'));
+    const parts = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    const today = parts.slice(0, 10);
+
+    cal.querySelector(`[data-cal-day="${today}"]`)?.classList.add('is-today');
+
+    const show = (index: number) => {
+      months.forEach((month, i) => {
+        month.hidden = i !== index;
+      });
+    };
+    const current = months.findIndex((month) => month.dataset.calMonth === today.slice(0, 7));
+    show(current >= 0 ? current : 0);
+    cal.classList.add('is-paged');
+
+    cal.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const step = target?.closest<HTMLButtonElement>('[data-cal-step]');
+      if (step) {
+        const index = months.findIndex((month) => !month.hidden);
+        const next = Math.min(months.length - 1, Math.max(0, index + Number(step.dataset.calStep)));
+        show(next);
+        months[next].querySelector<HTMLButtonElement>(`[data-cal-step="${step.dataset.calStep}"]:not([disabled])`)?.focus() ??
+          months[next].querySelector<HTMLButtonElement>('[data-cal-step]:not([disabled])')?.focus();
+        return;
+      }
+      const opener = target?.closest<HTMLButtonElement>('.cal-date[aria-controls], [data-cal-more]');
+      if (!opener) return;
+      const detail = document.getElementById(opener.getAttribute('aria-controls') ?? '');
+      if (!detail) return;
+      const opening = detail.hidden;
+      const month = opener.closest('[data-cal-month]');
+      month?.querySelectorAll<HTMLElement>('[data-cal-detail]').forEach((panel) => (panel.hidden = true));
+      month?.querySelectorAll('.cal-date[aria-expanded]').forEach((button) => button.setAttribute('aria-expanded', 'false'));
+      month?.querySelectorAll('.cal-cell.is-open').forEach((cell) => cell.classList.remove('is-open'));
+      if (opening) {
+        detail.hidden = false;
+        const cell = opener.closest('.cal-cell');
+        cell?.classList.add('is-open');
+        cell?.querySelector('.cal-date')?.setAttribute('aria-expanded', 'true');
+        detail.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    });
+  }
+</script>
