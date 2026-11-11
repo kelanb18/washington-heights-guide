@@ -9,6 +9,7 @@ import { loadGuides } from '../lib/guides';
 import { breadcrumbJsonLd, itemListJsonLd, websiteJsonLd } from '../lib/jsonld';
 import { loadListings } from '../lib/listings';
 import { pinsFor } from '../lib/pins';
+import { referenceId } from '../lib/refs';
 import { absoluteUrl, href, siteName } from '../lib/site';
 
 const listings = await loadListings();
@@ -23,18 +24,28 @@ const neighborhoods = flatten(roots);
 
 /** Topic shortcuts. Each points at a published guide; a topic whose guide is missing is left out. */
 const topics = [
-  { label: 'Late-night food', guide: 'best-late-night-food-washington-heights', tone: 'tomato' },
-  { label: 'Brunch', guide: 'best-brunch-washington-heights', tone: 'plain' },
-  { label: 'Coffee', guide: 'best-coffee-shops-washington-heights', tone: 'grape' },
-  { label: 'Dominican food', guide: 'best-dominican-restaurants-washington-heights', tone: 'plain' },
+  { label: 'Dominican food', guide: 'best-dominican-restaurants-washington-heights', tone: 'tomato' },
   { label: 'Parks and views', guide: 'best-parks-and-views-washington-heights', tone: 'street' },
-  { label: 'With kids', guide: 'best-spots-for-families-washington-heights', tone: 'plain' },
+  { label: 'Coffee', guide: 'best-coffee-shops-washington-heights', tone: 'grape' },
   { label: 'History', guide: 'history-lovers-guide-washington-heights', tone: 'bridge' },
-  { label: 'Bakeries and desserts', guide: 'best-bakeries-and-desserts-washington-heights', tone: 'plain' },
-  { label: 'Bars', guide: 'best-bars-and-nightlife-washington-heights', tone: 'tomato' },
+  { label: 'Late-night food', guide: 'best-late-night-food-washington-heights', tone: 'flag' },
+  { label: 'Brunch', guide: 'best-brunch-washington-heights', tone: 'tomato' },
+  { label: 'With kids', guide: 'best-spots-for-families-washington-heights', tone: 'street' },
+  { label: 'Bakeries and desserts', guide: 'best-bakeries-and-desserts-washington-heights', tone: 'grape' },
+  { label: 'Bars', guide: 'best-bars-and-nightlife-washington-heights', tone: 'bridge' },
 ].filter((topic) => guideIds.has(topic.guide));
 
 const usedPictures = new Set<string>();
+const listingIds = new Set(listings.map((listing) => listing.id));
+const topicCards = topics.flatMap((topic) => {
+  const guide = guides.find((entry) => entry.id === topic.guide);
+  if (!guide) return [];
+  const picks = guide.data.picks.filter((pick) => {
+    const id = referenceId(pick.listing);
+    return id !== undefined && listingIds.has(id);
+  }).length;
+  return [{ ...topic, guide, picks, cover: coverForGuide(guide, listings, areas, usedPictures)?.picture }];
+});
 const situations = [
   { id: 'food-near-newyork-presbyterian-columbia-medical-center', caption: 'Food near the hospital', note: 'Including a 24-hour option' },
   { id: 'where-to-eat-before-a-show-at-united-palace', caption: 'Dinner before a show', note: 'Near the United Palace' },
@@ -120,12 +131,17 @@ if (guides.length > 0) {
 
     <section class="home-block" aria-labelledby="topic-heading">
       <p class="label" id="topic-heading">Browse by topic</p>
-      <ul class="vibes">
+      <ul class="topic-grid">
         {
-          topics.map((topic) => (
-            <li>
-              <a class:list={['pill', `pill-${topic.tone}`]} href={href(`/best/${topic.guide}`)}>
-                {topic.label}
+          topicCards.map((topic, index) => (
+            <li class:list={['topic-tile', `topic-tone-${topic.tone}`, { 'is-featured': index === 0, 'has-cover': topic.cover }]}>
+              <a href={href(`/best/${topic.guide.id}`)}>
+                {topic.cover && <img src={topic.cover.src} alt="" loading="lazy" decoding="async" />}
+                <span class="topic-count">{topic.picks} picks</span>
+                <span class="topic-arrow" aria-hidden="true">→</span>
+                <span class="topic-label">{topic.label}</span>
+                {index === 0 && <span class="topic-note">{topic.guide.data.description}</span>}
+                <span class="sr-only">: {topic.guide.data.title}</span>
               </a>
             </li>
           ))
