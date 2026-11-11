@@ -21,25 +21,25 @@ const flatten = (nodes: typeof roots): (typeof roots)[number]['area'][] =>
   nodes.flatMap((node) => [node.area, ...flatten(node.children)]);
 const neighborhoods = flatten(roots);
 
-/** Vibe shortcuts. Each points at a published guide; a vibe whose guide is missing is left out. */
-const vibes = [
-  { label: 'late night', guide: 'best-late-night-food-washington-heights', tone: 'tomato' },
-  { label: 'brunch', guide: 'best-brunch-washington-heights', tone: 'plain' },
-  { label: 'coffee run', guide: 'best-coffee-shops-washington-heights', tone: 'grape' },
-  { label: 'dominican food', guide: 'best-dominican-restaurants-washington-heights', tone: 'plain' },
-  { label: 'touch grass', guide: 'best-parks-and-views-washington-heights', tone: 'street' },
-  { label: 'w/ the kids', guide: 'best-spots-for-families-washington-heights', tone: 'plain' },
-  { label: 'history nerd', guide: 'history-lovers-guide-washington-heights', tone: 'bridge' },
-  { label: 'something sweet', guide: 'best-bakeries-and-desserts-washington-heights', tone: 'plain' },
-  { label: 'drinks', guide: 'best-bars-and-nightlife-washington-heights', tone: 'tomato' },
-].filter((vibe) => guideIds.has(vibe.guide));
+/** Topic shortcuts. Each points at a published guide; a topic whose guide is missing is left out. */
+const topics = [
+  { label: 'Late-night food', guide: 'best-late-night-food-washington-heights', tone: 'tomato' },
+  { label: 'Brunch', guide: 'best-brunch-washington-heights', tone: 'plain' },
+  { label: 'Coffee', guide: 'best-coffee-shops-washington-heights', tone: 'grape' },
+  { label: 'Dominican food', guide: 'best-dominican-restaurants-washington-heights', tone: 'plain' },
+  { label: 'Parks and views', guide: 'best-parks-and-views-washington-heights', tone: 'street' },
+  { label: 'With kids', guide: 'best-spots-for-families-washington-heights', tone: 'plain' },
+  { label: 'History', guide: 'history-lovers-guide-washington-heights', tone: 'bridge' },
+  { label: 'Bakeries and desserts', guide: 'best-bakeries-and-desserts-washington-heights', tone: 'plain' },
+  { label: 'Bars', guide: 'best-bars-and-nightlife-washington-heights', tone: 'tomato' },
+].filter((topic) => guideIds.has(topic.guide));
 
 const usedPictures = new Set<string>();
 const situations = [
-  { id: 'food-near-newyork-presbyterian-columbia-medical-center', caption: 'food near the hospital', note: 'incl. a 24-hour spot' },
-  { id: 'where-to-eat-before-a-show-at-united-palace', caption: 'dinner before the show', note: 'United Palace, steps away' },
-  { id: 'after-the-cloisters-walk-to-hudson-heights', caption: 'the Cloisters walk', note: 'downhill to coffee + books' },
-  { id: 'a-day-in-washington-heights-first-time-visitors', caption: 'first time here?', note: 'a whole day, mapped' },
+  { id: 'food-near-newyork-presbyterian-columbia-medical-center', caption: 'Food near the hospital', note: 'Including a 24-hour option' },
+  { id: 'where-to-eat-before-a-show-at-united-palace', caption: 'Dinner before a show', note: 'Near the United Palace' },
+  { id: 'after-the-cloisters-walk-to-hudson-heights', caption: 'After the Cloisters', note: 'A walk down to coffee and books' },
+  { id: 'a-day-in-washington-heights-first-time-visitors', caption: 'A first visit', note: 'A full day, mapped' },
 ];
 const situationCards = situations.flatMap((item) => {
   const guide = guides.find((entry) => entry.id === item.id);
@@ -59,7 +59,7 @@ const stubDay = (local: string) => {
 
 const openings = listings.filter((listing) => listing.data.tags.includes('new-opening')).slice(0, 3);
 
-const ticker = ['mangú', 'open late', 'the Cloisters', 'coffee run', 'touch grass', 'the High Bridge', 'chicharrón', 'Fort Tryon'];
+const ticker = ['Fort Tryon Park', 'The Cloisters', 'The High Bridge', 'W 181st St', 'Bennett Park', 'United Palace', 'Highbridge Park', 'Morris-Jumel Mansion'];
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -97,7 +97,7 @@ if (guides.length > 0) {
         decoding="async"
         alt="Washington Heights, the neighborhood guide: a torn-paper collage of the Fort Tryon Park banner and tower, George Washington in a straw hat, the Dominican flag, a W 181 St street sign, the George Washington Bridge, hibiscus flowers, plates of mangú, and apartment buildings above the trees."
       />
-      <span class="sticker sticker-yellow home-collage-sticker" aria-hidden="true">est. by a neighbor</span>
+      <span class="sticker sticker-yellow home-collage-sticker" aria-hidden="true">Written by a neighbor</span>
     </div>
   </div>
 
@@ -109,24 +109,23 @@ if (guides.length > 0) {
 
   <div class="wrap home">
     <section class="home-intro">
-      <p class="scribble">hi, I’m Kelan. I live here.</p>
-      <h1>ok so where are we going?</h1>
+      <h1>Where to go in Washington Heights</h1>
       <svg class="squiggle" aria-hidden="true" width="230" height="14" viewBox="0 0 210 14">
         <path d="M2 9 C 30 2, 50 13, 80 7 S 140 3, 170 8 S 200 6, 208 5" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"></path>
       </svg>
       <p class="home-dek">
-        The places in Washington Heights I’d actually send a friend. Checked, dated, zero sponsored nonsense.
+        The places in Washington Heights we recommend to friends. Every page is checked and dated, and anything sponsored is labeled.
       </p>
     </section>
 
-    <section class="home-block" aria-labelledby="vibe-heading">
-      <p class="label" id="vibe-heading">Pick a vibe</p>
+    <section class="home-block" aria-labelledby="topic-heading">
+      <p class="label" id="topic-heading">Browse by topic</p>
       <ul class="vibes">
         {
-          vibes.map((vibe) => (
+          topics.map((topic) => (
             <li>
-              <a class:list={['pill', `pill-${vibe.tone}`]} href={href(`/best/${vibe.guide}`)}>
-                {vibe.label}
+              <a class:list={['pill', `pill-${topic.tone}`]} href={href(`/best/${topic.guide}`)}>
+                {topic.label}
               </a>
             </li>
           ))
@@ -136,8 +135,8 @@ if (guides.length > 0) {
 
     <a class="open-rn" href={href('/near-me')}>
       <span>
-        <span class="open-rn-title">what’s open rn?</span>
-        <span class="open-rn-note">closest first, sorted from where you are</span>
+        <span class="open-rn-title">What’s near you</span>
+        <span class="open-rn-note">Places sorted by distance from where you are</span>
       </span>
       <span class="open-rn-arrow" aria-hidden="true">→</span>
     </a>
@@ -146,8 +145,8 @@ if (guides.length > 0) {
       situationCards.length > 0 && (
         <section class="home-block" aria-labelledby="reasons-heading">
           <div class="home-head">
-            <h2 id="reasons-heading" class="poster-heading">here for a reason?</h2>
-            <a href={href('/best')}>all {guides.length} guides</a>
+            <h2 id="reasons-heading" class="poster-heading">Guides for a plan</h2>
+            <a href={href('/best')}>All {guides.length} guides</a>
           </div>
           <ul class="polaroids">
             {situationCards.map((card) => (
@@ -161,7 +160,6 @@ if (guides.length > 0) {
               </li>
             ))}
           </ul>
-          <p class="scribble scribble-note" aria-hidden="true">↑ trust me on the walk</p>
         </section>
       )
     }
@@ -170,8 +168,8 @@ if (guides.length > 0) {
       thisWeek.length > 0 && (
         <section class="home-block" aria-labelledby="events-heading" data-events-scope>
           <div class="home-head">
-            <h2 id="events-heading" class="poster-heading">this week, irl</h2>
-            <a href={href('/events')}>all events</a>
+            <h2 id="events-heading" class="poster-heading">This week</h2>
+            <a href={href('/events')}>All events</a>
           </div>
           <ul class="stubs">
             {thisWeek.map((event, index) => {
@@ -200,7 +198,7 @@ if (guides.length > 0) {
             })}
           </ul>
           <p class="front-subhead" data-events-empty hidden>Nothing else this week. The events page has what’s next.</p>
-          <a class="pill pill-ink" href={href('/events')}>see everything happening →</a>
+          <a class="pill pill-ink" href={href('/events')}>See all events →</a>
           <HidePastEvents />
         </section>
       )
@@ -209,12 +207,12 @@ if (guides.length > 0) {
     {
       openings.length > 0 && (
         <section class="home-block" aria-labelledby="new-heading">
-          <h2 id="new-heading" class="poster-heading">just opened</h2>
+          <h2 id="new-heading" class="poster-heading">New openings</h2>
           <ul class="home-list">
             {openings.map((listing) => (
               <li>
                 <a href={href(`/places/${listing.id}`)}>
-                  <span class="mini-sticker mini-sticker-yellow">new</span>
+                  <span class="mini-sticker mini-sticker-yellow">New</span>
                   <span class="home-list-title">{listing.data.name}</span>
                   <span class="home-list-note">{listing.data.verdict}</span>
                 </a>
@@ -229,8 +227,8 @@ if (guides.length > 0) {
       pins.length > 0 && (
         <section class="home-block" aria-labelledby="map-heading">
           <div class="home-head">
-            <h2 id="map-heading" class="poster-heading">the whole map</h2>
-            <a href={href('/map')}>open the big map</a>
+            <h2 id="map-heading" class="poster-heading">Map</h2>
+            <a href={href('/map')}>Open the full map</a>
           </div>
           <PlaceMap pins={pins} label="Places in Washington Heights" />
         </section>
@@ -240,7 +238,7 @@ if (guides.length > 0) {
     {
       neighborhoods.length > 0 && (
         <section class="home-block" aria-labelledby="areas-heading">
-          <h2 id="areas-heading" class="poster-heading">pick a corner</h2>
+          <h2 id="areas-heading" class="poster-heading">Neighborhoods</h2>
           <ul class="corners">
             {neighborhoods.map((area) => (
               <li>
@@ -253,23 +251,23 @@ if (guides.length > 0) {
     }
 
     <section class="home-block" aria-labelledby="archive-heading">
-      <h2 id="archive-heading" class="poster-heading">the backstory</h2>
+      <h2 id="archive-heading" class="poster-heading">History and film</h2>
       <ul class="home-list">
         <li>
           <a href={href('/people/fort-washington-battle-1776')}>
-            <span class="mini-sticker">history</span>
+            <span class="mini-sticker">History</span>
             <span class="home-list-title">Where Fort Washington fell in 1776</span>
           </a>
         </li>
         <li>
           <a href={href('/filmed-here')}>
-            <span class="mini-sticker">filmed here</span>
+            <span class="mini-sticker">Filmed here</span>
             <span class="home-list-title">In the Heights, Malcolm X, Coogan’s Bluff and more</span>
           </a>
         </li>
         <li>
           <a href={href('/people')}>
-            <span class="mini-sticker">people</span>
+            <span class="mini-sticker">People</span>
             <span class="home-list-title">Residents, from Lou Gehrig to Lin-Manuel Miranda</span>
           </a>
         </li>
@@ -277,10 +275,9 @@ if (guides.length > 0) {
     </section>
 
     <section class="promise">
-      <p class="promise-title">no paid opinions. ever.</p>
-      <p>I check every spot myself and date every page. Sponsors get a label, never a better review.</p>
-      <p class="scribble">— Kelan</p>
-      <p class="promise-link"><a href={href('/about')}>how this guide works</a></p>
+      <p class="promise-title">No paid reviews</p>
+      <p>We check every spot in person and date every page. Sponsors get a label, never a better review.</p>
+      <p class="promise-link"><a href={href('/about')}>How this guide works</a></p>
     </section>
   </div>
 </BaseLayout>
