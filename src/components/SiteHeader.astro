@@ -1,17 +1,29 @@
 ---
 import { areaTree, loadAreas } from '../lib/areas';
 import { coverForGuide } from '../lib/covers';
-import { loadGuides } from '../lib/guides';
+import { loadGuides, loadSpanishGuides } from '../lib/guides';
+import { loadSpanishAreas } from '../lib/barrios';
+import { categoryPluralEs } from '../lib/spanish';
 import { loadListings } from '../lib/listings';
 import { href, normalizePath } from '../lib/site';
 import NycStamp from './NycStamp.astro';
 import { categoryInfo, type Category } from '../lib/taxonomy';
+
+interface Props {
+  lang?: 'en' | 'es';
+  /** The other language's version of this page. */
+  switchPath?: string;
+}
+const { lang = 'en', switchPath = lang === 'es' ? '/' : '/es' } = Astro.props;
+const es = lang === 'es';
 
 interface MenuLink {
   href: string;
   label: string;
   count?: number;
   indent?: boolean;
+  /** True when a Spanish menu links to a page that is only in English. */
+  english?: boolean;
 }
 interface MenuColumn {
   heading: string;
@@ -31,123 +43,212 @@ const isCurrent = (path: string) => {
   return current === item || current.startsWith(`${item}/`);
 };
 
-const [guides, areas, listings] = await Promise.all([loadGuides(), loadAreas(), loadListings()]);
+const [guides, areas, listings, guias, barrios] = await Promise.all([
+  loadGuides(),
+  loadAreas(),
+  loadListings(),
+  loadSpanishGuides(),
+  loadSpanishAreas(),
+]);
+const guiaById = new Map(guias.map((pair) => [pair.guide.id, pair.es]));
+/** English-only pages in the Spanish menu get an "EN" tag. */
+const en = (link: MenuLink): MenuLink => (es ? { ...link, english: true } : link);
+const t = es
+  ? {
+      byType: 'Por tipo',
+      allPlaces: 'Todos los lugares',
+      guides: 'Guías',
+      forAPlan: 'Para un plan',
+      explore: 'Explora',
+      events: 'Eventos de la semana',
+      nearMe: 'Cerca de mí',
+      areas: 'Zonas',
+      getAround: 'Cómo moverse',
+      hills: 'Cuestas y escaleras',
+      map: 'Mapa de todos los lugares',
+      allAreas: 'Todos los barrios',
+      people: 'Personas',
+      filmed: 'Filmado aquí',
+      fort: 'Fort Washington, 1776',
+      featured: 'Guía destacada',
+      eat: 'Comer y beber',
+      do: 'Qué hacer',
+      neighborhoods: 'Barrios',
+      history: 'Historia y cine',
+      moving: 'Mudarse aquí',
+      bestOf: 'Guías',
+      mapShort: 'Mapa',
+      about: 'Acerca de',
+      today: 'Hoy',
+      search: 'Buscar',
+      newsletter: 'Boletín',
+      other: 'English',
+      dark: 'Modo oscuro',
+      light: 'Modo claro',
+      menu: 'Menú',
+      close: 'Cerrar',
+      primary: 'Principal',
+      englishTag: 'en inglés',
+    }
+  : {
+      byType: 'By type',
+      allPlaces: 'All places',
+      guides: 'Guides',
+      forAPlan: 'For a plan',
+      explore: 'Explore',
+      events: 'Events this week',
+      nearMe: 'Near me',
+      areas: 'Areas',
+      getAround: 'Get around',
+      hills: 'Hills and stairs',
+      map: 'Map of every place',
+      allAreas: 'All areas',
+      people: 'People',
+      filmed: 'Filmed here',
+      fort: 'Fort Washington, 1776',
+      featured: 'Featured guide',
+      eat: 'Eat & drink',
+      do: 'Things to do',
+      neighborhoods: 'Neighborhoods',
+      history: 'History & film',
+      moving: 'Moving here',
+      bestOf: 'Best of',
+      mapShort: 'Map',
+      about: 'About',
+      today: 'Today',
+      search: 'Search',
+      newsletter: 'Newsletter',
+      other: 'Español',
+      dark: 'Dark mode',
+      light: 'Light mode',
+      menu: 'Menu',
+      close: 'Close',
+      primary: 'Primary',
+      englishTag: '',
+    };
 
 const countFor = (category: Category) => listings.filter((listing) => listing.data.category === category).length;
-const categoryLink = (category: Category): MenuLink => ({
-  href: href(`/category/${category}`),
-  label: categoryInfo[category].plural,
-  count: countFor(category),
-});
+const categoryLink = (category: Category): MenuLink =>
+  en({
+    href: href(`/category/${category}`),
+    label: es ? categoryPluralEs[category] : categoryInfo[category].plural,
+    count: countFor(category),
+  });
 
 /** Short menu labels for guides. A guide that is not published is left out of the menu. */
-const guideLinks = (items: Array<[id: string, label: string]>): MenuLink[] =>
+const guideLinks = (items: Array<[id: string, label: string, labelEs: string]>): MenuLink[] =>
   items
     .filter(([id]) => guides.some((guide) => guide.id === id))
-    .map(([id, label]) => ({ href: href(`/best/${id}`), label }));
+    .map(([id, label, labelEs]) => {
+      if (!es) return { href: href(`/best/${id}`), label };
+      return guiaById.has(id) ? { href: href(`/es/guias/${id}`), label: labelEs } : en({ href: href(`/best/${id}`), label: labelEs });
+    });
 
 const flatAreas = (nodes: ReturnType<typeof areaTree>, depth = 0): MenuLink[] =>
   nodes.flatMap((node) => [
-    { href: href(`/areas/${node.area.id}`), label: node.area.data.name, indent: depth > 0 },
+    es && barrios.has(node.area.id)
+      ? { href: href(`/es/barrios/${node.area.id}`), label: barrios.get(node.area.id)!.es.data.name, indent: depth > 0 }
+      : en({ href: href(`/areas/${node.area.id}`), label: node.area.data.name, indent: depth > 0 }),
     ...flatAreas(node.children, depth + 1),
   ]);
 
 const sections: MenuSection[] = [
   {
     id: 'eat',
-    label: 'Eat & drink',
+    label: t.eat,
     featured: 'best-dominican-restaurants-washington-heights',
     columns: [
       {
-        heading: 'By type',
+        heading: t.byType,
         links: [
           categoryLink('restaurant'),
           categoryLink('cafe'),
           categoryLink('bakery'),
           categoryLink('bar'),
-          { href: href('/places'), label: 'All places', count: listings.length },
+          en({ href: href('/places'), label: t.allPlaces, count: listings.length }),
         ],
       },
       {
-        heading: 'Guides',
+        heading: t.guides,
         links: guideLinks([
-          ['best-dominican-restaurants-washington-heights', 'Dominican food'],
-          ['best-brunch-washington-heights', 'Brunch'],
-          ['best-coffee-shops-washington-heights', 'Coffee'],
-          ['best-bakeries-and-desserts-washington-heights', 'Bakeries and desserts'],
-          ['best-late-night-food-washington-heights', 'Late-night food'],
-          ['best-bars-and-nightlife-washington-heights', 'Bars and nightlife'],
+          ['best-dominican-restaurants-washington-heights', 'Dominican food', 'Comida dominicana'],
+          ['best-brunch-washington-heights', 'Brunch', 'Brunch'],
+          ['best-coffee-shops-washington-heights', 'Coffee', 'Café'],
+          ['best-bakeries-and-desserts-washington-heights', 'Bakeries and desserts', 'Panaderías y postres'],
+          ['best-late-night-food-washington-heights', 'Late-night food', 'Comida de madrugada'],
+          ['best-bars-and-nightlife-washington-heights', 'Bars and nightlife', 'Bares y vida nocturna'],
         ]),
       },
       {
-        heading: 'For a plan',
+        heading: t.forAPlan,
         links: guideLinks([
-          ['where-to-eat-before-a-show-at-united-palace', 'Dinner before a show'],
-          ['food-near-newyork-presbyterian-columbia-medical-center', 'Food near the hospital'],
+          ['where-to-eat-before-a-show-at-united-palace', 'Dinner before a show', 'Cenar antes de un show'],
+          ['food-near-newyork-presbyterian-columbia-medical-center', 'Food near the hospital', 'Comer cerca del hospital'],
         ]),
       },
     ],
   },
   {
     id: 'do',
-    label: 'Things to do',
+    label: t.do,
     featured: 'best-things-to-do-washington-heights',
     columns: [
       {
-        heading: 'Explore',
+        heading: t.explore,
         links: [
-          { href: href('/events'), label: 'Events this week' },
+          en({ href: href('/events'), label: t.events }),
           categoryLink('landmark'),
           categoryLink('shop'),
-          { href: href('/near-me'), label: 'Near me' },
+          en({ href: href('/near-me'), label: t.nearMe }),
         ],
       },
       {
-        heading: 'Guides',
+        heading: t.guides,
         links: guideLinks([
-          ['best-things-to-do-washington-heights', 'Things to do'],
-          ['best-parks-and-views-washington-heights', 'Parks and views'],
-          ['best-spots-for-families-washington-heights', 'With kids'],
-          ['a-day-in-washington-heights-first-time-visitors', 'A first visit'],
-          ['after-the-cloisters-walk-to-hudson-heights', 'After the Cloisters'],
-          ['hudson-heights-essentials', 'Hudson Heights essentials'],
-          ['where-to-stay-in-washington-heights', 'Where to stay'],
+          ['best-things-to-do-washington-heights', 'Things to do', 'Qué hacer'],
+          ['best-parks-and-views-washington-heights', 'Parks and views', 'Parques y vistas'],
+          ['best-spots-for-families-washington-heights', 'With kids', 'Con niños'],
+          ['a-day-in-washington-heights-first-time-visitors', 'A first visit', 'Una primera visita'],
+          ['after-the-cloisters-walk-to-hudson-heights', 'After the Cloisters', 'Después de The Cloisters'],
+          ['hudson-heights-essentials', 'Hudson Heights essentials', 'Lo esencial de Hudson Heights'],
+          ['where-to-stay-in-washington-heights', 'Where to stay', 'Dónde hospedarse'],
         ]),
       },
     ],
   },
   {
     id: 'areas',
-    label: 'Neighborhoods',
+    label: t.neighborhoods,
     featured: 'hudson-heights-essentials',
     columns: [
-      { heading: 'Areas', links: flatAreas(areaTree(areas)) },
+      { heading: t.areas, links: flatAreas(areaTree(areas)) },
       {
-        heading: 'Get around',
+        heading: t.getAround,
         links: [
-          { href: href('/map'), label: 'Map of every place' },
-          { href: href('/near-me'), label: 'Near me' },
-          { href: href('/areas'), label: 'All areas' },
+          { href: href(es ? '/es/mudarse/cuestas-y-escaleras' : '/moving/hills-and-stairs'), label: t.hills },
+          en({ href: href('/map'), label: t.map }),
+          en({ href: href('/near-me'), label: t.nearMe }),
+          { href: href(es ? '/es/barrios' : '/areas'), label: t.allAreas },
         ],
       },
     ],
   },
   {
     id: 'history',
-    label: 'History & film',
+    label: t.history,
     featured: 'history-lovers-guide-washington-heights',
     columns: [
       {
-        heading: 'Explore',
+        heading: t.explore,
         links: [
-          { href: href('/people'), label: 'People' },
-          { href: href('/filmed-here'), label: 'Filmed here' },
-          { href: href('/people/fort-washington-battle-1776'), label: 'Fort Washington, 1776' },
+          en({ href: href('/people'), label: t.people }),
+          en({ href: href('/filmed-here'), label: t.filmed }),
+          en({ href: href('/people/fort-washington-battle-1776'), label: t.fort }),
         ],
       },
       {
-        heading: 'Guides',
-        links: guideLinks([['history-lovers-guide-washington-heights', 'A history lover’s guide']]),
+        heading: t.guides,
+        links: guideLinks([['history-lovers-guide-washington-heights', 'A history lover’s guide', 'Guía para amantes de la historia']]),
       },
     ],
   },
@@ -160,33 +261,38 @@ const menu = sections.map((section) => {
     ...section,
     columns: section.columns.filter((column) => column.links.length > 0),
     active: section.columns.some((column) => column.links.some((link) => isCurrent(link.href))),
-    feature: guide ? { href: href(`/best/${guide.id}`), title: guide.data.title, cover } : undefined,
+    feature: guide
+      ? es && guiaById.has(guide.id)
+        ? { href: href(`/es/guias/${guide.id}`), title: guiaById.get(guide.id)!.data.title, cover }
+        : { href: href(`/best/${guide.id}`), title: guide.data.title, cover }
+      : undefined,
   };
 });
 
-const direct = [
-  { href: href('/moving'), label: 'Moving here' },
-  { href: href('/best'), label: 'Best of' },
-  { href: href('/map'), label: 'Map' },
+const direct: MenuLink[] = [
+  { href: href(es ? '/es/mudarse' : '/moving'), label: t.moving },
+  { href: href(es ? '/es' : '/best'), label: t.bestOf },
+  en({ href: href('/map'), label: t.mapShort }),
 ];
+const home = href(es ? '/es' : '/');
 ---
 
 <header class="masthead" data-pagefind-ignore>
   <div class="wrap masthead-bar">
-    <a class="wordmark" href={href('/')}>Washington Heights Guide</a>
+    <a class="wordmark" href={home}>Washington Heights Guide</a>
     <NycStamp />
     <div class="masthead-tools">
-      <a class="tool-link tool-optional" href={href('/today')}>Today</a>
-      <a class="tool-link tool-optional" href={href('/near-me')}>Near me</a>
-      <a class="tool-link" href={href('/search')}>Search</a>
-      <a class="tool-link tool-optional" href="#newsletter-title">Newsletter</a>
-      <a class="tool-link tool-optional" href={href('/es')} hreflang="es" lang="es">Español</a>
-      <button class="tool-link tool-optional" type="button" id="theme-toggle" aria-pressed="false">Dark mode</button>
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <a class="tool-link tool-optional" href={href(es ? '/es/hoy' : '/today')}>{t.today}</a>
+      <a class="tool-link tool-optional" href={href('/near-me')} hreflang={es ? 'en' : undefined}>{t.nearMe}</a>
+      <a class="tool-link" href={href('/search')} hreflang={es ? 'en' : undefined}>{t.search}</a>
+      <a class="tool-link tool-optional" href="#newsletter-title">{t.newsletter}</a>
+      <a class="tool-link tool-optional" href={href(switchPath)} hreflang={es ? 'en' : 'es'} lang={es ? 'en' : 'es'}>{t.other}</a>
+      <button class="tool-link tool-optional" type="button" id="theme-toggle" aria-pressed="false" data-dark={t.dark} data-light={t.light}>{t.dark}</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-open={t.menu} data-close={t.close}>{t.menu}</button>
     </div>
   </div>
 
-  <nav class="site-nav" id="site-nav" aria-label="Primary">
+  <nav class="site-nav" id="site-nav" aria-label={t.primary}>
     <div class="wrap">
       <ul class="site-nav-list">
         {
@@ -208,9 +314,10 @@ const direct = [
                       <ul>
                         {column.links.map((link) => (
                           <li class:list={{ 'mega-indent': link.indent }}>
-                            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined} hreflang={link.english ? 'en' : undefined}>
                               {link.label}
                               {link.count !== undefined && <span class="mega-count">{link.count}</span>}
+                              {link.english && <span class="mega-lang" title={t.englishTag}>EN<span class="sr-only"> ({t.englishTag})</span></span>}
                             </a>
                           </li>
                         ))}
@@ -222,7 +329,7 @@ const direct = [
                       {section.feature.cover && (
                         <img src={section.feature.cover.src} alt="" loading="lazy" decoding="async" />
                       )}
-                      <span class="mega-feature-kicker">Featured guide</span>
+                      <span class="mega-feature-kicker">{t.featured}</span>
                       <span class="mega-feature-title">{section.feature.title}</span>
                     </a>
                   )}
@@ -234,14 +341,14 @@ const direct = [
         {
           direct.map((link) => (
             <li class="site-nav-item">
-              <a class="site-nav-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+              <a class="site-nav-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined} hreflang={link.english ? 'en' : undefined}>
                 {link.label}
               </a>
             </li>
           ))
         }
         <li class="site-nav-item site-nav-extra">
-          <a class="site-nav-link" href={href('/about')} aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+          <a class="site-nav-link" href={href('/about')} aria-current={isCurrent('/about') ? 'page' : undefined} hreflang={es ? 'en' : undefined}>{t.about}</a>
         </li>
       </ul>
     </div>
@@ -254,7 +361,7 @@ const direct = [
     const sync = () => {
       const dark = document.documentElement.dataset.theme === 'dark';
       if (!toggle) return;
-      toggle.textContent = dark ? 'Light mode' : 'Dark mode';
+      toggle.textContent = dark ? toggle.dataset.light || 'Light mode' : toggle.dataset.dark || 'Dark mode';
       toggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
     };
     sync();
@@ -283,7 +390,7 @@ const direct = [
     const closeAll = (except) => triggers.forEach((trigger) => trigger !== except && setOpen(trigger, false));
     const setMenu = (open) => {
       menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menuToggle.textContent = open ? 'Close' : 'Menu';
+      menuToggle.textContent = open ? menuToggle.dataset.close || 'Close' : menuToggle.dataset.open || 'Menu';
       nav.classList.toggle('is-open', open);
       if (!open) closeAll();
     };

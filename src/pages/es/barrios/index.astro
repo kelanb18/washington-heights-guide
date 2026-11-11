@@ -1,0 +1,97 @@
+---
+import AttributedPhoto from '../../../components/AttributedPhoto.astro';
+import PlaceMap from '../../../components/PlaceMap.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { areaTree, loadAreas } from '../../../lib/areas';
+import { loadSpanishAreas } from '../../../lib/barrios';
+import { listingCounts } from '../../../lib/catalog';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../../lib/jsonld';
+import { loadListings } from '../../../lib/listings';
+import { pinsFor } from '../../../lib/pins';
+import { areasHero } from '../../../lib/site-heroes';
+import { absoluteUrl, href, siteName } from '../../../lib/site';
+import { categoryInfoEs } from '../../../lib/spanish';
+
+const areas = await loadAreas();
+const pairs = await loadSpanishAreas();
+const listings = await loadListings();
+const counts = listingCounts(areas, listings);
+const pins = pinsFor(listings).map((pin) => ({
+  ...pin,
+  categoryLabel: categoryInfoEs[pin.category as keyof typeof categoryInfoEs] ?? pin.categoryLabel,
+}));
+type Node = ReturnType<typeof areaTree>[number];
+const flat = (nodes: Node[], depth = 0): Array<{ id: string; name: string; summary: string; depth: number; es: boolean }> =>
+  nodes.flatMap((node) => {
+    const es = pairs.get(node.area.id)?.es;
+    return [
+      {
+        id: node.area.id,
+        name: es?.data.name ?? node.area.data.name,
+        summary: es?.data.summary ?? node.area.data.summary,
+        depth,
+        es: Boolean(es),
+      },
+      ...flat(node.children, depth + 1),
+    ];
+  });
+const rows = flat(areaTree(areas));
+const description = 'Las zonas de Washington Heights, de Hudson Heights a Fort George y Jumel Terrace: dónde quedan, qué hay y su historia.';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Barrios', url: absoluteUrl(site, '/es/barrios') },
+  ]),
+  itemListJsonLd(
+    'Zonas de Washington Heights',
+    rows.filter((row) => row.es).map((row) => ({ name: row.name, url: absoluteUrl(site, `/es/barrios/${row.id}`) })),
+  ),
+];
+---
+
+<BaseLayout
+  title={`Barrios de Washington Heights | ${siteName}`}
+  description={description}
+  image={areasHero.src}
+  imageAlt={areasHero.alt}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: '/areas' }]}
+>
+  <div class="wrap">
+    <AttributedPhoto picture={areasHero} variant="hero" />
+    <header class="page-head">
+      <p class="kicker">
+        El barrio
+        <span aria-hidden="true"> · </span>
+        <a href={href('/areas')} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>Barrios</h1>
+      <p class="lede">Las zonas de Washington Heights. Cuando una está dentro de otra, aparece debajo.</p>
+    </header>
+
+    <section class="group" aria-labelledby="map-heading">
+      <div class="section-head"><h2 id="map-heading">Mapa</h2></div>
+      <PlaceMap pins={pins} label="Lugares en Washington Heights" note="Cada pin es un lugar de esta guía. Las fichas de los lugares están en inglés por ahora." />
+    </section>
+
+    <p class="section-note">El número de cada zona cuenta los lugares de esta guía que están ahí, incluidas las zonas más pequeñas.</p>
+    <ul class="contents">
+      {
+        rows.map((row) => (
+          <li class:list={{ 'mega-indent': row.depth > 0 }} style={row.depth > 0 ? `margin-left:${row.depth * 1.5}rem` : undefined}>
+            <a href={row.es ? href(`/es/barrios/${row.id}`) : href(`/areas/${row.id}`)} hreflang={row.es ? undefined : 'en'}>
+              <span class="contents-name">
+                {row.name} <span class="mega-count">{counts[row.id] ?? 0}</span>
+              </span>
+              <span class="contents-blurb">{row.summary}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</BaseLayout>

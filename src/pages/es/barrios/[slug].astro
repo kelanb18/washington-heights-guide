@@ -1,0 +1,239 @@
+---
+import { render } from 'astro:content';
+import PhotoSet from '../../../components/PhotoSet.astro';
+import PlaceMap from '../../../components/PlaceMap.astro';
+import SourceList from '../../../components/SourceList.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ancestorAreas, areaTree, descendantIds, findAreaNode, loadAreas } from '../../../lib/areas';
+import { loadSpanishAreas } from '../../../lib/barrios';
+import { listingsInArea, peopleInArea } from '../../../lib/catalog';
+import { breadcrumbJsonLd } from '../../../lib/jsonld';
+import { loadSpanishGuides } from '../../../lib/guides';
+import { loadListings } from '../../../lib/listings';
+import { loadPeople } from '../../../lib/people';
+import { pinsFor } from '../../../lib/pins';
+import { shareableSrc } from '../../../lib/pictures';
+import { loadProductions } from '../../../lib/productions';
+import { referenceId } from '../../../lib/refs';
+import { absoluteUrl, href, siteName } from '../../../lib/site';
+import { categoryInfoEs } from '../../../lib/spanish';
+
+export async function getStaticPaths() {
+  const pairs = await loadSpanishAreas();
+  return [...pairs.keys()].map((slug) => ({ params: { slug } }));
+}
+
+const pairs = await loadSpanishAreas();
+const pair = pairs.get(Astro.params.slug as string);
+if (!pair) throw new Error(`[barrios] No Spanish area for "${Astro.params.slug}".`);
+const { area, es } = pair;
+const areas = await loadAreas();
+const nameOf = (id: string, fallback: string) => pairs.get(id)?.es.data.name ?? fallback;
+const areaHref = (id: string) => (pairs.has(id) ? href(`/es/barrios/${id}`) : href(`/areas/${id}`));
+
+const listings = listingsInArea(area.id, areas, await loadListings());
+const people = peopleInArea(area.id, areas, await loadPeople());
+const areaIds = descendantIds(area.id, areas);
+const productions = (await loadProductions()).filter((production) => {
+  const id = referenceId(production.data.area);
+  return id != null && areaIds.has(id);
+});
+const listingIds = new Set(listings.map((listing) => listing.id));
+const guidesHere = (await loadSpanishGuides()).filter(({ guide }) => {
+  const guideArea = referenceId(guide.data.area);
+  if (guideArea && areaIds.has(guideArea)) return true;
+  return guide.data.picks.some((pick) => {
+    const id = referenceId(pick.listing);
+    return id != null && listingIds.has(id);
+  });
+});
+const pins = pinsFor(listings).map((pin) => ({
+  ...pin,
+  categoryLabel: categoryInfoEs[pin.category as keyof typeof categoryInfoEs] ?? pin.categoryLabel,
+}));
+const children = findAreaNode(areaTree(areas), area.id)?.children ?? [];
+const ancestors = ancestorAreas(area, areas);
+const parent = ancestors.at(-1);
+const areaHero = area.data.image ?? area.data.gallery[0];
+const areaGallery = area.data.image ? area.data.gallery : area.data.gallery.slice(1);
+const { Content } = await render(es);
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Barrios', url: absoluteUrl(site, '/es/barrios') },
+    ...ancestors.map((entry) => ({ name: nameOf(entry.id, entry.data.name), url: absoluteUrl(site, `/es/barrios/${entry.id}`) })),
+    { name: es.data.name, url: absoluteUrl(site, `/es/barrios/${area.id}`) },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`${es.data.name}: dónde comer y qué ver | ${siteName}`}
+  description={es.data.summary}
+  ogType="article"
+  image={shareableSrc(areaHero?.src)}
+  imageAlt={areaHero?.alt}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: `/areas/${area.id}` }]}
+>
+  <article class="wrap">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/es/barrios')}>Barrios</a>
+      {
+        ancestors.map((entry) => (
+          <>
+            <span aria-hidden="true">/</span>
+            <a href={areaHref(entry.id)}>{nameOf(entry.id, entry.data.name)}</a>
+          </>
+        ))
+      }
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{es.data.name}</span>
+    </nav>
+
+    <header class="listing-head">
+      <p class="kicker">
+        <a href={href('/es/barrios')}>Barrio</a>
+        {
+          parent && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <a href={areaHref(parent.id)}>{nameOf(parent.id, parent.data.name)}</a>
+            </>
+          )
+        }
+        <span aria-hidden="true"> · </span>
+        <a href={href(`/areas/${area.id}`)} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>{es.data.name}</h1>
+      <p class="deck">{es.data.summary}</p>
+      <p class="where">{es.data.boundaries}</p>
+    </header>
+
+    <PhotoSet image={areaHero} gallery={areaGallery} />
+
+    {
+      pins.length > 0 && (
+        <section class="group" aria-labelledby="map-heading">
+          <div class="section-head">
+            <h2 id="map-heading">Mapa</h2>
+          </div>
+          <PlaceMap pins={pins} label={`Lugares en ${es.data.name}`} note="Cada pin es un lugar de esta guía. Las fichas de los lugares están en inglés por ahora." />
+        </section>
+      )
+    }
+
+    <div class="listing-grid">
+      <div>
+        <div class="prose dropcap">
+          <Content />
+        </div>
+      </div>
+      <aside class="facts" aria-labelledby="facts-heading">
+        <h2 id="facts-heading">Datos</h2>
+        <dl>
+          {
+            parent && (
+              <>
+                <dt>Forma parte de</dt>
+                <dd><a href={areaHref(parent.id)}>{nameOf(parent.id, parent.data.name)}</a></dd>
+              </>
+            )
+          }
+          <dt>Calles aproximadas</dt>
+          <dd>{es.data.boundaries}</dd>
+          <dt>Fuentes</dt>
+          <dd><SourceList urls={area.data.sources} /></dd>
+        </dl>
+      </aside>
+    </div>
+
+    {
+      children.length > 0 && (
+        <section class="group" aria-labelledby="children-heading">
+          <div class="section-head">
+            <h2 id="children-heading">Zonas más pequeñas</h2>
+            <span class="count">{children.length}</span>
+          </div>
+          <ul class="contents">
+            {children.map((node) => (
+              <li>
+                <a href={areaHref(node.area.id)}>
+                  <span class="contents-name">{nameOf(node.area.id, node.area.data.name)}</span>
+                  <span class="contents-blurb">{pairs.get(node.area.id)?.es.data.summary ?? node.area.data.summary}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      guidesHere.length > 0 && (
+        <section class="group" aria-labelledby="guides-heading">
+          <div class="section-head">
+            <h2 id="guides-heading">Guías con lugares de aquí</h2>
+            <a href={href('/es')}>Todas las guías</a>
+          </div>
+          <ul class="tag-line">
+            {guidesHere.map(({ es: guia }) => (
+              <li>
+                <a href={href(`/es/guias/${guia.id}`)}>{guia.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      listings.length > 0 && (
+        <section class="group" aria-labelledby="places-heading">
+          <div class="section-head">
+            <h2 id="places-heading">Lugares</h2>
+            <span class="count">{listings.length}</span>
+          </div>
+          <p class="section-note">Las fichas de cada lugar están en inglés por ahora.</p>
+          <ul class="living-list">
+            {listings.map((listing) => (
+              <li>
+                <a href={href(`/places/${listing.id}`)} hreflang="en">{listing.data.name}</a>
+                <span class="living-address">{categoryInfoEs[listing.data.category]}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      (people.length > 0 || productions.length > 0) && (
+        <section class="group" aria-labelledby="history-heading">
+          <div class="section-head">
+            <h2 id="history-heading">Historia y cine</h2>
+          </div>
+          <p class="section-note">Estas páginas están en inglés por ahora.</p>
+          <ul class="tag-line">
+            {people.map((person) => (
+              <li>
+                <a href={href(`/people/${person.id}`)} hreflang="en">{person.data.name}</a>
+              </li>
+            ))}
+            {productions.map((production) => (
+              <li>
+                <a href={href(`/filmed-here/${production.id}`)} hreflang="en">{production.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+  </article>
+</BaseLayout>

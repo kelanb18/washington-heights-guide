@@ -5,6 +5,7 @@ import { listingSchema } from './lib/listing-schema';
 import { personSchema } from './lib/person-schema';
 import { guideSchema } from './lib/guide-schema';
 import { guideTranslationSchema } from './lib/guide-translation-schema';
+import { areaTranslationSchema } from './lib/area-translation-schema';
 import { eventSchema } from './lib/event-schema';
 import { productionSchema } from './lib/production-schema';
 
@@ -62,9 +63,14 @@ const guias = defineCollection({
   schema: guideTranslationSchema,
 });
 
+const barrios = defineCollection({
+  loader: markdownFiles('barrios', 'barrios', 'fort-george.md'),
+  schema: areaTranslationSchema,
+});
+
 const events = defineCollection({
   loader: markdownFiles('events', 'events', '2026-12-05-nutcracker-united-palace.md'),
   schema: eventSchema,
 });
 
-export const collections = { listings, areas, people, productions, guides, guias, events };
+export const collections = { listings, areas, people, productions, guides, guias, barrios, events };

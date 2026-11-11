@@ -18,3 +18,13 @@ export function formatDateEs(date: Date): string {
     year: 'numeric',
   }).format(date);
 }
+
+export const categoryPluralEs: Record<Category, string> = {
+  restaurant: 'Restaurantes',
+  cafe: 'Cafés',
+  bakery: 'Panaderías',
+  bar: 'Bares',
+  shop: 'Tiendas',
+  service: 'Servicios',
+  landmark: 'Lugares de interés',
+};

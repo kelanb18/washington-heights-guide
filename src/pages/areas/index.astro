@@ -44,11 +44,15 @@ if (areas.length > 0) {
 }
 ---
 
-<BaseLayout title={pageTitle('Areas')} description={description} image={areasHero.src} imageAlt={areasHero.alt} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Areas')} description={description} image={areasHero.src} imageAlt={areasHero.alt} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/barrios' }]}>
   <div class="wrap">
     <AttributedPhoto picture={areasHero} variant="hero" />
     <header class="page-head">
-      <p class="kicker">The neighborhood</p>
+      <p class="kicker">
+        The neighborhood
+        <span aria-hidden="true"> · </span>
+        <a href={href('/es/barrios')} hreflang="es" lang="es">En español</a>
+      </p>
       <h1>Areas</h1>
       <p class="lede">
         Smaller sections of Washington Heights. When one sits inside another, it is listed underneath.

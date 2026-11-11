@@ -4623,3 +4623,4 @@ button.cal-date:hover,
 .hills-stairs li { margin: .45rem 0; }
 .hills-stair-facts { display: block; font-family: var(--sans); font-size: .9rem; color: var(--ink-soft); }
 .moving .living-list .moving-lines { margin-right: .4rem; }
+.mega-lang { display: inline-block; margin-left: .35rem; padding: 0 .3em; border: 1px solid currentColor; border-radius: 4px; font-size: .62rem; font-weight: 700; letter-spacing: .05em; opacity: .65; vertical-align: .15em; }

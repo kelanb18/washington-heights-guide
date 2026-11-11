@@ -56,6 +56,9 @@ const canonicalPath =
       ? pathname
       : `${pathname}/`;
 const canonical = new URL(canonicalPath, Astro.site);
+/** Where the language switch goes: this page's translation if there is one, otherwise the other language's home. */
+const otherLang = lang === 'es' ? 'en' : 'es';
+const switchPath = alternates.find((alt) => alt.lang === otherLang)?.path ?? (lang === 'es' ? '/' : '/es');
 const ogImage = new URL(image, Astro.site);
 const listings = await loadListings();
 const areas = await loadAreas();
@@ -156,7 +159,7 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
     }
   </head>
   <body>
-    <a class="skip" href="#main">Skip to content</a>
+    <a class="skip" href="#main">{lang === 'es' ? 'Saltar al contenido' : 'Skip to content'}</a>
     {
       showingExamples && (
         <div class="notice notice-example" role="note">
@@ -166,10 +169,10 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
         </div>
       )
     }
-    <SiteHeader />
+    <SiteHeader lang={lang} switchPath={switchPath} />
     <main id="main" tabindex="-1" data-pagefind-body>
       <slot />
     </main>
-    <SiteFooter />
+    <SiteFooter lang={lang} switchPath={switchPath} />
   </body>
 </html>
