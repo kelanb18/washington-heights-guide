@@ -4414,3 +4414,52 @@ button.cal-date:hover,
 .moving-feature:hover strong {
   text-decoration: underline;
 }
+
+/* Living here */
+.moving-feature-alt {
+  margin-top: 0.8rem;
+  background: var(--card);
+  color: var(--ink);
+}
+
+.living-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.6rem;
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.living-list li {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.living-list a {
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.living-list a:hover {
+  color: var(--brick);
+  text-decoration: underline;
+}
+
+.living-address,
+.living-hours {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+}
+
+.living-hours {
+  overflow-wrap: anywhere;
+}

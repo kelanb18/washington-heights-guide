@@ -1,0 +1,96 @@
+---
+import PlaceMap from '../../components/PlaceMap.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { everydayCategories, everydayFetched, everydayMapsHref, everydayPlaces } from '../../lib/living-here';
+import type { MapPin } from '../../lib/pins';
+import { absoluteUrl, correctionsEmail, formatDate, href, pageTitle, siteName } from '../../lib/site';
+
+const groups = everydayCategories
+  .map((category) => ({ ...category, places: everydayPlaces.filter((place) => place.category === category.id) }))
+  .filter((group) => group.places.length > 0);
+
+const pins: MapPin[] = everydayPlaces.map((place) => {
+  const category = everydayCategories.find((item) => item.id === place.category);
+  return {
+    lat: place.lat,
+    lng: place.lon,
+    name: place.name,
+    href: everydayMapsHref(place),
+    category: place.category,
+    categoryLabel: category?.label ?? place.category,
+  };
+});
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Living in Washington Heights: pharmacies, clinics, supermarkets, laundromats, hardware stores, post offices, libraries, gyms and dog runs, on one map.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Moving to the Heights', url: absoluteUrl(site, '/moving') },
+    { name: 'Living here', url: absoluteUrl(site, '/moving/living-here') },
+  ]),
+];
+---
+
+<BaseLayout title={pageTitle('Living here: everyday places in Washington Heights')} description={description} jsonLd={jsonLd}>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/moving')}>Moving to the Heights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Living here</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">Moving here</p>
+      <h1>Living here</h1>
+      <p class="lede">
+        The everyday places: where to fill a prescription, do laundry, buy groceries, fix a lock, mail a package, and walk the dog.
+      </p>
+    </header>
+
+    <nav class="moving-toc" aria-label="Jump to a category">
+      {groups.map((group) => <a href={`#${group.id}`}>{group.label} <span class="mega-count">{group.places.length}</span></a>)}
+    </nav>
+
+    <PlaceMap pins={pins} label="Everyday places in Washington Heights" />
+
+    {
+      groups.map((group) => (
+        <section class="group" aria-labelledby={group.id}>
+          <div class="section-head">
+            <h2 id={group.id}>{group.label}</h2>
+          </div>
+          <ul class="living-list">
+            {group.places.map((place) => (
+              <li>
+                <a href={everydayMapsHref(place)} rel="noopener noreferrer" target="_blank">
+                  {place.name}
+                  <span class="sr-only"> (opens Google Maps in a new tab)</span>
+                </a>
+                {place.address && <span class="living-address">{place.address}</span>}
+                {place.hours && <span class="living-hours">Hours on the map: {place.hours}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <aside class="bc-fineprint">
+      <p>
+        Places come from OpenStreetMap, the volunteer-built map, as of {formatDate(new Date(`${everydayFetched}T12:00:00Z`))}. Map
+        data ©{' '}
+        <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer" target="_blank">OpenStreetMap contributors<span class="sr-only"> (opens in a new tab)</span></a>.
+        Unlike the rest of this guide, these places are not checked one by one, so confirm hours before you go. Missing a place, or
+        found one that closed? Email <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent('Living here')}`}>{correctionsEmail}</a>.
+      </p>
+      <p>
+        Want to check a specific building? Try <a href={href('/moving/building-check')}>Check a building before you sign</a>.
+      </p>
+    </aside>
+  </article>
+</BaseLayout>

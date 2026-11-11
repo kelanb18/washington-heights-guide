@@ -1,0 +1,617 @@
+{
+ "fetched": "2026-11-11",
+ "places": [
+  {
+   "category": "dogs",
+   "name": "Sir William’s Dog Run",
+   "address": null,
+   "hours": null,
+   "lat": 40.861709,
+   "lon": -73.931938,
+   "osm": "https://www.openstreetmap.org/way/939041180"
+  },
+  {
+   "category": "grocery",
+   "name": "C-Town",
+   "address": "1016 Saint Nicholas Avenue",
+   "hours": "Mo-Sa 07:00-22:00; Su 08:00-21:00",
+   "lat": 40.835077,
+   "lon": -73.939576,
+   "osm": "https://www.openstreetmap.org/node/2603955334"
+  },
+  {
+   "category": "grocery",
+   "name": "Dan's Supermarket",
+   "address": null,
+   "hours": "Mo-Sa,Su 07:45-21:46,07:45-20:00",
+   "lat": 40.863982,
+   "lon": -73.925526,
+   "osm": "https://www.openstreetmap.org/node/10966173305"
+  },
+  {
+   "category": "grocery",
+   "name": "Extra Jumbo by Antillana",
+   "address": "312 Audubon Avenue",
+   "hours": "07:00-22:00",
+   "lat": 40.848572,
+   "lon": -73.932836,
+   "osm": "https://www.openstreetmap.org/way/275085242"
+  },
+  {
+   "category": "grocery",
+   "name": "Fine Fare",
+   "address": "4776 Broadway",
+   "hours": null,
+   "lat": 40.865696,
+   "lon": -73.926319,
+   "osm": "https://www.openstreetmap.org/node/10972328083"
+  },
+  {
+   "category": "grocery",
+   "name": "Fine Fare Gold",
+   "address": null,
+   "hours": "24/7",
+   "lat": 40.848202,
+   "lon": -73.937547,
+   "osm": "https://www.openstreetmap.org/node/12925573393"
+  },
+  {
+   "category": "grocery",
+   "name": "Jin's Superette",
+   "address": "804 West 181st Street",
+   "hours": "Mo-Su 08:00-00:00",
+   "lat": 40.850865,
+   "lon": -73.93861,
+   "osm": "https://www.openstreetmap.org/node/5414599813"
+  },
+  {
+   "category": "grocery",
+   "name": "Key Food",
+   "address": "4365 Broadway",
+   "hours": "Fr-Tu 08:00-21:00, We-Th 08:00-22:00",
+   "lat": 40.854016,
+   "lon": -73.933989,
+   "osm": "https://www.openstreetmap.org/node/2797604475"
+  },
+  {
+   "category": "grocery",
+   "name": "Key Food",
+   "address": "1239 Saint Nicholas Avenue",
+   "hours": "Mo-Sa 07:00-22:00, Su 08:00-21:00",
+   "lat": 40.843408,
+   "lon": -73.938274,
+   "osm": "https://www.openstreetmap.org/node/6720579382"
+  },
+  {
+   "category": "grocery",
+   "name": "Moscow On The Hudson",
+   "address": "801 West 181st Street",
+   "hours": "Mo-Sa 09:00-21:00; Su 09:00-20:00",
+   "lat": 40.851113,
+   "lon": -73.938541,
+   "osm": "https://www.openstreetmap.org/node/2797589496"
+  },
+  {
+   "category": "grocery",
+   "name": "Ozzie's Fresh Market",
+   "address": "592 Fort Washington Avenue",
+   "hours": "Mo-Fr 07:00-22:00; Sa 08:00-22:00; Su 08:00-21:00",
+   "lat": 40.854874,
+   "lon": -73.936782,
+   "osm": "https://www.openstreetmap.org/node/2348610308"
+  },
+  {
+   "category": "grocery",
+   "name": "Shop Fair",
+   "address": "159-04 Harlem River Drive",
+   "hours": null,
+   "lat": 40.83208,
+   "lon": -73.935643,
+   "osm": "https://www.openstreetmap.org/node/2554917284"
+  },
+  {
+   "category": "grocery",
+   "name": "Shop Fair",
+   "address": null,
+   "hours": null,
+   "lat": 40.857688,
+   "lon": -73.931828,
+   "osm": "https://www.openstreetmap.org/node/13816415308"
+  },
+  {
+   "category": "grocery",
+   "name": "The Food Emporium",
+   "address": "4138 Broadway",
+   "hours": "Mo-Sa 07:00-21:00, Su 08:00-21:00",
+   "lat": 40.84599,
+   "lon": -73.938311,
+   "osm": "https://www.openstreetmap.org/node/2797243220"
+  },
+  {
+   "category": "grocery",
+   "name": "Wholesome Farms Market",
+   "address": "758 West 181st Street",
+   "hours": null,
+   "lat": 40.850681,
+   "lon": -73.93794,
+   "osm": "https://www.openstreetmap.org/node/2797527517"
+  },
+  {
+   "category": "gym",
+   "name": "Blink Fitness",
+   "address": "4200 Broadway",
+   "hours": null,
+   "lat": 40.848559,
+   "lon": -73.937155,
+   "osm": "https://www.openstreetmap.org/node/6244876786"
+  },
+  {
+   "category": "gym",
+   "name": "Heights Meditation & Yoga",
+   "address": "875 West 181st Street",
+   "hours": null,
+   "lat": 40.85183,
+   "lon": -73.941672,
+   "osm": "https://www.openstreetmap.org/node/13915544407"
+  },
+  {
+   "category": "gym",
+   "name": "Planet Fitness",
+   "address": null,
+   "hours": null,
+   "lat": 40.834484,
+   "lon": -73.945002,
+   "osm": "https://www.openstreetmap.org/node/3627346236"
+  },
+  {
+   "category": "gym",
+   "name": "Planet Fitness",
+   "address": "4168 Broadway",
+   "hours": null,
+   "lat": 40.847379,
+   "lon": -73.937767,
+   "osm": "https://www.openstreetmap.org/node/8720304254"
+  },
+  {
+   "category": "gym",
+   "name": "Planet Fitness",
+   "address": "177 Dyckman Street",
+   "hours": "Mo-Fr 05:00-22:00; Sa-Su 07:00-19:00",
+   "lat": 40.864466,
+   "lon": -73.926141,
+   "osm": "https://www.openstreetmap.org/node/10969041005"
+  },
+  {
+   "category": "gym",
+   "name": "The Armory",
+   "address": "210 Fort Washington Avenue",
+   "hours": null,
+   "lat": 40.842147,
+   "lon": -73.941273,
+   "osm": "https://www.openstreetmap.org/way/275054959"
+  },
+  {
+   "category": "hardware",
+   "name": "Advantage Wholesale Supply",
+   "address": "1028 Saint Nicholas Avenue",
+   "hours": null,
+   "lat": 40.835532,
+   "lon": -73.939643,
+   "osm": "https://www.openstreetmap.org/node/2796762250"
+  },
+  {
+   "category": "hardware",
+   "name": "Nuñez Depot",
+   "address": "4147 Broadway",
+   "hours": null,
+   "lat": 40.846456,
+   "lon": -73.938573,
+   "osm": "https://www.openstreetmap.org/node/2797260700"
+  },
+  {
+   "category": "hardware",
+   "name": "Watson's Plumbing & Heating",
+   "address": null,
+   "hours": null,
+   "lat": 40.829837,
+   "lon": -73.940137,
+   "osm": "https://www.openstreetmap.org/node/11748769119"
+  },
+  {
+   "category": "health",
+   "name": "181st Street Urgent Care Center",
+   "address": "521 West 181st Street",
+   "hours": "Mo-Fr 09:00-20:00; Sa, Su 09:00-18:00",
+   "lat": 40.848786,
+   "lon": -73.932097,
+   "osm": "https://www.openstreetmap.org/node/11484334629"
+  },
+  {
+   "category": "health",
+   "name": "CityMD Urgent Care",
+   "address": null,
+   "hours": null,
+   "lat": 40.849885,
+   "lon": -73.934705,
+   "osm": "https://www.openstreetmap.org/node/11748490911"
+  },
+  {
+   "category": "health",
+   "name": "Columbia University Irving Medical Center",
+   "address": "630 West 168th Street",
+   "hours": "24/7",
+   "lat": 40.841999,
+   "lon": -73.942001,
+   "osm": "https://www.openstreetmap.org/way/137285662"
+  },
+  {
+   "category": "health",
+   "name": "Morgan Stanley Children's Hospital",
+   "address": "3959 Broadway",
+   "hours": "24/7",
+   "lat": 40.83975,
+   "lon": -73.941448,
+   "osm": "https://www.openstreetmap.org/way/275048181"
+  },
+  {
+   "category": "laundry",
+   "name": "ACM Suds 3802",
+   "address": "3802 Broadway",
+   "hours": null,
+   "lat": 40.834721,
+   "lon": -73.944072,
+   "osm": "https://www.openstreetmap.org/node/3627536667"
+  },
+  {
+   "category": "laundry",
+   "name": "Bubbles N Go Laundromat",
+   "address": "1026 Saint Nicholas Avenue",
+   "hours": null,
+   "lat": 40.835442,
+   "lon": -73.939624,
+   "osm": "https://www.openstreetmap.org/node/2796762249"
+  },
+  {
+   "category": "laundry",
+   "name": "Corner Cleaners",
+   "address": "815 West 181st Street",
+   "hours": "Mo-Fr 07:00-19:00; Sa 08:00-19:00",
+   "lat": 40.851198,
+   "lon": -73.938832,
+   "osm": "https://www.openstreetmap.org/node/2797589500"
+  },
+  {
+   "category": "laundry",
+   "name": "Heights Cleaners",
+   "address": "812 West 181st Street",
+   "hours": null,
+   "lat": 40.851006,
+   "lon": -73.939076,
+   "osm": "https://www.openstreetmap.org/node/2797538559"
+  },
+  {
+   "category": "laundry",
+   "name": "Lavanderia Tu Casa",
+   "address": "4126 Broadway",
+   "hours": null,
+   "lat": 40.84572,
+   "lon": -73.938284,
+   "osm": "https://www.openstreetmap.org/way/1469959265"
+  },
+  {
+   "category": "laundry",
+   "name": "NYC Family Laundromat",
+   "address": null,
+   "hours": "Mo-Su 07:00-22:00",
+   "lat": 40.86412,
+   "lon": -73.925016,
+   "osm": "https://www.openstreetmap.org/node/10968999009"
+  },
+  {
+   "category": "laundry",
+   "name": "Splash Laundromat",
+   "address": "812 West 187th Street",
+   "hours": "Mo-Fr 07:00-21:00; Sa,Su 07:00-23:00",
+   "lat": 40.855223,
+   "lon": -73.937549,
+   "osm": "https://www.openstreetmap.org/node/9423174146"
+  },
+  {
+   "category": "laundry",
+   "name": "The Dry Cleane",
+   "address": "810 West 187th Street",
+   "hours": "Mo-Th 08:00-19:00; Fr 08:00-20:00; Sa,Su 09:00-18:00",
+   "lat": 40.855192,
+   "lon": -73.937469,
+   "osm": "https://www.openstreetmap.org/node/2797600875"
+  },
+  {
+   "category": "laundry",
+   "name": "Toffy's Dry Cleaners 2",
+   "address": null,
+   "hours": null,
+   "lat": 40.851439,
+   "lon": -73.928242,
+   "osm": "https://www.openstreetmap.org/node/12310173141"
+  },
+  {
+   "category": "laundry",
+   "name": "VIP Cleaners",
+   "address": "605 Fort Washington Avenue",
+   "hours": "Mo-Fr 07:30-19:00; Sa 08:30-17:00",
+   "lat": 40.855485,
+   "lon": -73.936938,
+   "osm": "https://www.openstreetmap.org/node/2797681663"
+  },
+  {
+   "category": "library",
+   "name": "Fort Washington Library",
+   "address": "535 West 179th Street",
+   "hours": "Mo-Fr 10:00-18:00; Sa 10:00-17:00",
+   "lat": 40.847788,
+   "lon": -73.933913,
+   "osm": "https://www.openstreetmap.org/node/8151650901"
+  },
+  {
+   "category": "library",
+   "name": "Inwood Library",
+   "address": "4790 Broadway",
+   "hours": null,
+   "lat": 40.865712,
+   "lon": -73.925825,
+   "osm": "https://www.openstreetmap.org/way/275118436"
+  },
+  {
+   "category": "library",
+   "name": "Washington Heights Library",
+   "address": "1000 Saint Nicholas Avenue",
+   "hours": null,
+   "lat": 40.834519,
+   "lon": -73.939662,
+   "osm": "https://www.openstreetmap.org/way/275014148"
+  },
+  {
+   "category": "pharmacy",
+   "name": "173 Pharmacy",
+   "address": null,
+   "hours": null,
+   "lat": 40.843944,
+   "lon": -73.937418,
+   "osm": "https://www.openstreetmap.org/node/11748653913"
+  },
+  {
+   "category": "pharmacy",
+   "name": "181 Pharmacy",
+   "address": null,
+   "hours": null,
+   "lat": 40.849044,
+   "lon": -73.932762,
+   "osm": "https://www.openstreetmap.org/node/11976751734"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Andy Pharmacy II",
+   "address": null,
+   "hours": null,
+   "lat": 40.846922,
+   "lon": -73.935748,
+   "osm": "https://www.openstreetmap.org/node/13812670154"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Carol Pharmacy",
+   "address": null,
+   "hours": null,
+   "lat": 40.849156,
+   "lon": -73.93657,
+   "osm": "https://www.openstreetmap.org/node/12925573395"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Cibao Pharmacy",
+   "address": "1303 Saint Nicholas Avenue",
+   "hours": "Mo-Fr 10:00-19:00; Sa 10:00-18:00; Su off",
+   "lat": 40.845692,
+   "lon": -73.93661,
+   "osm": "https://www.openstreetmap.org/node/2797243197"
+  },
+  {
+   "category": "pharmacy",
+   "name": "CVS Pharmacy",
+   "address": "Dyckman Street",
+   "hours": "Mo-Su 08:00-21:00",
+   "lat": 40.862505,
+   "lon": -73.925599,
+   "osm": "https://www.openstreetmap.org/node/10966122205"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Duane Reade",
+   "address": "133-141 Dyckman Street",
+   "hours": "PH,Mo-Su 09:00-19:00",
+   "lat": 40.863201,
+   "lon": -73.925374,
+   "osm": "https://www.openstreetmap.org/way/433259798"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Dyckman Pharmacy",
+   "address": "199 Dyckman Street",
+   "hours": "Mo-Fr 09:30-19:30; Sa 10:00-17:00",
+   "lat": 40.864835,
+   "lon": -73.926564,
+   "osm": "https://www.openstreetmap.org/node/5712388611"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Farmacia San Rafael",
+   "address": "1479 Saint Nicholas Avenue",
+   "hours": "Mo-Sa 10:00-19:30",
+   "lat": 40.851295,
+   "lon": -73.932495,
+   "osm": "https://www.openstreetmap.org/node/2797541153"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Heidi Pharmacy",
+   "address": null,
+   "hours": null,
+   "lat": 40.848554,
+   "lon": -73.932269,
+   "osm": "https://www.openstreetmap.org/node/11976751749"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Med Pharmacy",
+   "address": "4085 Broadway",
+   "hours": null,
+   "lat": 40.844211,
+   "lon": -73.939168,
+   "osm": "https://www.openstreetmap.org/node/2797219952"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Medicine Plus Pharmacy",
+   "address": "517 West 181st Street",
+   "hours": "Mo-Fr 09:30-18:00; Sa 10:00-15:00",
+   "lat": 40.848678,
+   "lon": -73.931857,
+   "osm": "https://www.openstreetmap.org/node/11484345327"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Oval Pharmacy",
+   "address": "11 Edward M. Morgan Place",
+   "hours": "Mo-Fr 10:00-19:00, Sa 10:00-15:00",
+   "lat": 40.834688,
+   "lon": -73.94525,
+   "osm": "https://www.openstreetmap.org/node/13348973795"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Rangle Pharmacy",
+   "address": "159-12 Harlem River Drive",
+   "hours": null,
+   "lat": 40.832294,
+   "lon": -73.935662,
+   "osm": "https://www.openstreetmap.org/node/2554917276"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Redwood Apothecary",
+   "address": "1280 Saint Nicholas Avenue",
+   "hours": "Mo-Fr 10:00-17:00; Sa 10:00-15:00; Su off",
+   "lat": 40.844826,
+   "lon": -73.936788,
+   "osm": "https://www.openstreetmap.org/node/2797235652"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Rite Aid",
+   "address": "1033 Saint Nicholas Avenue",
+   "hours": "Mo-Su 08:00-22:00; Su 08:00-20:00",
+   "lat": 40.835894,
+   "lon": -73.940145,
+   "osm": "https://www.openstreetmap.org/node/2603955359"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Rite Aid",
+   "address": "4046 Broadway",
+   "hours": null,
+   "lat": 40.842818,
+   "lon": -73.93899,
+   "osm": "https://www.openstreetmap.org/node/2869155564"
+  },
+  {
+   "category": "pharmacy",
+   "name": "San Nicholas Pharmacy",
+   "address": "1265 Saint Nicholas Avenue",
+   "hours": "Mo-Fr 09:00-19:00; Sa 09:00-18:00; Su off",
+   "lat": 40.844466,
+   "lon": -73.937506,
+   "osm": "https://www.openstreetmap.org/node/2797228412"
+  },
+  {
+   "category": "pharmacy",
+   "name": "San Pedro Pharmacy",
+   "address": "1381 Saint Nicholas Avenue",
+   "hours": "Mo-Fr 10:00-19:30; Sa 10:00-18:00; Su 11:00-17:00",
+   "lat": 40.848203,
+   "lon": -73.934768,
+   "osm": "https://www.openstreetmap.org/node/2797466255"
+  },
+  {
+   "category": "pharmacy",
+   "name": "St. Maria Pharmacy",
+   "address": "1328 Saint Nicholas Avenue",
+   "hours": "Mo-Sa 09:30-19:00",
+   "lat": 40.846293,
+   "lon": -73.935716,
+   "osm": "https://www.openstreetmap.org/node/2797287613"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Twins Pharmacy 2",
+   "address": "4073 Broadway",
+   "hours": "Mo-Fr 09:00-19:00; Sa 09:00-18:00",
+   "lat": 40.843837,
+   "lon": -73.939255,
+   "osm": "https://www.openstreetmap.org/node/2797222919"
+  },
+  {
+   "category": "pharmacy",
+   "name": "Viva Pharmacy",
+   "address": "1494 Saint Nicholas Avenue",
+   "hours": "Mo-Fr 09:00-21:00; Sa-Su 09:00-19:00",
+   "lat": 40.851484,
+   "lon": -73.931924,
+   "osm": "https://www.openstreetmap.org/node/2797609313"
+  },
+  {
+   "category": "post",
+   "name": "Audubon Post Office",
+   "address": null,
+   "hours": null,
+   "lat": 40.838569,
+   "lon": -73.939011,
+   "osm": "https://www.openstreetmap.org/node/357621225"
+  },
+  {
+   "category": "post",
+   "name": "Fort George Post Office",
+   "address": "4558 Broadway",
+   "hours": "Mo-Fr 08:00-17:00; Sa 08:00-16:00",
+   "lat": 40.858879,
+   "lon": -73.931069,
+   "osm": "https://www.openstreetmap.org/way/275111593"
+  },
+  {
+   "category": "post",
+   "name": "Inwood Station New York Post Office",
+   "address": "90 Vermilyea Avenue",
+   "hours": "Mo-Fr 09:00-17:00; Sa 09:00-16:00",
+   "lat": 40.866189,
+   "lon": -73.922927,
+   "osm": "https://www.openstreetmap.org/way/275120912"
+  },
+  {
+   "category": "post",
+   "name": "Washington Bridge Post Office",
+   "address": "518 West 181st Street",
+   "hours": null,
+   "lat": 40.848494,
+   "lon": -73.932132,
+   "osm": "https://www.openstreetmap.org/node/5797595343"
+  },
+  {
+   "category": "post",
+   "name": "Washington Heights USPS Station",
+   "address": "549 West 180th Street",
+   "hours": null,
+   "lat": 40.848455,
+   "lon": -73.933554,
+   "osm": "https://www.openstreetmap.org/node/5797593001"
+  }
+ ]
+}

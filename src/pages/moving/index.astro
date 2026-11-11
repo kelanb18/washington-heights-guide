@@ -108,10 +108,6 @@ const checklist: Step[] = [
 
 const comingSoon = [
   {
-    title: 'Living here',
-    body: 'The everyday places: late-night pharmacies, urgent care, laundromats, hardware, groceries, gyms, dog runs.',
-  },
-  {
     title: 'Today uptown',
     body: 'Train and elevator status, alternate side parking, weather, and what is on today, in one place.',
   },
@@ -149,6 +145,11 @@ const jsonLd = [
       <span class="kicker">New tool</span>
       <strong>Check a building before you sign →</strong>
       <span>Open violations, recent complaints, bedbug filings, HPD registration, the nearest subway and what is nearby, for any address.</span>
+    </a>
+    <a class="moving-feature moving-feature-alt" href={href('/moving/living-here')}>
+      <span class="kicker">Directory</span>
+      <strong>Living here →</strong>
+      <span>Pharmacies, urgent care, groceries, laundromats, hardware, post offices, libraries, gyms and dog runs, on one map.</span>
     </a>
 
     <nav class="moving-toc" aria-label="On this page">

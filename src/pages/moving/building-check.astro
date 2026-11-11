@@ -3,7 +3,21 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../../lib/jsonld';
 import { loadListings } from '../../lib/listings';
 import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
+import { everydayCategories, everydayMapsHref, everydayPlaces } from '../../lib/living-here';
 import { categoryInfo } from '../../lib/taxonomy';
+
+/** The everyday categories shown on the building check, nearest first. */
+const basicsOrder = ['pharmacy', 'grocery', 'laundry', 'health', 'hardware', 'post'];
+const basics = everydayPlaces
+  .filter((place) => basicsOrder.includes(place.category))
+  .map((place) => ({
+    category: place.category,
+    kind: everydayCategories.find((item) => item.id === place.category)?.singular ?? place.category,
+    name: place.name,
+    href: everydayMapsHref(place),
+    lat: place.lat,
+    lon: place.lon,
+  }));
 
 /** Uptown stations from the MTA's station list (data.ny.gov, dataset 39hk-dx4f). ada: the MTA marks the station accessible. */
 const stations = [
@@ -104,6 +118,10 @@ const jsonLd = [
           <h3 id="bc-subway-h">Nearest subway</h3>
           <div data-bc="subway"></div>
         </section>
+        <section class="bc-card" aria-labelledby="bc-basics-h">
+          <h3 id="bc-basics-h">Everyday basics</h3>
+          <div data-bc="basics"></div>
+        </section>
         <section class="bc-card" aria-labelledby="bc-nearby-h">
           <h3 id="bc-nearby-h">Nearby in this guide</h3>
           <div data-bc="nearby"></div>
@@ -126,7 +144,7 @@ const jsonLd = [
   </article>
 </BaseLayout>
 
-<script is:inline define:vars={{ stations, listings }}>
+<script is:inline define:vars={{ stations, listings, basics, basicsOrder, livingHref: href('/moving/living-here') }}>
   (() => {
     const form = document.querySelector('[data-bc-form]');
     const input = document.getElementById('bc-address');
@@ -302,6 +320,26 @@ const jsonLd = [
         : '<p class="bc-empty">No places from this guide within a short walk yet.</p>';
     }
 
+    function everyday(lat, lon) {
+      const nearest = basicsOrder
+        .map((category) =>
+          basics
+            .filter((place) => place.category === category)
+            .map((place) => ({ ...place, m: meters(lat, lon, place.lat, place.lon) }))
+            .sort((a, b) => a.m - b.m)[0],
+        )
+        .filter((place) => place && place.m < 1500);
+      slot('basics').innerHTML =
+        (nearest.length
+          ? '<ul class="bc-list">' +
+            nearest
+              .map((p) => `<li><span class="bc-date">${esc(p.kind)}</span><br />${ext(p.href, p.name)} <span class="bc-date">· ${walk(p.m)}</span></li>`)
+              .join('') +
+            '</ul>'
+          : '<p class="bc-empty">No everyday places found nearby.</p>') +
+        `<p class="bc-sub"><a href="${esc(livingHref)}">All everyday places</a> · Map data © OpenStreetMap contributors</p>`;
+    }
+
     function links(bbl, bin, boro, block, lot, label) {
       const items = [
         [`https://zola.planning.nyc.gov/l/lot/${boro}/${block}/${lot}`, 'Zoning and lot details (NYC Planning ZoLa)'],
@@ -356,6 +394,7 @@ const jsonLd = [
       history.replaceState(null, '', url);
 
       subway(lat, lon);
+      everyday(lat, lon);
       nearby(lat, lon);
       links(bbl, bin, boro, block, lot, label);
       plutoMeta(bbl).then((meta) => {
