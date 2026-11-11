@@ -29,8 +29,30 @@ export const guideSchema = z
             .describe('Optional affiliate link shown after the blurb. Set affiliateDisclosure: true on the guide when used.'),
         }),
       )
-      .min(1, 'A guide needs at least one pick.')
-      .max(12),
+      .max(12)
+      .default([]),
+    stays: z
+      .array(
+        z.strictObject({
+          name: z.string().trim().min(2).max(80).describe('Hotel or inn name.'),
+          address: z.string().trim().min(5).max(120).describe('Street address as the official site gives it, such as "2420 Amsterdam Ave".'),
+          neighborhood: z.string().trim().min(2).max(60).describe('Neighborhood the place is in, such as "Harlem".'),
+          nearby: z.boolean().default(false).describe('True for places outside Washington Heights; labeled "Nearby".'),
+          blurb: z.string().trim().min(12).max(480).describe('What to know, from the official site or a named source.'),
+          website: z.httpUrl().describe('The official website.'),
+          badge: z.string().trim().min(2).max(80).optional(),
+          linkPlaceholder: z
+            .string()
+            .trim()
+            .min(4)
+            .max(120)
+            .optional()
+            .describe('Visible placeholder text for a booking link that has not been approved yet.'),
+        }),
+      )
+      .max(12)
+      .default([])
+      .describe('Places to stay. Hotels are not listings, so they live here instead of in picks.'),
     route: z
       .enum(['north-to-south', 'as-listed'])
       .default('north-to-south')
@@ -64,6 +86,14 @@ export const guideSchema = z
         path: ['title'],
         input: data.title,
         message: 'Title still contains EXAMPLE. Replace it, or set example: true.',
+      });
+    }
+    if (data.picks.length === 0 && data.stays.length === 0) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['picks'],
+        input: data.picks,
+        message: 'A guide needs at least one pick or one stay.',
       });
     }
     data.picks.forEach((pick, index) => {

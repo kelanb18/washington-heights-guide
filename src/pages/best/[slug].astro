@@ -15,7 +15,7 @@ import { directionsHref, northToSouth, walkingRoute } from '../../lib/directions
 import { pinsFor } from '../../lib/pins';
 import { claimFirstPicture, reservePicture } from '../../lib/pictures';
 import { referenceId } from '../../lib/refs';
-import { absoluteUrl, formatDate, href, isoDate, pageTitleFit, siteName } from '../../lib/site';
+import { absoluteUrl, formatDate, href, isoDate, mapsHref, pageTitleFit, siteName } from '../../lib/site';
 import { categoryInfo, isCategory } from '../../lib/taxonomy';
 
 export async function getStaticPaths() {
@@ -28,6 +28,8 @@ const guide = guides.find((entry) => entry.id === Astro.params.slug);
 if (!guide) throw new Error(`[guides] No public guide for "${Astro.params.slug}".`);
 
 const listings = await loadListings();
+// Entries cached before `stays` existed can lack the field, so fall back to none.
+const stays = guide.data.stays ?? [];
 const ranked = guide.data.picks.flatMap((pick, index) => {
   const id = referenceId(pick.listing);
   const listing = listings.find((entry) => entry.id === id);
@@ -72,10 +74,13 @@ const pageUrl = absoluteUrl(site, `/best/${guide.id}`);
 const jsonLd = [
   itemListJsonLd(
     guide.data.title,
-    ranked.map((item) => ({
-      name: item.listing.data.name,
-      url: absoluteUrl(site, `/places/${item.listing.id}`),
-    })),
+    [
+      ...ranked.map((item) => ({
+        name: item.listing.data.name,
+        url: absoluteUrl(site, `/places/${item.listing.id}`),
+      })),
+      ...stays.map((stay) => ({ name: stay.name, url: stay.website })),
+    ],
   ),
   breadcrumbJsonLd([
     { name: siteName, url: absoluteUrl(site, '/') },
@@ -203,6 +208,37 @@ const jsonLd = [
         </li>
       ))}
     </ol>
+    {
+      stays.length > 0 && (
+        <ol class="ranked" start={ranked.length + 1}>
+          {stays.map((stay, index) => (
+            <li class="ranked-card">
+              <p class="entry-index">{String(ranked.length + index + 1).padStart(2, '0')}</p>
+              <div>
+                {stay.badge && <p class="badge">{stay.badge}</p>}
+                <p class="kicker">
+                  <span class="chip">{stay.nearby ? `Nearby · ${stay.neighborhood}` : stay.neighborhood}</span>
+                </p>
+                <h2 class="entry-title">
+                  <a href={stay.website} rel="noopener noreferrer" target="_blank">
+                    {stay.name}<span class="sr-only"> (opens the official site in a new tab)</span>
+                  </a>
+                </h2>
+                <p class="pick-blurb">{stay.blurb}</p>
+                {stay.linkPlaceholder && <p class="pick-blurb">{stay.linkPlaceholder}</p>}
+                <p class="where">
+                  {stay.address}
+                  <span aria-hidden="true"> · </span>
+                  <a href={mapsHref([stay.name, stay.address])} rel="noopener noreferrer" target="_blank">
+                    Directions<span class="sr-only"> to {stay.name} (opens Google Maps)</span>
+                  </a>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )
+    }
     {ranked.length > 0 && <PlaceMap pins={pinsFor(ranked.map((item) => item.listing))} label={`Map for ${guide.data.title}`} />}
     {
       guide.data.sources.length > 0 && (

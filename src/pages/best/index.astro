@@ -58,7 +58,7 @@ if (guides.length > 0) {
                 <StoryCard
                   href={href(`/best/${guide.id}`)}
                   heading="h2"
-                  kicker={`${guide.data.picks.length} ${guide.data.picks.length === 1 ? 'place' : 'places'}`}
+                  kicker={`${guide.data.picks.length + (guide.data.stays?.length ?? 0)} ${guide.data.picks.length + (guide.data.stays?.length ?? 0) === 1 ? 'place' : 'places'}`}
                   title={guide.data.title}
                   description={guide.data.description}
                   cover={cover?.picture}
