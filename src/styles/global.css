@@ -4595,3 +4595,8 @@ button.cal-date:hover,
   font-family: var(--sans);
   font-size: 0.85rem !important;
 }
+
+/* About page: brand sticker photo */
+.about-sticker { margin: 0 0 2rem; max-width: 26rem; }
+.about-sticker img { display: block; width: 100%; height: auto; border: 2px solid var(--ink); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink); transform: rotate(-1.5deg); }
+@media (prefers-reduced-motion: no-preference) { .about-sticker img { transition: transform .3s ease; } .about-sticker img:hover { transform: rotate(0deg); } }
