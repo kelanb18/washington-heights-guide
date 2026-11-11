@@ -125,7 +125,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={pageTitle('Moving to Washington Heights')} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Moving to Washington Heights')} description={description} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/mudarse' }]}>
   <article class="wrap moving">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>
@@ -133,7 +133,11 @@ const jsonLd = [
       <span aria-current="page">Moving to the Heights</span>
     </nav>
     <header class="page-head">
-      <p class="kicker">Moving here</p>
+      <p class="kicker">
+        Moving here
+        <span aria-hidden="true"> · </span>
+        <a href={href('/es/mudarse')} hreflang="es" lang="es">En español</a>
+      </p>
       <h1>Moving to the Heights</h1>
       <p class="lede">
         What to know before and after you move to Washington Heights: which part of the neighborhood fits you, how to get

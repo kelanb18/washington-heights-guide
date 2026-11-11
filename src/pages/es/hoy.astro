@@ -1,0 +1,30 @@
+---
+import TodayUptown from '../../components/TodayUptown.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { absoluteUrl, href, siteName } from '../../lib/site';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Hoy en Washington Heights: estado en vivo de los trenes A, C y 1, ascensores del metro fuera de servicio, el tiempo y lo que hay hoy.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Hoy', url: absoluteUrl(site, '/es/hoy') },
+  ]),
+];
+---
+
+<BaseLayout title={`Hoy en el Alto Manhattan | ${siteName}`} description={description} jsonLd={jsonLd} lang="es" alternates={[{ lang: 'en', path: '/today' }]}>
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Hoy</span>
+      <span aria-hidden="true"> · </span>
+      <a href={href('/today')} hreflang="en" lang="en">In English</a>
+    </nav>
+    <TodayUptown eventLimit={8} lang="es" />
+  </div>
+</BaseLayout>

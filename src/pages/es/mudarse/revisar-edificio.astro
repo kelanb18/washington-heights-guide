@@ -1,0 +1,49 @@
+---
+import BuildingCheck from '../../../components/BuildingCheck.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../../lib/jsonld';
+import { absoluteUrl, href, siteName } from '../../../lib/site';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Revisa un edificio de Washington Heights antes de firmar: violaciones de vivienda abiertas, quejas recientes, chinches, registro con HPD, el metro más cercano y qué hay cerca.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Mudarse a Washington Heights', url: absoluteUrl(site, '/es/mudarse') },
+    { name: 'Revisar un edificio', url: absoluteUrl(site, '/es/mudarse/revisar-edificio') },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`Revisa un edificio antes de firmar | ${siteName}`}
+  description={description}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: '/moving/building-check' }]}
+>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/es/mudarse')}>Mudarse a Washington Heights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Revisar un edificio</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Mudarse
+        <span aria-hidden="true"> · </span>
+        <a href={href('/moving/building-check')} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>Revisa un edificio antes de firmar</h1>
+      <p class="lede">
+        Escribe una dirección para ver los registros de la ciudad sobre el edificio: violaciones abiertas, quejas recientes,
+        chinches y registro, además del metro más cercano y lo que hay cerca.
+      </p>
+    </header>
+    <BuildingCheck lang="es" />
+  </article>
+</BaseLayout>

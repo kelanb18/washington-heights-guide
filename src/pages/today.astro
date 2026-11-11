@@ -16,7 +16,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={pageTitle('Today uptown')} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Today uptown')} description={description} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/hoy' }]}>
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>

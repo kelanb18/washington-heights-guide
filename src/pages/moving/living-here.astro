@@ -35,7 +35,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={pageTitle('Living here: everyday places in Washington Heights')} description={description} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle('Living here: everyday places in Washington Heights')} description={description} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/mudarse/vivir-aqui' }]}>
   <article class="wrap moving">
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href={href('/')}>Home</a>
@@ -45,7 +45,11 @@ const jsonLd = [
       <span aria-current="page">Living here</span>
     </nav>
     <header class="page-head">
-      <p class="kicker">Moving here</p>
+      <p class="kicker">
+        Moving here
+        <span aria-hidden="true"> · </span>
+        <a href={href('/es/mudarse/vivir-aqui')} hreflang="es" lang="es">En español</a>
+      </p>
       <h1>Living here</h1>
       <p class="lede">
         The everyday places: where to fill a prescription, do laundry, buy groceries, fix a lock, mail a package, and walk the dog.

@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { areaTree, loadAreas } from '../../../lib/areas';
+import { breadcrumbJsonLd } from '../../../lib/jsonld';
+import { absoluteUrl, correctionsEmail, href, siteName } from '../../../lib/site';
+
+const areas = await loadAreas();
+const neighborhoods = areaTree(areas).map((node) => ({ area: node.area, children: node.children.map((child) => child.area) }));
+
+/** Same stations as the English hub; "accesible" follows the MTA's station list (data.ny.gov, 39hk-dx4f). */
+const stations = [
+  { name: '157 St', lines: ['1'], street: 'Broadway', note: '' },
+  { name: '163 St–Amsterdam Av', lines: ['C'], street: 'St Nicholas Ave', note: 'La parada más cercana a la Morris-Jumel Mansion.' },
+  { name: '168 St', lines: ['A', 'C', '1'], street: 'Broadway', note: 'El nudo principal, junto al campus del hospital. La MTA indica que los andenes del A y el C son accesibles.' },
+  { name: '175 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Accesible, según la MTA.' },
+  { name: '181 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Accesible, según la MTA. Los ascensores suben del valle a la loma.' },
+  { name: '181 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
+  { name: '190 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Con ascensores; la parada para Fort Tryon Park y The Cloisters.' },
+  { name: '191 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
+];
+
+const checklist = [
+  {
+    id: 'power',
+    title: 'Activa la luz y el gas',
+    body: 'Con Edison da servicio en el barrio. Para activarlo te piden la nueva dirección, la fecha de mudanza y una identificación.',
+    link: { href: 'https://www.coned.com/en/services-and-outages/service-management-page', label: 'Con Edison: activar, mudar o cancelar servicio' },
+  },
+  {
+    id: 'internet',
+    title: 'Resuelve el internet temprano',
+    body: 'Qué compañías pueden instalar en tu apartamento depende del edificio. Pregúntale al dueño o al súper antes de mudarte, porque la instalación puede tardar.',
+  },
+  {
+    id: 'vote',
+    title: 'Actualiza tu registro para votar',
+    body: 'Una dirección nueva significa un nuevo lugar de votación. Registrarte o actualizar toma unos minutos.',
+    link: { href: 'https://vote.nyc/page/register-vote', label: 'Junta Electoral de NYC: registrarse para votar' },
+  },
+  {
+    id: 'idnyc',
+    title: 'Saca la tarjeta IDNYC',
+    body: 'La identificación gratuita de la ciudad para residentes de Nueva York. El sitio de IDNYC explica qué necesitas y los beneficios actuales.',
+    link: { href: 'https://www.nyc.gov/site/idnyc/index.page', label: 'IDNYC' },
+  },
+  {
+    id: 'library',
+    title: 'Saca la tarjeta de la biblioteca',
+    body: 'La sucursal Fort Washington, en la calle 179 Oeste, es una de las bibliotecas NYPL del barrio.',
+    link: { href: 'https://www.nypl.org/library-card', label: 'Tarjeta de la NYPL' },
+  },
+  {
+    id: 'trash',
+    title: 'Aprende los días de basura y reciclaje',
+    body: 'Los días de recogida dependen de la dirección. Búscalos una vez y pégalos en la nevera.',
+    link: { href: 'https://www.nyc.gov/assets/dsny/site/collectionSchedule', label: 'Horario de recogida de DSNY' },
+  },
+  {
+    id: 'parking',
+    title: 'Si tienes carro, aprende el alternate side parking',
+    body: 'Las reglas de limpieza de calles deciden cuándo tienes que mover el carro. La ciudad anuncia las suspensiones por feriados y mal tiempo.',
+    link: { href: 'https://www.nyc.gov/html/dot/html/motorist/alternate-side-parking.shtml', label: 'NYC DOT: alternate side parking' },
+  },
+  {
+    id: '311',
+    title: 'Guarda el 311',
+    body: 'La línea de la ciudad para lo que no es emergencia: falta de calefacción o agua caliente, ruido y problemas del edificio.',
+    link: { href: 'https://portal.311.nyc.gov/', label: 'NYC 311' },
+  },
+  {
+    id: 'schools',
+    title: 'Averigua tu zona escolar',
+    body: 'Las zonas de las escuelas públicas dependen de la dirección, así que revísala antes de firmar si te importa.',
+    link: { href: 'https://schoolsearch.schools.nyc/', label: 'Escuelas Públicas de NYC: buscar escuela' },
+  },
+  {
+    id: 'cb12',
+    title: 'Conoce tu junta comunitaria',
+    body: 'La Junta Comunitaria 12 cubre Washington Heights e Inwood y tiene reuniones públicas sobre temas locales, desde licencias de alcohol hasta cambios en las calles.',
+    link: { href: 'https://cbmanhattan.cityofnewyork.us/cb12/', label: 'Junta Comunitaria 12 de Manhattan' },
+  },
+  {
+    id: 'elevators',
+    title: 'Guarda la página del estado de los ascensores',
+    body: 'Varias estaciones del Alto Manhattan dependen de ascensores. Revísala antes de salir con coche de bebé, maletas o una rodilla mala.',
+    link: { href: 'https://www.mta.info/elevator-escalator-status', label: 'MTA: estado de ascensores y escaleras' },
+  },
+];
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Mudarse a Washington Heights: las zonas del barrio, cómo moverse entre lomas y metro, y una lista para el primer mes con enlaces oficiales.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Mudarse a Washington Heights', url: absoluteUrl(site, '/es/mudarse') },
+  ]),
+];
+---
+
+<BaseLayout title={`Mudarse a Washington Heights | ${siteName}`} description={description} jsonLd={jsonLd} lang="es" alternates={[{ lang: 'en', path: '/moving' }]}>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Mudarse a Washington Heights</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Mudarse
+        <span aria-hidden="true"> · </span>
+        <a href={href('/moving')} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>Mudarse a Washington Heights</h1>
+      <p class="lede">
+        Lo que conviene saber antes y después de mudarte: qué parte del barrio te va, cómo moverte entre las lomas y qué
+        resolver en el primer mes.
+      </p>
+    </header>
+
+    <a class="moving-feature" href={href('/es/mudarse/revisar-edificio')}>
+      <span class="kicker">Herramienta</span>
+      <strong>Revisa un edificio antes de firmar →</strong>
+      <span>Violaciones abiertas, quejas recientes, chinches, registro con HPD, el metro más cercano y lo que hay cerca, para cualquier dirección.</span>
+    </a>
+    <a class="moving-feature moving-feature-alt" href={href('/es/mudarse/vivir-aqui')}>
+      <span class="kicker">Directorio</span>
+      <strong>Vivir aquí →</strong>
+      <span>Farmacias, urgencias, supermercados, lavanderías, ferreterías, correos, bibliotecas, gimnasios y parques para perros, en un mapa.</span>
+    </a>
+    <p class="moving-note">
+      ¿Vienes a ver apartamentos? Mira <a href={href('/best/where-to-stay-in-washington-heights')} hreflang="en">dónde quedarse en Washington Heights</a> (en inglés).
+    </p>
+
+    <nav class="moving-toc" aria-label="En esta página">
+      <a href="#zonas">Zonas</a>
+      <a href="#moverse">Cómo moverse</a>
+      <a href="#primer-mes">Tu primer mes</a>
+    </nav>
+
+    <section class="group" aria-labelledby="zonas">
+      <div class="section-head">
+        <h2 id="zonas">¿Qué parte de los Heights?</h2>
+      </div>
+      <p class="moving-intro">
+        Washington Heights va más o menos de la calle 155 a Dyckman Street. El oeste está en una loma alta sobre el río Hudson; el
+        centro baja al valle de Broadway; el este bordea el río Harlem. Cada zona tiene su propia página con mapa, lugares e
+        historia (por ahora en inglés).
+      </p>
+      <ul class="living-list">
+        {
+          neighborhoods.map(({ area, children }) => (
+            <li>
+              <a href={href(`/areas/${area.id}`)} hreflang="en">{area.data.name}</a>
+              {children.length > 0 && <span class="living-address">Incluye {children.map((child) => child.data.name).join(' y ')}</span>}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="group" aria-labelledby="moverse">
+      <div class="section-head">
+        <h2 id="moverse">Cómo moverse</h2>
+      </div>
+      <p class="moving-intro">
+        Los trenes A y 1 recorren todo el barrio, y el C llega hasta la calle 168. En la loma, las estaciones del A son muy
+        profundas y se llega en ascensor, así que un ascensor dañado puede significar una subida larga. La terminal de autobuses
+        del George Washington Bridge está en Broadway y la calle 178.
+      </p>
+      <div class="moving-table-wrap">
+        <table class="moving-table">
+          <caption class="sr-only">Estaciones de metro en Washington Heights, de sur a norte</caption>
+          <thead>
+            <tr>
+              <th scope="col">Estación</th>
+              <th scope="col">Líneas</th>
+              <th scope="col">Dónde</th>
+              <th scope="col">Bueno saber</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stations.map((station) => (
+              <tr>
+                <th scope="row">{station.name}</th>
+                <td>
+                  <span class="moving-lines">
+                    {station.lines.map((line) => (
+                      <span class:list={['line-bullet', line === '1' ? 'line-red' : 'line-blue']}>{line}</span>
+                    ))}
+                  </span>
+                </td>
+                <td>{station.street}</td>
+                <td>{station.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="moving-note">
+        Revisa{' '}
+        <a href={href('/es/hoy')}>el estado de trenes y ascensores de hoy</a>{' '}
+        antes de depender de un ascensor.
+      </p>
+    </section>
+
+    <section class="group" aria-labelledby="primer-mes" data-checklist>
+      <div class="section-head">
+        <h2 id="primer-mes">Tu primer mes</h2>
+      </div>
+      <p class="moving-intro">
+        Ve marcando lo que termines. Tu progreso se guarda solo en este navegador. Los enlaces llevan a sitios oficiales; algunos
+        están solo en inglés.
+      </p>
+      <p class="moving-progress" data-checklist-progress hidden aria-live="polite"></p>
+      <ol class="checklist">
+        {
+          checklist.map((step) => (
+            <li class="checklist-item">
+              <input type="checkbox" id={`paso-${step.id}`} data-step={step.id} />
+              <div>
+                <label for={`paso-${step.id}`} class="checklist-title">{step.title}</label>
+                <p>{step.body}</p>
+                {step.link && (
+                  <a href={step.link.href} rel="noopener noreferrer" target="_blank">
+                    {step.link.label}<span class="sr-only"> (se abre en una pestaña nueva)</span>
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <p class="moving-note">
+      ¿Te mudaste hace poco? Cuéntanos qué te hubiera gustado saber: <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent('Mudarse a Washington Heights')}`}>{correctionsEmail}</a>.
+    </p>
+  </article>
+</BaseLayout>
+
+<script>
+  // Same progress key as the English checklist, so ticks carry over between languages.
+  for (const list of document.querySelectorAll<HTMLElement>('[data-checklist]')) {
+    const boxes = Array.from(list.querySelectorAll<HTMLInputElement>('input[data-step]'));
+    const progress = list.querySelector<HTMLElement>('[data-checklist-progress]');
+    const key = 'moving-checklist';
+    let done: string[] = [];
+    try {
+      done = JSON.parse(localStorage.getItem(key) ?? '[]');
+    } catch {
+      done = [];
+    }
+    const update = () => {
+      const count = boxes.filter((box) => box.checked).length;
+      if (progress) {
+        progress.hidden = false;
+        progress.textContent = `${count} de ${boxes.length} listos`;
+      }
+    };
+    for (const box of boxes) {
+      box.checked = done.includes(box.dataset.step ?? '');
+      box.addEventListener('change', () => {
+        const ids = boxes.filter((item) => item.checked).map((item) => item.dataset.step ?? '');
+        try {
+          localStorage.setItem(key, JSON.stringify(ids));
+        } catch {
+          /* ignore */
+        }
+        update();
+      });
+    }
+    update();
+  }
+</script>

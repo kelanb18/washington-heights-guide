@@ -49,6 +49,12 @@ const jsonLd = [
         Guías independientes del barrio: dónde comer, qué hacer y cómo recorrerlo a pie. Cada guía tiene una ruta que se abre en Google Maps desde donde estés.
       </p>
     </header>
+    <a class="moving-feature" href={href('/es/mudarse')}>
+      <span class="kicker">Nuevo</span>
+      <strong>Mudarse a Washington Heights →</strong>
+      <span>Las zonas del barrio, el metro y los ascensores, una lista para el primer mes, la herramienta para revisar un edificio y los lugares de todos los días.</span>
+    </a>
+    <p class="moving-note"><a href={href('/es/hoy')}>Hoy en el Alto Manhattan</a>: trenes, ascensores, el tiempo y lo que hay hoy, en vivo.</p>
     <ul class="guide-grid">
       {
         cards.map(({ es, cover }) => (

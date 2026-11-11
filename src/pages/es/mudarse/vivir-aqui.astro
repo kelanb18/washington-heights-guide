@@ -1,0 +1,103 @@
+---
+import PlaceMap from '../../../components/PlaceMap.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../../lib/jsonld';
+import { everydayCategories, everydayFetched, everydayMapsHref, everydayPlaces } from '../../../lib/living-here';
+import type { MapPin } from '../../../lib/pins';
+import { absoluteUrl, correctionsEmail, href, siteName } from '../../../lib/site';
+
+const groups = everydayCategories
+  .map((category) => ({ ...category, places: everydayPlaces.filter((place) => place.category === category.id) }))
+  .filter((group) => group.places.length > 0);
+
+const pins: MapPin[] = everydayPlaces.map((place) => ({
+  lat: place.lat,
+  lng: place.lon,
+  name: place.name,
+  href: everydayMapsHref(place),
+  category: place.category,
+  categoryLabel: everydayCategories.find((item) => item.id === place.category)?.es ?? place.category,
+}));
+
+const fetched = new Date(`${everydayFetched}T12:00:00Z`).toLocaleDateString('es-US', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' });
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Vivir en Washington Heights: farmacias, urgencias, supermercados, lavanderías, ferreterías, correos, bibliotecas, gimnasios y parques para perros, en un mapa.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Mudarse a Washington Heights', url: absoluteUrl(site, '/es/mudarse') },
+    { name: 'Vivir aquí', url: absoluteUrl(site, '/es/mudarse/vivir-aqui') },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`Vivir aquí: lo cotidiano en Washington Heights | ${siteName}`}
+  description={description}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: '/moving/living-here' }]}
+>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/es/mudarse')}>Mudarse a Washington Heights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Vivir aquí</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Mudarse
+        <span aria-hidden="true"> · </span>
+        <a href={href('/moving/living-here')} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>Vivir aquí</h1>
+      <p class="lede">
+        Los lugares de todos los días: dónde comprar las medicinas, lavar la ropa, hacer la compra, arreglar una cerradura, mandar
+        un paquete y pasear al perro.
+      </p>
+    </header>
+
+    <nav class="moving-toc" aria-label="Ir a una categoría">
+      {groups.map((group) => <a href={`#${group.id}`}>{group.es} <span class="mega-count">{group.places.length}</span></a>)}
+    </nav>
+
+    <PlaceMap pins={pins} label="Lugares cotidianos en Washington Heights" />
+
+    {
+      groups.map((group) => (
+        <section class="group" aria-labelledby={group.id}>
+          <div class="section-head">
+            <h2 id={group.id}>{group.es}</h2>
+          </div>
+          <ul class="living-list">
+            {group.places.map((place) => (
+              <li>
+                <a href={everydayMapsHref(place)} rel="noopener noreferrer" target="_blank">
+                  {place.name}
+                  <span class="sr-only"> (abre Google Maps en una pestaña nueva)</span>
+                </a>
+                {place.address && <span class="living-address">{place.address}</span>}
+                {place.hours && <span class="living-hours">Horario en el mapa: <span lang="en">{place.hours}</span></span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+
+    <aside class="bc-fineprint">
+      <p>
+        Los lugares vienen de OpenStreetMap, el mapa hecho por voluntarios, con datos del {fetched}. Datos del mapa ©{' '}
+        <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer" target="_blank">colaboradores de OpenStreetMap<span class="sr-only"> (se abre en una pestaña nueva)</span></a>.
+        A diferencia del resto de esta guía, no los revisamos uno por uno, así que confirma el horario antes de ir. ¿Falta un lugar o
+        uno cerró? Escribe a <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent('Vivir aquí')}`}>{correctionsEmail}</a>.
+      </p>
+      <p>¿Quieres revisar un edificio? Prueba <a href={href('/es/mudarse/revisar-edificio')}>Revisa un edificio antes de firmar</a>.</p>
+    </aside>
+  </article>
+</BaseLayout>

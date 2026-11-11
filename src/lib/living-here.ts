@@ -16,15 +16,15 @@ export interface EverydayPlace {
 }
 
 export const everydayCategories = [
-  { id: 'pharmacy', label: 'Pharmacies', singular: 'Pharmacy' },
-  { id: 'health', label: 'Hospitals and clinics', singular: 'Hospital or clinic' },
-  { id: 'grocery', label: 'Supermarkets and produce', singular: 'Grocery' },
-  { id: 'laundry', label: 'Laundromats and dry cleaners', singular: 'Laundry' },
-  { id: 'hardware', label: 'Hardware and locksmiths', singular: 'Hardware' },
-  { id: 'post', label: 'Post offices', singular: 'Post office' },
-  { id: 'library', label: 'Libraries', singular: 'Library' },
-  { id: 'gym', label: 'Gyms', singular: 'Gym' },
-  { id: 'dogs', label: 'Dog runs', singular: 'Dog run' },
+  { id: 'pharmacy', label: 'Pharmacies', singular: 'Pharmacy', es: 'Farmacias' },
+  { id: 'health', label: 'Hospitals and clinics', singular: 'Hospital or clinic', es: 'Hospitales y urgencias' },
+  { id: 'grocery', label: 'Supermarkets and produce', singular: 'Grocery', es: 'Supermercados y fruterías' },
+  { id: 'laundry', label: 'Laundromats and dry cleaners', singular: 'Laundry', es: 'Lavanderías y tintorerías' },
+  { id: 'hardware', label: 'Hardware and locksmiths', singular: 'Hardware', es: 'Ferreterías y cerrajeros' },
+  { id: 'post', label: 'Post offices', singular: 'Post office', es: 'Correos' },
+  { id: 'library', label: 'Libraries', singular: 'Library', es: 'Bibliotecas' },
+  { id: 'gym', label: 'Gyms', singular: 'Gym', es: 'Gimnasios' },
+  { id: 'dogs', label: 'Dog runs', singular: 'Dog run', es: 'Parques para perros' },
 ] as const;
 
 export const everydayFetched: string = snapshot.fetched;
