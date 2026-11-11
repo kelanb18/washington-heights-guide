@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 import { absoluteUrl, correctionsEmail, formatDate, href, isoDate, pageTitle, siteName } from '../lib/site';
 
-const effectiveDate = new Date('2026-11-09T00:00:00Z');
+const effectiveDate = new Date('2026-11-11T00:00:00Z');
 
 const description = `How ${siteName} handles newsletter subscriptions, Google Analytics, cookies, and contact messages.`;
 const site = Astro.site;
@@ -63,6 +63,13 @@ const jsonLd = [
       adds advertising partners, they may also set cookies. Any such partners will be named on this page
       when they are added, with a link to their own privacy policy.
     </p>
+    <p>Current affiliate partners:</p>
+    <ul>
+      <li>
+        Viator, for tour and ticket links on some guides. See
+        <a href="https://www.viator.com/support/privacyPolicy" rel="noopener noreferrer" target="_blank">Viator’s privacy and cookies statement<span class="sr-only"> (opens in a new tab)</span></a>.
+      </li>
+    </ul>
 
     <h2>Contact</h2>
     <p>

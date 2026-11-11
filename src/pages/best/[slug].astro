@@ -193,7 +193,9 @@ const jsonLd = [
             {item.pick.affiliate && (
               <p class="pick-blurb">
                 <a href={item.pick.affiliate.href} rel="sponsored noopener noreferrer" target="_blank">
-                  {item.pick.affiliate.label}<span class="sr-only"> (opens in a new tab)</span>
+                  {item.pick.affiliate.label}
+                  <span class="aff-tag">Affiliate link</span>
+                  <span class="sr-only"> (opens in a new tab)</span>
                 </a>
               </p>
             )}
