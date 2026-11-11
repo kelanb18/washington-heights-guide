@@ -47,7 +47,7 @@ export const guideSchema = z
             .min(4)
             .max(120)
             .optional()
-            .describe('Visible placeholder text for a booking link that has not been approved yet.'),
+            .describe('Marks where an unapproved booking link will go. Shown only in local dev, never in production.'),
         }),
       )
       .max(12)

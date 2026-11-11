@@ -225,7 +225,8 @@ const jsonLd = [
                   </a>
                 </h2>
                 <p class="pick-blurb">{stay.blurb}</p>
-                {stay.linkPlaceholder && <p class="pick-blurb">{stay.linkPlaceholder}</p>}
+                {/* Placeholders mark where an unapproved link will go. They never render in production. */}
+                {import.meta.env.DEV && stay.linkPlaceholder && <p class="pick-blurb">{stay.linkPlaceholder}</p>}
                 <p class="where">
                   {stay.address}
                   <span aria-hidden="true"> · </span>
