@@ -1,0 +1,50 @@
+---
+import HillsGuide from '../../../components/HillsGuide.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../../lib/jsonld';
+import { absoluteUrl, href, siteName } from '../../../lib/site';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Cómo moverse por Washington Heights sin escaleras: los ascensores del metro que suben la colina, las estaciones sin escalones con el estado de los ascensores en vivo y las escaleras más grandes en un mapa.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/es') },
+    { name: 'Mudarse a Washington Heights', url: absoluteUrl(site, '/es/mudarse') },
+    { name: 'Cuestas, escaleras y ascensores', url: absoluteUrl(site, '/es/mudarse/cuestas-y-escaleras') },
+  ]),
+];
+---
+
+<BaseLayout
+  title={`Cuestas, escaleras y ascensores en Washington Heights | ${siteName}`}
+  description={description}
+  jsonLd={jsonLd}
+  lang="es"
+  alternates={[{ lang: 'en', path: '/moving/hills-and-stairs' }]}
+>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Ruta de navegación">
+      <a href={href('/es')}>Inicio</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/es/mudarse')}>Mudarse a Washington Heights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Cuestas y escaleras</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Cómo moverse
+        <span aria-hidden="true"> · </span>
+        <a href={href('/moving/hills-and-stairs')} hreflang="en" lang="en">In English</a>
+      </p>
+      <h1>Cuestas, escaleras y ascensores</h1>
+      <p class="lede">
+        Washington Heights está en la parte más alta de Manhattan, y entre una cuadra y otra puede haber diez pisos de escaleras. Las
+        apps de mapas casi nunca te avisan. Así se recorre el barrio con coche de bebé, silla de ruedas, el carrito de la compra o las
+        rodillas cansadas.
+      </p>
+    </header>
+    <HillsGuide lang="es" />
+  </article>
+</BaseLayout>

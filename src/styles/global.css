@@ -4600,3 +4600,26 @@ button.cal-date:hover,
 .about-sticker { margin: 0 0 2rem; max-width: 26rem; }
 .about-sticker img { display: block; width: 100%; height: auto; border: 2px solid var(--ink); border-radius: 16px; box-shadow: 6px 6px 0 var(--ink); transform: rotate(-1.5deg); }
 @media (prefers-reduced-motion: no-preference) { .about-sticker img { transition: transform .3s ease; } .about-sticker img:hover { transform: rotate(0deg); } }
+
+/* Hills, stairs and elevators */
+.hills-shortcuts { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin: 1rem 0; }
+.hills-card { background: var(--card); border: 2px solid var(--ink); border-radius: 16px; box-shadow: 5px 5px 0 var(--ink); padding: 1.1rem 1.2rem; }
+.hills-card h3 { margin: 0 0 .35rem; font-size: 1.15rem; }
+.hills-card p { margin: .5rem 0; }
+.hills-climb { font-family: var(--sans); }
+.hills-climb strong { background: var(--gold); color: #1c1712; padding: 0 .3em; border-radius: 4px; }
+.hills-steps { list-style: none; margin: .6rem 0; padding: 0 0 0 .9rem; border-left: 3px dashed var(--ink-soft); }
+.hills-steps li { margin: .3rem 0; }
+.hills-label { display: inline-block; min-width: 4.2rem; font-family: var(--sans); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-soft); }
+.hills-status { font-family: var(--sans); font-size: .9rem; font-weight: 600; color: var(--ink-soft); }
+.hills-status.is-ok { color: var(--pine); }
+.hills-status.is-out { color: var(--flag-red); }
+.hills-stations { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); list-style: none; margin: 1rem 0 1.5rem; padding: 0; }
+.hills-stations li { border: 2px solid var(--ink); border-radius: 14px; padding: .8rem 1rem; background: var(--card); min-width: 0; }
+.hills-stations p { margin: .3rem 0; }
+.hills-station-name { display: flex; align-items: center; gap: .5rem; font-size: 1.1rem; }
+.hills-inline-station { white-space: nowrap; }
+.hills-stairs { margin: 1.2rem 0; padding-left: 1.4rem; }
+.hills-stairs li { margin: .45rem 0; }
+.hills-stair-facts { display: block; font-family: var(--sans); font-size: .9rem; color: var(--ink-soft); }
+.moving .living-list .moving-lines { margin-right: .4rem; }

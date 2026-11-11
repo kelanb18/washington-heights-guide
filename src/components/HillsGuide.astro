@@ -1,0 +1,314 @@
+---
+import PlaceMap from './PlaceMap.astro';
+import { shortcuts, stairMapsHref, stairName, stairsFetched, stairsOnlyStations, stairways, stations } from '../lib/hills';
+import type { MapPin } from '../lib/pins';
+import { correctionsEmail } from '../lib/site';
+
+interface Props {
+  lang?: 'en' | 'es';
+}
+const { lang = 'en' } = Astro.props;
+
+const strings = {
+  en: {
+    tocShortcuts: 'Elevators up the hill',
+    tocStations: 'Step-free stations',
+    tocStairs: 'The big staircases',
+    shortcutsTitle: 'Elevators that take you up the hill',
+    shortcutsIntro:
+      'Two subway stations were dug so deep into the ridge that their elevators connect a low street to a high one. Neighbors use them to skip the climb, train or no train.',
+    shortcutsFare:
+      'According to the stations’ histories, the 190 St elevators have been open to people walking through without paying a fare since 1957.',
+    from: 'Bottom',
+    to: 'Top',
+    saves: 'Saves',
+    stationsTitle: 'Step-free subway stations',
+    stationsIntro:
+      'These are the uptown stations the MTA rates as accessible, street to train with no stairs, and the entrance to use. An elevator outage can turn any of them back into stairs, so check the live status below.',
+    entrance: 'Step-free entrance',
+    elevatorsInside: 'Elevators, but stairs too',
+    elevatorsInsideIntro: 'These stations have elevators for part of the trip, which helps with the depth but still leaves stairs.',
+    stairsOnly: 'Stairs only',
+    stairsOnlyIntro: 'The MTA lists no step-free route at these stations:',
+    statusChecking: 'Checking elevators…',
+    statusOk: 'All elevators working',
+    statusOut: 'Elevator out',
+    statusBack: 'back about',
+    statusUnknown: 'Live elevator status is not available right now.',
+    stairsTitle: 'The big staircases',
+    stairsIntro:
+      'The longest outdoor climbs in Washington Heights and Inwood, measured top to bottom. Pick a route that avoids them if you are pushing a stroller, a cart or a wheelchair.',
+    climb: 'climb',
+    feet: 'ft',
+    steps: 'steps',
+    metres: 'm long',
+    map: 'Map',
+    stairsMapLabel: 'Outdoor stairways and step-free stations in Washington Heights and Inwood',
+    pinStairs: 'Stairway',
+    pinStepFree: 'Step-free station',
+    mapNote: 'Each pin is a staircase or a step-free station. Tap one to see its climb, or use the filters to show one kind.',
+    newTab: '(opens in a new tab)',
+    fineprint1:
+      'Stations and elevators come from the MTA’s accessibility and elevator data. Stairways come from OpenStreetMap, the volunteer-built map, as of',
+    fineprint2: 'and their heights from USGS elevation data. Map data ©',
+    osm: 'OpenStreetMap contributors',
+    fineprint3: 'Know a staircase we missed, or an elevator that has changed? Email',
+    mtaStatus: 'MTA elevator and escalator status',
+    subject: 'Hills and stairs',
+    locale: 'en-US',
+  },
+  es: {
+    tocShortcuts: 'Ascensores cuesta arriba',
+    tocStations: 'Estaciones sin escalones',
+    tocStairs: 'Las grandes escaleras',
+    shortcutsTitle: 'Ascensores que te suben la colina',
+    shortcutsIntro:
+      'Dos estaciones del metro están tan hondas dentro de la colina que sus ascensores conectan una calle de abajo con una de arriba. Los vecinos los usan para no subir la cuesta, vayan o no a tomar el tren.',
+    shortcutsFare:
+      'Según la historia de las estaciones, los ascensores de la calle 190 están abiertos sin pagar pasaje a quien va de paso desde 1957.',
+    from: 'Abajo',
+    to: 'Arriba',
+    saves: 'Te ahorra',
+    stationsTitle: 'Estaciones de metro sin escalones',
+    stationsIntro:
+      'Estas son las estaciones del Alto Manhattan que la MTA considera accesibles, de la calle al tren sin escaleras, y la entrada que hay que usar. Si un ascensor se daña, vuelve a haber escaleras, así que mira el estado en vivo.',
+    entrance: 'Entrada sin escalones',
+    elevatorsInside: 'Con ascensores, pero también escaleras',
+    elevatorsInsideIntro: 'Estas estaciones tienen ascensores para parte del camino. Ayudan con la profundidad, pero quedan escaleras.',
+    stairsOnly: 'Solo escaleras',
+    stairsOnlyIntro: 'La MTA no tiene ruta sin escalones en estas estaciones:',
+    statusChecking: 'Revisando ascensores…',
+    statusOk: 'Todos los ascensores funcionan',
+    statusOut: 'Ascensor fuera de servicio',
+    statusBack: 'vuelve aprox.',
+    statusUnknown: 'El estado de los ascensores no está disponible ahora.',
+    stairsTitle: 'Las grandes escaleras',
+    stairsIntro:
+      'Las subidas al aire libre más largas de Washington Heights e Inwood, medidas de arriba abajo. Si llevas coche de bebé, carrito o silla de ruedas, busca una ruta que las evite.',
+    climb: 'de subida',
+    feet: 'pies',
+    steps: 'escalones',
+    metres: 'm de largo',
+    map: 'Mapa',
+    stairsMapLabel: 'Escaleras al aire libre y estaciones sin escalones en Washington Heights e Inwood',
+    pinStairs: 'Escalera',
+    pinStepFree: 'Estación sin escalones',
+    mapNote: 'Cada pin es una escalera o una estación sin escalones. Toca uno para ver la subida; usa los filtros para ver solo un tipo.',
+    newTab: '(se abre en una pestaña nueva)',
+    fineprint1:
+      'Las estaciones y los ascensores vienen de los datos de accesibilidad y ascensores de la MTA. Las escaleras vienen de OpenStreetMap, el mapa hecho por voluntarios, con datos del',
+    fineprint2: 'y sus alturas, de los datos de elevación del USGS. Datos del mapa ©',
+    osm: 'colaboradores de OpenStreetMap',
+    fineprint3: '¿Falta una escalera o cambió un ascensor? Escribe a',
+    mtaStatus: 'Estado de ascensores y escaleras mecánicas de la MTA',
+    subject: 'Cuestas y escaleras',
+    locale: 'es-US',
+  },
+}[lang];
+
+const stepFree = stations.filter((station) => station.stepFree);
+const partial = stations.filter((station) => !station.stepFree);
+const topStairs = stairways.filter((stair) => (stair.climbFt ?? 0) >= 20).slice(0, 14);
+const fetched = new Date(`${stairsFetched}T12:00:00Z`).toLocaleDateString(strings.locale, {
+  timeZone: 'UTC',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const lineClass = (line: string) => (line === '1' ? 'line-red' : 'line-blue');
+
+const pins: MapPin[] = [
+  ...stairways.filter((stair) => (stair.climbFt ?? 0) >= 10).map((stair) => ({
+    lat: stair.lat,
+    lng: stair.lon,
+    name: stair.climbFt ? `${stairName(stair, lang)} · ${stair.climbFt} ${strings.feet}` : stairName(stair, lang),
+    href: stairMapsHref(stair),
+    category: 'stairs',
+    categoryLabel: strings.pinStairs,
+  })),
+  ...stepFree.map((station) => ({
+    lat: station.lat,
+    lng: station.lon,
+    name: `${station.name} (${station.lines.join('/')})`,
+    href: `#station-${station.equipment[0]}`,
+    category: 'stepfree',
+    categoryLabel: strings.pinStepFree,
+  })),
+];
+const ids = [...new Set(stations.flatMap((station) => station.equipment))];
+---
+
+<nav class="moving-toc" aria-label={lang === 'es' ? 'Ir a una sección' : 'Jump to a section'}>
+  <a href="#shortcuts">{strings.tocShortcuts}</a>
+  <a href="#stations">{strings.tocStations}</a>
+  <a href="#stairs">{strings.tocStairs}</a>
+</nav>
+
+<section class="group" aria-labelledby="shortcuts">
+  <div class="section-head"><h2 id="shortcuts">{strings.shortcutsTitle}</h2></div>
+  <p class="moving-intro">{strings.shortcutsIntro}</p>
+  <div class="hills-shortcuts">
+    {
+      shortcuts.map((shortcut) => (
+        <article class="hills-card">
+          <h3>{shortcut.title[lang]}</h3>
+          <p class="hills-climb">
+            {strings.saves} <strong>{shortcut.climb[lang]}</strong>
+          </p>
+          <ol class="hills-steps">
+            <li>
+              <span class="hills-label">{strings.from}</span> {shortcut.bottom[lang]}
+            </li>
+            <li>
+              <span class="hills-label">{strings.to}</span> {shortcut.top[lang]}
+            </li>
+          </ol>
+          <p>{shortcut.how[lang]}</p>
+          <p class="hills-status" data-equipment={shortcut.equipment.join(' ')}>
+            {strings.statusChecking}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+  <p class="moving-note">{strings.shortcutsFare}</p>
+</section>
+
+<section class="group" aria-labelledby="stations">
+  <div class="section-head"><h2 id="stations">{strings.stationsTitle}</h2></div>
+  <p class="moving-intro">{strings.stationsIntro}</p>
+  <ul class="hills-stations">
+    {
+      stepFree.map((station) => (
+        <li id={`station-${station.equipment[0]}`}>
+          <p class="hills-station-name">
+            <span class="moving-lines">
+              {station.lines.map((line) => (
+                <span class={`line-bullet ${lineClass(line)}`}>{line}</span>
+              ))}
+            </span>
+            <strong>{station.name}</strong>
+          </p>
+          <p>
+            <span class="hills-label">{strings.entrance}</span> {station.entrance[lang]}
+          </p>
+          {station.note && <p class="today-muted">{station.note[lang]}</p>}
+          <p class="hills-status" data-equipment={station.equipment.join(' ')}>
+            {strings.statusChecking}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3>{strings.elevatorsInside}</h3>
+  <p>{strings.elevatorsInsideIntro}</p>
+  <ul class="living-list">
+    {
+      partial.map((station) => (
+        <li>
+          <span>
+            <span class="moving-lines">
+              {station.lines.map((line) => (
+                <span class={`line-bullet ${lineClass(line)}`}>{line}</span>
+              ))}
+            </span>
+            <strong>{station.name}</strong>
+          </span>
+          <span class="living-address">{station.entrance[lang]}</span>
+          {station.note && <span class="living-hours">{station.note[lang]}</span>}
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3>{strings.stairsOnly}</h3>
+  <p>
+    {strings.stairsOnlyIntro}{' '}
+    {
+      stairsOnlyStations.map((station, index) => (
+        <span class="hills-inline-station">
+          {station.lines.map((line) => (
+            <span class={`line-bullet ${lineClass(line)}`}>{line}</span>
+          ))}{' '}
+          {station.name}
+          {index < stairsOnlyStations.length - 1 ? ', ' : '.'}
+        </span>
+      ))
+    }
+  </p>
+  <p>
+    <a href="https://www.mta.info/elevator-escalator-status" rel="noopener noreferrer" target="_blank">
+      {strings.mtaStatus}<span class="sr-only"> {strings.newTab}</span>
+    </a>
+  </p>
+</section>
+
+<section class="group" aria-labelledby="stairs">
+  <div class="section-head"><h2 id="stairs">{strings.stairsTitle}</h2></div>
+  <p class="moving-intro">{strings.stairsIntro}</p>
+  <PlaceMap pins={pins} label={strings.stairsMapLabel} note={strings.mapNote} />
+  <ol class="hills-stairs">
+    {
+      topStairs.map((stair) => (
+        <li>
+          <a href={stairMapsHref(stair)} rel="noopener noreferrer" target="_blank">
+            {stairName(stair, lang)}
+            <span class="sr-only"> {strings.newTab}</span>
+          </a>
+          <span class="hills-stair-facts">
+            <strong>
+              {stair.climbFt} {strings.feet}
+            </strong>{' '}
+            {strings.climb}
+            {stair.steps && ` · ${stair.steps} ${strings.steps}`} · {stair.lengthM} {strings.metres}
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<aside class="bc-fineprint">
+  <p>
+    {strings.fineprint1} {fetched}, {strings.fineprint2}{' '}
+    <a href="https://www.openstreetmap.org/copyright" rel="noopener noreferrer" target="_blank">
+      {strings.osm}<span class="sr-only"> {strings.newTab}</span>
+    </a>. {strings.fineprint3}{' '}
+    <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent(strings.subject)}`}>{correctionsEmail}</a>.
+  </p>
+</aside>
+
+<script is:inline define:vars={{ ids, strings }}>
+  (() => {
+    const boxes = document.querySelectorAll('.hills-status[data-equipment]');
+    const show = (outages) => {
+      boxes.forEach((box) => {
+        const mine = box.dataset.equipment.split(' ');
+        const down = outages.filter((row) => mine.includes(row.equipment));
+        box.classList.toggle('is-out', down.length > 0);
+        box.classList.toggle('is-ok', down.length === 0);
+        if (!down.length) {
+          box.textContent = `● ${strings.statusOk}`;
+          return;
+        }
+        const back = down
+          .map((row) => new Date(row.estimatedreturntoservice))
+          .filter((date) => !Number.isNaN(date.getTime()))
+          .sort((a, b) => b - a)[0];
+        const when = back ? `, ${strings.statusBack} ${back.toLocaleString(strings.locale, { weekday: 'short', hour: 'numeric', minute: '2-digit' })}` : '';
+        box.textContent = `● ${strings.statusOut}${when}`;
+      });
+    };
+    fetch('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fnyct_ene.json')
+      .then((response) => (response.ok ? response.json() : Promise.reject(response.status)))
+      .then((data) =>
+        show((Array.isArray(data) ? data : []).filter((row) => ids.includes(row.equipment) && row.isupcomingoutage !== 'Y')),
+      )
+      .catch(() =>
+        boxes.forEach((box) => {
+          box.textContent = strings.statusUnknown;
+        }),
+      );
+  })();
+</script>

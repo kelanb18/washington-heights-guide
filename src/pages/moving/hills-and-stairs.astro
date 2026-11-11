@@ -1,0 +1,43 @@
+---
+import HillsGuide from '../../components/HillsGuide.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Getting around hilly Washington Heights without the stairs: the subway elevators that climb the hill, step-free stations with live elevator status, and the biggest staircases on a map.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Moving to the Heights', url: absoluteUrl(site, '/moving') },
+    { name: 'Hills, stairs and elevators', url: absoluteUrl(site, '/moving/hills-and-stairs') },
+  ]),
+];
+---
+
+<BaseLayout title={pageTitle('Hills, stairs and elevators in Washington Heights')} description={description} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/mudarse/cuestas-y-escaleras' }]}>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <a href={href('/moving')}>Moving to the Heights</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Hills and stairs</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">
+        Getting around
+        <span aria-hidden="true"> · </span>
+        <a href={href('/es/mudarse/cuestas-y-escaleras')} hreflang="es" lang="es">En español</a>
+      </p>
+      <h1>Hills, stairs and elevators</h1>
+      <p class="lede">
+        Washington Heights sits on the highest ground in Manhattan, and the walk between two blocks can be ten stories of stairs. Map
+        apps rarely warn you. This is how to get around with a stroller, a wheelchair, a cart of groceries or tired knees.
+      </p>
+    </header>
+    <HillsGuide />
+  </article>
+</BaseLayout>
