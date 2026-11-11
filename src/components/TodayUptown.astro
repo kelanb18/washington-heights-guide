@@ -1,0 +1,159 @@
+---
+import { loadEvents } from '../lib/events';
+import { href } from '../lib/site';
+
+interface Props {
+  /** How many of today's events to list. */
+  eventLimit?: number;
+}
+
+const { eventLimit = 4 } = Astro.props;
+
+// The site rebuilds daily, so ship the next few days of events and let the browser pick today's.
+const { oneOff, recurring } = await loadEvents();
+const soon = [...oneOff, ...recurring.flatMap((item) => item.occurrences)]
+  .filter((event) => event.start.slice(0, 10) <= new Date(Date.now() + 3 * 864e5).toISOString().slice(0, 10))
+  .sort((a, b) => a.start.localeCompare(b.start))
+  .map((event) => ({ title: event.title, start: event.start, place: event.place, url: event.sourceUrl, label: event.label }));
+---
+
+<section class="today" data-today aria-labelledby="today-heading">
+  <div class="today-head">
+    <h2 id="today-heading" class="poster-heading">Today uptown</h2>
+    <p class="today-stamp" data-today-stamp aria-live="polite">Loading live updates…</p>
+  </div>
+  <div class="today-grid">
+    <div class="today-card">
+      <h3>Weather</h3>
+      <div data-today-weather><p class="today-muted">Loading…</p></div>
+    </div>
+    <div class="today-card">
+      <h3>Trains</h3>
+      <div data-today-trains><p class="today-muted">Loading…</p></div>
+    </div>
+    <div class="today-card">
+      <h3>Elevators out uptown</h3>
+      <div data-today-elevators><p class="today-muted">Loading…</p></div>
+    </div>
+    <div class="today-card">
+      <h3>On today</h3>
+      <div data-today-events><p class="today-muted">Loading…</p></div>
+      <p class="today-more"><a href={href('/events')}>All events</a></p>
+    </div>
+  </div>
+  <p class="today-foot">
+    Parking: <a href="https://www.nyc.gov/html/dot/html/motorist/alternate-side-parking.shtml" rel="noopener noreferrer" target="_blank">alternate side rules and suspensions<span class="sr-only"> (opens in a new tab)</span></a>
+    · Live data from the MTA and the National Weather Service.
+  </p>
+</section>
+
+<script is:inline define:vars={{ soon, eventLimit }}>
+  (() => {
+    const root = document.querySelector('[data-today]');
+    if (!root) return;
+    const $ = (name) => root.querySelector(`[data-today-${name}]`);
+    const esc = (value) =>
+      String(value ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+    const lineColor = (line) => (line === '1' ? 'line-red' : 'line-blue');
+    const bullet = (line) => `<span class="line-bullet ${lineColor(line)}">${esc(line)}</span>`;
+    const lines = ['A', 'C', '1'];
+    const nyDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    const clock = (local) => {
+      const [h, m] = local.slice(11, 16).split(':').map(Number);
+      const hour = h % 12 === 0 ? 12 : h % 12;
+      return `${hour}${m ? `:${String(m).padStart(2, '0')}` : ''}${h >= 12 ? 'pm' : 'am'}`;
+    };
+    const getJson = async (url) => {
+      const response = await fetch(url, { headers: { Accept: 'application/json, application/geo+json' } });
+      if (!response.ok) throw new Error(String(response.status));
+      return response.json();
+    };
+
+    // Today's events, from the daily build.
+    const today = soon.filter((event) => event.start.slice(0, 10) === nyDate).slice(0, eventLimit);
+    $('events').innerHTML = today.length
+      ? '<ul class="today-list">' +
+        today
+          .map(
+            (event) =>
+              `<li><span class="today-time">${clock(event.start)}</span> <a href="${esc(event.url)}" rel="noopener noreferrer" target="_blank">${esc(event.title)}</a><span class="today-muted"> · ${esc(event.place)}</span></li>`,
+          )
+          .join('') +
+        '</ul>'
+      : '<p class="today-muted">Nothing listed for today.</p>';
+
+    // Weather: National Weather Service forecast for the neighborhood's grid square.
+    getJson('https://api.weather.gov/gridpoints/OKX/35,48/forecast')
+      .then((data) => {
+        const [now, next] = data.properties.periods;
+        $('weather').innerHTML = `<p class="today-big">${esc(now.temperature)}°</p>
+          <p><strong>${esc(now.name)}:</strong> ${esc(now.shortForecast)}</p>
+          ${next ? `<p class="today-muted">${esc(next.name)}: ${esc(next.temperature)}°, ${esc(next.shortForecast.toLowerCase())}</p>` : ''}`;
+      })
+      .catch(() => {
+        $('weather').innerHTML = '<p class="today-muted">Weather is unavailable right now.</p>';
+      });
+
+    // Trains: active MTA alerts for the A, C and 1. Unplanned problems first, then planned work.
+    getJson('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/camsys%2Fsubway-alerts.json')
+      .then((data) => {
+        const now = Date.now() / 1000;
+        const alerts = (data.entity || [])
+          .map((entity) => entity.alert)
+          .filter((alert) => alert && (alert.active_period || []).some((p) => (p.start ?? 0) <= now && (!p.end || p.end >= now)))
+          .map((alert) => {
+            const routes = [...new Set((alert.informed_entity || []).map((e) => e.route_id))].filter((r) => lines.includes(r));
+            const type = alert['transit_realtime.mercury_alert']?.alert_type || '';
+            const text = (alert.header_text?.translation || []).find((t) => t.language === 'en')?.text || '';
+            return { routes, type, planned: /^planned/i.test(type), text };
+          })
+          .filter((alert) => alert.routes.length > 0 && alert.text)
+          .sort((a, b) => Number(a.planned) - Number(b.planned));
+        const status = lines
+          .map((line) => {
+            const hit = alerts.filter((a) => a.routes.includes(line));
+            const live = hit.some((a) => !a.planned);
+            return `<li>${bullet(line)} <span class="${live ? 'today-alert' : hit.length ? 'today-note' : 'today-good'}">${live ? 'Service change' : hit.length ? 'Planned work' : 'Good service'}</span></li>`;
+          })
+          .join('');
+        const details = alerts
+          .slice(0, 3)
+          .map((a) => `<li>${esc(a.text).replace(/\[([A-Z0-9]+)\]/g, (_, l) => (lines.includes(l) ? bullet(l) : `[${l}]`))}</li>`)
+          .join('');
+        $('trains').innerHTML = `<ul class="today-status">${status}</ul>${details ? `<ul class="today-list today-small">${details}</ul>` : ''}
+          <p class="today-more"><a href="https://www.mta.info/alerts" rel="noopener noreferrer" target="_blank">All MTA alerts<span class="sr-only"> (opens in a new tab)</span></a></p>`;
+      })
+      .catch(() => {
+        $('trains').innerHTML = '<p class="today-muted">Train status is unavailable right now.</p>';
+      });
+
+    // Elevators: outages happening now at stations in and around Washington Heights.
+    const uptown = /^(155 St|157 St|163 St|168 St|175 St|181 St|190 St|191 St|Dyckman St)/;
+    getJson('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fnyct_ene.json')
+      .then((data) => {
+        const out = (Array.isArray(data) ? data : [])
+          .filter((row) => row.equipmenttype === 'EL' && row.isupcomingoutage !== 'Y')
+          .filter((row) => uptown.test(row.station || '') && /\b(A|C|1)\b/.test(row.trainno || ''));
+        const back = (value) => {
+          const date = new Date(value);
+          return Number.isNaN(date.getTime()) ? '' : `, back about ${date.toLocaleString('en-US', { weekday: 'short', hour: 'numeric', minute: '2-digit' })}`;
+        };
+        $('elevators').innerHTML = out.length
+          ? '<ul class="today-list">' +
+            out
+              .slice(0, 5)
+              .map(
+                (row) =>
+                  `<li><strong>${esc(row.station)}</strong> ${(row.trainno || '').split('/').filter((l) => lines.includes(l)).map(bullet).join('')}<br /><span class="today-muted">${esc(row.serving)}${esc(back(row.estimatedreturntoservice))}</span></li>`,
+              )
+              .join('') +
+            '</ul>'
+          : '<p class="today-good">All uptown elevators are working.</p>';
+      })
+      .catch(() => {
+        $('elevators').innerHTML = '<p class="today-muted">Elevator status is unavailable right now.</p>';
+      });
+
+    $('stamp').textContent = `Live as of ${new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' })}`;
+  })();
+</script>

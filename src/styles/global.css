@@ -4463,3 +4463,135 @@ button.cal-date:hover,
 .living-hours {
   overflow-wrap: anywhere;
 }
+
+/* Today uptown */
+.today {
+  margin-top: 2rem;
+  padding: 1.2rem 1.25rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 18px;
+  background: var(--dark-ink);
+  color: var(--cream);
+  box-shadow: 4px 4px 0 var(--flag);
+}
+
+.today-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+}
+
+.today .poster-heading {
+  margin: 0;
+  color: var(--highlighter);
+}
+
+.today-stamp,
+.today-foot {
+  margin: 0;
+  color: rgb(255 250 240 / 0.7);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+}
+
+.today-foot {
+  margin-top: 0.9rem;
+}
+
+.today a {
+  color: var(--cream);
+}
+
+.today a:hover {
+  color: var(--highlighter);
+}
+
+.today-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.9rem;
+}
+
+.today-card {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid rgb(255 250 240 / 0.18);
+  border-radius: 12px;
+  background: rgb(255 250 240 / 0.05);
+}
+
+.today-card h3 {
+  margin: 0 0 0.45rem;
+  color: rgb(255 250 240 / 0.75);
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 800;
+  font-stretch: 85%;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.today-card p {
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+}
+
+.today-big {
+  font-family: var(--poster);
+  font-size: 2.4rem !important;
+  line-height: 1;
+}
+
+.today-muted {
+  color: rgb(255 250 240 / 0.65);
+}
+
+.today-list,
+.today-status {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.92rem;
+}
+
+.today-status li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-weight: 700;
+}
+
+.today-small {
+  margin-top: 0.6rem;
+  font-size: 0.82rem;
+  color: rgb(255 250 240 / 0.8);
+}
+
+.today-small .line-bullet,
+.today-list .line-bullet {
+  width: 1.2rem;
+  height: 1.2rem;
+  font-size: 0.7rem;
+  vertical-align: -0.2em;
+}
+
+.today-good { color: #7fe0a8; }
+.today-note { color: var(--highlighter); }
+.today-alert { color: #ff8a7e; }
+
+.today-time {
+  font-family: var(--sans);
+  font-weight: 800;
+  color: var(--highlighter);
+}
+
+.today-more {
+  margin-top: 0.6rem !important;
+  font-family: var(--sans);
+  font-size: 0.85rem !important;
+}

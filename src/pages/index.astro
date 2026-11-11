@@ -1,6 +1,7 @@
 ---
 import HidePastEvents from '../components/HidePastEvents.astro';
 import PlaceMap from '../components/PlaceMap.astro';
+import TodayUptown from '../components/TodayUptown.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { areaTree, loadAreas } from '../lib/areas';
 import { coverForGuide } from '../lib/covers';
@@ -128,6 +129,8 @@ if (guides.length > 0) {
         The places in Washington Heights we recommend to friends. Every page is checked and dated, and anything sponsored is labeled.
       </p>
     </section>
+
+    <TodayUptown />
 
     <section class="home-block" aria-labelledby="topic-heading">
       <p class="label" id="topic-heading">Browse by topic</p>
