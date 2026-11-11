@@ -16,13 +16,16 @@ const neighborhoods = areaTree(areas).map((node) => ({
   cover: coverForArea(node.area, areas, listings, used)?.picture,
 }));
 
-/** Stations in or at the edge of Washington Heights, south to north. Elevator notes come from the area pages. */
+/**
+ * Stations in or at the edge of Washington Heights, south to north. "Accessible" follows the MTA's station list
+ * (data.ny.gov, dataset 39hk-dx4f); elevator notes come from the area pages.
+ */
 const stations = [
   { name: '157 St', lines: ['1'], street: 'Broadway', note: '' },
   { name: '163 St–Amsterdam Av', lines: ['C'], street: 'St Nicholas Ave', note: 'Closest stop for the Morris-Jumel Mansion.' },
-  { name: '168 St', lines: ['A', 'C', '1'], street: 'Broadway', note: 'The main subway hub, by the hospital campus.' },
-  { name: '175 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Listed as the only fully accessible station in Washington Heights.' },
-  { name: '181 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Elevators lift riders from the valley up to the ridge.' },
+  { name: '168 St', lines: ['A', 'C', '1'], street: 'Broadway', note: 'The main subway hub, by the hospital campus. The MTA lists the A/C platforms as accessible.' },
+  { name: '175 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Accessible, per the MTA.' },
+  { name: '181 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Accessible, per the MTA. Elevators lift riders from the valley up to the ridge.' },
   { name: '181 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
   { name: '190 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Elevators; the stop for Fort Tryon Park and The Cloisters.' },
   { name: '191 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
@@ -105,10 +108,6 @@ const checklist: Step[] = [
 
 const comingSoon = [
   {
-    title: 'Check a building before you sign',
-    body: 'Type an address and see city violations and complaints, rent stabilization, the owner on file, flood risk, the nearest subway, and what is on the block.',
-  },
-  {
     title: 'Living here',
     body: 'The everyday places: late-night pharmacies, urgent care, laundromats, hardware, groceries, gyms, dog runs.',
   },
@@ -145,6 +144,12 @@ const jsonLd = [
         around the hills, and what to set up in your first month.
       </p>
     </header>
+
+    <a class="moving-feature" href={href('/moving/building-check')}>
+      <span class="kicker">New tool</span>
+      <strong>Check a building before you sign →</strong>
+      <span>Open violations, recent complaints, bedbug filings, HPD registration, the nearest subway and what is nearby, for any address.</span>
+    </a>
 
     <nav class="moving-toc" aria-label="On this page">
       <a href="#neighborhoods">Neighborhoods</a>

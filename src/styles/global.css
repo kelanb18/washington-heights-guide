@@ -4125,3 +4125,292 @@ button.cal-date:hover,
   margin: 0;
   color: var(--ink-soft);
 }
+
+/* Building check */
+.line-orange {
+  background: #ff6319;
+}
+
+.bc-form {
+  max-width: 40rem;
+  margin: 1.4rem 0 0.6rem;
+  padding: 1.1rem 1.2rem 1rem;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--card);
+  box-shadow: 4px 4px 0 var(--shadow);
+}
+
+.bc-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: var(--sans);
+  font-weight: 700;
+}
+
+.bc-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.bc-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.bc-row input:focus-visible {
+  outline: 3px solid var(--highlighter);
+  outline-offset: 1px;
+}
+
+.bc-hint,
+.bc-status {
+  margin: 0.55rem 0 0;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+}
+
+.bc-status {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.bc-choices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.bc-choices[hidden] {
+  display: none;
+}
+
+.bc-choice {
+  padding: 0.5rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bc-choice:hover {
+  background: var(--highlighter);
+  color: var(--dark-ink);
+}
+
+.bc-results {
+  margin-top: 2rem;
+  scroll-margin-top: 8rem;
+}
+
+.bc-address {
+  margin: 0.1rem 0 0.2rem;
+  font-family: var(--poster);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.bc-meta,
+.bc-outside {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.92rem;
+}
+
+.bc-outside {
+  margin-top: 0.4rem;
+  color: var(--brick);
+  font-weight: 600;
+}
+
+.bc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 0.9rem;
+  margin-top: 1.2rem;
+}
+
+.bc-card {
+  padding: 1rem 1.1rem 1.1rem;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--card);
+}
+
+.bc-card h3,
+.bc-links h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 800;
+  font-stretch: 85%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.bc-big {
+  margin: 0;
+  font-family: var(--poster);
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+.bc-sub,
+.bc-empty,
+.bc-loading {
+  margin: 0.35rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.bc-loading {
+  animation: placeholder-sheen 1.4s linear infinite;
+}
+
+.bc-list,
+.bc-classes,
+.bc-bars {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+}
+
+.bc-date {
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.8rem;
+}
+
+.bc-class {
+  display: inline-grid;
+  place-items: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-right: 0.3rem;
+  border-radius: 6px;
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.bc-class-c { background: var(--flag); color: var(--cream); }
+.bc-class-b { background: var(--tomato); color: var(--dark-ink); }
+.bc-class-a { background: var(--chip); color: var(--ink); }
+
+.bc-bars li {
+  display: grid;
+  grid-template-columns: minmax(0, 9rem) 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--sans);
+  font-size: 0.82rem;
+}
+
+.bc-bars li > span:first-child {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bc-bar {
+  height: 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(var(--grape), var(--grape)) no-repeat left / var(--w) 100%, var(--chip);
+}
+
+.bc-flag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.bc-ok { background: color-mix(in srgb, var(--street) 18%, var(--card)); color: var(--street); }
+.bc-warn { background: color-mix(in srgb, var(--flag) 15%, var(--card)); color: var(--brick); }
+.bc-neutral { background: var(--chip); color: var(--ink); }
+
+.bc-links {
+  margin-top: 1.2rem;
+}
+
+.bc-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bc-links a {
+  display: inline-block;
+  padding: 0.45rem 0.85rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.bc-links a:hover {
+  background: var(--highlighter);
+  color: var(--dark-ink);
+}
+
+.bc-fineprint {
+  max-width: 46rem;
+  margin-top: 2rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.moving-feature {
+  display: grid;
+  gap: 0.4rem;
+  max-width: 46rem;
+  margin: 1.4rem 0 0;
+  padding: 1.2rem 1.3rem;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--highlighter);
+  color: var(--dark-ink);
+  box-shadow: 4px 4px 0 var(--shadow);
+  text-decoration: none;
+}
+
+.moving-feature strong {
+  font-family: var(--poster);
+  font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  line-height: 1.05;
+}
+
+.moving-feature:hover strong {
+  text-decoration: underline;
+}
