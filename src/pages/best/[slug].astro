@@ -193,10 +193,9 @@ const jsonLd = [
             {item.pick.affiliate && (
               <p class="pick-blurb">
                 <a href={item.pick.affiliate.href} rel="sponsored noopener" target="_blank">
-                  {item.pick.affiliate.label}{' '}
-                  <span class="aff-tag">Affiliate link</span>
-                  <span class="sr-only"> (opens in a new tab)</span>
-                </a>
+                  {item.pick.affiliate.label}<span class="sr-only"> (opens in a new tab)</span>
+                </a>{' '}
+                <span class="aff-note">(affiliate link)</span>
               </p>
             )}
             <p class="where">
@@ -273,3 +272,13 @@ const jsonLd = [
     }
   </article>
 </BaseLayout>
+
+<style>
+  /* A quiet but visible label beside each affiliate link, as the About page promises. */
+  .aff-note {
+    color: var(--ink-soft);
+    font-family: var(--sans);
+    font-size: 0.82em;
+    white-space: nowrap;
+  }
+</style>
