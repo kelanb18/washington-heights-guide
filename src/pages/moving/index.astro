@@ -1,0 +1,307 @@
+---
+import StoryCard from '../../components/StoryCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { areaTree, loadAreas } from '../../lib/areas';
+import { coverForArea } from '../../lib/covers';
+import { breadcrumbJsonLd } from '../../lib/jsonld';
+import { loadListings } from '../../lib/listings';
+import { absoluteUrl, correctionsEmail, href, pageTitle, siteName } from '../../lib/site';
+
+const areas = await loadAreas();
+const listings = await loadListings();
+const used = new Set<string>();
+const neighborhoods = areaTree(areas).map((node) => ({
+  area: node.area,
+  children: node.children.map((child) => child.area),
+  cover: coverForArea(node.area, areas, listings, used)?.picture,
+}));
+
+/** Stations in or at the edge of Washington Heights, south to north. Elevator notes come from the area pages. */
+const stations = [
+  { name: '157 St', lines: ['1'], street: 'Broadway', note: '' },
+  { name: '163 St–Amsterdam Av', lines: ['C'], street: 'St Nicholas Ave', note: 'Closest stop for the Morris-Jumel Mansion.' },
+  { name: '168 St', lines: ['A', 'C', '1'], street: 'Broadway', note: 'The main subway hub, by the hospital campus.' },
+  { name: '175 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Listed as the only fully accessible station in Washington Heights.' },
+  { name: '181 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Elevators lift riders from the valley up to the ridge.' },
+  { name: '181 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
+  { name: '190 St', lines: ['A'], street: 'Fort Washington Ave', note: 'Elevators; the stop for Fort Tryon Park and The Cloisters.' },
+  { name: '191 St', lines: ['1'], street: 'St Nicholas Ave', note: '' },
+];
+
+interface Step {
+  id: string;
+  title: string;
+  body: string;
+  link?: { href: string; label: string };
+}
+
+const checklist: Step[] = [
+  {
+    id: 'power',
+    title: 'Start electricity and gas',
+    body: 'Con Edison serves the neighborhood. Starting service asks for your new address, move-in date and ID.',
+    link: { href: 'https://www.coned.com/en/services-and-outages/service-management-page', label: 'Con Edison: start, move or stop service' },
+  },
+  {
+    id: 'internet',
+    title: 'Sort out internet early',
+    body: 'Which providers can wire your apartment depends on the building. Ask the landlord or super before move-in, since installs can take a while.',
+  },
+  {
+    id: 'vote',
+    title: 'Update your voter registration',
+    body: 'A new address means a new polling site. Registering or updating takes a few minutes.',
+    link: { href: 'https://vote.nyc/page/register-vote', label: 'NYC Board of Elections: register to vote' },
+  },
+  {
+    id: 'idnyc',
+    title: 'Get an IDNYC card',
+    body: 'The city’s free ID card, open to New York City residents. The IDNYC site lists what you need to apply and the current benefits.',
+    link: { href: 'https://www.nyc.gov/site/idnyc/index.page', label: 'IDNYC' },
+  },
+  {
+    id: 'library',
+    title: 'Get a library card',
+    body: 'The Fort Washington branch on W 179th St is one of the neighborhood’s NYPL libraries.',
+    link: { href: 'https://www.nypl.org/library-card', label: 'NYPL library card' },
+  },
+  {
+    id: 'trash',
+    title: 'Learn your trash and recycling days',
+    body: 'Collection days are set by address. Look yours up once and put it on the fridge.',
+    link: { href: 'https://www.nyc.gov/assets/dsny/site/collectionSchedule', label: 'DSNY collection schedule' },
+  },
+  {
+    id: 'parking',
+    title: 'If you have a car, learn alternate side parking',
+    body: 'Street cleaning rules decide when you have to move your car. The city posts suspensions for holidays and weather.',
+    link: { href: 'https://www.nyc.gov/html/dot/html/motorist/alternate-side-parking.shtml', label: 'NYC DOT: alternate side parking' },
+  },
+  {
+    id: '311',
+    title: 'Save 311',
+    body: 'The city’s line for non-emergencies, including no heat or hot water, noise, and building problems.',
+    link: { href: 'https://portal.311.nyc.gov/', label: 'NYC 311' },
+  },
+  {
+    id: 'schools',
+    title: 'Find your school zone',
+    body: 'Public school zones are set by address, so check yours before you sign if it matters to you.',
+    link: { href: 'https://schoolsearch.schools.nyc/', label: 'NYC Public Schools: find a school' },
+  },
+  {
+    id: 'cb12',
+    title: 'Know your community board',
+    body: 'Community Board 12 covers Washington Heights and Inwood and holds public meetings on local issues, from liquor licenses to street changes.',
+    link: { href: 'https://cbmanhattan.cityofnewyork.us/cb12/', label: 'Manhattan Community Board 12' },
+  },
+  {
+    id: 'elevators',
+    title: 'Bookmark the subway elevator status page',
+    body: 'Several uptown stations depend on elevators. Check before you head out with a stroller, luggage or a bad knee.',
+    link: { href: 'https://www.mta.info/elevator-escalator-status', label: 'MTA elevator and escalator status' },
+  },
+];
+
+const comingSoon = [
+  {
+    title: 'Check a building before you sign',
+    body: 'Type an address and see city violations and complaints, rent stabilization, the owner on file, flood risk, the nearest subway, and what is on the block.',
+  },
+  {
+    title: 'Living here',
+    body: 'The everyday places: late-night pharmacies, urgent care, laundromats, hardware, groceries, gyms, dog runs.',
+  },
+  {
+    title: 'Today uptown',
+    body: 'Train and elevator status, alternate side parking, weather, and what is on today, in one place.',
+  },
+];
+
+const site = Astro.site;
+if (!site) throw new Error('Missing site URL.');
+const description =
+  'Moving to Washington Heights: the neighborhoods compared, getting around the hills and the subway, and a first-month checklist with official links.';
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: siteName, url: absoluteUrl(site, '/') },
+    { name: 'Moving to the Heights', url: absoluteUrl(site, '/moving') },
+  ]),
+];
+---
+
+<BaseLayout title={pageTitle('Moving to Washington Heights')} description={description} jsonLd={jsonLd}>
+  <article class="wrap moving">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href={href('/')}>Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Moving to the Heights</span>
+    </nav>
+    <header class="page-head">
+      <p class="kicker">Moving here</p>
+      <h1>Moving to the Heights</h1>
+      <p class="lede">
+        What to know before and after you move to Washington Heights: which part of the neighborhood fits you, how to get
+        around the hills, and what to set up in your first month.
+      </p>
+    </header>
+
+    <nav class="moving-toc" aria-label="On this page">
+      <a href="#neighborhoods">Neighborhoods</a>
+      <a href="#getting-around">Getting around</a>
+      <a href="#first-month">Your first month</a>
+      <a href="#coming-next">Coming next</a>
+    </nav>
+
+    <section class="group" aria-labelledby="neighborhoods">
+      <div class="section-head">
+        <h2 id="neighborhoods">Which part of the Heights?</h2>
+      </div>
+      <p class="moving-intro">
+        Washington Heights runs from about W 155th St to Dyckman St. The west side sits on a high ridge above the Hudson; the
+        middle drops into the Broadway valley; the east side runs along the Harlem River. Each area page has its own map, places and history.
+      </p>
+      <ul class="guide-grid">
+        {
+          neighborhoods.map(({ area, children, cover }) => (
+            <li>
+              <StoryCard
+                href={href(`/areas/${area.id}`)}
+                heading="h3"
+                kicker={children.length > 0 ? `Includes ${children.map((child) => child.data.name).join(' and ')}` : 'Area'}
+                title={area.data.name}
+                description={area.data.summary}
+                cover={cover}
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="group" aria-labelledby="getting-around">
+      <div class="section-head">
+        <h2 id="getting-around">Getting around</h2>
+      </div>
+      <p class="moving-intro">
+        The A and 1 trains run the length of the neighborhood, and the C runs as far north as 168th St. On the ridge, the A stations are deep
+        underground and reached by elevator, so an elevator outage can mean a long climb. The George Washington Bridge Bus Station is on
+        Broadway at W 178th St.
+      </p>
+      <div class="moving-table-wrap">
+        <table class="moving-table">
+          <caption class="sr-only">Subway stations in Washington Heights, south to north</caption>
+          <thead>
+            <tr>
+              <th scope="col">Station</th>
+              <th scope="col">Lines</th>
+              <th scope="col">Where</th>
+              <th scope="col">Good to know</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stations.map((station) => (
+              <tr>
+                <th scope="row">{station.name}</th>
+                <td>
+                  <span class="moving-lines">
+                    {station.lines.map((line) => (
+                      <span class:list={['line-bullet', line === '1' ? 'line-red' : 'line-blue']}>{line}</span>
+                    ))}
+                  </span>
+                </td>
+                <td>{station.street}</td>
+                <td>{station.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="moving-note">
+        Elevator and accessibility notes come from our area pages and their sources; check{' '}
+        <a href="https://www.mta.info/elevator-escalator-status" rel="noopener noreferrer" target="_blank">the MTA’s live elevator status<span class="sr-only"> (opens in a new tab)</span></a>{' '}
+        before you rely on one.
+      </p>
+    </section>
+
+    <section class="group" aria-labelledby="first-month" data-checklist>
+      <div class="section-head">
+        <h2 id="first-month">Your first month</h2>
+      </div>
+      <p class="moving-intro">Tick things off as you go. Your progress stays in this browser only.</p>
+      <p class="moving-progress" data-checklist-progress hidden aria-live="polite"></p>
+      <ol class="checklist">
+        {
+          checklist.map((step) => (
+            <li class="checklist-item">
+              <input type="checkbox" id={`step-${step.id}`} data-step={step.id} />
+              <div>
+                <label for={`step-${step.id}`} class="checklist-title">{step.title}</label>
+                <p>{step.body}</p>
+                {step.link && (
+                  <a href={step.link.href} rel="noopener noreferrer" target="_blank">
+                    {step.link.label}<span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                )}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="group" aria-labelledby="coming-next">
+      <div class="section-head">
+        <h2 id="coming-next">Coming next</h2>
+      </div>
+      <ul class="moving-soon">
+        {
+          comingSoon.map((item) => (
+            <li>
+              <span class="mini-sticker mini-sticker-yellow">Soon</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="moving-note">
+        Moved here recently? Tell us what you wish you had known: <a href={`mailto:${correctionsEmail}?subject=${encodeURIComponent('Moving to the Heights')}`}>{correctionsEmail}</a>.
+      </p>
+    </section>
+  </article>
+</BaseLayout>
+
+<script>
+  for (const list of document.querySelectorAll<HTMLElement>('[data-checklist]')) {
+    const boxes = Array.from(list.querySelectorAll<HTMLInputElement>('input[data-step]'));
+    const progress = list.querySelector<HTMLElement>('[data-checklist-progress]');
+    const key = 'moving-checklist';
+    let done: string[] = [];
+    try {
+      done = JSON.parse(localStorage.getItem(key) ?? '[]');
+    } catch {
+      done = [];
+    }
+    const update = () => {
+      const count = boxes.filter((box) => box.checked).length;
+      if (progress) {
+        progress.hidden = false;
+        progress.textContent = `${count} of ${boxes.length} done`;
+      }
+    };
+    for (const box of boxes) {
+      box.checked = done.includes(box.dataset.step ?? '');
+      box.addEventListener('change', () => {
+        const ids = boxes.filter((item) => item.checked).map((item) => item.dataset.step ?? '');
+        try {
+          localStorage.setItem(key, JSON.stringify(ids));
+        } catch {
+          /* ignore */
+        }
+        update();
+      });
+    }
+    update();
+  }
+</script>

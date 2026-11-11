@@ -3937,3 +3937,191 @@ button.cal-date:hover,
 .cal-chips li {
   min-width: 0;
 }
+
+/* ==========================================================================
+   Moving to the Heights
+   ========================================================================== */
+.moving-toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.4rem 0 0.4rem;
+}
+
+.moving-toc a {
+  padding: 0.4rem 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-stretch: 90%;
+  text-decoration: none;
+}
+
+.moving-toc a:hover {
+  background: var(--highlighter);
+  color: var(--dark-ink);
+}
+
+.moving-intro,
+.moving-note {
+  max-width: 44rem;
+}
+
+.moving-note {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+.moving-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.moving-table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.moving-table th,
+.moving-table td {
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.moving-table thead th {
+  background: var(--dark-ink);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-stretch: 85%;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.moving-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.moving-table tbody th {
+  font-family: var(--sans);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.moving-lines {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+
+.line-bullet {
+  display: inline-grid;
+  place-items: center;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* MTA trunk-line colors: blue for the 8th Ave A/C, red for the Broadway–7th Ave 1. */
+.line-blue {
+  background: #0039a6;
+}
+
+.line-red {
+  background: #ee352e;
+}
+
+.checklist {
+  display: grid;
+  gap: 0.7rem;
+  max-width: 46rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checklist-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.9rem;
+  padding: 0.95rem 1.05rem;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--card);
+}
+
+.checklist-item input {
+  width: 1.4rem;
+  height: 1.4rem;
+  margin-top: 0.15rem;
+  accent-color: var(--street);
+}
+
+.checklist-item p {
+  margin: 0.25rem 0 0.35rem;
+}
+
+.checklist-title {
+  font-family: var(--sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.checklist-item:has(input:checked) {
+  background: color-mix(in srgb, var(--street) 10%, var(--card));
+}
+
+.checklist-item:has(input:checked) .checklist-title {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.moving-progress {
+  margin: 0.4rem 0 0;
+  font-family: var(--sans);
+  font-weight: 700;
+  color: var(--street);
+}
+
+.moving-soon {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.moving-soon li {
+  padding: 1rem 1.1rem;
+  border: 2px dashed var(--ink);
+  border-radius: 14px;
+}
+
+.moving-soon h3 {
+  margin: 0.6rem 0 0.3rem;
+  font-family: var(--poster);
+  font-weight: 400;
+  font-size: 1.3rem;
+}
+
+.moving-soon p {
+  margin: 0;
+  color: var(--ink-soft);
+}
