@@ -1,70 +1,315 @@
 ---
+import { areaTree, loadAreas } from '../lib/areas';
+import { coverForGuide } from '../lib/covers';
+import { loadGuides } from '../lib/guides';
+import { loadListings } from '../lib/listings';
 import { href, normalizePath } from '../lib/site';
+import { categoryInfo, type Category } from '../lib/taxonomy';
 
-const current = normalizePath(Astro.url.pathname);
-
-function currentAttr(path: string): true | undefined {
-  const item = normalizePath(path);
-  if (item === '/') return current === '/' ? true : undefined;
-  if (current === item || current.startsWith(`${item}/`)) return true;
-  return undefined;
+interface MenuLink {
+  href: string;
+  label: string;
+  count?: number;
+  indent?: boolean;
+}
+interface MenuColumn {
+  heading: string;
+  links: MenuLink[];
+}
+interface MenuSection {
+  id: string;
+  label: string;
+  columns: MenuColumn[];
+  featured?: string;
 }
 
-const primary = [
+const current = normalizePath(Astro.url.pathname);
+const isCurrent = (path: string) => {
+  const item = normalizePath(path);
+  if (item === '/') return current === '/';
+  return current === item || current.startsWith(`${item}/`);
+};
+
+const [guides, areas, listings] = await Promise.all([loadGuides(), loadAreas(), loadListings()]);
+
+const countFor = (category: Category) => listings.filter((listing) => listing.data.category === category).length;
+const categoryLink = (category: Category): MenuLink => ({
+  href: href(`/category/${category}`),
+  label: categoryInfo[category].plural,
+  count: countFor(category),
+});
+
+/** Short menu labels for guides. A guide that is not published is left out of the menu. */
+const guideLinks = (items: Array<[id: string, label: string]>): MenuLink[] =>
+  items
+    .filter(([id]) => guides.some((guide) => guide.id === id))
+    .map(([id, label]) => ({ href: href(`/best/${id}`), label }));
+
+const flatAreas = (nodes: ReturnType<typeof areaTree>, depth = 0): MenuLink[] =>
+  nodes.flatMap((node) => [
+    { href: href(`/areas/${node.area.id}`), label: node.area.data.name, indent: depth > 0 },
+    ...flatAreas(node.children, depth + 1),
+  ]);
+
+const sections: MenuSection[] = [
+  {
+    id: 'eat',
+    label: 'Eat & drink',
+    featured: 'best-dominican-restaurants-washington-heights',
+    columns: [
+      {
+        heading: 'By type',
+        links: [
+          categoryLink('restaurant'),
+          categoryLink('cafe'),
+          categoryLink('bakery'),
+          categoryLink('bar'),
+          { href: href('/places'), label: 'All places', count: listings.length },
+        ],
+      },
+      {
+        heading: 'Guides',
+        links: guideLinks([
+          ['best-dominican-restaurants-washington-heights', 'Dominican food'],
+          ['best-brunch-washington-heights', 'Brunch'],
+          ['best-coffee-shops-washington-heights', 'Coffee'],
+          ['best-bakeries-and-desserts-washington-heights', 'Bakeries and desserts'],
+          ['best-late-night-food-washington-heights', 'Late-night food'],
+          ['best-bars-and-nightlife-washington-heights', 'Bars and nightlife'],
+        ]),
+      },
+      {
+        heading: 'For a plan',
+        links: guideLinks([
+          ['where-to-eat-before-a-show-at-united-palace', 'Dinner before a show'],
+          ['food-near-newyork-presbyterian-columbia-medical-center', 'Food near the hospital'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'do',
+    label: 'Things to do',
+    featured: 'best-things-to-do-washington-heights',
+    columns: [
+      {
+        heading: 'Explore',
+        links: [
+          { href: href('/events'), label: 'Events this week' },
+          categoryLink('landmark'),
+          categoryLink('shop'),
+          { href: href('/near-me'), label: 'Near me' },
+        ],
+      },
+      {
+        heading: 'Guides',
+        links: guideLinks([
+          ['best-things-to-do-washington-heights', 'Things to do'],
+          ['best-parks-and-views-washington-heights', 'Parks and views'],
+          ['best-spots-for-families-washington-heights', 'With kids'],
+          ['a-day-in-washington-heights-first-time-visitors', 'A first visit'],
+          ['after-the-cloisters-walk-to-hudson-heights', 'After the Cloisters'],
+          ['hudson-heights-essentials', 'Hudson Heights essentials'],
+        ]),
+      },
+    ],
+  },
+  {
+    id: 'areas',
+    label: 'Neighborhoods',
+    featured: 'hudson-heights-essentials',
+    columns: [
+      { heading: 'Areas', links: flatAreas(areaTree(areas)) },
+      {
+        heading: 'Get around',
+        links: [
+          { href: href('/map'), label: 'Map of every place' },
+          { href: href('/near-me'), label: 'Near me' },
+          { href: href('/areas'), label: 'All areas' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'history',
+    label: 'History & film',
+    featured: 'history-lovers-guide-washington-heights',
+    columns: [
+      {
+        heading: 'Explore',
+        links: [
+          { href: href('/people'), label: 'People' },
+          { href: href('/filmed-here'), label: 'Filmed here' },
+          { href: href('/people/fort-washington-battle-1776'), label: 'Fort Washington, 1776' },
+        ],
+      },
+      {
+        heading: 'Guides',
+        links: guideLinks([['history-lovers-guide-washington-heights', 'A history lover’s guide']]),
+      },
+    ],
+  },
+];
+
+const menu = sections.map((section) => {
+  const guide = section.featured ? guides.find((entry) => entry.id === section.featured) : undefined;
+  const cover = guide ? coverForGuide(guide, listings, areas)?.picture : undefined;
+  return {
+    ...section,
+    columns: section.columns.filter((column) => column.links.length > 0),
+    active: section.columns.some((column) => column.links.some((link) => isCurrent(link.href))),
+    feature: guide ? { href: href(`/best/${guide.id}`), title: guide.data.title, cover } : undefined,
+  };
+});
+
+const direct = [
   { href: href('/best'), label: 'Best of' },
-  { href: href('/places'), label: 'Places' },
   { href: href('/map'), label: 'Map' },
-  { href: href('/events'), label: 'Events' },
-  { href: href('/areas'), label: 'Areas' },
-  { href: href('/people'), label: 'People' },
-  { href: href('/filmed-here'), label: 'Filmed here' },
-  { href: href('/about'), label: 'About' },
 ];
 ---
 
 <header class="masthead" data-pagefind-ignore>
-  <div class="wrap">
-    <div class="masthead-bar">
-      <a class="wordmark" href={href('/')}>Washington Heights Guide</a>
-      <div class="masthead-tools">
-        <a class="tool-link" href={href('/near-me')}>Near me</a>
-        <a class="tool-link" href={href('/search')}>Search</a>
-        <button class="tool-link" type="button" id="theme-toggle" aria-pressed="false">Dark mode</button>
-      </div>
+  <div class="wrap masthead-bar">
+    <a class="wordmark" href={href('/')}>Washington Heights Guide</a>
+    <div class="masthead-tools">
+      <a class="tool-link tool-optional" href={href('/near-me')}>Near me</a>
+      <a class="tool-link" href={href('/search')}>Search</a>
+      <a class="tool-link tool-optional" href="#newsletter-title">Newsletter</a>
+      <a class="tool-link tool-optional" href={href('/es')} hreflang="es" lang="es">Español</a>
+      <button class="tool-link tool-optional" type="button" id="theme-toggle" aria-pressed="false">Dark mode</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     </div>
-    <nav aria-label="Primary" class="nav-scroll">
-      <ul class="nav-list">
+  </div>
+
+  <nav class="site-nav" id="site-nav" aria-label="Primary">
+    <div class="wrap">
+      <ul class="site-nav-list">
         {
-          primary.map((item) => (
-            <li>
-              <a href={item.href} aria-current={currentAttr(item.href) && 'page'}>
-                {item.label}
+          menu.map((section) => (
+            <li class="site-nav-item">
+              <button
+                class:list={['site-nav-trigger', { 'is-current': section.active }]}
+                type="button"
+                aria-expanded="false"
+                aria-controls={`menu-${section.id}`}
+              >
+                {section.label}
+              </button>
+              <div class="mega" id={`menu-${section.id}`} hidden>
+                <div class="mega-inner">
+                  {section.columns.map((column) => (
+                    <div class="mega-column">
+                      <p class="mega-heading">{column.heading}</p>
+                      <ul>
+                        {column.links.map((link) => (
+                          <li class:list={{ 'mega-indent': link.indent }}>
+                            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                              {link.label}
+                              {link.count !== undefined && <span class="mega-count">{link.count}</span>}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  {section.feature && (
+                    <a class="mega-feature" href={section.feature.href}>
+                      {section.feature.cover && (
+                        <img src={section.feature.cover.src} alt="" loading="lazy" decoding="async" />
+                      )}
+                      <span class="mega-feature-kicker">Featured guide</span>
+                      <span class="mega-feature-title">{section.feature.title}</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            </li>
+          ))
+        }
+        {
+          direct.map((link) => (
+            <li class="site-nav-item">
+              <a class="site-nav-link" href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                {link.label}
               </a>
             </li>
           ))
         }
+        <li class="site-nav-item site-nav-extra">
+          <a class="site-nav-link" href={href('/about')} aria-current={isCurrent('/about') ? 'page' : undefined}>About</a>
+        </li>
       </ul>
-    </nav>
-  </div>
+    </div>
+  </nav>
 </header>
 
 <script is:inline>
-  const toggle = document.getElementById('theme-toggle');
-  const sync = () => {
-    const dark = document.documentElement.dataset.theme === 'dark';
-    if (!toggle) return;
-    toggle.textContent = dark ? 'Light mode' : 'Dark mode';
-    toggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
-  };
-  sync();
-  toggle?.addEventListener('click', () => {
-    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem('theme', next);
-    } catch {
-      /* ignore */
-    }
+  (() => {
+    const toggle = document.getElementById('theme-toggle');
+    const sync = () => {
+      const dark = document.documentElement.dataset.theme === 'dark';
+      if (!toggle) return;
+      toggle.textContent = dark ? 'Light mode' : 'Dark mode';
+      toggle.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    };
     sync();
-  });
+    toggle?.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {
+        /* ignore */
+      }
+      sync();
+    });
+
+    const nav = document.getElementById('site-nav');
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (!nav || !menuToggle) return;
+    const triggers = Array.from(nav.querySelectorAll('.site-nav-trigger'));
+    const panelFor = (trigger) => document.getElementById(trigger.getAttribute('aria-controls'));
+
+    const setOpen = (trigger, open) => {
+      trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      const panel = panelFor(trigger);
+      if (panel) panel.hidden = !open;
+    };
+    const closeAll = (except) => triggers.forEach((trigger) => trigger !== except && setOpen(trigger, false));
+    const setMenu = (open) => {
+      menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuToggle.textContent = open ? 'Close' : 'Menu';
+      nav.classList.toggle('is-open', open);
+      if (!open) closeAll();
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const open = trigger.getAttribute('aria-expanded') !== 'true';
+        closeAll(trigger);
+        setOpen(trigger, open);
+      });
+    });
+    menuToggle.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+
+    document.addEventListener('click', (event) => {
+      if (!(event.target instanceof Node) || nav.contains(event.target) || menuToggle.contains(event.target)) return;
+      closeAll();
+      if (nav.classList.contains('is-open')) setMenu(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      const open = triggers.find((trigger) => trigger.getAttribute('aria-expanded') === 'true');
+      if (open) {
+        closeAll();
+        open.focus();
+      } else if (nav.classList.contains('is-open')) {
+        setMenu(false);
+        menuToggle.focus();
+      }
+    });
+    nav.addEventListener('click', (event) => {
+      if (event.target instanceof Element && event.target.closest('a[href^="#"]')) setMenu(false);
+    });
+  })();
 </script>
