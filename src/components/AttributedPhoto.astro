@@ -17,6 +17,9 @@ const sizes =
       ? '(min-width: 720px) 18rem, 100vw'
       : '(min-width: 880px) 50rem, 100vw';
 const widths = variant === 'thumb' ? [160, 320] : variant === 'gallery' ? [480, 800] : [640, 960, 1400];
+// Heroes sit at the top of the page, so they load right away; everything else loads as it nears the screen.
+const loading = variant === 'hero' ? 'eager' : 'lazy';
+const fetchpriority = variant === 'hero' ? 'high' : undefined;
 ---
 
 <figure class:list={['photo', `photo-${variant}`]}>
@@ -27,7 +30,8 @@ const widths = variant === 'thumb' ? [160, 320] : variant === 'gallery' ? [480, 
         alt={picture.alt}
         widths={widths}
         sizes={sizes}
-        loading="lazy"
+        loading={loading}
+        fetchpriority={fetchpriority}
         decoding="async"
       />
     ) : resolved.kind === 'remote' ? (
@@ -37,7 +41,8 @@ const widths = variant === 'thumb' ? [160, 320] : variant === 'gallery' ? [480, 
         inferSize
         widths={widths}
         sizes={sizes}
-        loading="lazy"
+        loading={loading}
+        fetchpriority={fetchpriority}
         decoding="async"
       />
     ) : (
@@ -46,7 +51,8 @@ const widths = variant === 'thumb' ? [160, 320] : variant === 'gallery' ? [480, 
         alt={picture.alt}
         width={picture.width}
         height={picture.height}
-        loading="lazy"
+        loading={loading}
+        fetchpriority={fetchpriority}
         decoding="async"
       />
     )

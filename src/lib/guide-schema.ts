@@ -41,6 +41,7 @@ export const guideSchema = z
           blurb: z.string().trim().min(12).max(480).describe('What to know, from the official site or a named source.'),
           website: z.httpUrl().describe('The official website.'),
           badge: z.string().trim().min(2).max(80).optional(),
+          image: creditedImageSchema.optional().describe('A freely licensed, credited photo of the place.'),
           linkPlaceholder: z
             .string()
             .trim()
@@ -109,6 +110,9 @@ export const guideSchema = z
     }
     assertAreaSlug(data.area, ctx, 'area');
     if (data.image) assertCreditedImages([data.image], ctx, ['image']);
+    data.stays.forEach((stay, index) => {
+      if (stay.image) assertCreditedImages([stay.image], ctx, ['stays', index, 'image']);
+    });
     const verified = Date.UTC(data.updated.getUTCFullYear(), data.updated.getUTCMonth(), data.updated.getUTCDate());
     const now = new Date();
     const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());

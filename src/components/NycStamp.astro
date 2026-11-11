@@ -1,0 +1,25 @@
+---
+/**
+ * A sticker-style badge on the header: "NYC" in the center, with a slowly rotating ring of text.
+ * Purely decorative: hidden from screen readers and never blocks clicks.
+ */
+const ring = 'NEW YORK CITY ✦ UPPER MANHATTAN ✦ NEW YORK CITY ✦ UPPER MANHATTAN ✦ ';
+---
+
+<span class="nyc-stamp" aria-hidden="true">
+  <svg viewBox="0 0 120 120" width="120" height="120" focusable="false">
+    <defs>
+      <path id="nyc-stamp-ring" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0" />
+    </defs>
+    <circle class="nyc-stamp-edge" cx="60" cy="60" r="57" />
+    <circle class="nyc-stamp-face" cx="60" cy="60" r="53" />
+    <circle class="nyc-stamp-line" cx="60" cy="60" r="33" />
+    <g class="nyc-stamp-spin">
+      <text class="nyc-stamp-ring">
+        <textPath href="#nyc-stamp-ring" textLength="274" lengthAdjust="spacingAndGlyphs">{ring}</textPath>
+      </text>
+    </g>
+    <text class="nyc-stamp-mark" x="60" y="67" text-anchor="middle">NYC</text>
+    <text class="nyc-stamp-coords" x="60" y="80" text-anchor="middle">40.84°N 73.94°W</text>
+  </svg>
+</span>

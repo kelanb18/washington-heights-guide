@@ -13,7 +13,7 @@ const { picture, label, href, feature = false } = Astro.props;
 
 <figure class:list={['place-photo', { 'place-photo-feature': feature }]}>
   <a href={href}>
-    <img src={picture.src} alt={picture.alt} loading="eager" decoding="async" />
+    <img src={picture.src} alt={picture.alt} loading="lazy" decoding="async" />
     <span class="place-photo-label">{label}</span>
   </a>
   <figcaption class="photo-credit">

@@ -214,6 +214,7 @@ const jsonLd = [
           {stays.map((stay, index) => (
             <li class="ranked-card">
               <p class="entry-index">{String(ranked.length + index + 1).padStart(2, '0')}</p>
+              {stay.image && <AttributedPhoto picture={stay.image} variant="thumb" />}
               <div>
                 {stay.badge && <p class="badge">{stay.badge}</p>}
                 <p class="kicker">

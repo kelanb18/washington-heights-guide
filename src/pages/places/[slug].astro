@@ -187,7 +187,7 @@ const jsonLd = [
         <div class="plates">
           {plates.map((image) => (
             <figure class="plate">
-              <img src={image.src} alt={image.alt} width="1200" height="750" />
+              <img src={image.src} alt={image.alt} width="1200" height="750" loading="lazy" decoding="async" />
             </figure>
           ))}
         </div>

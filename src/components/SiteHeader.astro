@@ -4,6 +4,7 @@ import { coverForGuide } from '../lib/covers';
 import { loadGuides } from '../lib/guides';
 import { loadListings } from '../lib/listings';
 import { href, normalizePath } from '../lib/site';
+import NycStamp from './NycStamp.astro';
 import { categoryInfo, type Category } from '../lib/taxonomy';
 
 interface MenuLink {
@@ -171,6 +172,7 @@ const direct = [
 <header class="masthead" data-pagefind-ignore>
   <div class="wrap masthead-bar">
     <a class="wordmark" href={href('/')}>Washington Heights Guide</a>
+    <NycStamp />
     <div class="masthead-tools">
       <a class="tool-link tool-optional" href={href('/near-me')}>Near me</a>
       <a class="tool-link" href={href('/search')}>Search</a>

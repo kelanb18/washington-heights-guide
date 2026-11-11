@@ -24,6 +24,15 @@ stays:
     nearby: true
     blurb: "A Marriott-brand hotel on Frederick Douglass Blvd between W 123rd and W 124th Sts, a block from 125th St. Time Out's review describes a lounge bar and a 24-hour gym, but it dates from 2016, so check current amenities and fees on Marriott's site. The A train at 125th St runs to 181st St."
     website: "https://www.marriott.com/en-us/hotels/nyclh-aloft-harlem/overview/"
+    image:
+      src: /images/stays/aloft-harlem.webp
+      alt: "The Aloft Harlem entrance and sign on Frederick Douglass Blvd, beside a red-brick and glass apartment block"
+      credit: "Paul Sableman"
+      license: "CC BY 2.0"
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Aloft_Harlem_2017_(35442344854).jpg"
+      licenseUrl: "https://creativecommons.org/licenses/by/2.0/"
+      width: 1280
+      height: 853
 sources:
   - "https://www.theradiohotel.com/"
   - "https://www.theradiohotel.com/stay/"

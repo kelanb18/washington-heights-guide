@@ -3405,3 +3405,204 @@ html {
   color: var(--paper);
   box-shadow: none;
 }
+
+/* ==========================================================================
+   Layering: one scale, so menus, maps and overlays never fight.
+   Maps are sealed in their own stacking context; Leaflet's internal panes
+   (z-index 400-1000) can no longer rise above the header or its menus.
+   ========================================================================== */
+:root {
+  --layer-header: 1000;
+  --layer-skip: 1100;
+}
+
+.masthead {
+  z-index: var(--layer-header);
+}
+
+.skip {
+  z-index: var(--layer-skip);
+}
+
+.leaflet-container,
+.place-map,
+.place-map-canvas {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   Lazy images: a soft placeholder while loading, then a fade and focus-in.
+   Only active when the head script has set .js, so images never get stuck
+   hidden without JavaScript.
+   ========================================================================== */
+@keyframes img-in {
+  from {
+    opacity: 0;
+    filter: blur(10px) saturate(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes img-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes placeholder-sheen {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+.js img[loading='lazy']:not(.is-loaded) {
+  opacity: 0;
+}
+
+/* Backwards fill only: once the animation ends, each image's own filters and hover effects apply again. */
+.js img[loading='lazy'].is-loaded {
+  animation: img-in 0.75s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+/* Tiles that tint their photos fade without the blur, so the tint never flickers. */
+.js .topic-tile img[loading='lazy'].is-loaded,
+.js .leaflet-container img[loading='lazy'].is-loaded {
+  animation-name: img-fade;
+}
+
+.js :is(.photo, .guide-cover, .place-photo > a, .polaroid, .plate, .mega-feature):has(img[loading='lazy']:not(.is-loaded)) {
+  background: linear-gradient(100deg, var(--paper-deep) 30%, var(--chip) 50%, var(--paper-deep) 70%);
+  background-size: 200% 100%;
+  animation: placeholder-sheen 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js img[loading='lazy'].is-loaded {
+    animation: img-fade 0.3s ease backwards;
+  }
+
+  .js :is(.photo, .guide-cover, .place-photo > a, .polaroid, .plate, .mega-feature):has(img[loading='lazy']:not(.is-loaded)) {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   NYC stamp: a sticker on the header next to the wordmark.
+   Decorative only; it never takes clicks.
+   ========================================================================== */
+.masthead-bar {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.masthead-tools {
+  margin-left: auto;
+}
+
+.nyc-stamp {
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: 5.6rem;
+  height: 5.6rem;
+  margin: -0.7rem 0 -1.45rem 0.5rem;
+  transform: rotate(-9deg);
+  filter: drop-shadow(2px 3px 0 var(--dark-ink));
+  pointer-events: none;
+  user-select: none;
+}
+
+.site-nav {
+  z-index: 1;
+}
+
+.nyc-stamp svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.nyc-stamp-edge {
+  fill: var(--cream);
+}
+
+.nyc-stamp-face {
+  fill: var(--flag);
+  stroke: var(--dark-ink);
+  stroke-width: 2;
+}
+
+.nyc-stamp-line {
+  fill: none;
+  stroke: var(--cream);
+  stroke-width: 1.2;
+  stroke-dasharray: 2 3;
+}
+
+.nyc-stamp-ring {
+  fill: var(--cream);
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  font-stretch: 85%;
+  letter-spacing: 0.06em;
+}
+
+.nyc-stamp-mark {
+  fill: var(--cream);
+  font-family: var(--poster);
+  font-size: 25px;
+  letter-spacing: 0.02em;
+}
+
+.nyc-stamp-coords {
+  fill: var(--highlighter);
+  font-family: var(--sans);
+  font-size: 7.2px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.nyc-stamp-spin {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  animation: nyc-stamp-spin 26s linear infinite;
+}
+
+@keyframes nyc-stamp-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 56rem) {
+  .nyc-stamp {
+    width: 3.6rem;
+    height: 3.6rem;
+    margin: -0.3rem 0 -0.5rem 0.25rem;
+  }
+}
+
+@media (max-width: 22rem) {
+  .nyc-stamp {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nyc-stamp-spin {
+    animation: none;
+  }
+}

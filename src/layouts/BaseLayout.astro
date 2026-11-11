@@ -92,6 +92,24 @@ const robots = indexable ? 'index, follow, max-image-preview:large' : 'noindex, 
         document.documentElement.dataset.theme = 'light';
       }
     </script>
+    <script is:inline>
+      // Lazy images fade in once loaded. Registered before any <img> is parsed, so no load is missed.
+      // Without this script, the .js class is never set and images show normally.
+      (() => {
+        const root = document.documentElement;
+        root.classList.add('js');
+        const settle = (event) => {
+          if (event.target instanceof HTMLImageElement) event.target.classList.add('is-loaded');
+        };
+        document.addEventListener('load', settle, true);
+        document.addEventListener('error', settle, true);
+        document.addEventListener('DOMContentLoaded', () => {
+          document.querySelectorAll('img').forEach((img) => {
+            if (img.complete) img.classList.add('is-loaded');
+          });
+        });
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical.href} />
