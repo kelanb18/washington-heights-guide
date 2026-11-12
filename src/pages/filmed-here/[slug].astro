@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import PhotoSet from '../../components/PhotoSet.astro';
 import SourceList from '../../components/SourceList.astro';
+import StopsMap from '../../components/StopsMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
@@ -9,7 +10,7 @@ import { breadcrumbJsonLd, productionJsonLd } from '../../lib/jsonld';
 import { formatYear, loadProductions } from '../../lib/productions';
 import { productionKindInfo } from '../../lib/production-schema';
 import { shareableSrc } from '../../lib/pictures';
-import { absoluteUrl, href, pageTitle, siteName } from '../../lib/site';
+import { absoluteUrl, href, pageTitleFit, siteName } from '../../lib/site';
 
 export async function getStaticPaths() {
   const productions = await loadProductions();
@@ -43,7 +44,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title={pageTitle(`${data.title} (${data.year}): Filmed in the Heights`)}
+  title={pageTitleFit(`${data.title} (${formatYear(data.year)}) Filming Locations in Washington Heights`)}
   description={data.summary}
   ogType="article"
   image={shareableSrc(data.image?.src)}
@@ -146,5 +147,13 @@ const jsonLd = [
         </dl>
       </aside>
     </div>
+
+    <StopsMap
+      stops={data.stops}
+      heading="Filming locations you can visit"
+      intro={data.stopsIntro}
+      mapLabel={`Map of ${data.title} filming locations`}
+      kindLabel="Filming location"
+    />
   </article>
 </BaseLayout>

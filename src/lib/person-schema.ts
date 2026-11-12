@@ -4,6 +4,7 @@ import { assertAreaSlug } from './area-slugs';
 import { connections } from './connections';
 import { assertCreditedImages, creditedImageSchema } from './picture-schema';
 import { optionalText } from './schema-helpers';
+import { stopsField } from './stop-schema';
 
 export const personSchema = z
   .strictObject({
@@ -38,6 +39,11 @@ export const personSchema = z
       .describe('Pages or other http(s) URLs that support the note. At least one.'),
     image: creditedImageSchema.optional().describe('Optional portrait or place photo, with credit and a source link.'),
     gallery: z.array(creditedImageSchema).max(8).default([]).describe('Optional extra images.'),
+    stops: stopsField,
+    stopsHeading: optionalText(z.string().trim().min(3).max(80)).describe(
+      'Optional heading for the stops section. Defaults to "Where to see it today".',
+    ),
+    stopsIntro: optionalText(z.string().trim().min(10).max(300)),
     example: z
       .boolean()
       .default(false)

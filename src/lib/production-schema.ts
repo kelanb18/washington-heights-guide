@@ -3,6 +3,7 @@ import { z } from 'astro/zod';
 import { assertAreaSlug } from './area-slugs';
 import { assertCreditedImages, creditedImageSchema } from './picture-schema';
 import { optionalText } from './schema-helpers';
+import { stopsField } from './stop-schema';
 
 export const productionKinds = ['film', 'tv', 'music-video', 'other'] as const;
 
@@ -43,6 +44,10 @@ export const productionSchema = z
     watchUrl: optionalText(z.httpUrl()).describe('Optional official trailer, episode, or music video URL.'),
     sources: z.array(z.httpUrl()).min(1, 'List at least one source URL.'),
     image: creditedImageSchema.optional().describe('Optional hero image, with credit and a source link.'),
+    stops: stopsField.describe(
+      'Optional filming locations with a note and a map pin each. Shown below the story as a numbered list with a map.',
+    ),
+    stopsIntro: optionalText(z.string().trim().min(10).max(300)),
     example: z.boolean().default(false),
     draft: z.boolean().default(false),
   })

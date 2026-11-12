@@ -9,6 +9,32 @@ summary: "George Washington based his operations at Fort Washington in 1776; its
 sources:
   - https://www.nycgovparks.org/parks/bennett-park/history
   - https://www.nycgovparks.org/parks/highbridge-park/history
+  - https://en.wikipedia.org/wiki/Battle_of_Fort_Washington
+  - https://en.wikipedia.org/wiki/Fort_Lee_Historic_Park
+stopsHeading: "Battle of Fort Washington map: where to see it today"
+stopsIntro: "Five places you can still visit, from Washington's headquarters in the south to the New Jersey fort across the river. The first four are an easy walk or a short A train ride apart."
+stops:
+  - name: "Morris-Jumel Mansion"
+    where: "65 Jumel Terrace, at W 160th St"
+    note: "Washington's headquarters in September and October 1776, in the weeks before the fort fell. It is Manhattan's oldest surviving house."
+    listing: morris-jumel-mansion
+  - name: "Bennett Park, the site of the fort"
+    where: "Fort Washington Ave & W 183rd St"
+    note: "The main fort stood here, on Manhattan's highest natural ground. Bluestone and granite paving at the south end of the park traces part of its outline, and a 1901 monument stands on the eastern wall."
+    listing: bennett-park
+  - name: "Jeffrey's Hook and the Little Red Lighthouse"
+    where: "Fort Washington Park, below the George Washington Bridge"
+    note: "American batteries stood on this point in the Hudson. From here to the New Jersey shore, the Americans sank boulder-filled hulks to try to stop British ships sailing upriver."
+    listing: little-red-lighthouse
+  - name: "Fort Tryon Park and Margaret Corbin Circle"
+    where: "Fort Washington Ave & W 190th St"
+    note: "The northern defenses stood on this ridge. Margaret Corbin took over her husband's cannon here after he was killed and was badly wounded; a bronze plaque at the park entrance honors her."
+    listing: fort-tryon-park
+  - name: "Fort Lee Historic Park, New Jersey"
+    where: "Historic Park Rd, Fort Lee, NJ"
+    note: "Fort Washington's partner across the Hudson. The park has a reconstructed encampment with a blockhouse, a battery and soldiers' quarters, plus a visitor center, and has views back across the river to Upper Manhattan."
+    latitude: 40.8508
+    longitude: -73.9626
 image:
   src: /images/people/fort-washington-battle-1776.webp
   alt: "A hand-colored 1776 British map of the attack on Fort Washington (then renamed Fort Knyphausen) and the American lines on New York Island, 16 November 1776."
@@ -52,6 +78,6 @@ gallery:
 
 NYC Parks' historical sign says General George Washington located his base of operations at the high point now occupied by Bennett Park, and also fortified a position across the Hudson at Fort Lee so he could gain control over river traffic. Fort Washington was built in 1776 and was the last American stronghold as the battle for New York swept north on Manhattan.
 
-On November 16, 1776, British and Hessian troops swiftly attacked and seized the fort in what NYC Parks calls a pivotal defeat for the Americans. After the war the remains of the fort disappeared, and the surrounding area came to be known as Washington Heights. At the south end of Bennett Park, bluestone and granite paving outlines part of the fort, and a 1901 monument by the Sons of the American Revolution stands on the park's eastern wall.
+On November 16, 1776, British and Hessian troops swiftly attacked and seized the fort in what NYC Parks calls a pivotal defeat for the Americans. Wikipedia's account of the battle says Hessian troops under Wilhelm von Knyphausen crossed the Harlem River and attacked from the north while British troops pushed in from the south and east. Colonel Robert Magaw, in command, had vowed to hold the fort "to the last extremity," but surrendered that afternoon. About 59 Americans were killed and 2,837 taken prisoner, one of the worst American losses of the war. After the war the remains of the fort disappeared, and the surrounding area came to be known as Washington Heights. At the south end of Bennett Park, bluestone and granite paving outlines part of the fort, and a 1901 monument by the Sons of the American Revolution stands on the park's eastern wall.
 
 NYC Parks' Highbridge Park history adds that Washington used the Morris-Jumel Mansion as his headquarters in September and October 1776, and that a later fort, Fort George, stood in the park's northern portion in 1779.

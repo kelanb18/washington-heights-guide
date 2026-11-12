@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import PhotoSet from '../../components/PhotoSet.astro';
 import SourceList from '../../components/SourceList.astro';
+import StopsMap from '../../components/StopsMap.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { loadAreas } from '../../lib/areas';
 import { findArea } from '../../lib/catalog';
@@ -140,5 +141,13 @@ const jsonLd = [
         </dl>
       </aside>
     </div>
+
+    <StopsMap
+      stops={data.stops}
+      heading={data.stopsHeading ?? 'Where to see it today'}
+      intro={data.stopsIntro}
+      mapLabel={`Map of places tied to ${data.name}`}
+      kindLabel="Historic site"
+    />
   </article>
 </BaseLayout>

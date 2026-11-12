@@ -1,0 +1,49 @@
+---
+/**
+ * Sends a few visitor actions to Google Tag Manager's dataLayer:
+ *
+ * - `sign_up`  when the newsletter form is submitted (method: "newsletter").
+ * - `search`   when someone pauses typing in site search (search_term, result_count).
+ *
+ * In GTM, a Custom Event trigger on `sign_up|search` (regex) plus a GA4 Event tag
+ * named {{Event}} forwards them to Analytics. Outbound link clicks are already
+ * recorded by GA4's enhanced measurement, so they are not repeated here.
+ */
+---
+
+<script>
+  type Layer = Array<Record<string, unknown>>;
+  const layer = ((window as unknown as { dataLayer?: Layer }).dataLayer ??= []);
+  const push = (event: string, params: Record<string, unknown>) => {
+    try {
+      layer.push({ event, ...params });
+    } catch {
+      /* analytics must never break the page */
+    }
+  };
+
+  document.addEventListener('submit', (event) => {
+    const form = event.target;
+    if (!(form instanceof HTMLFormElement)) return;
+    if (!form.action.includes('buttondown.com')) return;
+    push('sign_up', { method: 'newsletter', page_language: document.documentElement.lang });
+  });
+
+  const searchRoot = document.getElementById('search');
+  if (searchRoot) {
+    let timer: number | undefined;
+    let lastSent = '';
+    searchRoot.addEventListener('input', (event) => {
+      const input = event.target;
+      if (!(input instanceof HTMLInputElement)) return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        const term = input.value.trim().toLowerCase().slice(0, 100);
+        if (term.length < 3 || term === lastSent) return;
+        lastSent = term;
+        const resultCount = searchRoot.querySelectorAll('.pagefind-ui__result').length;
+        push('search', { search_term: term, result_count: resultCount });
+      }, 1500);
+    });
+  }
+</script>

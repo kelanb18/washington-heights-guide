@@ -1,0 +1,88 @@
+---
+import PlaceMap from './PlaceMap.astro';
+import { directionsHref } from '../lib/directions';
+import { loadListings } from '../lib/listings';
+import type { MapPin } from '../lib/pins';
+import type { Stop } from '../lib/stop-schema';
+import { href } from '../lib/site';
+
+interface Props {
+  stops?: Stop[];
+  heading: string;
+  intro?: string;
+  mapLabel: string;
+  /** Category label shown in each pin's popup. */
+  kindLabel: string;
+}
+
+const { stops = [], heading, intro, mapLabel, kindLabel } = Astro.props;
+const listings = await loadListings();
+
+function coordsDirections(lat: number, lng: number): string {
+  return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+}
+
+const rows = stops.map((stop, index) => {
+  const listing = stop.listing ? listings.find((entry) => entry.id === stop.listing) : undefined;
+  const lat = stop.latitude ?? listing?.data.latitude;
+  const lng = stop.longitude ?? listing?.data.longitude;
+  const page = listing ? href(`/places/${listing.id}`) : undefined;
+  const directions =
+    stop.latitude != null && stop.longitude != null
+      ? coordsDirections(stop.latitude, stop.longitude)
+      : listing
+        ? directionsHref(listing)
+        : undefined;
+  return { stop, number: String(index + 1), lat, lng, page, directions };
+});
+
+const pins: MapPin[] = rows
+  .filter((row) => row.lat != null && row.lng != null)
+  .map((row) => ({
+    lat: row.lat as number,
+    lng: row.lng as number,
+    name: `${row.number}. ${row.stop.name}`,
+    href: row.page ?? row.directions ?? '#',
+    category: 'stop',
+    categoryLabel: kindLabel,
+    directions: row.directions,
+    label: row.number,
+  }));
+---
+
+{
+  stops.length > 0 && (
+    <section class="stops" aria-labelledby="stops-heading">
+      <h2 id="stops-heading">{heading}</h2>
+      {intro && <p class="stops-intro">{intro}</p>}
+      <div class="stops-layout">
+        <ol class="stop-list">
+          {rows.map((row) => (
+            <li class="stop">
+              <span class="stop-num" aria-hidden="true">
+                {row.number}
+              </span>
+              <div>
+                <h3>{row.stop.name}</h3>
+                {row.stop.where && <p class="stop-where">{row.stop.where}</p>}
+                <p class="stop-note">{row.stop.note}</p>
+                {(row.page || row.directions) && (
+                  <p class="stop-links">
+                    {row.page && <a href={row.page}>About this place</a>}
+                    {row.page && row.directions && <span aria-hidden="true"> · </span>}
+                    {row.directions && (
+                      <a href={row.directions} target="_blank" rel="noopener noreferrer">
+                        Directions<span class="sr-only"> to {row.stop.name} (opens in a new tab)</span>
+                      </a>
+                    )}
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <PlaceMap pins={pins} label={mapLabel} note="Numbers match the list." />
+      </div>
+    </section>
+  )
+}

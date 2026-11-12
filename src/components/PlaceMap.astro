@@ -60,6 +60,7 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       categoryLabel: string;
       sponsored?: boolean;
       directions?: string;
+      label?: string;
     }>;
     const map = Leaflet.map(canvas, { scrollWheelZoom: false });
     Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -75,8 +76,23 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       popupAnchor: [0, -10],
     });
 
+    const labelled = (label: string) => {
+      const span = document.createElement('span');
+      span.textContent = label;
+      return Leaflet.divIcon({
+        className: 'map-pin numbered',
+        html: span.outerHTML,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        popupAnchor: [0, -14],
+      });
+    };
+
     const markers = pins.map((pin) => {
-      const marker = Leaflet.marker([pin.lat, pin.lng], { icon, title: pin.name });
+      const marker = Leaflet.marker([pin.lat, pin.lng], {
+        icon: pin.label ? labelled(pin.label) : icon,
+        title: pin.name,
+      });
       const popup = document.createElement('div');
       const link = document.createElement('a');
       link.href = pin.href;

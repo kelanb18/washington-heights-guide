@@ -12,6 +12,8 @@ export interface MapPin {
   categoryLabel: string;
   sponsored?: boolean;
   directions?: string;
+  /** Short text drawn inside the pin, such as a stop number. */
+  label?: string;
 }
 
 export function pinsFor(listings: Listing[]): MapPin[] {
