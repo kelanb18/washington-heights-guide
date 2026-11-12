@@ -17,6 +17,8 @@ postalCode: "10033"
 latitude: 40.851374
 longitude: -73.939491
 phone: "(212) 795-3080"
+links:
+  order: https://www.ubereats.com/store/saggio/haUv0pnKSBu5PID7-gHggw
 lastVerified: 2026-10-28
 verdict: "A cozy, affordable pasta-and-wine room with a back garden; the Infatuation found the food unmemorable."
 ---
