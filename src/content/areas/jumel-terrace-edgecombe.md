@@ -7,7 +7,7 @@ outline:
   - [40.836, -73.94]
   - [40.835, -73.9378]
   - [40.8296, -73.9395]
-order: 1
+order: 2
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://morrisjumel.org/visit/

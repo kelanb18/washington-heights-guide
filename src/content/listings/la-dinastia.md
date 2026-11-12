@@ -2,6 +2,7 @@
 name: "La Dinastia"
 description: "A long-running Chino-Latino restaurant on Broadway serving fried pork chops with sweet plantains, tenderloin steak, General Tso's chicken and special fried rice."
 category: "restaurant"
+area: "medical-center-168th"
 cuisine: "Chino-Latino"
 tags:
   - chino-latino

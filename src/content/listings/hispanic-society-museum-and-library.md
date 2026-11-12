@@ -2,6 +2,7 @@
 name: "Hispanic Society Museum & Library"
 description: "A free museum and research library on Audubon Terrace with works by Velázquez, Goya and El Greco and Sorolla's Vision of Spain, open Thursday–Sunday."
 category: "landmark"
+area: "audubon-terrace"
 tags:
   - museum
   - art

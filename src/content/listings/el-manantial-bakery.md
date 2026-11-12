@@ -2,6 +2,7 @@
 name: "El Manantial Bakery"
 description: "A budget-friendly Dominican bakery on St Nicholas Ave near W 171st St, known for flaky guava-and-cheese pastries and coffee."
 category: "bakery"
+area: "st-nicholas-audubon"
 cuisine: "Dominican bakery"
 tags:
   - dominican

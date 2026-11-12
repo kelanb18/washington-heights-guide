@@ -2,6 +2,7 @@
 name: "Anthony Flowers"
 description: "A Broadway florist near W 170th St with local delivery, sympathy arrangements, and reviews dated through October 2026."
 category: "shop"
+area: "medical-center-168th"
 tags:
   - florist
   - flowers

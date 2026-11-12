@@ -2,6 +2,7 @@
 name: "La Reina del Chicharrón"
 description: "A counter-service Dominican spot on St Nicholas Ave near W 172nd St known for chicharrón sold by the pound, with fried plantains, rice and mofongo."
 category: "restaurant"
+area: "st-nicholas-audubon"
 cuisine: "Dominican"
 tags:
   - dominican

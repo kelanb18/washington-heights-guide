@@ -2,6 +2,7 @@
 name: "Marilu & Daysi"
 description: "A tiny, cash-only Dominican restaurant at 206 Audubon Ave, serving mangú, bistec encebollado and stewed chicken since 2007; spelled Deisy by Gothamist."
 category: "restaurant"
+area: "st-nicholas-audubon"
 cuisine: "Dominican"
 tags:
   - dominican

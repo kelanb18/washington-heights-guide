@@ -2,6 +2,7 @@
 name: "Semicolon Cafe"
 description: "A Korean-influenced cafe on Edward M. Morgan Pl known for brioche egg sandwiches, bingsoo and pastries; open 8am–7pm."
 category: "cafe"
+area: "audubon-terrace"
 cuisine: "Korean"
 tags:
   - korean

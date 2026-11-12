@@ -7,7 +7,7 @@ outline:
   - [40.8478, -73.9385]
   - [40.8474, -73.9368]
   - [40.8448, -73.9374]
-order: 3
+order: 6
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://data.ny.gov/Transportation/MTA-Subway-Stations/39hk-dx4f

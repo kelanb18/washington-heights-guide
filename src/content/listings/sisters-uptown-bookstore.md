@@ -2,6 +2,7 @@
 name: "Sister's Uptown Bookstore & Cultural Center"
 description: "A Black-owned bookstore and cultural center on Amsterdam Ave, open since 2000, with books, events and a community room on the Harlem border."
 category: "shop"
+area: "audubon-terrace"
 tags:
   - bookstore
   - black-owned

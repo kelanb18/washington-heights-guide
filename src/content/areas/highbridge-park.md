@@ -14,7 +14,7 @@ outline:
   - [40.843, -73.9344]
   - [40.837, -73.9375]
   - [40.834, -73.9385]
-order: 4
+order: 8
 sources:
   - https://www.nycgovparks.org/parks/highbridge-park
   - https://www.nycgovparks.org/parks/highbridge-park/history

@@ -11,7 +11,7 @@ outline:
   - [40.8557, -73.9265]
   - [40.8515, -73.9278]
   - [40.8476, -73.9315]
-order: 7
+order: 11
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
 image:

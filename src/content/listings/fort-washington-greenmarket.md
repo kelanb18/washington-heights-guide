@@ -2,6 +2,7 @@
 name: "Fort Washington Greenmarket"
 description: "GrowNYC's seasonal Tuesday farmers market on Fort Washington Ave at W 168th–169th Sts, running June 2 to Dec 15 in 2026 and accepting SNAP."
 category: "shop"
+area: "medical-center-168th"
 tags:
   - farmers-market
   - greenmarket

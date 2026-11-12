@@ -11,7 +11,7 @@ tags:
 address: "W 173rd St between Haven Ave and Fort Washington Ave"
 crossStreets: "W 173rd to W 176th St, Haven Ave to Fort Washington Ave"
 neighborhood: "Hudson Heights"
-area: "hudson-heights"
+area: "fort-washington-bridge"
 postalCode: "10033"
 latitude: 40.846485
 longitude: -73.941350

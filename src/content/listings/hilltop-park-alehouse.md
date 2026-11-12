@@ -2,6 +2,7 @@
 name: "Hilltop Park Alehouse"
 description: "A dark-wood neighborhood pub at W 159th St and Broadway named for the old Yankees ballpark, with burgers, craft beer, Sunday jazz, and brunch."
 category: "bar"
+area: "audubon-terrace"
 cuisine: "American pub"
 tags:
   - pub

@@ -8,7 +8,7 @@ outline:
   - [40.856, -73.94]
   - [40.859, -73.9372]
   - [40.8571, -73.9356]
-order: 6
+order: 10
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://en.wikipedia.org/wiki/Hudson_Heights,_Manhattan

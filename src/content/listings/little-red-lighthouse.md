@@ -12,7 +12,7 @@ latitude: 40.850257
 longitude: -73.946963
 crossStreets: "Hudson River Greenway at the George Washington Bridge"
 neighborhood: "Washington Heights"
-area: "hudson-heights"
+area: "fort-washington-bridge"
 website: "https://www.nycgovparks.org/parks/fort-washington-park"
 lastVerified: 2026-10-28
 verdict: "A charming riverside stop for the walk or bike ride below the bridge, but go for the setting, since interior access is limited."

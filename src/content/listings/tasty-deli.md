@@ -2,6 +2,7 @@
 name: "Tasty Deli"
 description: "A family-owned counter-service deli on Broadway serving the neighborhood since 1957, with more than fifty sandwiches and a breakfast burrito before 10am."
 category: "restaurant"
+area: "medical-center-168th"
 cuisine: "Deli"
 tags:
   - deli

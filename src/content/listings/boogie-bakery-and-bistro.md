@@ -2,6 +2,7 @@
 name: "Boogie Bakery & Bistro"
 description: "A new sourdough bakery and bistro in the old Coogan's space at 4015 Broadway, with focaccia, sandwiches and sourdough pasta; the bistro opened Oct 15, 2026."
 category: "bakery"
+area: "medical-center-168th"
 cuisine: "Sourdough bakery & bistro"
 tags:
   - sourdough

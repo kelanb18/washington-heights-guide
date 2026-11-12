@@ -2,6 +2,7 @@
 name: "Fort Washington Avenue Armory"
 description: "A 1911 Classical Revival armory and 5,000-seat arena, now The Armory Foundation's track center with the National Track & Field Hall of Fame."
 category: "landmark"
+area: "medical-center-168th"
 tags:
   - armory
   - track-and-field
