@@ -42,6 +42,13 @@ if (areas.length > 0) {
     ),
   );
 }
+const shapes = areas
+  .filter((entry) => entry.data.outline)
+  .map((entry) => ({
+    name: entry.data.name,
+    href: href(`/areas/${entry.id}`),
+    points: entry.data.outline as [number, number][],
+  }));
 ---
 
 <BaseLayout title={pageTitle('Areas')} description={description} image={areasHero.src} imageAlt={areasHero.alt} jsonLd={jsonLd} alternates={[{ lang: 'es', path: '/es/barrios' }]}>
@@ -67,12 +74,18 @@ if (areas.length > 0) {
     </header>
 
     {
-      pins.length > 0 && (
+      shapes.length > 0 && (
         <section class="group" aria-labelledby="map-heading">
           <div class="section-head">
-            <h2 id="map-heading">Map</h2>
+            <h2 id="map-heading">Where each neighborhood is</h2>
           </div>
-          <PlaceMap pins={pins} label="Places in Washington Heights" />
+          <PlaceMap
+            pins={[]}
+            shapes={shapes}
+            tall
+            label="Map of the neighborhoods of Washington Heights"
+            note="Outlines are approximate: neighborhoods here have no official lines, and neighbors draw them differently. Tap a shape to open it."
+          />
         </section>
       )
     }

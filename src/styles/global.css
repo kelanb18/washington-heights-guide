@@ -4787,3 +4787,32 @@ button.cal-date:hover,
 a[href^="mailto:"] {
   overflow-wrap: anywhere;
 }
+
+/* Softer, paper-toned map tiles to match the site. Dark mode keeps its own treatment. */
+html:not([data-theme="dark"]) .place-map .leaflet-tile-pane {
+  filter: grayscale(0.55) sepia(0.18) contrast(0.95) brightness(1.03);
+}
+
+.place-map .leaflet-tooltip {
+  font-family: var(--sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.place-map.tall .place-map-canvas {
+  height: min(72vh, 620px);
+}
+
+.place-map .shape-label {
+  padding: 0.1rem 0.35rem;
+  border: 0;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  box-shadow: none;
+  color: var(--ink);
+  font-size: 0.7rem;
+  white-space: nowrap;
+}
+
+.place-map .shape-label::before {
+  display: none;
+}

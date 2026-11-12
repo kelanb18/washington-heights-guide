@@ -2,6 +2,12 @@
 name: "Hudson Heights"
 summary: "The hilltop northwest corner of Washington Heights, between W 181st St and Fort Tryon Park. The name is a 1990s real-estate coinage, and plenty of neighbors just call it Washington Heights."
 boundaries: "Roughly W 181st St north to Fort Tryon Park, between the Hudson River and Fort Washington Ave or Broadway depending on who draws the line. Some definitions reach as far south as W 173rd St."
+outline:
+  - [40.8508, -73.9392]
+  - [40.8514, -73.9421]
+  - [40.856, -73.94]
+  - [40.859, -73.9372]
+  - [40.8571, -73.9356]
 order: 6
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan

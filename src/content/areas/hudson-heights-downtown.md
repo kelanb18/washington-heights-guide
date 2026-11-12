@@ -3,6 +3,9 @@ name: "Hudson Heights Downtown"
 parent: hudson-heights
 summary: "The stretch of W 181st St near Fort Washington Ave, by the A train, where the neighborhood's pubs, cafes, and takeout cluster. \"Downtown\" is local shorthand, not an official name."
 boundaries: "Roughly W 181st St from Fort Washington Ave west toward Cabrini Blvd. This is the western end of the commercial corridor that the Washington Heights BID covers along W 181st St."
+outline:
+  - [40.8512, -73.9388]
+  - [40.8517, -73.941]
 order: 1
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan

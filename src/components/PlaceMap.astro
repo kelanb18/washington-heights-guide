@@ -1,20 +1,22 @@
 ---
-import type { MapPin } from '../lib/pins';
+import type { MapPin, MapShape } from '../lib/pins';
 
 interface Props {
   pins: MapPin[];
+  shapes?: MapShape[];
   label: string;
   compact?: boolean;
+  tall?: boolean;
   note?: string;
 }
 
-const { pins, label, compact = false, note } = Astro.props;
+const { pins, shapes = [], label, compact = false, tall = false, note } = Astro.props;
 const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabel])).entries()];
 ---
 
 {
-  pins.length > 0 && (
-    <div class:list={['place-map', { compact }]} data-pins={JSON.stringify(pins)}>
+  (pins.length > 0 || shapes.length > 0) && (
+    <div class:list={['place-map', { compact, tall }]} data-pins={JSON.stringify(pins)} data-shapes={JSON.stringify(shapes)}>
       {
         categories.length > 1 && (
           <div class="map-filters" role="group" aria-label="Filter pins by category">
@@ -62,7 +64,7 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       directions?: string;
       label?: string;
     }>;
-    const map = Leaflet.map(canvas, { scrollWheelZoom: false });
+    const map = Leaflet.map(canvas, { scrollWheelZoom: false, zoomSnap: 0.25 });
     Leaflet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -136,7 +138,48 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
       }
     };
 
+    const shapes = JSON.parse(root.dataset.shapes ?? '[]') as Array<{
+      name: string;
+      href: string;
+      points: [number, number][];
+      active?: boolean;
+    }>;
+    const shapeLayers = shapes.map((shape) => {
+      const style = {
+        color: shape.active ? '#b4232a' : '#1d4e6e',
+        weight: shape.active ? 3 : 2,
+        opacity: 0.9,
+        fillOpacity: shape.active ? 0.12 : 0.14,
+        dashArray: shape.active ? undefined : '5 5',
+      };
+      const layer =
+        shape.points.length === 2
+          ? Leaflet.polyline(shape.points, { ...style, weight: 9, opacity: 0.55, dashArray: undefined, lineCap: 'round' })
+          : Leaflet.polygon(shape.points, style);
+      const link = document.createElement('a');
+      link.href = shape.href;
+      link.textContent = shape.name;
+      layer.bindPopup(link);
+      const overview = !shapes.some((entry) => entry.active);
+      layer.bindTooltip(
+        overview ? shape.name.replace(/\s*\(.*\)$/, '') : shape.name,
+        overview && shape.points.length > 2
+          ? { permanent: true, direction: 'center', className: 'shape-label' }
+          : { sticky: true, direction: 'top' },
+      );
+      layer.addTo(map);
+      return layer;
+    });
+
     show('all');
+    const active = shapeLayers.filter((_, i) => shapes[i].active);
+    const frame = active.length ? active : shapeLayers;
+    const fitShapes = () => {
+      if (!frame.length || !(markers.length === 0 || active.length)) return;
+      const bounds = Leaflet.featureGroup([...frame, ...markers.map((m) => m.marker)]).getBounds();
+      map.fitBounds(bounds.pad(0.05));
+    };
+    fitShapes();
     root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((button) => {
       button.addEventListener('click', () => {
         root.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((other) => {
@@ -145,7 +188,10 @@ const categories = [...new Map(pins.map((pin) => [pin.category, pin.categoryLabe
         show(button.dataset.filter ?? 'all');
       });
     });
-    window.setTimeout(() => map.invalidateSize(), 0);
+    window.setTimeout(() => {
+      map.invalidateSize();
+      fitShapes();
+    }, 0);
   }
 
   const observer = new IntersectionObserver(

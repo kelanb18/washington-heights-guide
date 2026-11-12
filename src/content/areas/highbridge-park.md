@@ -2,6 +2,18 @@
 name: "Highbridge Park & Coogan's Bluff"
 summary: "The long, forested park along the Harlem River on Washington Heights' eastern edge, home to the High Bridge, the Highbridge Water Tower, and the cliffs of Coogan's Bluff."
 boundaries: "Roughly W 155th St north to Dyckman St, between Edgecombe Ave and Amsterdam Ave on the west and the Harlem River on the east. The High Bridge and Water Tower are near W 172nd St."
+outline:
+  - [40.8296, -73.9395]
+  - [40.83, -73.9355]
+  - [40.842, -73.929]
+  - [40.8485, -73.9255]
+  - [40.8598, -73.9225]
+  - [40.858, -73.9245]
+  - [40.8515, -73.9278]
+  - [40.8476, -73.9315]
+  - [40.843, -73.9344]
+  - [40.837, -73.9375]
+  - [40.834, -73.9385]
 order: 4
 sources:
   - https://www.nycgovparks.org/parks/highbridge-park

@@ -34,3 +34,12 @@ export function pinsFor(listings: Listing[]): MapPin[] {
   }
   return pins;
 }
+
+/** An approximate neighborhood outline drawn on a map. */
+export interface MapShape {
+  name: string;
+  href: string;
+  points: [number, number][];
+  /** The shape this page is about; drawn stronger. */
+  active?: boolean;
+}

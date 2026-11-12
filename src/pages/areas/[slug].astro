@@ -144,6 +144,15 @@ if (people.length > 0) {
     ),
   );
 }
+const allAreas = await loadAreas();
+const areaShapes = allAreas
+  .filter((entry) => entry.data.outline && (entry.id === area.id || referenceId(entry.data.parent) === area.id))
+  .map((entry) => ({
+    name: entry.data.name,
+    href: href(`/areas/${entry.id}`),
+    points: entry.data.outline as [number, number][],
+    active: entry.id === area.id,
+  }));
 ---
 
 <BaseLayout
@@ -204,12 +213,18 @@ if (people.length > 0) {
     <PhotoSet image={areaHero} gallery={areaGallery} />
 
     {
-      pins.length > 0 && (
+      (pins.length > 0 || areaShapes.length > 0) && (
         <section class="group" aria-labelledby="map-heading">
           <div class="section-head">
             <h2 id="map-heading">Map</h2>
           </div>
-          <PlaceMap pins={pins} label={`Places in ${data.name}`} />
+          <PlaceMap
+            pins={pins}
+            shapes={areaShapes}
+            tall
+            label={`Map of ${data.name}`}
+            note="The red outline is approximate: neighborhoods here have no official lines. Pins are places on this site."
+          />
         </section>
       )
     }

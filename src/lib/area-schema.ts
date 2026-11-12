@@ -24,6 +24,12 @@ export const areaSchema = z
       .min(3)
       .max(400)
       .describe('Approximate streets, such as "Sample Street to Placeholder Avenue".'),
+    outline: z
+      .array(z.tuple([z.number().min(40.4).max(41.1), z.number().min(-74.3).max(-73.6)]))
+      .min(2)
+      .max(40)
+      .optional()
+      .describe('Optional approximate outline as [lat, lng] points. Two points draw a street corridor; three or more a shape.'),
     order: optionalNumber(z.number()).describe(
       'Optional sort position. Lower numbers are listed first. Omit it to sort by name after the numbered areas.',
     ),

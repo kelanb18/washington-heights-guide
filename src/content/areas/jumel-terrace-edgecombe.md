@@ -2,6 +2,11 @@
 name: "Jumel Terrace & Edgecombe Ave"
 summary: "The southeast corner of Washington Heights, on the bluff above the Harlem River, where the Morris-Jumel Mansion and Sylvan Terrace sit and the area shades into Sugar Hill."
 boundaries: "Roughly W 155th to W 162nd St between St. Nicholas Ave and Edgecombe Ave, with Jumel Terrace at the center. Sugar Hill, to the south in Harlem, blurs into the southern end."
+outline:
+  - [40.8305, -73.9418]
+  - [40.836, -73.94]
+  - [40.835, -73.9378]
+  - [40.8296, -73.9395]
 order: 1
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan

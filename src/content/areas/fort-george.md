@@ -2,6 +2,15 @@
 name: "Fort George"
 summary: "The quieter eastern slope of northern Washington Heights, east of Broadway from W 181st St north to Dyckman St, running up to Highbridge Park's Fort George Hill."
 boundaries: "Roughly east of Broadway from W 181st St north to Dyckman St, between Broadway and St. Nicholas Ave on the west and Highbridge Park on the east."
+outline:
+  - [40.8493, -73.9336]
+  - [40.8556, -73.9294]
+  - [40.862, -73.928]
+  - [40.8605, -73.9255]
+  - [40.858, -73.9245]
+  - [40.8557, -73.9265]
+  - [40.8515, -73.9278]
+  - [40.8476, -73.9315]
 order: 7
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan

@@ -3,6 +3,9 @@ name: "Hudson Heights Uptown"
 parent: hudson-heights
 summary: "A one-block strip of W 187th St between Fort Washington and Pinehurst Aves, with a bookshop, a bakery, and restaurants, just up the hill from Bennett Park. \"Uptown\" is local shorthand, not an official name."
 boundaries: "Roughly W 187th St between Fort Washington Ave and Pinehurst Ave, with nearby Pinehurst Ave around the corner. Cabrini Blvd is the next street to the west."
+outline:
+  - [40.8552, -73.9366]
+  - [40.8557, -73.938]
 order: 2
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
