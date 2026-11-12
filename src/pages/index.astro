@@ -71,7 +71,7 @@ const stubDay = (local: string) => {
 
 const openings = listings.filter((listing) => listing.data.tags.includes('new-opening')).slice(0, 3);
 
-const ticker = ['Fort Tryon Park', 'The Cloisters', 'The High Bridge', 'W 181st St', 'Bennett Park', 'United Palace', 'Highbridge Park', 'Morris-Jumel Mansion'];
+const ticker = ['W 181st St', 'United Palace', 'The High Bridge', 'Plaza de las Americas', 'Morris-Jumel Mansion', 'Little Red Lighthouse', 'Fort Tryon Park', 'The Cloisters'];
 
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
@@ -98,7 +98,7 @@ if (guides.length > 0) {
   jsonLd={jsonLd}
 >
   <div class="wrap home">
-    <div class="home-collage">
+    <div class="home-collage" data-nosnippet>
       <img
         src="/images/site/home/collage-1774.webp"
         srcset="/images/site/home/collage-760.webp 760w, /images/site/home/collage-1100.webp 1100w, /images/site/home/collage-1774.webp 1774w"
@@ -113,7 +113,7 @@ if (guides.length > 0) {
     </div>
   </div>
 
-  <div class="ticker" aria-hidden="true">
+  <div class="ticker" aria-hidden="true" data-nosnippet>
     <div class="ticker-track">
       {[0, 1].map(() => ticker.map((word) => <span>✶ {word}</span>))}
     </div>
