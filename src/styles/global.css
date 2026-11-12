@@ -522,8 +522,21 @@ main {
 
 .listing-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1.6rem;
   margin-top: 1.5rem;
+}
+
+/* Long addresses, URLs and street lists wrap instead of widening the column on phones. */
+.listing-grid > *,
+.facts,
+.prose {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.facts a {
+  overflow-wrap: anywhere;
 }
 
 .prose {
@@ -996,6 +1009,10 @@ main {
 }
 
 .shoot-filters label {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 100%;
   font-family: var(--sans);
   font-size: 0.82rem;
   letter-spacing: 0.08em;
@@ -1003,6 +1020,8 @@ main {
 }
 
 .shoot-filters select {
+  min-width: 0;
+  max-width: 100%;
   margin-left: 0.4rem;
   padding: 0.3rem 0.45rem;
   border: 1px solid var(--ink);
@@ -2919,8 +2938,17 @@ html[data-theme='dark'] {
   transform: rotate(6deg);
 }
 
-html {
+html,
+body {
   overflow-x: clip;
+}
+
+/* Safari before 16 has no overflow: clip. */
+@supports not (overflow: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
 }
 
 .ticker {
@@ -3695,6 +3723,32 @@ html {
     width: 3.6rem;
     height: 3.6rem;
     margin: -0.3rem 0 -0.5rem 0.25rem;
+  }
+}
+
+/* Narrow phones (360-400px): keep the wordmark, stamp, Search and Menu inside the screen. */
+@media (max-width: 26rem) {
+  .masthead-bar {
+    gap: 0.5rem;
+  }
+
+  .masthead .wordmark {
+    min-width: 0;
+    font-size: 1.2rem;
+  }
+
+  .nyc-stamp {
+    width: 2.9rem;
+    height: 2.9rem;
+    margin: -0.2rem 0 -0.4rem 0.1rem;
+  }
+
+  .masthead-tools {
+    gap: 0.6rem;
+  }
+
+  .menu-toggle {
+    padding: 0 0.7rem;
   }
 }
 
@@ -4721,9 +4775,15 @@ button.cal-date:hover,
 .hills-stations li { border: 2px solid var(--ink); border-radius: 14px; padding: .8rem 1rem; background: var(--card); min-width: 0; }
 .hills-stations p { margin: .3rem 0; }
 .hills-station-name { display: flex; align-items: center; gap: .5rem; font-size: 1.1rem; }
-.hills-inline-station { white-space: nowrap; }
+.hills-inline-station { white-space: normal; }
+.hills-inline-station .line-bullet { vertical-align: middle; }
 .hills-stairs { margin: 1.2rem 0; padding-left: 1.4rem; }
 .hills-stairs li { margin: .45rem 0; }
 .hills-stair-facts { display: block; font-family: var(--sans); font-size: .9rem; color: var(--ink-soft); }
 .moving .living-list .moving-lines { margin-right: .4rem; }
 .mega-lang { display: inline-block; margin-left: .35rem; padding: 0 .3em; border: 1px solid currentColor; border-radius: 4px; font-size: .62rem; font-weight: 700; letter-spacing: .05em; opacity: .65; vertical-align: .15em; }
+
+/* Long email addresses wrap on narrow phones. */
+a[href^="mailto:"] {
+  overflow-wrap: anywhere;
+}

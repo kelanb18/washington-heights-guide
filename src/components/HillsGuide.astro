@@ -227,13 +227,15 @@ const ids = [...new Set(stations.flatMap((station) => station.equipment))];
     {strings.stairsOnlyIntro}{' '}
     {
       stairsOnlyStations.map((station, index) => (
+        <>
         <span class="hills-inline-station">
           {station.lines.map((line) => (
             <span class={`line-bullet ${lineClass(line)}`}>{line}</span>
           ))}{' '}
           {station.name}
-          {index < stairsOnlyStations.length - 1 ? ', ' : '.'}
-        </span>
+          {index < stairsOnlyStations.length - 1 ? ',' : '.'}
+        </span>{' '}
+        </>
       ))
     }
   </p>
