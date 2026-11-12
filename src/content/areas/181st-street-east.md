@@ -2,7 +2,7 @@
 name: "181st Street Strip (East of Broadway)"
 summary: "The busy shopping street along W 181st St from Broadway toward Amsterdam Ave, with side stretches of St. Nicholas Ave and Broadway. It is the commercial heart of the Washington Heights BID."
 boundaries: "Roughly W 181st St from Broadway east to Amsterdam Ave, plus St. Nicholas Ave from about W 179th to W 183rd St and Broadway from about W 179th to W 182nd St. The Business Improvement District also continues west to Fort Washington Ave, where it overlaps Hudson Heights Downtown."
-order: 3
+order: 5
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://www.whbid181.org/about

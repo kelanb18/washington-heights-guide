@@ -2,7 +2,7 @@
 name: "Audubon / W 165th St"
 summary: "The Broadway and W 165th St area around the former Audubon Ballroom and the NewYork-Presbyterian/Columbia medical campus, with a few small shops on Amsterdam Ave a few blocks east."
 boundaries: "Roughly W 162nd to W 168th St, from Broadway and Audubon Ave east to Amsterdam Ave."
-order: 4
+order: 2
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://theshabazzcenter.org/tours/

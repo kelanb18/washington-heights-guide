@@ -186,5 +186,5 @@ export const homeFrames = [
 
 /** One landscape from the site set for each section index. */
 export const placesHero = heroByFile('9.webp');
-export const areasHero = heroByFile('10.webp');
-export const peopleHero = heroByFile('6.webp');
+export const areasHero = heroByFile('7.webp');
+export const peopleHero = heroByFile('2.webp');

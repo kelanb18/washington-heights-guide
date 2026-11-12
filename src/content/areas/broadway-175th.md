@@ -2,7 +2,7 @@
 name: "Broadway at 175th St (United Palace)"
 summary: "The stretch of Broadway around the United Palace theater, with Malecón across the street and the Plaza de las Americas pedestrian plaza on W 175th St."
 boundaries: "Roughly Broadway from about W 173rd to W 177th St, centered on W 175th St between Broadway and Wadsworth Ave."
-order: 2
+order: 3
 sources:
   - https://en.wikipedia.org/wiki/Washington_Heights,_Manhattan
   - https://data.ny.gov/Transportation/MTA-Subway-Stations/39hk-dx4f
