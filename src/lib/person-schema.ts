@@ -21,7 +21,7 @@ export const personSchema = z
       'Optional years, as text, such as "1900–1901" or "1965". Omit it rather than guessing.',
     ),
     place: optionalText(z.string().trim().min(2).max(160)).describe(
-      'Optional building, address, or other place name tied to the note.',
+      'Optional building, address, or other place name tied to the note. Never a living person\'s current home: for current residents, name the neighborhood only.',
     ),
     area: reference('areas')
       .optional()
