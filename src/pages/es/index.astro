@@ -18,7 +18,7 @@ const cards = pairs.map(({ guide, es }) => ({
   cover: coverForGuide(guide, listings, areas, usedPictures)?.picture,
 }));
 const description =
-  'Guías de Washington Heights en español: dónde comer, qué hacer y rutas a pie para abrir en Google Maps desde tu teléfono.';
+  'Dónde comer, pasear y vivir en Washington Heights: panaderías dominicanas, comida de madrugada, el High Bridge, lugares de película y los ascensores que te ahorran la cuesta. Escrito por un vecino.';
 const site = Astro.site;
 if (!site) throw new Error('Missing site URL.');
 const jsonLd = [
@@ -31,7 +31,7 @@ const jsonLd = [
 ---
 
 <BaseLayout
-  title="Washington Heights Guide en español: dónde comer y qué hacer"
+  title="Washington Heights Guide en español: uptown, por un vecino"
   description={description}
   jsonLd={jsonLd}
   lang="es"

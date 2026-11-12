@@ -78,7 +78,7 @@ if (!site) throw new Error('Missing site URL.');
 
 const homeUrl = absoluteUrl(site, '/');
 const description =
-  'An independent, locally researched guide to Washington Heights, NYC: where to eat, what to see, and walking routes, with checked details, maps, and cited sources.';
+  'Where to eat, walk and live in Washington Heights: Dominican bakeries, late-night food, the High Bridge, film locations and the elevators that beat the hills. By a neighbor, in English y en español.';
 const jsonLd: unknown[] = [websiteJsonLd(homeUrl, description), breadcrumbJsonLd([{ name: siteName, url: homeUrl }])];
 if (guides.length > 0) {
   jsonLd.push(
@@ -91,7 +91,7 @@ if (guides.length > 0) {
 ---
 
 <BaseLayout
-  title="Washington Heights Guide: Food, Places & Neighborhoods"
+  title="Washington Heights Guide: Uptown, by a Neighbor"
   description={description}
   image="/images/site/home/collage-og.jpg"
   imageAlt="Washington Heights, the neighborhood guide: a collage of Fort Tryon Park, the George Washington Bridge, a W 181 St sign, the Dominican flag, and plates of mangú."
